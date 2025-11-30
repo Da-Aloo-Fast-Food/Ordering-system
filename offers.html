@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Da Aloo - Special Offers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-container">
+                        <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
+                        <div class="tagline">"Where Hunger Comes to An End"</div>
+                    </div>
+                    <nav class="site-nav">
+                        <a href="index.html" class="nav-link">About</a>
+                        <a href="menu.html" class="nav-link">Menu</a>
+                        <a href="offers.html" class="nav-link">Offers</a>
+                    </nav>
+                </div>
+            </div>
+    </header>
+
+    <main>
+        <section class="container" style="padding: 2rem 0;">
+            <h1 class="section-title center"
+                style="font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 3.5rem;">Special Offers
+            </h1>
+            <p class="center"
+                style="text-align: center; margin-bottom: 1rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; font-family: 'Montserrat', sans-serif;">
+                Don't miss out on our exclusive deals and promotions
+            </p>
+
+            <!-- Offers Grid -->
+            <div class="offers-grid"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 2rem;">
+                <div class="offer-card"
+                    style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s; display: flex; flex-direction: column;">
+                    <div class="offer-image"
+                        style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="images/Offer1.png" alt="Special Offer"
+                            style="max-width: 100%; max-height: 300px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="offer-card"
+                    style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s; display: flex; flex-direction: column;">
+                    <div class="offer-image"
+                        style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="images/Offer2.png" alt="Special Offer"
+                            style="max-width: 100%; max-height: 300px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="offer-card"
+                    style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s; display: flex; flex-direction: column;">
+                    <div class="offer-image"
+                        style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="images/Offer3.png" alt="Special Offer"
+                            style="max-width: 100%; max-height: 300px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+                <div class="offer-card"
+                    style="background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s; display: flex; flex-direction: column;">
+                    <div class="offer-image"
+                        style="flex: 1; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+                        <img src="images/Offer4.png" alt="Special Offer"
+                            style="max-width: 100%; max-height: 300px; width: auto; height: auto; object-fit: contain;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Specials Section -->
+            <div class="center" style="margin-top: 3rem;">
+                <div
+                    style="background: var(--primary); color: white; padding: 2rem; border-radius: 15px; max-width: 600px; margin: 0 auto;">
+                    <h2
+                        style="margin-bottom: 1rem; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 2.5rem;">
+                        Daily Specials</h2>
+                    <p style="margin-bottom: 1.5rem; font-family: 'Montserrat', sans-serif;">Check back often for new
+                        deals and seasonal promotions</p>
+                    <a href="https://wa.me/9779847375984?text=Hi, what are your current offers?"
+                        class="order-now-btn btn-outline" target="_blank"
+                        style="border-color: white; color: white; font-family: 'Montserrat', sans-serif;">
+                        Inquire About Offers
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <a class="floating-whatsapp" href="https://wa.me/9779847375984" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Order on WhatsApp
+    </a>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+    </script>
+
+    <style>
+        @media (max-width: 768px) {
+            .offers-grid {
+                grid-template-columns: 1fr !important;
+                gap: 1.5rem !important;
+            }
+
+            .offer-image {
+                padding: 0.5rem !important;
+            }
+
+            .offer-image img {
+                max-height: 250px !important;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .offers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
+            }
+        }
+    </style>
+</body>
+
+</html>
