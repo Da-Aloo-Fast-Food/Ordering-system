@@ -392,6 +392,7 @@
         }
 
         // Generate menu items with enhanced Add to Cart buttons
+      // Generate menu items with enhanced Add to Cart buttons
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
             let first = true;
@@ -407,7 +408,7 @@
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
                     const requiresCustomization = hasVariants || hasExtras;
-
+                    
                     // Display price range for variant items
                     let displayPrice = `Rs ${item.price}`;
                     if (hasVariants) {
@@ -416,6 +417,21 @@
                         const maxPrice = Math.max(...prices);
                         displayPrice = `Rs ${minPrice} - ${maxPrice}`;
                     }
+                    
+                    // --- NEW BUTTON TEXT LOGIC ---
+                    let buttonText = 'Add to Cart';
+                    let buttonIcon = 'plus';
+
+                    if (hasVariants) {
+                        // This will ONLY happen for Mo:Mo category
+                        buttonText = 'Choose Variant';
+                        buttonIcon = 'list-ul';
+                    } else if (hasExtras) {
+                        // This happens for items with Egg, Cheese, Sauce
+                        buttonText = 'Customize'; 
+                        buttonIcon = 'cog';
+                    }
+                    // -----------------------------
 
                     itemsHTML += `
                         <div class="menu-item-card">
@@ -434,8 +450,8 @@
                                     data-price="${item.price}"
                                     data-has-variants="${hasVariants}"
                                     data-has-extras="${hasExtras}">
-                                <i class="fas fa-${requiresCustomization ? 'cog' : 'plus'}"></i> 
-                                ${requiresCustomization ? 'Choose Varient' : 'Add to Cart'}
+                                <i class="fas fa-${buttonIcon}"></i> 
+                                ${buttonText}
                             </button>
                         </div>
                     `;
@@ -1814,3 +1830,4 @@
 </body>
 
 </html>
+
