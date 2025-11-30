@@ -407,7 +407,6 @@
                 for (const item of items) {
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
-                    const requiresCustomization = hasVariants || hasExtras;
                     
                     // Display price range for variant items
                     let displayPrice = `Rs ${item.price}`;
@@ -417,21 +416,19 @@
                         const maxPrice = Math.max(...prices);
                         displayPrice = `Rs ${minPrice} - ${maxPrice}`;
                     }
-                    
-                    // --- NEW BUTTON TEXT LOGIC ---
+
+                    // --- BUTTON LOGIC CHANGED HERE ---
+                    // Only show "Choose Variant" for Mo:Mo. 
+                    // Everything else (including items with extras) says "Add to Cart"
                     let buttonText = 'Add to Cart';
                     let buttonIcon = 'plus';
+                    let btnClass = '';
 
                     if (hasVariants) {
-                        // This will ONLY happen for Mo:Mo category
                         buttonText = 'Choose Variant';
                         buttonIcon = 'list-ul';
-                    } else if (hasExtras) {
-                        // This happens for items with Egg, Cheese, Sauce
-                        buttonText = 'Customize'; 
-                        buttonIcon = 'cog';
-                    }
-                    // -----------------------------
+                        btnClass = 'customize-btn'; // Keeps the yellow/gold style for variants
+                    } 
 
                     itemsHTML += `
                         <div class="menu-item-card">
@@ -445,7 +442,7 @@
                                 </div>
                             </div>
                             ${item.details ? `<div class="item-details">${item.details}</div>` : ''}
-                            <button class="add-to-cart-btn ${requiresCustomization ? 'customize-btn' : ''}" 
+                            <button class="add-to-cart-btn ${btnClass}" 
                                     data-name="${item.name}" 
                                     data-price="${item.price}"
                                     data-has-variants="${hasVariants}"
@@ -553,32 +550,37 @@
                 sendOrderToWhatsApp();
             });
 
-            // Close modal when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === cartModal) {
                     cartModal.style.display = 'none';
                 }
             });
 
-            // Add listener to the cart items container (Event Delegation)
-            // This ensures buttons work immediately without needing re-binding
             if (cartItemsContainer) {
                 cartItemsContainer.addEventListener('click', handleCartItemClick);
+                // Also listen for change events for the checkboxes
+                cartItemsContainer.addEventListener('change', handleCartItemChange);
             }
 
-            // Add to cart buttons with customization
+            // --- UPDATED CLICK LOGIC ---
             document.addEventListener('click', (e) => {
                 if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
                     const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
                     const name = button.getAttribute('data-name');
                     const price = button.getAttribute('data-price');
                     const hasVariants = button.getAttribute('data-has-variants') === 'true';
-                    const hasExtras = button.getAttribute('data-has-extras') === 'true';
-
-                    if (hasVariants || hasExtras) {
-                        openCustomizationModal(name, hasVariants, hasExtras);
+                    
+                    if (hasVariants) {
+                        // Mo:Mo still needs the modal
+                        openCustomizationModal(name, true, false); 
                     } else {
-                        addToCart(name, parseInt(price), null, []);
+                        // Everything else adds directly
+                        // We need to find the item object to get its available extras
+                        const itemData = findMenuItem(name);
+                        const availableExtras = itemData.extras || [];
+                        
+                        // Add to cart with empty selected extras, but pass available ones
+                        addToCart(name, parseInt(price), null, [], availableExtras);
                         showAddFeedback(button);
                     }
                 }
@@ -720,37 +722,27 @@
             return null;
         }
 
-        function addToCart(name, price, variant, extras) {
-            console.log('Adding to cart:', name, price, variant, extras);
+      // Updated to accept availableExtras
+        function addToCart(name, price, variant, extras, availableExtras = []) {
+            console.log('Adding to cart:', name);
 
             const cartItem = {
                 name: name,
                 basePrice: price,
                 variant: variant,
-                extras: extras,
+                extras: extras, // Currently selected extras
+                availableExtras: availableExtras, // All possible extras for this item
                 quantity: 1,
                 totalPrice: price + extras.reduce((sum, extra) => sum + extra.price, 0)
             };
 
-            // Check if identical item already exists in cart
-            const existingIndex = cart.findIndex(item =>
-                item.name === cartItem.name &&
-                JSON.stringify(item.variant) === JSON.stringify(cartItem.variant) &&
-                JSON.stringify(item.extras) === JSON.stringify(cartItem.extras)
-            );
-
-            if (existingIndex > -1) {
-                cart[existingIndex].quantity += 1;
-                cart[existingIndex].totalPrice = cart[existingIndex].basePrice * cart[existingIndex].quantity +
-                    cart[existingIndex].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[existingIndex].quantity;
-            } else {
-                cart.push(cartItem);
-            }
+            // Simple push for now to avoid merging issues with checkbox states
+            // (Simplifies logic: every click adds a new line item if it has extras options)
+            cart.push(cartItem);
 
             saveCart();
             updateCartBadge();
 
-            // Update cart display if modal is open
             const cartModal = document.getElementById('cartModal');
             if (cartModal.style.display === 'block') {
                 updateCartDisplay();
@@ -1830,4 +1822,5 @@
 </body>
 
 </html>
+
 
