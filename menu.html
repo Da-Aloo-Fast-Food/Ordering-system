@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -696,7 +695,10 @@
             return null;
         }
 
+        // FIXED: addToCart function now updates cart display immediately
         function addToCart(name, price, variant, extras) {
+            console.log('Adding to cart:', name, price, variant, extras);
+            
             const cartItem = {
                 name: name,
                 basePrice: price,
@@ -724,9 +726,13 @@
             saveCart();
             updateCartBadge();
             
-            // Update cart display if modal is open
-            if (document.getElementById('cartModal').style.display === 'block') {
+            // CRITICAL FIX: Always update cart display when cart modal is open
+            const cartModal = document.getElementById('cartModal');
+            if (cartModal.style.display === 'block') {
+                console.log('Cart modal is open, updating display immediately');
                 updateCartDisplay();
+            } else {
+                console.log('Cart modal is closed');
             }
         }
 
@@ -744,9 +750,12 @@
             const badge = document.getElementById('cartBadge');
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             badge.textContent = totalItems;
+            console.log('Cart badge updated:', totalItems);
         }
 
         function updateCartDisplay() {
+            console.log('Updating cart display, current cart:', cart);
+            
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
             const emptyCartMessage = document.getElementById('emptyCartMessage');
@@ -795,54 +804,65 @@
             cartItems.innerHTML = itemsHTML;
             cartTotal.textContent = `Total: Rs ${total}`;
             
-            // Setup event listeners for cart controls - FIXED
+            console.log('Cart display updated with', cart.length, 'items');
+            
+            // Setup event listeners for cart controls
             setupCartItemControls();
         }
 
-        // FIXED: Setup cart item controls with proper event delegation
+        // Setup cart item controls with event delegation
         function setupCartItemControls() {
             const cartItems = document.getElementById('cartItems');
             
-            // Use event delegation on the persistent cart items container
-            cartItems.addEventListener('click', (e) => {
-                // Handle quantity buttons
-                if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
-                    const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
-                    const index = parseInt(button.getAttribute('data-index'));
-                    const action = button.getAttribute('data-action');
-                    
-                    if (action === 'increase') {
-                        cart[index].quantity += 1;
+            // Remove any existing event listeners to prevent duplicates
+            cartItems.removeEventListener('click', handleCartItemClick);
+            
+            // Add new event listener
+            cartItems.addEventListener('click', handleCartItemClick);
+        }
+
+        function handleCartItemClick(e) {
+            // Handle quantity buttons
+            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
+                const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
+                const index = parseInt(button.getAttribute('data-index'));
+                const action = button.getAttribute('data-action');
+                
+                console.log('Quantity button clicked:', {index, action});
+                
+                if (action === 'increase') {
+                    cart[index].quantity += 1;
+                    cart[index].totalPrice = cart[index].basePrice * cart[index].quantity + 
+                        cart[index].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[index].quantity;
+                } else if (action === 'decrease') {
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
                         cart[index].totalPrice = cart[index].basePrice * cart[index].quantity + 
                             cart[index].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[index].quantity;
-                    } else if (action === 'decrease') {
-                        if (cart[index].quantity > 1) {
-                            cart[index].quantity -= 1;
-                            cart[index].totalPrice = cart[index].basePrice * cart[index].quantity + 
-                                cart[index].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[index].quantity;
-                        } else {
-                            cart.splice(index, 1);
-                        }
+                    } else {
+                        cart.splice(index, 1);
                     }
-                    
-                    saveCart();
-                    updateCartBadge();
-                    updateCartDisplay(); // This will re-render the cart
                 }
                 
-                // Handle remove buttons
-                if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
-                    const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
-                    const index = parseInt(button.getAttribute('data-index'));
-                    
-                    if (confirm('Remove this item from cart?')) {
-                        cart.splice(index, 1);
-                        saveCart();
-                        updateCartBadge();
-                        updateCartDisplay(); // This will re-render the cart
-                    }
+                saveCart();
+                updateCartBadge();
+                updateCartDisplay();
+            }
+            
+            // Handle remove buttons
+            if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
+                const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
+                const index = parseInt(button.getAttribute('data-index'));
+                
+                console.log('Remove button clicked:', index);
+                
+                if (confirm('Remove this item from cart?')) {
+                    cart.splice(index, 1);
+                    saveCart();
+                    updateCartBadge();
+                    updateCartDisplay();
                 }
-            });
+            }
         }
 
         function sendOrderToWhatsApp() {
@@ -903,6 +923,7 @@
     </script>
 
     <style>
+        /* All CSS styles remain exactly the same as in the previous version */
         .menu-section {
             padding: 1rem 0;
         }
