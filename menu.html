@@ -766,12 +766,9 @@
         }
 
         function updateCartDisplay() {
-            console.log('Updating cart display, current cart:', cart);
-
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
 
-            // If cart is empty, show the empty message
             if (cart.length === 0) {
                 cartItems.innerHTML = `
                     <div class="empty-cart-message" id="emptyCartMessage" style="display: block;">
@@ -782,7 +779,6 @@
                 return;
             }
 
-            // If cart has items, build the items HTML
             let itemsHTML = '';
             let total = 0;
 
@@ -794,15 +790,37 @@
                 if (item.variant) {
                     description += `<div class="cart-item-variant">Variant: ${item.variant.name}</div>`;
                 }
-                if (item.extras && item.extras.length > 0) {
-                    description += `<div class="cart-item-extras">Extras: ${item.extras.map(extra => extra.name).join(', ')}</div>`;
+
+                // --- NEW EXTRA CHECKBOX LOGIC ---
+                let extrasHTML = '';
+                if (item.availableExtras && item.availableExtras.length > 0) {
+                    extrasHTML += '<div class="cart-extras-options">';
+                    item.availableExtras.forEach(opt => {
+                        // Check if this extra is already in the item.extras array
+                        const isChecked = item.extras.some(e => e.name === opt.name);
+                        
+                        extrasHTML += `
+                            <label class="cart-extra-label">
+                                <input type="checkbox" 
+                                       class="extra-checkbox" 
+                                       data-index="${index}" 
+                                       data-name="${opt.name}" 
+                                       data-price="${opt.price}"
+                                       ${isChecked ? 'checked' : ''}>
+                                ${opt.name} (+Rs ${opt.price})
+                            </label>
+                        `;
+                    });
+                    extrasHTML += '</div>';
                 }
+                // -------------------------------
 
                 itemsHTML += `
                     <div class="cart-item">
                         <div class="cart-item-info">
                             <div class="cart-item-name">${item.name} × ${item.quantity}</div>
                             ${description}
+                            ${extrasHTML}
                             <div class="cart-item-price">Rs ${itemTotal}</div>
                         </div>
                         <div class="cart-item-controls">
@@ -817,39 +835,36 @@
 
             cartItems.innerHTML = itemsHTML;
             cartTotal.textContent = `Total: Rs ${total}`;
-
+        }
             console.log('Cart display updated with', cart.length, 'items');
             // Note: We do NOT re-add event listeners here anymore.
             // The listener in setupCart handles clicks via delegation.
         }
 
-        function handleCartItemClick(e) {
-            // Handle quantity buttons
-            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
-                const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
-                const index = parseInt(button.getAttribute('data-index'));
-                const action = button.getAttribute('data-action');
+       // Handle checkbox changes in cart
+        function handleCartItemChange(e) {
+            if (e.target.classList.contains('extra-checkbox')) {
+                const index = parseInt(e.target.getAttribute('data-index'));
+                const name = e.target.getAttribute('data-name');
+                const price = parseInt(e.target.getAttribute('data-price'));
+                const isChecked = e.target.checked;
 
-                console.log('Quantity button clicked:', { index, action });
-
-                if (action === 'increase') {
-                    cart[index].quantity += 1;
-                    cart[index].totalPrice = cart[index].basePrice * cart[index].quantity +
-                        cart[index].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[index].quantity;
-                } else if (action === 'decrease') {
-                    if (cart[index].quantity > 1) {
-                        cart[index].quantity -= 1;
-                        cart[index].totalPrice = cart[index].basePrice * cart[index].quantity +
-                            cart[index].extras.reduce((sum, extra) => sum + extra.price, 0) * cart[index].quantity;
-                    } else {
-                        cart.splice(index, 1);
-                    }
+                if (isChecked) {
+                    // Add extra
+                    cart[index].extras.push({ name: name, price: price });
+                } else {
+                    // Remove extra
+                    cart[index].extras = cart[index].extras.filter(e => e.name !== name);
                 }
 
+                // Recalculate price
+                const extrasTotal = cart[index].extras.reduce((sum, e) => sum + e.price, 0);
+                cart[index].totalPrice = (cart[index].basePrice * cart[index].quantity) + (extrasTotal * cart[index].quantity);
+
                 saveCart();
-                updateCartBadge();
                 updateCartDisplay();
             }
+        }
 
             // Handle remove buttons
             if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
@@ -1822,5 +1837,6 @@
 </body>
 
 </html>
+
 
 
