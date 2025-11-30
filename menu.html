@@ -810,6 +810,7 @@
                     message += ` (${item.variant.name})`;
                 }
                 if (item.extras && item.extras.length > 0) {
+                    
                     message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
                 }
                 message += ` - Rs ${itemTotal}\n`;
@@ -1741,4 +1742,5 @@
     </style>
 </body>
 </html>
+
 
