@@ -250,32 +250,34 @@ body {
     }
 }
 
-/* Tablet */
+/* Tablet and Desktop - Centered Layout */
 @media (min-width: 768px) {
     .site-header {
         padding: 15px 0;
     }
 
     .header-content {
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         gap: 20px;
     }
 
     .logo-section {
-        text-align: left;
-        margin-bottom: 0;
-        width: auto;
+        text-align: center;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .logo-container {
         padding: 12px 45px;
-        min-width: 320px;
         display: inline-block;
-        /* Back to inline-block for tablet/desktop */
-        margin-left: 0;
-        margin-right: 0;
+        margin-bottom: 15px;
+        min-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .main-logo {
@@ -290,12 +292,12 @@ body {
     }
 
     .site-nav {
-        width: auto;
-        max-width: none;
+        width: 100%;
+        max-width: 400px;
         gap: 25px;
         padding: 12px 30px;
-        margin: 0;
-        /* Remove auto margin for tablet/desktop */
+        margin: 0 auto;
+        justify-content: center;
     }
 
     .nav-link {
@@ -303,10 +305,11 @@ body {
         font-size: 1rem;
         flex: none;
         min-width: auto;
+        text-align: center;
     }
 }
 
-/* Desktop */
+/* Desktop - Slightly larger sizes */
 @media (min-width: 1024px) {
     .logo-container {
         padding: 15px 55px;
@@ -323,6 +326,7 @@ body {
     }
 
     .site-nav {
+        max-width: 450px;
         gap: 30px;
         padding: 15px 35px;
     }
@@ -597,5 +601,6 @@ body {
 
 .section-title.center {
     text-align: center;
+
 
 }
