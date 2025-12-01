@@ -901,7 +901,7 @@
             }
         }
 
-        function sendOrderToWhatsApp() {
+      function sendOrderToWhatsApp() {
     let message = "My Order\n\n";
     message += "*Order Details:*\n";
     
@@ -925,13 +925,9 @@
         }
         message += ` - Rs ${itemTotal}\n`;
     });
-    
-    // Add total and complete the message
-     message += `\n*Total Amount: Rs ${total}*\n\n`;
-    message += "Please confirm this order. Thank you!";
 
-
-           
+            message += `\n*Total Amount: Rs ${total}*\n\n`;
+            message += "Please confirm this order. Thank you!";
 
             const encodedMessage = encodeURIComponent(message);
             const whatsappUrl = `https://wa.me/9779847695529?text=${encodedMessage}`;
@@ -944,7 +940,6 @@
             updateCartDisplay();
             document.getElementById('cartModal').style.display = 'none';
         }
-
         // Fallback for missing images
         function handleTabImageError(img, categoryName) {
             img.parentElement.innerHTML = `<div style="font-size:1.5rem;color:#666;">🍽️</div>`;
@@ -1891,6 +1886,7 @@
 
 
 </html>
+
 
 
 
