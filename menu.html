@@ -902,24 +902,35 @@
         }
 
         function sendOrderToWhatsApp() {
-            let message = "My Order\n\n";
-            message += "*Order Details:*\n";
-            
+    let message = "My Order\n\n";
+    message += "*Order Details:*\n";
+    
+    // Add date and time in simple format
+    const now = new Date();
+    const date = now.toLocaleDateString();
+    const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    message += `📅 ${date} ${time}\n\n`;
+    
+    let total = 0;
+    cart.forEach(item => {
+        const itemTotal = item.totalPrice;
+        total += itemTotal;
 
-            let total = 0;
-            cart.forEach(item => {
-                const itemTotal = item.totalPrice;
-                total += itemTotal;
-
-                message += `• ${item.quantity}x ${item.name}`;
-                if (item.variant) {
-                    message += ` (${item.variant.name})`;
-                }
-                if (item.extras && item.extras.length > 0) {
-                    message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-                }
-                message += ` - Rs ${itemTotal}\n`;
-            });
+        message += `• ${item.quantity}x ${item.name}`;
+        if (item.variant) {
+            message += ` (${item.variant.name})`;
+        }
+        if (item.extras && item.extras.length > 0) {
+            message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
+        }
+        message += ` - Rs ${itemTotal}\n`;
+    });
+    
+    // Add total and complete the message
+    message += `\n*Total: Rs ${total}*`;
+    
+    // Rest of your WhatsApp code here
+}
 
             message += `\n*Total Amount: Rs ${total}*\n\n`;
             message += "Please confirm this order. Thank you!";
@@ -1882,6 +1893,7 @@
 
 
 </html>
+
 
 
 
