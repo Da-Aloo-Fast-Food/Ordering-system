@@ -477,3 +477,83 @@ body {
 .section-title.center {
     text-align: center;
 }
+/* Ensure title fits within header on all devices */
+.customization-header h3 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* For very long item names, allow wrapping on small screens */
+@media (max-width: 480px) {
+    .customization-header h3 {
+        white-space: normal;
+        max-height: 40px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-size: 14px !important;
+        line-height: 1.1;
+    }
+}
+
+/* Adjust header container to ensure title fits */
+.customization-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px !important;
+    min-height: 60px;
+    gap: 10px;
+}
+
+/* Close button adjustments */
+.close-customization {
+    font-size: 22px !important;
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--secondary);
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    .customization-header {
+        padding: 10px 12px !important;
+        min-height: 55px;
+    }
+    
+    .customization-header h3 {
+        font-size: 16px !important;
+        max-width: calc(100% - 30px); /* Reserve space for close button */
+    }
+}
+
+/* For extremely small screens */
+@media (max-width: 360px) {
+    .customization-header {
+        padding: 8px 10px !important;
+        min-height: 50px;
+    }
+    
+    .customization-header h3 {
+        font-size: 14px !important;
+    }
+    
+    .close-customization {
+        font-size: 20px !important;
+        width: 20px;
+        height: 20px;
+    }
+}
