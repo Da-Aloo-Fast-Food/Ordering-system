@@ -888,19 +888,6 @@
                 updateCartDisplay();
             }
 
-            // Handle remove buttons
-            if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
-                const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
-                const index = parseInt(button.getAttribute('data-index'));
-
-                if (confirm('Remove this item from cart?')) {
-                    cart.splice(index, 1);
-                    saveCart();
-                    updateCartBadge();
-                    updateCartDisplay();
-                }
-            }
-        }
 
       function sendOrderToWhatsApp() {
     let message = "My Order\n\n";
@@ -1924,25 +1911,12 @@
             }
         }
     </style>
-    <script>
-let cartCount = 0;
 
-const badge = document.getElementById("cartBadge");
-const cartIcon = document.getElementById("cartIcon");
-
-cartIcon.addEventListener("click", () => {
-    cartCount++;
-    badge.textContent = cartCount;
-
-    badge.classList.remove("bounce");
-    void badge.offsetWidth;
-    badge.classList.add("bounce");
-});
-</script>
 </body>
 
 
 </html>
+
 
 
 
