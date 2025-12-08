@@ -1079,6 +1079,10 @@
             0 6px 20px rgba(0, 0, 0, 0.25);
     }
 }
+        const cartIcon = document.querySelector('.cart-icon');
+
+cartIcon.classList.add('bounce');
+setTimeout(() => cartIcon.classList.remove('bounce'), 400);
 
 /* Badge */
 .cart-badge {
@@ -1934,6 +1938,7 @@
 
 
 </html>
+
 
 
 
