@@ -1024,46 +1024,90 @@
     position: fixed;
     top: 120px;
     right: 20px;
-    z-index: 100;
+    z-index: 999; /* ensure always on top */
 }
 
+/* Cart Icon */
 .cart-icon {
-    background: #FFFFFF;              /* white background */
-    color: #000000;                   /* black icon */
-    width: 60px;
-    height: 60px;
+    background: #FFFFFF;
+    color: #000000;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    border: 3px solid #FFEB3B;        /* yellow border */
+    border: 3px solid #FFEB3B;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     position: relative;
-    transition: all 0.3s ease;
-    font-size: 1.5rem;
+    
+    /* Stronger visual impact */
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.25),
+        0 0 0 8px rgba(255, 235, 59, 0.35);
+
+    font-size: 1.7rem;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    /* Attention animation */
+    animation: cartPulse 2s infinite;
 }
 
+/* Hover Effect */
 .cart-icon:hover {
-    transform: scale(1.1);
-    background: #FFFFFF;              /* keep white on hover */
+    transform: scale(1.15);
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        0 0 0 10px rgba(255, 235, 59, 0.45);
+}
+
+/* Pulse Animation */
+@keyframes cartPulse {
+    0% {
+        box-shadow:
+            0 0 0 0 rgba(255, 235, 59, 0.6),
+            0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    70% {
+        box-shadow:
+            0 0 0 12px rgba(255, 235, 59, 0),
+            0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+    100% {
+        box-shadow:
+            0 0 0 0 rgba(255, 235, 59, 0),
+            0 6px 20px rgba(0, 0, 0, 0.25);
+    }
 }
 
 /* Badge */
 .cart-badge {
     position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #000000;              /* black badge */
-    color: #FFFFFF;                   /* white number */
+    top: -6px;
+    right: -6px;
+    background: #E53935; /* red = urgency */
+    color: #FFFFFF;
     border-radius: 50%;
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: bold;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: bounce when item added */
+.cart-icon.bounce {
+    animation: bounce 0.4s;
+}
+
+@keyframes bounce {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.25); }
+    60% { transform: scale(0.9); }
+    100% { transform: scale(1); }
 }
 
 
@@ -1890,6 +1934,7 @@
 
 
 </html>
+
 
 
 
