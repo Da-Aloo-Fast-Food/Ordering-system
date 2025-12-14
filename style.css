@@ -477,6 +477,7 @@ body {
 .section-title.center {
     text-align: center;
 }
+
 /* Ensure title fits within header on all devices */
 .customization-header h3 {
     margin: 0;
@@ -533,10 +534,11 @@ body {
         padding: 10px 12px !important;
         min-height: 55px;
     }
-    
+
     .customization-header h3 {
         font-size: 16px !important;
-        max-width: calc(100% - 30px); /* Reserve space for close button */
+        max-width: calc(100% - 30px);
+        /* Reserve space for close button */
     }
 }
 
@@ -546,11 +548,11 @@ body {
         padding: 8px 10px !important;
         min-height: 50px;
     }
-    
+
     .customization-header h3 {
         font-size: 14px !important;
     }
-    
+
     .close-customization {
         font-size: 20px !important;
         width: 20px;

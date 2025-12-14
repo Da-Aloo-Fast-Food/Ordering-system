@@ -81,7 +81,7 @@
             </div>
             <div class="cart-actions">
                 <button class="clear-cart-btn" id="clearCart">Clear Cart</button>
-                <button class="checkout-btn" id="checkoutBtn">Checkout on WhatsApp</button>
+            <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
             </div>
         </div>
     </div>
@@ -568,13 +568,14 @@
             });
 
             // Checkout
-            checkoutBtn.addEventListener('click', () => {
+           checkoutBtn.addEventListener('click', () => {
                 if (cart.length === 0) {
                     alert('Your cart is empty!');
                     return;
                 }
-                sendOrderToWhatsApp();
-            });
+                 localStorage.setItem('daAlooCart', JSON.stringify(cart));
+               window.location.href = 'checkout.html';
+           })
 
             // Close modal when clicking outside
             window.addEventListener('click', (e) => {
