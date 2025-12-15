@@ -1,4 +1,4 @@
-/* style.css - Optimized for Mobile Size Reduction */
+/* style.css - Final Version with Castle Regular Font for Tagline (SLIGHTLY INCREASED SIZES) */
 
 /* ==================================================================== */
 /* ✒️ CUSTOM FONT DEFINITION (Castle Regular) */
@@ -82,8 +82,8 @@ body {
     /* CRITICAL: Use fit-content and remove min-width for snug horizontal fit */
     width: fit-content;
 
-    /* REVERTED: Base padding back toward original small size (6px 15px -> 4px 12px) */
-    padding: 4px 12px;
+    /* INCREASED: Padding for better spacing (4px 10px -> 6px 15px) */
+    padding: 6px 15px;
     height: auto;
 
     /* CRITICAL: Centering Logo and Tagline inside the Box */
@@ -95,8 +95,7 @@ body {
     margin-bottom: 5px;
     /* Changed box-shadow color to var(--primary-dark) for better contrast/theme consistency */
     box-shadow: 0 2px 8px var(--primary-dark);
-    border: 2px solid var(--secondary);
-
+    
     /* Allow margin auto to center the fit-content box */
     margin-left: auto;
     margin-right: auto;
@@ -104,10 +103,10 @@ body {
 
 /* Logo Image - Base Size (Slightly larger mobile devices) */
 .main-logo {
-    /* REVERTED: Size reduction (140px -> 130px) */
-    width: 130px;
-    /* REVERTED: Size reduction (70px -> 65px) */
-    height: 65px;
+    /* INCREASED: Logo width (120px -> 135px) */
+    width: 135px;
+    /* INCREASED: Logo height (60px -> 68px) */
+    height: 68px;
     object-fit: contain;
     margin-bottom: 1px;
 }
@@ -117,8 +116,8 @@ body {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
-    /* REVERTED: Font size reduction (0.95rem -> 0.85rem) */
-    font-size: 0.85rem;
+    /* INCREASED: Font size (0.85rem -> 0.95rem) */
+    font-size: 0.95rem;
     margin: 0;
 
     /* --- MODIFIED: Apply Custom Font --- */
@@ -192,8 +191,8 @@ body {
 
     /* Logo container on tablet/larger mobile */
     .logo-container {
-        /* Reduced padding slightly (5px 12px -> 4px 10px) */
-        padding: 4px 10px;
+        /* INCREASED: Padding (3px 10px -> 5px 12px) */
+        padding: 5px 12px;
         border-radius: 12px;
         min-width: auto;
         margin-left: auto;
@@ -202,16 +201,16 @@ body {
 
     /* Content size */
     .main-logo {
-        /* Reduced width (110px -> 100px) */
-        width: 100px;
-        /* Reduced height (55px -> 50px) */
-        height: 50px;
+        /* INCREASED: Logo width (100px -> 110px) */
+        width: 110px;
+        /* INCREASED: Logo height (50px -> 55px) */
+        height: 55px;
         margin-bottom: 0px;
     }
 
     .tagline {
-        /* Reduced font-size (0.9rem -> 0.8rem) */
-        font-size: 0.8rem;
+        /* INCREASED: Font size (0.8rem -> 0.9rem) */
+        font-size: 0.9rem;
     }
 
     .site-nav {
@@ -232,23 +231,23 @@ body {
 
     /* Logo container on small mobile */
     .logo-container {
-        /* Reduced padding (4px 10px -> 3px 8px) */
-        padding: 3px 8px;
+        /* INCREASED: Padding (2px 8px -> 4px 10px) */
+        padding: 4px 10px;
         min-width: auto;
     }
 
     /* Content size */
     .main-logo {
-        /* Reduced width (90px -> 80px) */
-        width: 80px;
-        /* Reduced height (45px -> 40px) */
-        height: 40px;
+        /* INCREASED: Logo width (80px -> 90px) */
+        width: 90px;
+        /* INCREASED: Logo height (40px -> 45px) */
+        height: 45px;
         margin-bottom: 0px;
     }
 
     .tagline {
-        /* Reduced font-size (0.8rem -> 0.75rem) */
-        font-size: 0.75rem;
+        /* INCREASED: Font size (0.7rem -> 0.8rem) */
+        font-size: 0.8rem;
     }
 
     .site-nav {
@@ -283,7 +282,7 @@ body {
         width: fit-content;
         min-width: auto;
 
-        /* KEEPING DESKTOP SIZE: 12px 18px */
+        /* INCREASED: Padding (10px 15px -> 12px 18px) */
         padding: 12px 18px;
 
         height: auto;
@@ -295,16 +294,16 @@ body {
 
     /* 3. LOGO IMAGE SIZING: Desktop size */
     .main-logo {
-        /* KEEPING DESKTOP SIZE: 190px */
+        /* INCREASED: Logo width (170px -> 190px) */
         width: 190px;
-        /* KEEPING DESKTOP SIZE: 95px */
+        /* INCREASED: Logo height (85px -> 95px) */
         height: 95px;
         margin-bottom: 5px;
     }
 
     /* 4. TAGLINE: Desktop font size */
     .tagline {
-        /* KEEPING DESKTOP SIZE: 1rem */
+        /* INCREASED: Font size (0.9rem -> 1rem) */
         font-size: 1rem;
         white-space: nowrap;
     }
@@ -335,19 +334,19 @@ body {
 @media (min-width: 1024px) {
 
     .logo-container {
-        /* KEEPING DESKTOP SIZE: 18px 24px */
+        /* INCREASED: Padding (15px 20px -> 18px 24px) */
         padding: 18px 24px;
     }
 
     .main-logo {
-        /* KEEPING DESKTOP SIZE: 200px */
+        /* INCREASED: Logo width (180px -> 200px) */
         width: 200px;
-        /* KEEPING DESKTOP SIZE: 100px */
+        /* INCREASED: Logo height (90px -> 100px) */
         height: 100px;
     }
 
     .tagline {
-        /* KEEPING DESKTOP SIZE: 1.1rem */
+        /* INCREASED: Font size (1rem -> 1.1rem) */
         font-size: 1.1rem;
     }
 
@@ -369,10 +368,10 @@ body {
 
 .hero-section {
     padding: 30px 20px;
+    text-align: center;
 }
 
 .hero-title {
-    text-align: center;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 5px;
