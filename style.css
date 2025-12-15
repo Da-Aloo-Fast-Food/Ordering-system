@@ -94,7 +94,7 @@ body {
 
     margin-bottom: 5px;
     /* Changed box-shadow color to var(--primary-dark) for better contrast/theme consistency */
-    box-shadow: 0 2px 8px var(--primary-dark);
+    box-shadow: #E6B800;
     
     /* Allow margin auto to center the fit-content box */
     margin-left: auto;
@@ -584,3 +584,4 @@ body {
         height: 20px;
     }
 }
+
