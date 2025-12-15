@@ -1,4 +1,4 @@
-/* style.css (updated with compact header optimizations) */
+/* style.css (updated with balanced header optimizations) */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -32,24 +32,24 @@ body {
 }
 
 /* ================================== */
-/* ===== HEADER STYLES (COMPACT) ==== */
+/* ===== HEADER STYLES (BALANCED) ==== */
 /* ================================== */
 
-/* Site Header - Reduced Vertical Padding */
+/* Site Header - Increased Vertical Padding (Default/Small Desktop) */
 .site-header {
     background: var(--primary);
-    /* REDUCED: 10px 0 -> 8px 0 */
-    padding: 8px 0; 
+    /* INCREASED: 8px 0 -> 10px 0 */
+    padding: 10px 0; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Content - Reduced Gap */
+/* Header Content - Increased Gap */
 .header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* REDUCED: 15px -> 8px */
-    gap: 8px; 
+    /* INCREASED: 8px -> 12px */
+    gap: 12px; 
     width: 100%;
 }
 
@@ -58,14 +58,14 @@ body {
     width: 100%;
 }
 
-/* Logo Container - Reduced Padding and Margins */
+/* Logo Container - Increased Padding and Margins */
 .logo-container {
     background: white;
     border-radius: 15px;
     width: fit-content;
 
-    /* REDUCED: 2px 5px -> 0 5px */
-    padding: 0 5px; 
+    /* INCREASED: 0 5px -> 2px 5px */
+    padding: 2px 5px; 
     height: auto;
 
     display: flex;
@@ -73,8 +73,8 @@ body {
     align-items: center;
     justify-content: center;
 
-    /* REDUCED: 5px -> 0px */
-    margin-bottom: 0px; 
+    /* INCREASED: 0px -> 5px */
+    margin-bottom: 5px; 
     box-shadow: 0 2px 8px var(--primary-dark);
 
     /* Allow margin auto to center the fit-content box */
@@ -82,11 +82,11 @@ body {
     margin-right: auto;
 }
 
-/* Logo Image - Smaller Default Size */
+/* Logo Image - Slightly Larger Default Size */
 .main-logo {
-    /* REDUCED: 180px x 90px -> 120px x 60px */
-    width: 120px;
-    height: 60px;
+    /* INCREASED: 120px x 60px -> 150px x 75px */
+    width: 150px;
+    height: 75px;
     object-fit: cover;
     margin-bottom: 0px;
 }
@@ -95,27 +95,27 @@ body {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
-    /* REDUCED: 0.9rem -> 0.8rem */
-    font-size: 0.8rem; 
-    /* REDUCED: 5px -> 2px */
-    margin-top: 2px; 
+    /* INCREASED: 0.8rem -> 0.9rem */
+    font-size: 0.9rem; 
+    /* INCREASED: 2px -> 5px */
+    margin-top: 5px; 
     font-family: 'Lora', serif;
 }
 
-/* Navigation Styles - Compressed */
+/* Navigation Styles - Slightly More Breathing Room */
 .site-nav {
     display: flex;
     justify-content: center;
-    /* REDUCED: 15px -> 10px */
+    /* RETAINED: 10px */
     gap: 10px; 
     background: rgba(255, 255, 255, 0.2);
-    /* REDUCED: 10px 20px -> 6px 15px */
-    padding: 6px 15px; 
+    /* INCREASED: 6px 15px -> 8px 18px */
+    padding: 8px 18px; 
     border-radius: 25px;
     backdrop-filter: blur(10px);
     width: 100%;
-    /* REDUCED: 350px -> 300px */
-    max-width: 300px; 
+    /* INCREASED: 300px -> 320px */
+    max-width: 320px; 
     margin: 0 auto;
 }
 
@@ -123,13 +123,13 @@ body {
     text-decoration: none;
     font-weight: 600;
     color: var(--secondary);
-    /* REDUCED: 8px 20px -> 5px 15px */
-    padding: 5px 15px; 
+    /* INCREASED: 5px 15px -> 7px 18px */
+    padding: 7px 18px; 
     border-radius: 20px;
     background: white;
     transition: all 0.3s ease;
-    /* REDUCED: 0.9rem -> 0.8rem */
-    font-size: 0.8rem; 
+    /* INCREASED: 0.8rem -> 0.9rem */
+    font-size: 0.9rem; 
     border: 2px solid var(--secondary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex: 1;
@@ -157,157 +157,157 @@ body {
 }
 
 /* ================================== */
-/* ===== RESPONSIVE DESIGN (COMPACT) == */
+/* ===== RESPONSIVE DESIGN (BALANCED) == */
 /* ================================== */
 
-/* Mobile Optimizations - ENSURE CENTERED LAYOUT (max-width: 767px) */
+/* Mobile Optimizations (max-width: 767px) */
 @media (max-width: 767px) {
     .site-header {
-        /* REDUCED: 8px 0 -> 6px 0 */
-        padding: 6px 0;
+        /* INCREASED: 6px 0 -> 8px 0 */
+        padding: 8px 0;
     }
 
     .header-content {
-        /* REDUCED: 12px -> 8px */
-        gap: 8px;
+        /* INCREASED: 8px -> 10px */
+        gap: 10px;
     }
 
     .logo-container {
-        /* REDUCED: 5px 25px -> 3px 20px */
-        padding: 3px 20px;
+        /* INCREASED: 3px 20px -> 5px 22px */
+        padding: 5px 22px;
         border-radius: 12px;
-        /* REDUCED: 260px -> 200px */
-        min-width: 200px; 
+        /* INCREASED: 200px -> 240px */
+        min-width: 240px; 
         margin-left: auto;
         margin-right: auto;
         display: block;
     }
 
     .main-logo {
-        /* REDUCED: 100px x 50px -> 80px x 40px */
-        width: 80px; 
-        height: 40px; 
+        /* INCREASED: 80px x 40px -> 100px x 50px */
+        width: 100px; 
+        height: 50px; 
     }
 
     .tagline {
-        /* REDUCED: 0.8rem -> 0.75rem */
-        font-size: 0.75rem; 
-        /* REDUCED: 5px -> 1px */
-        margin-top: 1px; 
+        /* INCREASED: 0.75rem -> 0.8rem */
+        font-size: 0.8rem; 
+        /* INCREASED: 1px -> 3px */
+        margin-top: 3px; 
     }
 
     .site-nav {
-        /* REDUCED: 10px -> 8px */
+        /* RETAINED: 8px */
         gap: 8px; 
-        /* REDUCED: 8px 15px -> 5px 10px */
-        padding: 5px 10px; 
-        /* REDUCED: 300px -> 250px */
-        max-width: 250px;
+        /* INCREASED: 5px 10px -> 7px 12px */
+        padding: 7px 12px; 
+        /* INCREASED: 250px -> 280px */
+        max-width: 280px;
         margin: 0 auto;
     }
 
     .nav-link {
-        /* REDUCED: 6px 12px -> 4px 10px */
-        padding: 4px 10px; 
-        /* REDUCED: 0.8rem -> 0.75rem */
-        font-size: 0.75rem; 
-        /* REDUCED: 60px -> 50px */
-        min-width: 50px; 
+        /* INCREASED: 4px 10px -> 6px 12px */
+        padding: 6px 12px; 
+        /* INCREASED: 0.75rem -> 0.8rem */
+        font-size: 0.8rem; 
+        /* INCREASED: 50px -> 60px */
+        min-width: 60px; 
     }
 }
 
 /* Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
     .site-header {
-        /* REDUCED: 6px 0 -> 4px 0 */
-        padding: 4px 0;
+        /* INCREASED: 4px 0 -> 6px 0 */
+        padding: 6px 0;
     }
 
     .logo-container {
-        /* REDUCED: 6px 20px -> 3px 15px */
-        padding: 3px 15px;
-        /* REDUCED: 240px -> 190px */
-        min-width: 190px;
+        /* INCREASED: 3px 15px -> 4px 18px */
+        padding: 4px 18px;
+        /* INCREASED: 190px -> 220px */
+        min-width: 220px;
     }
 
     .main-logo {
-        /* Adjusted to be consistent with 767px */
-        width: 80px;
-        height: 40px;
+        /* RETAINED: 100px x 50px */
+        width: 100px;
+        height: 50px;
     }
 
     .tagline {
-        /* REDUCED: 0.75rem -> 0.7rem */
-        font-size: 0.7rem;
+        /* INCREASED: 0.7rem -> 0.75rem */
+        font-size: 0.75rem;
     }
 
     .site-nav {
-        /* REDUCED: 6px 15px -> 4px 10px */
-        padding: 4px 10px;
-        /* REDUCED: 300px -> 240px */
-        max-width: 240px;
+        /* INCREASED: 4px 10px -> 6px 12px */
+        padding: 6px 12px;
+        /* INCREASED: 240px -> 270px */
+        max-width: 270px;
     }
 
     .nav-link {
-        /* REDUCED: 5px 12px -> 3px 8px */
-        padding: 3px 8px;
-        /* REDUCED: 0.75rem -> 0.7rem */
-        font-size: 0.7rem;
-        /* REDUCED: 55px -> 45px */
-        min-width: 45px;
+        /* INCREASED: 3px 8px -> 5px 10px */
+        padding: 5px 10px;
+        /* INCREASED: 0.7rem -> 0.75rem */
+        font-size: 0.75rem;
+        /* INCREASED: 45px -> 50px */
+        min-width: 50px;
     }
 }
 
 /* Very Small Mobile (max-width: 360px) */
 @media (max-width: 360px) {
     .logo-container {
-        /* REDUCED: 5px 15px -> 3px 10px */
-        padding: 3px 10px;
-        /* REDUCED: 220px -> 180px */
-        min-width: 180px;
+        /* INCREASED: 3px 10px -> 4px 12px */
+        padding: 4px 12px;
+        /* INCREASED: 180px -> 200px */
+        min-width: 200px;
     }
 
     .main-logo {
-        /* Consistent with 767px and 480px */
+        /* RETAINED: 80px x 40px */
         width: 80px;
         height: 40px;
     }
 
     .tagline {
-        /* REDUCED: 0.7rem -> 0.65rem */
-        font-size: 0.65rem;
+        /* INCREASED: 0.65rem -> 0.7rem */
+        font-size: 0.7rem;
     }
 
     .site-nav {
-        /* REDUCED: 5px 12px -> 3px 8px */
-        padding: 3px 8px;
-        /* REDUCED: 280px -> 220px */
-        max-width: 220px;
+        /* INCREASED: 3px 8px -> 5px 10px */
+        padding: 5px 10px;
+        /* INCREASED: 220px -> 250px */
+        max-width: 250px;
     }
 
     .nav-link {
-        /* REDUCED: 4px 10px -> 2px 6px */
-        padding: 2px 6px;
-        /* REDUCED: 0.7rem -> 0.65rem */
-        font-size: 0.65rem;
-        /* REDUCED: 50px -> 40px */
-        min-width: 40px;
+        /* INCREASED: 2px 6px -> 4px 8px */
+        padding: 4px 8px;
+        /* INCREASED: 0.65rem -> 0.7rem */
+        font-size: 0.7rem;
+        /* INCREASED: 40px -> 45px */
+        min-width: 45px;
     }
 }
 
 /* Tablet and Desktop - Centered Layout (min-width: 768px) */
 @media (min-width: 768px) {
     .site-header {
-        /* REDUCED: 15px 0 -> 10px 0 */
-        padding: 10px 0;
+        /* INCREASED: 10px 0 -> 14px 0 */
+        padding: 14px 0;
     }
 
     .header-content {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        /* REDUCED: 20px -> 10px */
-        gap: 10px;
+        /* INCREASED: 10px -> 15px */
+        gap: 15px;
     }
 
     .logo-section {
@@ -319,47 +319,47 @@ body {
     }
 
     .logo-container {
-        /* REDUCED: 12px 45px -> 5px 30px */
-        padding: 5px 30px;
+        /* INCREASED: 5px 30px -> 8px 40px */
+        padding: 8px 40px;
         display: inline-block;
-        /* REDUCED: 15px -> 5px */
-        margin-bottom: 5px; 
-        /* REDUCED: 320px -> 250px */
-        min-width: 250px; 
+        /* INCREASED: 5px -> 10px */
+        margin-bottom: 10px; 
+        /* INCREASED: 250px -> 300px */
+        min-width: 300px; 
         margin-left: auto;
         margin-right: auto;
     }
 
     .main-logo {
-        /* REDUCED: 220px x 110px -> 140px x 70px */
-        width: 140px;
-        height: 70px;
+        /* INCREASED: 140px x 70px -> 180px x 90px */
+        width: 180px;
+        height: 90px;
         margin-bottom: 0;
     }
 
     .tagline {
-        /* REDUCED: 1rem -> 0.9rem */
-        font-size: 0.9rem;
+        /* INCREASED: 0.9rem -> 1rem */
+        font-size: 1rem;
         white-space: nowrap;
     }
 
     .site-nav {
         width: 100%;
-        /* REDUCED: 400px -> 350px */
-        max-width: 350px;
-        /* REDUCED: 25px -> 15px */
-        gap: 15px; 
-        /* REDUCED: 12px 30px -> 8px 20px */
-        padding: 8px 20px;
+        /* INCREASED: 350px -> 400px */
+        max-width: 400px;
+        /* INCREASED: 15px -> 20px */
+        gap: 20px; 
+        /* INCREASED: 8px 20px -> 10px 25px */
+        padding: 10px 25px;
         margin: 0 auto;
         justify-content: center;
     }
 
     .nav-link {
-        /* REDUCED: 10px 25px -> 7px 18px */
-        padding: 7px 18px;
-        /* REDUCED: 1rem -> 0.9rem */
-        font-size: 0.9rem; 
+        /* INCREASED: 7px 18px -> 9px 22px */
+        padding: 9px 22px;
+        /* INCREASED: 0.9rem -> 1rem */
+        font-size: 1rem; 
         flex: none;
         min-width: auto;
         text-align: center;
@@ -369,37 +369,37 @@ body {
 /* Desktop - Slightly larger sizes (min-width: 1024px) */
 @media (min-width: 1024px) {
     .logo-container {
-        /* REDUCED: 15px 55px -> 8px 40px */
-        padding: 8px 40px;
-        /* REDUCED: 380px -> 300px */
-        min-width: 300px;
+        /* INCREASED: 8px 40px -> 10px 45px */
+        padding: 10px 45px;
+        /* INCREASED: 300px -> 350px */
+        min-width: 350px;
     }
 
     .main-logo {
-        /* REDUCED: 180px x 90px -> 160px x 80px */
-        width: 160px;
-        height: 80px;
+        /* INCREASED: 160px x 80px -> 200px x 100px */
+        width: 200px;
+        height: 100px;
     }
 
     .tagline {
-        /* REDUCED: 1.1rem -> 1rem */
-        font-size: 1rem;
+        /* INCREASED: 1rem -> 1.1rem */
+        font-size: 1.1rem;
     }
 
     .site-nav {
-        /* REDUCED: 450px -> 400px */
-        max-width: 400px;
-        /* REDUCED: 30px -> 20px */
-        gap: 20px; 
-        /* REDUCED: 15px 35px -> 10px 25px */
-        padding: 10px 25px;
+        /* INCREASED: 400px -> 450px */
+        max-width: 450px;
+        /* INCREASED: 20px -> 25px */
+        gap: 25px; 
+        /* INCREASED: 10px 25px -> 12px 30px */
+        padding: 12px 30px;
     }
 
     .nav-link {
-        /* REDUCED: 12px 30px -> 8px 20px */
-        padding: 8px 20px;
-        /* REDUCED: 1.1rem -> 1rem */
-        font-size: 1rem;
+        /* INCREASED: 8px 20px -> 10px 25px */
+        padding: 10px 25px;
+        /* INCREASED: 1rem -> 1.1rem */
+        font-size: 1.1rem;
     }
 }
 
