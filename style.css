@@ -1,6 +1,8 @@
-/* style.css (updated with mobile header optimizations and centered navigation) */
+/* style.css - Final Version with Desktop Header Fixes */
 
-/* CSS Variables for consistent theming */
+/* ==================================================================== */
+/* 🎨 CSS Variables for Consistent Theming */
+/* ==================================================================== */
 :root {
     --primary: #FDFD96;
     --primary-dark: #E6B800;
@@ -9,7 +11,9 @@
     --card: #ffffff;
 }
 
-/* Reset and Base Styles */
+/* ==================================================================== */
+/* 📝 Reset and Base Styles */
+/* ==================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -30,16 +34,18 @@ body {
     padding: 0 20px;
 }
 
-/* ===== HEADER STYLES ===== */
+/* ==================================================================== */
+/* ⏫ HEADER STYLES (Default: Stacked/Mobile) */
+/* ==================================================================== */
 
-/* Site Header */
+/* Site Header Background */
 .site-header {
     background: var(--primary);
     padding: 10px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Center align header content (Default: Stacked/Mobile) */
+/* Header Content Wrapper (Default: Mobile/Stacked) */
 .header-content {
     display: flex;
     flex-direction: column;
@@ -53,7 +59,7 @@ body {
     width: 100%;
 }
 
-/* Logo Container */
+/* Logo Container (White Box) */
 .logo-container {
     background: white;
     border-radius: 15px;
@@ -74,6 +80,7 @@ body {
     margin-bottom: 0px;
 }
 
+/* Logo Tagline */
 .tagline {
     font-style: italic;
     font-weight: 500;
@@ -83,7 +90,7 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Navigation Styles */
+/* Navigation Container (Default: Mobile) */
 .site-nav {
     display: flex;
     justify-content: center;
@@ -125,16 +132,16 @@ body {
     transform: translateY(0);
 }
 
-/* Active state for current page */
 .nav-link.active {
     background: var(--secondary);
     color: var(--primary);
     border-color: var(--secondary);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ==================================================================== */
+/* 📱 RESPONSIVE DESIGN: Mobile Optimizations (Max 767px) */
+/* ==================================================================== */
 
-/* Mobile Optimizations - ENSURE CENTERED LAYOUT */
 @media (max-width: 767px) {
     .site-header {
         padding: 8px 0;
@@ -176,7 +183,7 @@ body {
     }
 }
 
-/* Small Mobile */
+/* Small Mobile (Max 480px) */
 @media (max-width: 480px) {
     .site-header {
         padding: 6px 0;
@@ -188,8 +195,9 @@ body {
     }
 
     .main-logo {
-        width: 180px;
-        height: 90px;
+        /* Reverting large logo size for very small screens */
+        width: 100px;
+        height: 50px;
     }
 
     .tagline {
@@ -210,7 +218,7 @@ body {
     }
 }
 
-/* Very Small Mobile */
+/* Very Small Mobile (Max 360px) */
 @media (max-width: 360px) {
     .logo-container {
         padding: 5px 15px;
@@ -240,19 +248,22 @@ body {
     }
 }
 
-/* --- CRITICAL DESKTOP FIX (768px and up) --- */
+/* ==================================================================== */
+/* 🖥️ CRITICAL DESKTOP FIX (768px and up) */
+/* Header content side-by-side: Logo Left, Nav Right */
+/* ==================================================================== */
 @media (min-width: 768px) {
 
-    /* 1. MAIN HEADER CONTAINER: No changes needed here */
+    /* 1. MAIN HEADER CONTAINER: Force horizontal layout and space distribution */
     .header-content {
         flex-direction: row !important;
-        justify-content: space-between !important;
+        justify-content: space-between !important; /* Push logo left, nav right */
         align-items: center !important;
         gap: 40px;
         padding: 10px 0;
     }
 
-    /* 2. LOGO SECTION: No changes needed here */
+    /* 2. LOGO SECTION: Ensure it aligns its content to the left */
     .logo-section {
         flex-shrink: 0;
         text-align: left !important;
@@ -260,50 +271,48 @@ body {
         width: auto;
     }
 
-    /* 3. LOGO CONTAINER: CRITICAL ADJUSTMENTS FOR WIDTH */
-                .logo-container {
-                    /* *** PRIMARY FIX: Increased minimum width to guarantee fit *** */
-                    min-width: 400px;
-                    /* INCREASED from 500px to 550px */
+    /* 3. LOGO CONTAINER: Increased width to ensure tagline fits */
+    .logo-container {
+        /* *** PRIMARY FIX: Increased minimum width to guarantee fit *** */
+        min-width: 550px; 
         
-                    /* Adjusted padding slightly to give a clean edge */
-                    padding: 20px 20px;
+        padding: 20px 20px; /* Adjusted padding to maximize content area */
         
-                    /* Ensure these overrides are still present: */
-                    margin-left: 0 !important;
-                    margin-right: 0 !important;
-                    display: inline-block;
-                }
+        /* Remove mobile center alignment overrides */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        display: inline-block;
+    }
 
-    /* 4. LOGO IMAGE SIZING: No changes needed here */
-           .main-logo {
-               width: 160px;
-               height: 80px;
-               margin-bottom: 0;
-           }
+    /* 4. LOGO IMAGE SIZING: Standard desktop size */
+    .main-logo {
+        width: 160px;
+        height: 80px;
+        margin-bottom: 0;
+    }
 
-    /* 5. TAGLINE: Slightly smaller text size to fit long phrase */
-                .tagline {
-                    font-size: 0.8rem;
-                    white-space: nowrap;
-                    margin-left: 0 !important;
-                    /* Removed !important from text-align as it's not needed here */
-                    text-align: left;
-                }
+    /* 5. TAGLINE: Force no-wrap and alignment */
+    .tagline {
+        font-size: 0.8rem;
+        white-space: nowrap;
+        margin-left: 0 !important;
+        text-align: left;
+    }
 
-    /* 6. NAVIGATION STYLES: No changes needed here */
+    /* 6. NAVIGATION STYLES: Ensure it flows right and aligns its links to the right */
     .site-nav {
         display: flex !important;
         flex-direction: row !important;
-        justify-content: flex-end !important;
+        justify-content: flex-end !important; /* Align links to the far right */
         align-items: center;
-        flex-grow: 1;
+        flex-grow: 1; /* Allows nav to take remaining space, pushing links right */
         gap: 15px;
         max-width: none !important;
         width: auto !important;
+        padding: 10px 0; /* Adjust padding for desktop alignment */
     }
 
-    /* 7. NAVIGATION LINK STYLES: No changes needed here */
+    /* 7. NAVIGATION LINK STYLES: Standard sizing */
     .nav-link {
         padding: 8px 20px;
         font-size: 0.9rem;
@@ -315,11 +324,10 @@ body {
 /* Desktop - Slightly larger sizes (1024px and up) */
 @media (min-width: 1024px) {
 
-    /* CRITICAL ADJUSTMENT: Ensure the larger container also accounts for the tagline width */
+    /* Ensure large screen keeps the necessary width */
     .logo-container {
         padding: 20px 25px;
-        min-width: 500px;
-        /* Matched to 768px, ensuring sufficient width */
+        min-width: 550px; 
     }
 
     .main-logo {
@@ -328,12 +336,10 @@ body {
     }
 
     .tagline {
-        font-size: 0.9rem;
-        /* Set to 0.9rem for larger screens */
+        font-size: 0.9rem; /* Slightly larger text on larger screens */
     }
 
     .site-nav {
-        max-width: none;
         gap: 20px;
         padding: 10px 25px;
     }
@@ -344,7 +350,10 @@ body {
     }
 }
 
-/* ===== HERO SECTION STYLES ===== */
+
+/* ==================================================================== */
+/* 🌟 HERO SECTION STYLES */
+/* ==================================================================== */
 
 .hero-section {
     padding: 30px 20px;
@@ -397,7 +406,6 @@ body {
     gap: 1rem;
 }
 
-
 .character-image {
     width: 150px;
     height: 210px;
@@ -406,18 +414,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    clip-path: polygon(50% 0%,
-            70% 8%,
-            85% 25%,
-            92% 45%,
-            88% 68%,
-            72% 88%,
-            50% 100%,
-            28% 88%,
-            12% 68%,
-            8% 45%,
-            15% 25%,
-            30% 8%);
+    clip-path: polygon(50% 0%, 70% 8%, 85% 25%, 92% 45%, 88% 68%, 72% 88%, 50% 100%, 28% 88%, 12% 68%, 8% 45%, 15% 25%, 30% 8%);
     border-radius: 50% / 45%;
     overflow: hidden;
 }
@@ -433,12 +430,10 @@ body {
     padding: 0;
 }
 
-.hero-title {
-    font-size: 2rem;
-    margin: -1;
-}
 
-/* ===== FOOTER STYLES ===== */
+/* ==================================================================== */
+/* ⬇️ FOOTER STYLES */
+/* ==================================================================== */
 
 .site-footer {
     background: var(--secondary);
@@ -448,7 +443,9 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== WHATSAPP FLOATING BUTTON ===== */
+/* ==================================================================== */
+/* 🟢 WHATSAPP FLOATING BUTTON */
+/* ==================================================================== */
 
 .floating-whatsapp {
     position: fixed;
@@ -475,7 +472,9 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== MENU SECTION STYLES ===== */
+/* ==================================================================== */
+/* 🍲 MENU SECTION STYLES (Includes Customization Modal Fixes) */
+/* ==================================================================== */
 
 .menu-section {
     padding: 30px 20px;
@@ -495,7 +494,16 @@ body {
     text-align: center;
 }
 
-/* Ensure title fits within header on all devices */
+/* Customization Header for Modals/Sidebars */
+.customization-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px !important;
+    min-height: 60px;
+    gap: 10px;
+}
+
 .customization-header h3 {
     margin: 0;
     padding: 0;
@@ -505,30 +513,6 @@ body {
     white-space: nowrap;
     flex: 1;
     font-family: 'Montserrat', sans-serif !important;
-}
-
-/* For very long item names, allow wrapping on small screens */
-@media (max-width: 480px) {
-    .customization-header h3 {
-        white-space: normal;
-        max-height: 40px;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        font-size: 14px !important;
-        line-height: 1.1;
-    }
-}
-
-/* Adjust header container to ensure title fits */
-.customization-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 15px !important;
-    min-height: 60px;
-    gap: 10px;
 }
 
 /* Close button adjustments */
@@ -545,7 +529,7 @@ body {
     color: var(--secondary);
 }
 
-/* Mobile-specific adjustments */
+/* Mobile-specific adjustments for customization header */
 @media (max-width: 768px) {
     .customization-header {
         padding: 10px 12px !important;
@@ -555,11 +539,24 @@ body {
     .customization-header h3 {
         font-size: 16px !important;
         max-width: calc(100% - 30px);
-        /* Reserve space for close button */
     }
 }
 
-/* For extremely small screens */
+/* Small screen text wrapping */
+@media (max-width: 480px) {
+    .customization-header h3 {
+        white-space: normal;
+        max-height: 40px;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        font-size: 14px !important;
+        line-height: 1.1;
+    }
+}
+
+/* Extremely small screens adjustments */
 @media (max-width: 360px) {
     .customization-header {
         padding: 8px 10px !important;
@@ -575,5 +572,4 @@ body {
         width: 20px;
         height: 20px;
     }
-
 }
