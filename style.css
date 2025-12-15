@@ -351,7 +351,7 @@ body {
 }
 
 .hero-title {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 5px;
     color: var(--secondary);
@@ -575,3 +575,4 @@ body {
         height: 20px;
     }
 }
+
