@@ -1,4 +1,19 @@
-/* style.css - Final Version with Responsive, Centered, and Horizontally Snug Logo Container */
+/* style.css - Final Version with Castle Regular Font for Tagline */
+
+/* ==================================================================== */
+/* ✒️ CUSTOM FONT DEFINITION (Castle Regular) */
+/* ==================================================================== */
+@font-face {
+    font-family: 'Castle Regular';
+    /* Update the URL path if your font files are located elsewhere */
+    src: url('fonts/CastleRegular.woff2') format('woff2'),
+        url('fonts/CastleRegular.woff') format('woff'),
+        url('fonts/CastleRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    /* Helps with page loading performance */
+}
 
 /* ==================================================================== */
 /* 🎨 CSS Variables for Consistent Theming */
@@ -18,15 +33,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-}
-
-/* Castle Regular Font */
-@font-face {
-    font-family: 'CastleRegular';
-    src: url('fonts/CastleRegular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
 body {
@@ -77,7 +83,8 @@ body {
     width: fit-content;
 
     /* Optimized Vertical & Horizontal Padding for snugness */
-    padding: 4px 10px; /* Reduced horizontal padding for tighter fit */
+    padding: 4px 10px;
+    /* Reduced horizontal padding for tighter fit */
     height: auto;
 
     /* CRITICAL: Centering Logo and Tagline inside the Box */
@@ -87,8 +94,9 @@ body {
     justify-content: center;
 
     margin-bottom: 5px;
-    box-shadow: 0 2px 8px var(--primary-dark), 0 0 20px 5px rgba(230, 184, 0, 0.3); /* Added outer glow */
-    border: 2px solid var(--secondary);
+    /* Changed box-shadow color to var(--primary-dark) for better contrast/theme consistency */
+    box-shadow: 0 2px 8px var(--primary-dark);
+   
     /* Allow margin auto to center the fit-content box */
     margin-left: auto;
     margin-right: auto;
@@ -102,16 +110,20 @@ body {
     margin-bottom: 1px;
 }
 
-/* Logo Tagline - Base Style with Castle Regular font */
+/* Logo Tagline - Base Style */
 .tagline {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
     font-size: 0.85rem;
     margin: 0;
-    font-family: 'CastleRegular', 'Montserrat', sans-serif; /* Added CastleRegular */
+
+    /* --- MODIFIED: Apply Custom Font --- */
+    font-family: 'Castle Regular', serif;
+
     text-align: center;
-    white-space: nowrap; /* Ensures the width is governed by the text length */
+    white-space: nowrap;
+    /* Ensures the width is governed by the text length */
 }
 
 /* Navigation Container (Default: Mobile) */
@@ -178,12 +190,12 @@ body {
     /* Logo container on tablet/larger mobile */
     .logo-container {
         /* Tighter padding for snug fit */
-        padding: 3px 10px; /* Reduced horizontal padding */
+        padding: 3px 10px;
+        /* Reduced horizontal padding */
         border-radius: 12px;
         min-width: auto;
         margin-left: auto;
         margin-right: auto;
-        box-shadow: 0 2px 8px var(--primary-dark), 0 0 15px 3px rgba(230, 184, 0, 0.3); /* Adjusted outer glow for mobile */
     }
 
     /* Content size */
@@ -216,11 +228,12 @@ body {
     /* Logo container on small mobile */
     .logo-container {
         /* Minimal padding for smallest screens */
-        padding: 2px 8px; /* Minimal horizontal padding */
+        padding: 2px 8px;
+        /* Minimal horizontal padding */
         min-width: auto;
-        box-shadow: 0 2px 6px var(--primary-dark), 0 0 12px 2px rgba(230, 184, 0, 0.3); /* Adjusted outer glow for very small screens */
     }
 
+    /* Content size */
     .main-logo {
         width: 80px;
         height: 40px;
@@ -264,14 +277,14 @@ body {
         min-width: auto;
 
         /* Optimized horizontal padding for desktop */
-        padding: 10px 15px; /* Reduced horizontal padding for tighter fit */
+        padding: 10px 15px;
+        /* Reduced horizontal padding for tighter fit */
 
         height: auto;
         /* Ensures the fit-content box aligns to the left in the desktop header */
         margin-left: 0 !important;
         margin-right: 0 !important;
         display: flex;
-        box-shadow: 0 2px 8px var(--primary-dark), 0 0 20px 5px rgba(230, 184, 0, 0.3); /* Outer glow for desktop */
     }
 
     /* 3. LOGO IMAGE SIZING: Desktop size */
@@ -315,7 +328,6 @@ body {
     .logo-container {
         /* Optimized horizontal padding for larger screens */
         padding: 15px 20px;
-        box-shadow: 0 2px 8px var(--primary-dark), 0 0 20px 5px rgba(230, 184, 0, 0.3); /* Outer glow for larger screens */
     }
 
     .main-logo {
@@ -337,8 +349,6 @@ body {
         font-size: 1rem;
     }
 }
-
-/* Rest of the style.css remains unchanged... */
 
 
 /* ==================================================================== */
@@ -563,6 +573,3 @@ body {
         height: 20px;
     }
 }
-
-
-
