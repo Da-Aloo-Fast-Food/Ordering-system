@@ -62,7 +62,7 @@ body {
     width: fit-content;
 
     /* Optimized Vertical & Horizontal Padding for snugness */
-    padding: 4px 10px;
+    padding: 2px 5px;
     /* Reduced horizontal padding for tighter fit */
     height: auto;
 
@@ -574,3 +574,4 @@ body {
         height: 20px;
     }
 }
+
