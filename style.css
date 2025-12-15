@@ -270,7 +270,7 @@ body {
       /* CRITICAL: Increase width and horizontal padding */
       padding: 10px 30px;
       /* Increased horizontal padding (30px on each side) */
-      min-width: 300px;
+      min-width: 400px;
       /* Increased minimum width to ensure text fits */
 
       /* Ensure these overrides are still present: */
