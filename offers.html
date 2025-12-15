@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Da Aloo - Special Offers</title>
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400..700;1,400..700&family=Montserrat:wght@400;500;600;700;800&family=Paytone+One&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    </head>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/offers.css">
+</head>
 
 <body>
+    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -23,17 +30,18 @@
                     </div>
                     <nav class="site-nav">
                         <a href="index.html" class="nav-link">Menu</a>
-                        <a href="offers.html" class="nav-link">Offers</a>
+                        <a href="offers.html" class="nav-link active">Offers</a>
                         <a href="about.html" class="nav-link">About</a>
                     </nav>
                 </div>
             </div>
+        </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         <section class="container offers-page-content">
-            <h1 class="section-title center">Special Offers</h1> 
-            
+            <h1 class="section-title center">Special Offers</h1>
             <p class="section-description center">
                 Don't miss out on our exclusive deals and promotions
             </p>
@@ -80,130 +88,22 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Floating Elements -->
     <a class="floating-whatsapp" href="tel:+9779847695529">
         <i class="fas fa-phone-alt"></i> Call Now
     </a>
 
+    <!-- JavaScript -->
     <script>
+        // Set current year in footer
         document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
-
-    <style>
-        /* General styling for the new elements based on your original inline styles */
-        .offers-page-content {
-            padding: 2rem 0;
-        }
-
-        .section-description {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .offers-grid {
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); 
-            gap: 2rem;
-        }
-
-        .offer-card {
-            background: white; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
-            transition: transform 0.3s; 
-            display: flex; 
-            flex-direction: column;
-        }
-        
-        .offer-image {
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 1rem;
-        }
-        
-        .offer-image img {
-            max-width: 100%; 
-            max-height: 300px; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain;
-        }
-
-        /* Daily Specials Styles */
-        .daily-specials-wrapper {
-             background: var(--primary); 
-             margin-top: 3rem; 
-             width: 100%;
-        }
-        
-        .daily-specials-content {
-            padding: 2rem 0;
-        }
-
-        .daily-specials-box {
-            color: black; /* Changed from white to black for contrast */
-            padding: 2rem; 
-            border-radius: 15px; 
-            max-width: 600px; 
-            margin: 0 auto; 
-            text-align: center;
-        }
-
-        .daily-specials-title {
-            margin-bottom: 1rem; 
-            color: black; 
-            font-family: 'Bebas Neue', cursive; 
-            letter-spacing: 1.5px; 
-            font-size: 2.5rem; /* Let's keep this as h2, standard size */
-        }
-        
-        .daily-specials-text {
-            margin-bottom: 1.5rem; 
-            color: black; 
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        /* The Order Button Class should already exist in style.css */
-        .order-now-btn.btn-outline {
-             border-color: black; /* Changed from white to black for contrast */
-             color: black; 
-             font-family: 'Montserrat', sans-serif;
-        }
-
-        /* Responsive styles from before */
-        @media (max-width: 768px) {
-            .offers-grid {
-                grid-template-columns: 1fr !important;
-                gap: 1.5rem !important;
-            }
-
-            .offer-image {
-                padding: 0.5rem !important;
-            }
-
-            .offer-image img {
-                max-height: 250px !important;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .offers-grid {
-                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)) !important;
-            }
-        }
-    </style>
 </body>
 </html>
