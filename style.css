@@ -64,12 +64,12 @@ body {
     background: white;
     border-radius: 15px;
 
-    /* --- CRITICAL SNUG HORIZONTAL FIT FIX --- */
-    /* Removed min-width, set width to fit content */
+    /* CRITICAL: Use fit-content and remove min-width for snug horizontal fit */
     width: fit-content;
 
     /* Optimized Vertical & Horizontal Padding for snugness */
-    padding: 4px 15px;
+    padding: 4px 10px;
+    /* Reduced horizontal padding for tighter fit */
     height: auto;
 
     /* CRITICAL: Centering Logo and Tagline inside the Box */
@@ -170,10 +170,10 @@ body {
 
     /* Logo container on tablet/larger mobile */
     .logo-container {
-        /* Padding for snug vertical fit, horizontal padding remains snug */
-        padding: 3px 18px;
+        /* Tighter padding for snug fit */
+        padding: 3px 10px;
+        /* Reduced horizontal padding */
         border-radius: 12px;
-        /* No min-width needed as fit-content takes over */
         min-width: auto;
         margin-left: auto;
         margin-right: auto;
@@ -209,7 +209,8 @@ body {
     /* Logo container on small mobile */
     .logo-container {
         /* Minimal padding for smallest screens */
-        padding: 2px 10px;
+        padding: 2px 8px;
+        /* Minimal horizontal padding */
         min-width: auto;
     }
 
@@ -252,12 +253,14 @@ body {
 
     /* 2. LOGO CONTAINER: CRITICAL ADJUSTMENTS FOR TIGHT FIT ON DESKTOP */
     .logo-container {
-        /* CRITICAL: Horizontal fit */
         width: fit-content;
         min-width: auto;
-        padding: 10px 25px;
-        height: auto;
 
+        /* Optimized horizontal padding for desktop */
+        padding: 10px 15px;
+        /* Reduced horizontal padding for tighter fit */
+
+        height: auto;
         /* Ensures the fit-content box aligns to the left in the desktop header */
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -303,7 +306,8 @@ body {
 @media (min-width: 1024px) {
 
     .logo-container {
-        padding: 15px 30px;
+        /* Optimized horizontal padding for larger screens */
+        padding: 15px 20px;
     }
 
     .main-logo {
