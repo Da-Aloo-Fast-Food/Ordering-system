@@ -1,4 +1,4 @@
-/* style.css - Final Version with Fixed, Centered Logo Box Across All Views */
+/* style.css - Final Version with Responsive, Snug Logo Container Fit */
 
 /* ==================================================================== */
 /* 🎨 CSS Variables for Consistent Theming */
@@ -9,10 +9,6 @@
     --secondary: #000000;
     --background: #FFF9C4;
     --card: #ffffff;
-
-    /* DEFINED FIXED SIZE FOR THE LOGO CONTAINER (Based on 1024px+ content) */
-    --logo-box-width: 400px;
-    --logo-box-height: 140px;
 }
 
 /* ==================================================================== */
@@ -63,18 +59,18 @@ body {
     width: 100%;
 }
 
-/* Logo Container (White Box) - FIXED SIZE AND CENTERING */
+/* Logo Container (White Box) - BASE/MOBILE STYLES */
 .logo-container {
     background: white;
     border-radius: 15px;
 
-    /* --- CRITICAL: FIXED SIZE --- */
-    width: var(--logo-box-width);
-    height: var(--logo-box-height);
-    padding: 0;
-    /* Padding is no longer needed since size is fixed */
+    /* Responsive sizing based on content and minimum width */
+    padding: 5px 20px;
+    min-width: 280px;
+    /* Base minimum width for mobile/content */
+    height: auto;
 
-    /* --- CRITICAL: CENTERING CONTENT --- */
+    /* CRITICAL: Centering Logo and Tagline inside the Box */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -84,25 +80,23 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 2px solid var(--secondary);
     max-width: 90%;
-    /* Ensure it shrinks if viewport is smaller than fixed width */
 }
 
-/* Logo Image - Base Size (Used for Desktop) */
+/* Logo Image - Base Size (Slightly larger mobile devices) */
 .main-logo {
-    width: 170px;
-    height: 85px;
+    width: 120px;
+    height: 60px;
     object-fit: contain;
-    /* Use contain to ensure logo aspect ratio is respected */
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     /* Spacing between logo and tagline */
 }
 
-/* Logo Tagline - Base Size (Used for Desktop) */
+/* Logo Tagline - Base Style */
 .tagline {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     margin: 0;
     font-family: 'Montserrat', sans-serif;
     text-align: center;
@@ -158,7 +152,7 @@ body {
 }
 
 /* ==================================================================== */
-/* 📱 RESPONSIVE DESIGN: Mobile Optimizations (Adjust Logo/Text Size within Fixed Box) */
+/* 📱 RESPONSIVE DESIGN: Mobile Optimizations (Max 767px) */
 /* ==================================================================== */
 
 @media (max-width: 767px) {
@@ -170,20 +164,19 @@ body {
         gap: 12px;
     }
 
-    /* Logo Container retains fixed size (width/height from :root) */
+    /* Logo container on tablet/larger mobile */
     .logo-container {
+        padding: 5px 20px;
         border-radius: 12px;
+        min-width: 250px;
         margin-left: auto;
         margin-right: auto;
-        /* Ensures the fixed width fits even on smaller tablets */
-        max-width: var(--logo-box-width);
     }
 
-    /* Shrink content for mobile inside the fixed box */
+    /* Content size */
     .main-logo {
         width: 100px;
         height: 50px;
-        margin-bottom: 3px;
     }
 
     .tagline {
@@ -194,7 +187,6 @@ body {
         gap: 10px;
         padding: 8px 15px;
         max-width: 300px;
-        margin: 0 auto;
     }
 
     .nav-link {
@@ -204,9 +196,14 @@ body {
     }
 }
 
-/* Very Small Mobile (Max 360px) - Shrink content further */
+/* Very Small Mobile (Max 360px) - Shrink box and content further */
 @media (max-width: 360px) {
-    /* Logo Container retains fixed size */
+
+    /* Logo container on small mobile */
+    .logo-container {
+        padding: 4px 10px;
+        min-width: 200px;
+    }
 
     .main-logo {
         width: 80px;
@@ -245,24 +242,36 @@ body {
         padding: 10px 0;
     }
 
-    /* 2. LOGO SECTION: Ensure logo box aligns left */
-    .logo-section {
-        flex-shrink: 0;
-        text-align: left !important;
-        display: block !important;
-        width: var(--logo-box-width);
-        /* Reserve space for the fixed box */
-    }
-
-    /* 3. LOGO CONTAINER: Retains fixed size, aligns left within section */
+    /* 2. LOGO CONTAINER: CRITICAL ADJUSTMENTS FOR TIGHT FIT ON DESKTOP */
     .logo-container {
+        /* Optimal min-width for the full tagline at desktop font size (0.9rem) */
+        min-width: 380px;
+
+        /* Adjusted padding for vertical and horizontal tightness */
+        padding: 10px 25px;
+        height: auto;
+
+        /* Ensure logo is on the left side of the header */
         margin-left: 0 !important;
         margin-right: 0 !important;
+        display: flex;
+        /* Keep flex for centering */
     }
 
-    /* Logo Image / Tagline: Use Base size defined above */
+    /* 3. LOGO IMAGE SIZING: Desktop size */
+    .main-logo {
+        width: 170px;
+        height: 85px;
+        margin-bottom: 5px;
+    }
 
-    /* 6. NAVIGATION STYLES: Push navigation to the right */
+    /* 4. TAGLINE: Desktop font size */
+    .tagline {
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+
+    /* 5. NAVIGATION STYLES: Push navigation to the right */
     .site-nav {
         display: flex !important;
         flex-direction: row !important;
@@ -275,7 +284,7 @@ body {
         padding: 10px 0;
     }
 
-    /* 7. NAVIGATION LINK STYLES: Standard sizing */
+    /* 6. NAVIGATION LINK STYLES: Standard sizing */
     .nav-link {
         padding: 8px 20px;
         font-size: 0.9rem;
@@ -284,18 +293,23 @@ body {
     }
 }
 
-/* Desktop - Slightly larger sizes (1024px and up) */
+/* Desktop - Slightly larger screens (1024px and up) */
 @media (min-width: 1024px) {
 
-    /* Logo container retains fixed size */
+    .logo-container {
+        min-width: 400px;
+        /* Slight buffer for larger screens */
+        padding: 15px 30px;
+    }
 
     .main-logo {
-        width: 170px;
-        height: 85px;
+        width: 180px;
+        height: 90px;
     }
 
     .tagline {
-        font-size: 0.9rem;
+        font-size: 1rem;
+        /* Slightly larger text on largest screens */
     }
 
     .site-nav {
