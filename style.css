@@ -1,4 +1,4 @@
-/* style.css (updated with mobile header optimizations and centered navigation) */
+/* style.css (updated with compact header optimizations) */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -17,6 +17,7 @@
 }
 
 body {
+    /* Retained Montserrat as base font */
     font-family: 'Montserrat', sans-serif;
     background-color: var(--background);
     color: var(--secondary);
@@ -30,21 +31,25 @@ body {
     padding: 0 20px;
 }
 
-/* ===== HEADER STYLES ===== */
+/* ================================== */
+/* ===== HEADER STYLES (COMPACT) ==== */
+/* ================================== */
 
-/* Site Header */
+/* Site Header - Reduced Vertical Padding */
 .site-header {
     background: var(--primary);
-    padding: 10px 0;
+    /* REDUCED: 10px 0 -> 8px 0 */
+    padding: 8px 0; 
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Center align header content */
+/* Header Content - Reduced Gap */
 .header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    /* REDUCED: 15px -> 8px */
+    gap: 8px; 
     width: 100%;
 }
 
@@ -53,27 +58,23 @@ body {
     width: 100%;
 }
 
-/* Logo Container */
+/* Logo Container - Reduced Padding and Margins */
 .logo-container {
     background: white;
     border-radius: 15px;
-
-    /* CRITICAL: Use fit-content and remove min-width for snug horizontal fit */
     width: fit-content;
 
-    /* Optimized Vertical & Horizontal Padding for snugness */
-    padding: 2px 5px;
-    /* Reduced horizontal padding for tighter fit */
+    /* REDUCED: 2px 5px -> 0 5px */
+    padding: 0 5px; 
     height: auto;
 
-    /* CRITICAL: Centering Logo and Tagline inside the Box */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    margin-bottom: 5px;
-    /* Changed box-shadow color to var(--primary-dark) for better contrast/theme consistency */
+    /* REDUCED: 5px -> 0px */
+    margin-bottom: 0px; 
     box-shadow: 0 2px 8px var(--primary-dark);
 
     /* Allow margin auto to center the fit-content box */
@@ -81,10 +82,11 @@ body {
     margin-right: auto;
 }
 
-/* Logo Image */
+/* Logo Image - Smaller Default Size */
 .main-logo {
-    width: 180px;
-    height: 90px;
+    /* REDUCED: 180px x 90px -> 120px x 60px */
+    width: 120px;
+    height: 60px;
     object-fit: cover;
     margin-bottom: 0px;
 }
@@ -93,22 +95,27 @@ body {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
-    font-size: 0.9rem;
-    margin-top: 5px;
+    /* REDUCED: 0.9rem -> 0.8rem */
+    font-size: 0.8rem; 
+    /* REDUCED: 5px -> 2px */
+    margin-top: 2px; 
     font-family: 'Lora', serif;
 }
 
-/* Navigation Styles */
+/* Navigation Styles - Compressed */
 .site-nav {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    /* REDUCED: 15px -> 10px */
+    gap: 10px; 
     background: rgba(255, 255, 255, 0.2);
-    padding: 10px 20px;
+    /* REDUCED: 10px 20px -> 6px 15px */
+    padding: 6px 15px; 
     border-radius: 25px;
     backdrop-filter: blur(10px);
     width: 100%;
-    max-width: 350px;
+    /* REDUCED: 350px -> 300px */
+    max-width: 300px; 
     margin: 0 auto;
 }
 
@@ -116,11 +123,13 @@ body {
     text-decoration: none;
     font-weight: 600;
     color: var(--secondary);
-    padding: 8px 20px;
+    /* REDUCED: 8px 20px -> 5px 15px */
+    padding: 5px 15px; 
     border-radius: 20px;
     background: white;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    /* REDUCED: 0.9rem -> 0.8rem */
+    font-size: 0.8rem; 
     border: 2px solid var(--secondary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex: 1;
@@ -147,125 +156,158 @@ body {
     border-color: var(--secondary);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ================================== */
+/* ===== RESPONSIVE DESIGN (COMPACT) == */
+/* ================================== */
 
-/* Mobile Optimizations - ENSURE CENTERED LAYOUT */
+/* Mobile Optimizations - ENSURE CENTERED LAYOUT (max-width: 767px) */
 @media (max-width: 767px) {
     .site-header {
-        padding: 8px 0;
+        /* REDUCED: 8px 0 -> 6px 0 */
+        padding: 6px 0;
     }
 
     .header-content {
-        gap: 12px;
+        /* REDUCED: 12px -> 8px */
+        gap: 8px;
     }
 
     .logo-container {
-        padding: 5px 25px;
+        /* REDUCED: 5px 25px -> 3px 20px */
+        padding: 3px 20px;
         border-radius: 12px;
-        min-width: 260px;
+        /* REDUCED: 260px -> 200px */
+        min-width: 200px; 
         margin-left: auto;
         margin-right: auto;
         display: block;
     }
 
     .main-logo {
-        width: 100px;
-        height: 50px;
+        /* REDUCED: 100px x 50px -> 80px x 40px */
+        width: 80px; 
+        height: 40px; 
     }
 
     .tagline {
-        font-size: 0.8rem;
+        /* REDUCED: 0.8rem -> 0.75rem */
+        font-size: 0.75rem; 
+        /* REDUCED: 5px -> 1px */
+        margin-top: 1px; 
     }
 
     .site-nav {
-        gap: 10px;
-        padding: 8px 15px;
-        max-width: 300px;
+        /* REDUCED: 10px -> 8px */
+        gap: 8px; 
+        /* REDUCED: 8px 15px -> 5px 10px */
+        padding: 5px 10px; 
+        /* REDUCED: 300px -> 250px */
+        max-width: 250px;
         margin: 0 auto;
     }
 
     .nav-link {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        min-width: 60px;
+        /* REDUCED: 6px 12px -> 4px 10px */
+        padding: 4px 10px; 
+        /* REDUCED: 0.8rem -> 0.75rem */
+        font-size: 0.75rem; 
+        /* REDUCED: 60px -> 50px */
+        min-width: 50px; 
     }
 }
 
-/* Small Mobile */
+/* Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
     .site-header {
-        padding: 6px 0;
+        /* REDUCED: 6px 0 -> 4px 0 */
+        padding: 4px 0;
     }
 
     .logo-container {
-        padding: 6px 20px;
-        min-width: 240px;
+        /* REDUCED: 6px 20px -> 3px 15px */
+        padding: 3px 15px;
+        /* REDUCED: 240px -> 190px */
+        min-width: 190px;
     }
 
     .main-logo {
-        width: 180px;
-        height: 90px;
-    }
-
-    .tagline {
-        font-size: 0.75rem;
-    }
-
-    .site-nav {
-        gap: 10px;
-        padding: 6px 15px;
-        max-width: 300px;
-        margin: 0 auto;
-    }
-
-    .nav-link {
-        padding: 5px 12px;
-        font-size: 0.75rem;
-        min-width: 55px;
-    }
-}
-
-/* Very Small Mobile */
-@media (max-width: 360px) {
-    .logo-container {
-        padding: 5px 15px;
-        min-width: 220px;
-    }
-
-    .main-logo {
+        /* Adjusted to be consistent with 767px */
         width: 80px;
         height: 40px;
     }
 
     .tagline {
+        /* REDUCED: 0.75rem -> 0.7rem */
         font-size: 0.7rem;
     }
 
     .site-nav {
-        gap: 8px;
-        padding: 5px 12px;
-        max-width: 280px;
-        margin: 0 auto;
+        /* REDUCED: 6px 15px -> 4px 10px */
+        padding: 4px 10px;
+        /* REDUCED: 300px -> 240px */
+        max-width: 240px;
     }
 
     .nav-link {
-        padding: 4px 10px;
+        /* REDUCED: 5px 12px -> 3px 8px */
+        padding: 3px 8px;
+        /* REDUCED: 0.75rem -> 0.7rem */
         font-size: 0.7rem;
-        min-width: 50px;
+        /* REDUCED: 55px -> 45px */
+        min-width: 45px;
     }
 }
 
-/* Tablet and Desktop - Centered Layout */
+/* Very Small Mobile (max-width: 360px) */
+@media (max-width: 360px) {
+    .logo-container {
+        /* REDUCED: 5px 15px -> 3px 10px */
+        padding: 3px 10px;
+        /* REDUCED: 220px -> 180px */
+        min-width: 180px;
+    }
+
+    .main-logo {
+        /* Consistent with 767px and 480px */
+        width: 80px;
+        height: 40px;
+    }
+
+    .tagline {
+        /* REDUCED: 0.7rem -> 0.65rem */
+        font-size: 0.65rem;
+    }
+
+    .site-nav {
+        /* REDUCED: 5px 12px -> 3px 8px */
+        padding: 3px 8px;
+        /* REDUCED: 280px -> 220px */
+        max-width: 220px;
+    }
+
+    .nav-link {
+        /* REDUCED: 4px 10px -> 2px 6px */
+        padding: 2px 6px;
+        /* REDUCED: 0.7rem -> 0.65rem */
+        font-size: 0.65rem;
+        /* REDUCED: 50px -> 40px */
+        min-width: 40px;
+    }
+}
+
+/* Tablet and Desktop - Centered Layout (min-width: 768px) */
 @media (min-width: 768px) {
     .site-header {
-        padding: 15px 0;
+        /* REDUCED: 15px 0 -> 10px 0 */
+        padding: 10px 0;
     }
 
     .header-content {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 20px;
+        /* REDUCED: 20px -> 10px */
+        gap: 10px;
     }
 
     .logo-section {
@@ -277,70 +319,93 @@ body {
     }
 
     .logo-container {
-        padding: 12px 45px;
+        /* REDUCED: 12px 45px -> 5px 30px */
+        padding: 5px 30px;
         display: inline-block;
-        margin-bottom: 15px;
-        min-width: 320px;
+        /* REDUCED: 15px -> 5px */
+        margin-bottom: 5px; 
+        /* REDUCED: 320px -> 250px */
+        min-width: 250px; 
         margin-left: auto;
         margin-right: auto;
     }
 
     .main-logo {
-        width: 220px;
-        height: 110px;
+        /* REDUCED: 220px x 110px -> 140px x 70px */
+        width: 140px;
+        height: 70px;
         margin-bottom: 0;
     }
 
     .tagline {
-        font-size: 1rem;
+        /* REDUCED: 1rem -> 0.9rem */
+        font-size: 0.9rem;
         white-space: nowrap;
     }
 
     .site-nav {
         width: 100%;
-        max-width: 400px;
-        gap: 25px;
-        padding: 12px 30px;
+        /* REDUCED: 400px -> 350px */
+        max-width: 350px;
+        /* REDUCED: 25px -> 15px */
+        gap: 15px; 
+        /* REDUCED: 12px 30px -> 8px 20px */
+        padding: 8px 20px;
         margin: 0 auto;
         justify-content: center;
     }
 
     .nav-link {
-        padding: 10px 25px;
-        font-size: 1rem;
+        /* REDUCED: 10px 25px -> 7px 18px */
+        padding: 7px 18px;
+        /* REDUCED: 1rem -> 0.9rem */
+        font-size: 0.9rem; 
         flex: none;
         min-width: auto;
         text-align: center;
     }
 }
 
-/* Desktop - Slightly larger sizes */
+/* Desktop - Slightly larger sizes (min-width: 1024px) */
 @media (min-width: 1024px) {
     .logo-container {
-        padding: 15px 55px;
-        min-width: 380px;
+        /* REDUCED: 15px 55px -> 8px 40px */
+        padding: 8px 40px;
+        /* REDUCED: 380px -> 300px */
+        min-width: 300px;
     }
 
     .main-logo {
-        width: 180px;
-        height: 90px;
+        /* REDUCED: 180px x 90px -> 160px x 80px */
+        width: 160px;
+        height: 80px;
     }
 
     .tagline {
-        font-size: 1.1rem;
+        /* REDUCED: 1.1rem -> 1rem */
+        font-size: 1rem;
     }
 
     .site-nav {
-        max-width: 450px;
-        gap: 30px;
-        padding: 15px 35px;
+        /* REDUCED: 450px -> 400px */
+        max-width: 400px;
+        /* REDUCED: 30px -> 20px */
+        gap: 20px; 
+        /* REDUCED: 15px 35px -> 10px 25px */
+        padding: 10px 25px;
     }
 
     .nav-link {
-        padding: 12px 30px;
-        font-size: 1.1rem;
+        /* REDUCED: 12px 30px -> 8px 20px */
+        padding: 8px 20px;
+        /* REDUCED: 1.1rem -> 1rem */
+        font-size: 1rem;
     }
 }
+
+/* ================================== */
+/* ===== OTHER SECTIONS (UNTOUCHED) ===== */
+/* ================================== */
 
 /* ===== HERO SECTION STYLES ===== */
 
@@ -405,17 +470,17 @@ body {
     align-items: center;
     justify-content: center;
     clip-path: polygon(50% 0%,
-            70% 8%,
-            85% 25%,
-            92% 45%,
-            88% 68%,
-            72% 88%,
-            50% 100%,
-            28% 88%,
-            12% 68%,
-            8% 45%,
-            15% 25%,
-            30% 8%);
+                70% 8%,
+                85% 25%,
+                92% 45%,
+                88% 68%,
+                72% 88%,
+                50% 100%,
+                28% 88%,
+                12% 68%,
+                8% 45%,
+                15% 25%,
+                30% 8%);
     border-radius: 50% / 45%;
     overflow: hidden;
 }
@@ -574,6 +639,3 @@ body {
         height: 20px;
     }
 }
-
-
-
