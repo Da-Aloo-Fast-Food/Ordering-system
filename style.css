@@ -492,6 +492,7 @@ body {
 
 .section-title.center {
     text-align: center;
+    font-size: 3rem;
 }
 
 /* Ensure title fits within header on all devices */
@@ -575,4 +576,5 @@ body {
         height: 20px;
     }
 }
+
 
