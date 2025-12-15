@@ -240,73 +240,63 @@ body {
     }
 }
 
-/* Tablet and Desktop - Horizontal Layout (CRUCIAL MODIFICATIONS) */
+/* --- CRITICAL DESKTOP FIX (768px and up) --- */
 @media (min-width: 768px) {
-    .site-header {
-        padding: 15px 0;
-    }
 
-    /* 1. MAIN HEADER CONTAINER: Switch to horizontal, push elements apart */
+    /* 1. MAIN HEADER CONTAINER: Ensure content is horizontal and space is distributed */
     .header-content {
         flex-direction: row !important;
-        /* Force row layout */
+        /* Force horizontal layout */
         justify-content: space-between !important;
-        /* Logo left, Nav right */
+        /* Push logo left, nav right */
         align-items: center !important;
-        gap: 20px;
+        /* Vertically center both the logo block and the nav block */
+        gap: 40px;
+        /* Add space between the logo block and the navigation */
+        padding: 10px 0;
+        /* Add some vertical padding */
     }
 
-    /* 2. LOGO SECTION: Ensure alignment is on the left */
+    /* 2. LOGO SECTION: Ensure it aligns its OWN content (logo and tagline) to the left/start */
     .logo-section {
-        text-align: left;
+        flex-shrink: 0;
+        text-align: left !important;
+        display: block !important;
         width: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start !important;
-        /* Align content to the start (left) */
     }
 
-    /* 3. LOGO BOX STYLING: Smaller and left-aligned */
+    /* 3. LOGO CONTAINER: Remove centralizing margins/styles */
     .logo-container {
+        /* CRITICAL: Remove auto margins that force center alignment on a stacked mobile layout */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        /* Keep the custom padding and dimensions */
         padding: 8px 20px;
-        min-width: 200px;
-        margin-bottom: 5px;
-
-        /* OVERRIDE: Remove auto margins forcing center alignment */
-        margin-left: unset !important;
-        margin-right: unset !important;
-        display: inline-block;
     }
 
-    /* 4. LOGO IMAGE SIZING: Smaller */
-    .main-logo {
-        width: 140px;
-        height: 70px;
-        margin-bottom: 0;
-    }
-
-    /* 5. TAGLINE: Aligned left */
+    /* 4. TAGLINE: Ensure alignment is left */
     .tagline {
-        font-size: 0.9rem;
-        white-space: nowrap;
+        text-align: left !important;
         margin-left: 0 !important;
     }
 
-    /* 6. NAVIGATION STYLES: Push to the right */
+    /* 5. NAVIGATION STYLES: Ensure it flows right and aligns its links to the right */
     .site-nav {
-        /* OVERRIDE: Remove fixed centering styles */
-        width: auto !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-
+        display: flex !important;
+        /* Must be a flex container to align links */
+        flex-direction: row !important;
+        justify-content: flex-end !important;
+        /* Align links to the far right of the navigation container */
+        align-items: center;
+        /* Vertically center the links */
+        flex-grow: 1;
+        /* Allow the nav to take up remaining space, pushing links right */
         gap: 15px;
-        padding: 8px 20px;
-        justify-content: flex-end;
-        /* Align links to the right */
-        flex-shrink: 0;
+        max-width: none !important;
+        width: auto !important;
     }
 
-    /* 7. NAVIGATION LINK STYLES: Smaller buttons */
+    /* 6. NAVIGATION LINK STYLES: Standard sizing */
     .nav-link {
         padding: 8px 20px;
         font-size: 0.9rem;
