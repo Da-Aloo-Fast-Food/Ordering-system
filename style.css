@@ -1,4 +1,4 @@
-/* style.css (updated with balanced header optimizations) */
+/* style.css (updated with wider navigation and split desktop header) */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -35,21 +35,19 @@ body {
 /* ===== HEADER STYLES (BALANCED) ==== */
 /* ================================== */
 
-/* Site Header - Increased Vertical Padding (Default/Small Desktop) */
+/* Site Header */
 .site-header {
     background: var(--primary);
-    /* INCREASED: 8px 0 -> 10px 0 */
-    padding: 10px 0; 
+    padding: 10px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Header Content - Increased Gap */
+/* Header Content - Default (Mobile: Vertical Stack) */
 .header-content {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* INCREASED: 8px -> 12px */
-    gap: 12px; 
+    gap: 12px;
     width: 100%;
 }
 
@@ -58,33 +56,25 @@ body {
     width: 100%;
 }
 
-/* Logo Container - Increased Padding and Margins */
+/* Logo Container */
 .logo-container {
     background: white;
     border-radius: 15px;
     width: fit-content;
-
-    /* INCREASED: 0 5px -> 2px 5px */
-    padding: 2px 5px; 
+    padding: 2px 5px;
     height: auto;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /* INCREASED: 0px -> 5px */
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     box-shadow: 0 2px 8px var(--primary-dark);
-
-    /* Allow margin auto to center the fit-content box */
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Logo Image - Slightly Larger Default Size */
+/* Logo Image */
 .main-logo {
-    /* INCREASED: 120px x 60px -> 150px x 75px */
     width: 150px;
     height: 75px;
     object-fit: cover;
@@ -95,27 +85,23 @@ body {
     font-style: italic;
     font-weight: 500;
     color: var(--secondary);
-    /* INCREASED: 0.8rem -> 0.9rem */
-    font-size: 0.9rem; 
-    /* INCREASED: 2px -> 5px */
-    margin-top: 5px; 
+    font-size: 0.9rem;
+    margin-top: 5px;
     font-family: 'Lora', serif;
 }
 
-/* Navigation Styles - Slightly More Breathing Room */
+/* Navigation Styles - Increased Gap for Mobile */
 .site-nav {
     display: flex;
     justify-content: center;
-    /* RETAINED: 10px */
-    gap: 10px; 
+    /* INCREASED: 10px -> 15px */
+    gap: 15px;
     background: rgba(255, 255, 255, 0.2);
-    /* INCREASED: 6px 15px -> 8px 18px */
-    padding: 8px 18px; 
+    padding: 8px 18px;
     border-radius: 25px;
     backdrop-filter: blur(10px);
     width: 100%;
-    /* INCREASED: 300px -> 320px */
-    max-width: 320px; 
+    max-width: 320px;
     margin: 0 auto;
 }
 
@@ -123,13 +109,11 @@ body {
     text-decoration: none;
     font-weight: 600;
     color: var(--secondary);
-    /* INCREASED: 5px 15px -> 7px 18px */
-    padding: 7px 18px; 
+    padding: 7px 18px;
     border-radius: 20px;
     background: white;
     transition: all 0.3s ease;
-    /* INCREASED: 0.8rem -> 0.9rem */
-    font-size: 0.9rem; 
+    font-size: 0.9rem;
     border: 2px solid var(--secondary);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     flex: 1;
@@ -157,248 +141,144 @@ body {
 }
 
 /* ================================== */
-/* ===== RESPONSIVE DESIGN (BALANCED) == */
+/* ===== RESPONSIVE DESIGN (SPLIT HEADER) == */
 /* ================================== */
 
-/* Mobile Optimizations (max-width: 767px) */
+/* Mobile Optimizations (max-width: 767px) - Vertical Stack with Wider Gaps */
 @media (max-width: 767px) {
     .site-header {
-        /* INCREASED: 6px 0 -> 8px 0 */
         padding: 8px 0;
     }
 
     .header-content {
-        /* INCREASED: 8px -> 10px */
         gap: 10px;
     }
 
     .logo-container {
-        /* INCREASED: 3px 20px -> 5px 22px */
         padding: 5px 22px;
         border-radius: 12px;
-        /* INCREASED: 200px -> 240px */
-        min-width: 240px; 
+        min-width: 240px;
         margin-left: auto;
         margin-right: auto;
         display: block;
     }
 
     .main-logo {
-        /* INCREASED: 80px x 40px -> 100px x 50px */
-        width: 100px; 
-        height: 50px; 
-    }
-
-    .tagline {
-        /* INCREASED: 0.75rem -> 0.8rem */
-        font-size: 0.8rem; 
-        /* INCREASED: 1px -> 3px */
-        margin-top: 3px; 
-    }
-
-    .site-nav {
-        /* RETAINED: 8px */
-        gap: 8px; 
-        /* INCREASED: 5px 10px -> 7px 12px */
-        padding: 7px 12px; 
-        /* INCREASED: 250px -> 280px */
-        max-width: 280px;
-        margin: 0 auto;
-    }
-
-    .nav-link {
-        /* INCREASED: 4px 10px -> 6px 12px */
-        padding: 6px 12px; 
-        /* INCREASED: 0.75rem -> 0.8rem */
-        font-size: 0.8rem; 
-        /* INCREASED: 50px -> 60px */
-        min-width: 60px; 
-    }
-}
-
-/* Small Mobile (max-width: 480px) */
-@media (max-width: 480px) {
-    .site-header {
-        /* INCREASED: 4px 0 -> 6px 0 */
-        padding: 6px 0;
-    }
-
-    .logo-container {
-        /* INCREASED: 3px 15px -> 4px 18px */
-        padding: 4px 18px;
-        /* INCREASED: 190px -> 220px */
-        min-width: 220px;
-    }
-
-    .main-logo {
-        /* RETAINED: 100px x 50px */
         width: 100px;
         height: 50px;
     }
 
     .tagline {
-        /* INCREASED: 0.7rem -> 0.75rem */
-        font-size: 0.75rem;
+        font-size: 0.8rem;
+        margin-top: 3px;
     }
 
     .site-nav {
-        /* INCREASED: 4px 10px -> 6px 12px */
+        /* INCREASED: 8px (default mobile gap) -> 12px */
+        gap: 12px;
+        padding: 7px 12px;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+
+    .nav-link {
         padding: 6px 12px;
-        /* INCREASED: 240px -> 270px */
-        max-width: 270px;
-    }
-
-    .nav-link {
-        /* INCREASED: 3px 8px -> 5px 10px */
-        padding: 5px 10px;
-        /* INCREASED: 0.7rem -> 0.75rem */
-        font-size: 0.75rem;
-        /* INCREASED: 45px -> 50px */
-        min-width: 50px;
+        font-size: 0.8rem;
+        min-width: 60px;
     }
 }
 
-/* Very Small Mobile (max-width: 360px) */
-@media (max-width: 360px) {
-    .logo-container {
-        /* INCREASED: 3px 10px -> 4px 12px */
-        padding: 4px 12px;
-        /* INCREASED: 180px -> 200px */
-        min-width: 200px;
-    }
-
-    .main-logo {
-        /* RETAINED: 80px x 40px */
-        width: 80px;
-        height: 40px;
-    }
-
-    .tagline {
-        /* INCREASED: 0.65rem -> 0.7rem */
-        font-size: 0.7rem;
-    }
-
-    .site-nav {
-        /* INCREASED: 3px 8px -> 5px 10px */
-        padding: 5px 10px;
-        /* INCREASED: 220px -> 250px */
-        max-width: 250px;
-    }
-
-    .nav-link {
-        /* INCREASED: 2px 6px -> 4px 8px */
-        padding: 4px 8px;
-        /* INCREASED: 0.65rem -> 0.7rem */
-        font-size: 0.7rem;
-        /* INCREASED: 40px -> 45px */
-        min-width: 45px;
-    }
-}
-
-/* Tablet and Desktop - Centered Layout (min-width: 768px) */
+/* Tablet/Desktop (min-width: 768px) - HORIZONTAL/SPLIT LAYOUT */
 @media (min-width: 768px) {
     .site-header {
-        /* INCREASED: 10px 0 -> 14px 0 */
         padding: 14px 0;
     }
 
+    /* Change header-content to horizontal (logo left, nav right) */
     .header-content {
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-between; /* Pushes logo and nav to opposite sides */
         align-items: center;
-        /* INCREASED: 10px -> 15px */
-        gap: 15px;
+        /* Reduce gap since items are split horizontally now */
+        gap: 20px; 
     }
 
     .logo-section {
-        text-align: center;
-        width: 100%;
+        text-align: left;
+        width: auto; /* Allow section to shrink to fit content */
+        /* Change logo-section back to flex for internal elements (logo and tagline) */
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start; /* Align logo and tagline to the left */
+        flex-shrink: 0; /* Prevent the logo section from shrinking too much */
     }
 
     .logo-container {
-        /* INCREASED: 5px 30px -> 8px 40px */
         padding: 8px 40px;
-        display: inline-block;
-        /* INCREASED: 5px -> 10px */
-        margin-bottom: 10px; 
-        /* INCREASED: 250px -> 300px */
-        min-width: 300px; 
-        margin-left: auto;
-        margin-right: auto;
+        display: block; /* Important: remove inline-block to allow left alignment */
+        margin-bottom: 10px;
+        min-width: 300px;
+        margin-left: 0; /* Align left */
+        margin-right: 0; /* Remove auto centering */
     }
 
     .main-logo {
-        /* INCREASED: 140px x 70px -> 180px x 90px */
         width: 180px;
         height: 90px;
-        margin-bottom: 0;
     }
 
     .tagline {
-        /* INCREASED: 0.9rem -> 1rem */
         font-size: 1rem;
         white-space: nowrap;
+        margin-top: 0; /* Remove top margin when placed next to logo container */
+        margin-left: 5px; /* Slight indent under the logo container */
     }
 
     .site-nav {
-        width: 100%;
-        /* INCREASED: 350px -> 400px */
-        max-width: 400px;
-        /* INCREASED: 15px -> 20px */
-        gap: 20px; 
-        /* INCREASED: 8px 20px -> 10px 25px */
+        width: auto; /* Allow nav to shrink to fit buttons */
+        /* INCREASED: 20px -> 30px */
+        gap: 30px; /* Increased horizontal distance */
         padding: 10px 25px;
-        margin: 0 auto;
-        justify-content: center;
+        max-width: none; /* Remove max-width constraint */
+        margin: 0; /* Remove auto centering */
+        justify-content: flex-end; /* Align links to the right */
+        flex-shrink: 1; /* Allow navigation to shrink if needed */
+        min-width: 300px; /* Ensure space for three buttons */
     }
 
     .nav-link {
-        /* INCREASED: 7px 18px -> 9px 22px */
         padding: 9px 22px;
-        /* INCREASED: 0.9rem -> 1rem */
-        font-size: 1rem; 
-        flex: none;
+        font-size: 1rem;
+        flex: none; /* Buttons should not grow/shrink in desktop */
         min-width: auto;
-        text-align: center;
     }
 }
 
 /* Desktop - Slightly larger sizes (min-width: 1024px) */
 @media (min-width: 1024px) {
     .logo-container {
-        /* INCREASED: 8px 40px -> 10px 45px */
         padding: 10px 45px;
-        /* INCREASED: 300px -> 350px */
         min-width: 350px;
     }
 
     .main-logo {
-        /* INCREASED: 160px x 80px -> 200px x 100px */
         width: 200px;
         height: 100px;
     }
 
     .tagline {
-        /* INCREASED: 1rem -> 1.1rem */
         font-size: 1.1rem;
     }
 
     .site-nav {
-        /* INCREASED: 400px -> 450px */
-        max-width: 450px;
-        /* INCREASED: 20px -> 25px */
-        gap: 25px; 
-        /* INCREASED: 10px 25px -> 12px 30px */
+        /* INCREASED: 25px -> 40px */
+        gap: 40px; /* Extra horizontal distance for large screens */
         padding: 12px 30px;
+        min-width: 450px; 
     }
 
     .nav-link {
-        /* INCREASED: 8px 20px -> 10px 25px */
         padding: 10px 25px;
-        /* INCREASED: 1rem -> 1.1rem */
         font-size: 1.1rem;
     }
 }
@@ -406,6 +286,8 @@ body {
 /* ================================== */
 /* ===== OTHER SECTIONS (UNTOUCHED) ===== */
 /* ================================== */
+/* ... (Hero, Footer, WhatsApp, Menu, Customization Styles remain here) ... */
+/* NOTE: The rest of the CSS below this line is UNCHANGED from the previous full file. */
 
 /* ===== HERO SECTION STYLES ===== */
 
