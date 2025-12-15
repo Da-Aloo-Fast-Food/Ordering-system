@@ -1,4 +1,4 @@
-/* style.css (Final version with larger logo) */
+/* style.css (Final version with slightly larger logo across all views) */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -70,11 +70,11 @@ body {
     margin-right: auto;
 }
 
-/* Logo Image - INCREASED SIZE (Default/Small Desktop) */
+/* Logo Image - Default/Base Size (Slightly Increased) */
 .main-logo {
-    /* INCREASED: 150px x 75px -> 180px x 90px */
-    width: 180px;
-    height: 90px;
+    /* Slightly increased size for all views (before media queries take over) */
+    width: 195px; /* Increased from 180px */
+    height: 97.5px; /* Increased from 90px */
     object-fit: cover;
     margin-bottom: 0px;
 }
@@ -149,18 +149,17 @@ body {
         gap: 10px;
     }
 
+    /* Logo Container - ADJUSTED min-width */
     .logo-container {
         padding: 5px 22px;
-        /* Increased min-width to accommodate larger logo */
-        min-width: 280px; 
+        min-width: 290px; /* Increased from 280px */
         display: block;
     }
 
-    /* Logo Image - INCREASED SIZE (Mobile) */
+    /* Logo Image - SLIGHTLY INCREASED SIZE (Mobile) */
     .main-logo {
-        /* INCREASED: 100px x 50px -> 120px x 60px */
-        width: 120px;
-        height: 60px;
+        width: 130px; /* Increased from 120px */
+        height: 65px; /* Increased from 60px */
     }
 
     .tagline {
@@ -187,17 +186,16 @@ body {
         padding: 6px 0;
     }
 
+    /* Logo Container - ADJUSTED min-width */
     .logo-container {
         padding: 4px 18px;
-        /* Increased min-width */
-        min-width: 240px;
+        min-width: 250px; /* Increased from 240px */
     }
 
-    /* Logo Image - INCREASED SIZE (Small Mobile) */
+    /* Logo Image - SLIGHTLY INCREASED SIZE (Small Mobile) */
     .main-logo {
-        /* INCREASED: 100px x 50px -> 120px x 60px */
-        width: 120px;
-        height: 60px;
+        width: 130px; /* Increased from 120px */
+        height: 65px; /* Increased from 60px */
     }
 
     .tagline {
@@ -218,17 +216,16 @@ body {
 
 /* Very Small Mobile (max-width: 360px) */
 @media (max-width: 360px) {
+    /* Logo Container - ADJUSTED min-width */
     .logo-container {
         padding: 4px 12px;
-        /* Increased min-width */
-        min-width: 220px;
+        min-width: 230px; /* Increased from 220px */
     }
 
-    /* Logo Image - INCREASED SIZE (Very Small Mobile) */
+    /* Logo Image - SLIGHTLY INCREASED SIZE (Very Small Mobile) */
     .main-logo {
-        /* INCREASED: 80px x 40px -> 100px x 50px */
-        width: 100px;
-        height: 50px;
+        width: 110px; /* Increased from 100px */
+        height: 55px; /* Increased from 50px */
     }
 
     .tagline {
@@ -248,7 +245,6 @@ body {
 }
 
 
-
 /* Tablet/Desktop (min-width: 768px) - HORIZONTAL/STANDARD LAYOUT */
 @media (min-width: 768px) {
     .site-header {
@@ -260,8 +256,6 @@ body {
         display: flex; 
         flex-direction: row; 
         justify-content: space-between; 
-        
-        /* RESTORED: Vertically center the logo and navigation */
         align-items: center; 
         gap: 20px; 
     }
@@ -273,31 +267,32 @@ body {
         gap: 0; 
     }
 
-    /* Logo Container styles remain the same (for size) */
+    /* Logo Container - ADJUSTED min-width for slightly larger logo */
     .logo-container {
         padding: 8px 40px;
         display: flex; 
         flex-direction: column;
         align-items: flex-start;
         margin-bottom: 0; 
-        min-width: 340px; 
+        min-width: 350px; /* Increased from 340px */
         margin-left: 0;
         margin-right: 0;
     }
     
+    /* Logo Image - SLIGHTLY INCREASED SIZE (Desktop) */
     .main-logo {
-        width: 210px;
-        height: 105px;
+        width: 225px; /* Increased from 210px */
+        height: 112.5px; /* Increased from 105px */
     }
 
     .tagline {
-        font-size: 1rem;
+        font-size: 1rem; 
         white-space: nowrap;
         margin-top: 5px; 
         margin-left: 0;
     }
 
-    /* Navigation - RESTORED: Remove margin-top and margin-right */
+    /* Navigation - Standard Position */
     .site-nav {
         width: auto;
         gap: 30px; 
@@ -306,10 +301,7 @@ body {
         justify-content: flex-end; 
         flex-shrink: 1;
         min-width: 300px;
-        
-        /* REMOVED vertical offset */
         margin-top: 0; 
-        /* REMOVED left shift */
         margin-right: 0;
         margin-left: 0;
     }
@@ -324,29 +316,28 @@ body {
 
 /* Desktop - Slightly larger sizes (min-width: 1024px) */
 @media (min-width: 1024px) {
+    /* Logo Container - ADJUSTED min-width for slightly larger logo */
     .logo-container {
         padding: 10px 45px;
-        min-width: 400px;
+        min-width: 420px; /* Increased from 400px */
     }
 
+    /* Logo Image - SLIGHTLY INCREASED SIZE (Large Desktop) */
     .main-logo {
-        width: 240px;
-        height: 120px;
+        width: 255px; /* Increased from 240px */
+        height: 127.5px; /* Increased from 120px */
     }
 
     .tagline {
-        font-size: 1.1rem;
+        font-size: 1.1rem; 
     }
 
-    /* Navigation - RESTORED: Remove vertical offset */
+    /* Navigation - Standard Position */
     .site-nav {
         gap: 40px; 
         padding: 12px 30px;
         min-width: 450px; 
-        
-        /* REMOVED vertical offset */
         margin-top: 0; 
-        /* REMOVED left shift */
         margin-right: 0;
     }
 
@@ -591,6 +582,3 @@ body {
         height: 20px;
     }
 }
-
-
-
