@@ -1,4 +1,4 @@
-/* style.css - Final Version with Desktop Header and Sizing Fixes */
+/* style.css - Final Version with Tight Logo Container Fit */
 
 /* ==================================================================== */
 /* 🎨 CSS Variables for Consistent Theming */
@@ -273,12 +273,11 @@ body {
 
     /* 3. LOGO CONTAINER: CRITICAL ADJUSTMENTS FOR TIGHT FIT */
     .logo-container {
-        /* *** PRIMARY FIX: Reduced width to achieve a tight fit *** */
-        min-width: 380px;
-        /* Adjusted to fit the logo and tagline snugly */
+        /* *** PRIMARY FIX: Adjusted min-width for horizontal fit *** */
+        min-width: 350px;
 
-        padding: 20px 20px;
-        /* Consistent padding */
+        /* Adjusted padding for vertical fit (less top/bottom padding) */
+        padding: 10px 20px;
 
         /* Remove mobile center alignment overrides */
         margin-left: 0 !important;
@@ -286,12 +285,10 @@ body {
         display: inline-block;
     }
 
-    /* 4. LOGO IMAGE SIZING: Increased slightly for better visual fit */
+    /* 4. LOGO IMAGE SIZING: Adjusted size for vertical fit */
     .main-logo {
-        width: 170px;
-        /* Slight increase from 160px */
-        height: 85px;
-        /* Slight increase from 80px */
+        width: 160px;
+        height: 80px;
         margin-bottom: 0;
     }
 
@@ -333,14 +330,15 @@ body {
 
     /* Ensure large screen keeps the necessary width */
     .logo-container {
-        padding: 20px 25px;
-        min-width: 400px;
-        /* Slightly more space for larger screens/fonts */
+        /* Increased min-width for the slightly larger font size (0.9rem) */
+        padding: 10px 25px;
+        min-width: 380px;
     }
 
     .main-logo {
-        width: 180px;
-        height: 90px;
+        width: 170px;
+        /* Slightly larger logo on larger screens */
+        height: 85px;
     }
 
     .tagline {
