@@ -248,8 +248,8 @@ body {
 }
 
 
-/* Tablet/Desktop (min-width: 768px) - HORIZONTAL/SPLIT LAYOUT with PUSHED-DOWN NAV */
-/* Tablet/Desktop (min-width: 768px) - HORIZONTAL/SPLIT LAYOUT with PUSHED-DOWN NAV */
+
+/* Tablet/Desktop (min-width: 768px) - HORIZONTAL/STANDARD LAYOUT */
 @media (min-width: 768px) {
     .site-header {
         padding: 14px 0;
@@ -260,7 +260,9 @@ body {
         display: flex; 
         flex-direction: row; 
         justify-content: space-between; 
-        align-items: flex-start;
+        
+        /* RESTORED: Vertically center the logo and navigation */
+        align-items: center; 
         gap: 20px; 
     }
 
@@ -271,7 +273,7 @@ body {
         gap: 0; 
     }
 
-    /* Logo Container styles remain the same */
+    /* Logo Container styles remain the same (for size) */
     .logo-container {
         padding: 8px 40px;
         display: flex; 
@@ -295,7 +297,7 @@ body {
         margin-left: 0;
     }
 
-    /* Navigation - CRITICAL CHANGE: Push down and shift left */
+    /* Navigation - RESTORED: Remove margin-top and margin-right */
     .site-nav {
         width: auto;
         gap: 30px; 
@@ -305,9 +307,10 @@ body {
         flex-shrink: 1;
         min-width: 300px;
         
-        margin-top: 100px; 
-        /* NEW: Add a right margin to push the element away from the right edge */
-        margin-right: 40px; 
+        /* REMOVED vertical offset */
+        margin-top: 0; 
+        /* REMOVED left shift */
+        margin-right: 0;
         margin-left: 0;
     }
 
@@ -335,15 +338,16 @@ body {
         font-size: 1.1rem;
     }
 
-    /* Navigation - CRITICAL CHANGE: Push down further and shift left */
+    /* Navigation - RESTORED: Remove vertical offset */
     .site-nav {
         gap: 40px; 
         padding: 12px 30px;
         min-width: 450px; 
         
-        margin-top: 120px; 
-        /* NEW: Increase right margin for larger screen shift */
-        margin-right: 60px; 
+        /* REMOVED vertical offset */
+        margin-top: 0; 
+        /* REMOVED left shift */
+        margin-right: 0;
     }
 
     .nav-link {
@@ -587,5 +591,6 @@ body {
         height: 20px;
     }
 }
+
 
 
