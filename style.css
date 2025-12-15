@@ -266,23 +266,35 @@ body {
     }
 
     /* 3. LOGO CONTAINER: Remove centralizing margins/styles */
-    .logo-container {
-    padding: 10px 30px;
-        /* Increased horizontal padding (30px on each side) */
-        min-width: 300px;
-        /* Increased minimum width to ensure text fits */
-    
-        /* Ensure these overrides are still present: */
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        display: inline-block;
-    }
+  .logo-container {
+      /* CRITICAL: Increase width and horizontal padding */
+      padding: 10px 30px;
+      /* Increased horizontal padding (30px on each side) */
+      min-width: 300px;
+      /* Increased minimum width to ensure text fits */
 
-    /* 4. TAGLINE: Ensure alignment is left */
-    .tagline {
-        text-align: left !important;
-        margin-left: 0 !important;
-    }
+      /* Ensure these overrides are still present: */
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      display: inline-block;
+  }
+
+  /* 4. LOGO IMAGE SIZING: You can also slightly increase the logo image if needed */
+  .main-logo {
+      width: 160px;
+      /* Slightly wider logo image */
+      height: 80px;
+      margin-bottom: 0;
+  }
+
+  /* 5. TAGLINE: Ensure the font size is appropriate for the box */
+  .tagline {
+      font-size: 0.9rem;
+      white-space: nowrap;
+      /* Forces the text to stay on one line */
+      margin-left: 0 !important;
+      text-align: left !important;
+  }
 
     /* 5. NAVIGATION STYLES: Ensure it flows right and aligns its links to the right */
     .site-nav {
