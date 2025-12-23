@@ -22,7 +22,6 @@
             cursor: grab;
             position: relative;
             padding: 40px 0;
-            /* Extra padding for hover scaling */
             background: var(--primary, #ffc107);
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -36,9 +35,9 @@
             display: flex;
             flex-direction: row;
             align-items: center;
-            /* This centers shorter boxes vertically in the track */
             width: max-content;
-            animation: scrollHorizontal 10s linear infinite;
+            /* Faster flow (Reduced from 10s to 7s) */
+            animation: scrollHorizontal 7s linear infinite;
         }
 
         .marquee-viewport-horizontal:hover .marquee-track-horizontal,
@@ -52,18 +51,14 @@
             margin: 0 1.5rem;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 
-            /* UPDATED: Shrink-wrap logic */
+            /* Shrink-wrap logic maintained */
             width: auto;
             max-width: 750px;
-            /* Maximum width for very wide images */
             height: auto;
             min-height: 200px;
-            /* Prevents boxes from being too tiny */
             max-height: 500px;
-            /* Prevents boxes from being too tall */
 
             padding: 15px;
-            /* Even margin around the image */
             flex-shrink: 0;
             display: flex;
             align-items: center;
@@ -74,14 +69,11 @@
 
         .offer-card:hover {
             transform: scale(1.05);
-            /* Clean zoom on hover */
         }
 
         .offer-card img {
-            /* Image dictates the size of the box */
             max-width: 100%;
             max-height: 470px;
-            /* Slightly less than card max-height to account for padding */
             width: auto;
             height: auto;
             border-radius: 10px;
@@ -130,6 +122,11 @@
 
         /* --- Mobile Tweaks --- */
         @media (max-width: 768px) {
+            .marquee-track-horizontal {
+                /* Even faster on mobile for better UX */
+                animation: scrollHorizontal 5s linear infinite;
+            }
+
             .offer-card {
                 max-width: 85vw;
                 margin: 0 0.8rem;
