@@ -33,17 +33,23 @@
     </header>
 
 <main>
-    <section style="padding: 1rem 0; overflow: hidden;">
+    <section style="padding: 0.5rem 0; overflow: hidden;">
         <h1 class="section-title center"
-            style="text-align: center; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 3rem; margin-top: 0; margin-bottom: 0.2rem;">
+            style="text-align: center; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 2.8rem; margin: 0;">
             Special Offers</h1>
         <p class="center"
-            style="text-align: center; margin-bottom: 1rem; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; font-family: 'Montserrat', sans-serif;">
+            style="text-align: center; margin-bottom: 0.5rem; font-size: 1rem; font-family: 'Montserrat', sans-serif;">
             Don't miss out on our exclusive deals
         </p>
 
+        <div style="text-align: center; margin-bottom: 10px;">
+            <button id="scrollToggle" class="control-btn">
+                <i class="fas fa-pause"></i> Pause Scroll
+            </button>
+        </div>
+
         <div class="marquee-viewport-vertical">
-            <div class="marquee-track-vertical">
+            <div id="scrollingTrack" class="marquee-track-vertical">
                 <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
                         alt="Offer 1"></div>
                 <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
@@ -59,7 +65,7 @@
                         alt="Offer 2"></div>
                 <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
                         alt="Offer 3"></div>
-                <div class="offer-card" onclick="nowopenModal('images/Offer4.png')"><img src="images/Offer4.png"
+                <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
                         alt="Offer 4"></div>
             </div>
         </div>
@@ -67,19 +73,29 @@
 </main>
 
 <style>
-    /* 1. Header Tightening */
-    .section-title.center {
-        line-height: 1;
-        /* Reduces vertical space between letters and lines */
+    /* Control Button Styling */
+    .control-btn {
+        background: #333;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.8rem;
+        cursor: pointer;
+        z-index: 10;
+        position: relative;
     }
 
-    /* 2. Vertical Slider Styles */
+    /* Vertical Slider Container */
     .marquee-viewport-vertical {
-        height: 500px;
-        /* Adjust this height based on how many images you want visible */
+        height: 600px;
+        /* Increased height to match wider images */
         width: 100%;
+        max-width: 800px;
+        /* Wider desktop container */
+        margin: 0 auto;
         overflow: hidden;
-        position: relative;
         display: flex;
         justify-content: center;
     }
@@ -87,25 +103,30 @@
     .marquee-track-vertical {
         display: flex;
         flex-direction: column;
-        /* Stack images vertically */
         height: max-content;
-        animation: scrollVertical 20s linear infinite;
+        animation: scrollVertical 25s linear infinite;
+        /* Slightly slower for larger images */
     }
 
-    .marquee-track-vertical:hover {
-        animation-play-state: paused;
+    .paused {
+        animation-play-state: paused !important;
     }
 
+    /* WIDER CARDS */
     .offer-card {
         background: white;
         border-radius: 15px;
-        margin: 1rem 0;
-        /* Vertical margin instead of horizontal */
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        flex-shrink: 0;
-        width: 300px;
-        padding: 10px;
-        cursor: zoom-in;
+        margin: 1.2rem 0;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        width: 600px;
+        /* Much wider for Desktop */
+        padding: 12px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .offer-card:hover {
+        transform: scale(1.02);
     }
 
     .offer-card img {
@@ -115,7 +136,6 @@
         display: block;
     }
 
-    /* 3. The Vertical Animation */
     @keyframes scrollVertical {
         0% {
             transform: translateY(0);
@@ -124,50 +144,26 @@
         100% {
             transform: translateY(-50%);
         }
-
-        /* Moves up by half the total track height */
     }
 
-    /* Maintain your existing Modal CSS here... */
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 9999;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        justify-content: center;
-        align-items: center;
-    }
-
-    .modal-content {
-        max-width: 90%;
-        max-height: 85vh;
-        border-radius: 10px;
-    }
-
-    .close-modal {
-        position: absolute;
-        top: 20px;
-        right: 35px;
-        color: white;
-        font-size: 40px;
-        cursor: pointer;
-    }
-
+    /* MOBILE RESPONSIVENESS */
     @media (max-width: 768px) {
-        .marquee-viewport-vertical {
-            height: 400px;
+        .offer-card {
+            width: 90vw;
+            /* Take up 90% of the screen width on mobile */
+            margin: 0.8rem 0;
         }
 
-        .offer-card {
-            width: 250px;
+        .marquee-viewport-vertical {
+            height: 500px;
+            /* Shorter viewport for mobile */
+        }
+
+        .section-title.center {
+            font-size: 2.2rem;
         }
     }
-
-    </style>
+</style>
 </body>
 
 
