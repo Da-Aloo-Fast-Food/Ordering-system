@@ -32,155 +32,141 @@
             </div>
     </header>
 
-    <main>
-        <section style="padding: 2rem 0; overflow: hidden;">
-            <h1 class="section-title center"
-                style="text-align: center; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 3.5rem;">
-                Special Offers</h1>
-            <p class="center"
-                style="text-align: center; margin-bottom: 2rem; font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto; font-family: 'Montserrat', sans-serif;">
-                Don't miss out on our exclusive deals and promotions
-            </p>
-    
-            <div class="marquee-viewport">
-                <div class="marquee-track">
-                    <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
-                            alt="Offer 1"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
-                            alt="Offer 2"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
-                            alt="Offer 3"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
-                            alt="Offer 4"></div>
-    
-                    <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
-                            alt="Offer 1"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
-                            alt="Offer 2"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
-                            alt="Offer 3"></div>
-                    <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
-                            alt="Offer 4"></div>
-                </div>
+<main>
+    <section style="padding: 1rem 0; overflow: hidden;">
+        <h1 class="section-title center"
+            style="text-align: center; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 3rem; margin-top: 0; margin-bottom: 0.2rem;">
+            Special Offers</h1>
+        <p class="center"
+            style="text-align: center; margin-bottom: 1rem; font-size: 1rem; max-width: 600px; margin-left: auto; margin-right: auto; font-family: 'Montserrat', sans-serif;">
+            Don't miss out on our exclusive deals
+        </p>
+
+        <div class="marquee-viewport-vertical">
+            <div class="marquee-track-vertical">
+                <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
+                        alt="Offer 1"></div>
+                <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
+                        alt="Offer 2"></div>
+                <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
+                        alt="Offer 3"></div>
+                <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
+                        alt="Offer 4"></div>
+
+                <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
+                        alt="Offer 1"></div>
+                <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
+                        alt="Offer 2"></div>
+                <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
+                        alt="Offer 3"></div>
+                <div class="offer-card" onclick="nowopenModal('images/Offer4.png')"><img src="images/Offer4.png"
+                        alt="Offer 4"></div>
             </div>
-    
-            <div style="background: var(--primary); margin-top: 3rem; width: 100%;">
-            </div>
-        </section>
-    </main>
-    
-    <div id="imageModal" class="modal" onclick="closeModal()">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="fullImage">
-    </div>
-    
-    <style>
-        /* Slider Styles */
-        .marquee-viewport {
-            width: 100%;
-            overflow: hidden;
-            padding: 20px 0;
-            cursor: pointer;
+        </div>
+    </section>
+</main>
+
+<style>
+    /* 1. Header Tightening */
+    .section-title.center {
+        line-height: 1;
+        /* Reduces vertical space between letters and lines */
+    }
+
+    /* 2. Vertical Slider Styles */
+    .marquee-viewport-vertical {
+        height: 500px;
+        /* Adjust this height based on how many images you want visible */
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .marquee-track-vertical {
+        display: flex;
+        flex-direction: column;
+        /* Stack images vertically */
+        height: max-content;
+        animation: scrollVertical 20s linear infinite;
+    }
+
+    .marquee-track-vertical:hover {
+        animation-play-state: paused;
+    }
+
+    .offer-card {
+        background: white;
+        border-radius: 15px;
+        margin: 1rem 0;
+        /* Vertical margin instead of horizontal */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        flex-shrink: 0;
+        width: 300px;
+        padding: 10px;
+        cursor: zoom-in;
+    }
+
+    .offer-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+        display: block;
+    }
+
+    /* 3. The Vertical Animation */
+    @keyframes scrollVertical {
+        0% {
+            transform: translateY(0);
         }
-    
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: scroll 25s linear infinite;
+
+        100% {
+            transform: translateY(-50%);
         }
-    
-        .marquee-track:hover {
-            animation-play-state: paused;
-            /* Stops sliding when user wants to click */
+
+        /* Moves up by half the total track height */
+    }
+
+    /* Maintain your existing Modal CSS here... */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 85vh;
+        border-radius: 10px;
+    }
+
+    .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+        .marquee-viewport-vertical {
+            height: 400px;
         }
-    
+
         .offer-card {
-            background: white;
-            border-radius: 15px;
-            margin: 0 1rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s;
-            flex-shrink: 0;
-            width: 300px;
-            padding: 10px;
+            width: 250px;
         }
-    
-        .offer-card img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            display: block;
-        }
-    
-        @keyframes scroll {
-            0% {
-                transform: translateX(0);
-            }
-    
-            100% {
-                transform: translateX(-50%);
-            }
-    
-            /* Moves exactly half the track width */
-        }
-    
-        /* Full Screen Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 9999;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-        }
-    
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-        }
-    
-        .close-modal {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    
-        @media (max-width: 768px) {
-            .offer-card {
-                width: 220px;
-            }
-    
-            .marquee-track {
-                animation-duration: 15s;
-            }
-        }
-    </style>
-    
-    <script>
-        // Logic for Full Screen View
-        function openModal(imgSrc) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("fullImage");
-            modal.style.display = "flex";
-            modalImg.src = imgSrc;
-        }
+    }
 
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-    </script>
     </style>
 </body>
 
