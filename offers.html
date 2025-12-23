@@ -8,10 +8,152 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* --- Layout & Typography --- */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fcfcfc;
+        }
+
+        .offers-section {
+            padding: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .compact-header {
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .compact-header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3rem;
+            margin: 0;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .compact-header p {
+            margin: 0.2rem 0 0.5rem 0;
+            font-size: 1rem;
+            color: #555;
+        }
+
+        /* --- Vertical Marquee Slider --- */
+        .marquee-viewport-vertical {
+            height: 650px;
+            /* Tall enough for wide images */
+            width: 100%;
+            max-width: 900px;
+            /* Increased desktop spread */
+            margin: 0 auto;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .marquee-track-vertical {
+            display: flex;
+            flex-direction: column;
+            height: max-content;
+            animation: scrollVertical 30s linear infinite;
+            /* Slower for readability */
+        }
+
+        /* The Magic: Pause when user interacts */
+        .marquee-viewport-vertical:hover .marquee-track-vertical,
+        .marquee-viewport-vertical:active .marquee-track-vertical {
+            animation-play-state: paused !important;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 20px;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 750px;
+            /* Ultra wide on desktop */
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .offer-card:hover {
+            transform: scale(1.01);
+        }
+
+        .offer-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            display: block;
+        }
+
+        @keyframes scrollVertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        /* --- Full Screen Modal --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        /* --- Responsiveness --- */
+        @media (max-width: 768px) {
+            .offer-card {
+                width: 92vw;
+                margin: 1rem 0;
+                padding: 10px;
+            }
+
+            .marquee-viewport-vertical {
+                height: 500px;
+            }
+
+            .compact-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -30,142 +172,65 @@
                     </nav>
                 </div>
             </div>
+        </div>
     </header>
 
-<main>
-    <section style="padding: 0.5rem 0; overflow: hidden;">
-        <h1 class="section-title center"
-            style="text-align: center; font-family: 'Bebas Neue', cursive; letter-spacing: 1.5px; font-size: 2.8rem; margin: 0;">
-            Special Offers</h1>
-        <p class="center"
-            style="text-align: center; margin-bottom: 0.5rem; font-size: 1rem; font-family: 'Montserrat', sans-serif;">
-            Don't miss out on our exclusive deals
-        </p>
-
-        <div style="text-align: center; margin-bottom: 10px;">
-            <button id="scrollToggle" class="control-btn">
-                <i class="fas fa-pause"></i> Pause Scroll
-            </button>
-        </div>
-
-        <div class="marquee-viewport-vertical">
-            <div id="scrollingTrack" class="marquee-track-vertical">
-                <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
-                        alt="Offer 1"></div>
-                <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
-                        alt="Offer 2"></div>
-                <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
-                        alt="Offer 3"></div>
-                <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
-                        alt="Offer 4"></div>
-
-                <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
-                        alt="Offer 1"></div>
-                <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
-                        alt="Offer 2"></div>
-                <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
-                        alt="Offer 3"></div>
-                <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
-                        alt="Offer 4"></div>
+    <main>
+        <section class="offers-section">
+            <div class="compact-header">
+                <h1>SPECIAL OFFERS</h1>
+                <p>Click any offer to view full screen</p>
             </div>
-        </div>
-    </section>
-</main>
 
-<style>
-    /* Control Button Styling */
-    .control-btn {
-        background: #333;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 20px;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.8rem;
-        cursor: pointer;
-        z-index: 10;
-        position: relative;
-    }
+            <div class="marquee-viewport-vertical">
+                <div id="scrollingTrack" class="marquee-track-vertical">
+                    <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
+                            alt="Offer 1"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
+                            alt="Offer 2"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
+                            alt="Offer 3"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
+                            alt="Offer 4"></div>
 
-    /* Vertical Slider Container */
-    .marquee-viewport-vertical {
-        height: 600px;
-        /* Increased height to match wider images */
-        width: 100%;
-        max-width: 800px;
-        /* Wider desktop container */
-        margin: 0 auto;
-        overflow: hidden;
-        display: flex;
-        justify-content: center;
-    }
+                    <div class="offer-card" onclick="openModal('images/Offer1.png')"><img src="images/Offer1.png"
+                            alt="Offer 1"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer2.png')"><img src="images/Offer2.png"
+                            alt="Offer 2"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer3.png')"><img src="images/Offer3.png"
+                            alt="Offer 3"></div>
+                    <div class="offer-card" onclick="openModal('images/Offer4.png')"><img src="images/Offer4.png"
+                            alt="Offer 4"></div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    .marquee-track-vertical {
-        display: flex;
-        flex-direction: column;
-        height: max-content;
-        animation: scrollVertical 25s linear infinite;
-        /* Slightly slower for larger images */
-    }
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="fullImage">
+    </div>
 
-    .paused {
-        animation-play-state: paused !important;
-    }
-
-    /* WIDER CARDS */
-    .offer-card {
-        background: white;
-        border-radius: 15px;
-        margin: 1.2rem 0;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        width: 600px;
-        /* Much wider for Desktop */
-        padding: 12px;
-        cursor: pointer;
-        transition: transform 0.2s;
-    }
-
-    .offer-card:hover {
-        transform: scale(1.02);
-    }
-
-    .offer-card img {
-        width: 100%;
-        height: auto;
-        border-radius: 10px;
-        display: block;
-    }
-
-    @keyframes scrollVertical {
-        0% {
-            transform: translateY(0);
+    <script>
+        // Modal Handlers
+        function openModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("fullImage");
+            modal.style.display = "flex";
+            modalImg.src = imgSrc;
+            // The scroll is naturally paused because the mouse is no longer on the track
         }
 
-        100% {
-            transform: translateY(-50%);
-        }
-    }
-
-    /* MOBILE RESPONSIVENESS */
-    @media (max-width: 768px) {
-        .offer-card {
-            width: 90vw;
-            /* Take up 90% of the screen width on mobile */
-            margin: 0.8rem 0;
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
         }
 
-        .marquee-viewport-vertical {
-            height: 500px;
-            /* Shorter viewport for mobile */
-        }
-
-        .section-title.center {
-            font-size: 2.2rem;
-        }
-    }
-</style>
+        // Auto-update Footer Year (if element exists)
+        window.onload = function () {
+            const yearSpan = document.getElementById('currentYear');
+            if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+        };
+    </script>
 </body>
-
-
 
 </html>
