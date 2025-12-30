@@ -238,23 +238,12 @@
             Your current location is already selected
         </div>
     </div>
-
-    <!-- Order Summary -->
-    <div class="order-summary">
-        <h3><i class="fas fa-receipt"></i> Your Order</h3>
-        <div class="order-items" id="orderItems">
-            <!-- Order items will be populated here -->
-        </div>
-        <div class="order-total" id="orderTotal">Total: Rs 0</div>
-    </div>
-
     <!-- Map -->
     <div id="map"></div>
 
     <!-- Instructions -->
     <div class="location-instructions">
         <p><i class="fas fa-info-circle"></i> Drag the marker only if your delivery location is different</p>
-        <p><i class="fas fa-map-marker-alt"></i> You can zoom in/out for more precise pinning</p>
     </div>
 
     <!-- Confirm Button -->
@@ -324,11 +313,11 @@
     }).addTo(map);
 
     // Add popup to marker
-    marker.bindPopup('Drag me to your delivery location').openPopup();
+    marker.bindPopup('Drag me').openPopup();
 
     // Format order message for WhatsApp
     function formatOrderMessage(locationLink) {
-        let message = "*DA ALOO ORDER*\n\n";
+        let message = "*My ORDER*\n\n";
         message += "*Order Details:*\n";
         
         const now = new Date();
@@ -358,7 +347,7 @@
         message += `\n*Total Amount: Rs ${total}*\n\n`;
         message += "*Delivery Location:*\n";
         message += `${locationLink}\n\n`;
-        message += "Please confirm this order. Thank you! 🙏";
+        message += "Please confirm this order. Thank you!";
         
         return message;
     }
@@ -423,3 +412,4 @@
 
 </body>
 </html>
+
