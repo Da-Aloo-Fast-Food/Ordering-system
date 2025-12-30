@@ -207,7 +207,6 @@
     <div class="container">
         <div class="location-header">
             <h1>Confirm your Location</h1>
-            <p>Pin your delivery location on the map</p>
         </div>
 
         <!-- Map -->
@@ -215,8 +214,8 @@
 
         <!-- Instructions -->
         <div class="location-instructions">
-            <p><i class="fas fa-info-circle"></i> Drag the marker to your exact delivery location</p>
-            <p><i class="fas fa-map-marker-alt"></i> You can zoom in/out for more precise pinning</p>
+            <p><i class="fas fa-info-circle"></i> Drag the marker </p>
+            <p><i class="fas fa-map-marker-alt"></i> if delivery location is different than your current location</p>
         </div>
 
         <!-- Confirm Button -->
@@ -286,7 +285,7 @@
         }).addTo(map);
 
         // Add popup to marker
-        marker.bindPopup('Drag me to your delivery location').openPopup();
+        marker.bindPopup('Drag me').openPopup();
 
         // Format order message for WhatsApp
         function formatOrderMessage(locationLink) {
@@ -386,6 +385,7 @@
 
 
 </html>
+
 
 
 
