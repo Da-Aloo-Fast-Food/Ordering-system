@@ -69,11 +69,8 @@
             letter-spacing: 1px;
         }
 
-        .location-status-btn {
-            background: white;
-            border: 2px solid #25D366;
-            border-radius: 50px;
-            padding: 12px 24px;
+        /* Updated Location Status Styles */
+        .location-status-container {
             margin: 15px auto;
             display: flex;
             align-items: center;
@@ -81,37 +78,51 @@
             gap: 10px;
             width: fit-content;
             min-width: 250px;
+        }
+
+        .location-status-btn {
+            background: white;
+            border: 2px solid #25D366;
+            border-radius: 50px;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: fit-content;
             font-weight: 600;
+            font-size: 1rem;
             cursor: default;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .location-status-btn i {
-            font-size: 1.8rem;
-        }
-
-        .location-status-btn.live {
-            border-color: #25D366;
-            color: #25D366;
-            background: #f0fff4;
-            font-size: 1.3rem; /* Bigger text for live status */
-            padding: 14px 28px; /* Slightly more padding for bigger text */
-        }
-
-        .location-status-btn.live i {
-            font-size: 2rem; /* Bigger icon for live status */
-        }
-
-        .location-status-btn.live span {
-            font-weight: 700; /* Bolder text for live status */
         }
 
         .location-status-btn.loading {
             border-color: #FFA500;
             color: #FFA500;
             background: #fffaf0;
-            font-size: 1rem;
+        }
+
+        .location-status-btn i {
+            font-size: 1.8rem;
+        }
+
+        /* Live Status as Text (not button) */
+        .location-status-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #25D366;
+            text-align: center;
+            padding: 10px 20px;
+            margin: 0;
+        }
+
+        .location-status-text i {
+            font-size: 2rem;
+            color: #25D366;
         }
 
         #map {
@@ -214,17 +225,21 @@
                 height: 200px;
             }
 
-            .location-status-btn {
+            .location-status-container {
                 min-width: 220px;
+            }
+
+            .location-status-btn {
                 padding: 10px 20px;
+                font-size: 0.95rem;
             }
 
-            .location-status-btn.live {
-                font-size: 1.15rem; /* Slightly smaller on tablet */
-                padding: 12px 24px;
+            .location-status-text {
+                font-size: 1.15rem;
+                padding: 8px 16px;
             }
 
-            .location-status-btn.live i {
+            .location-status-text i {
                 font-size: 1.8rem;
             }
 
@@ -248,18 +263,22 @@
                 height: 180px;
             }
 
-            .location-status-btn {
+            .location-status-container {
                 min-width: 200px;
+            }
+
+            .location-status-btn {
                 padding: 8px 16px;
                 font-size: 0.9rem;
             }
 
-            .location-status-btn.live {
-                font-size: 1.05rem; /* Slightly smaller on mobile */
-                padding: 10px 20px;
+            .location-status-text {
+                font-size: 1.05rem;
+                padding: 6px 12px;
+                gap: 8px;
             }
 
-            .location-status-btn.live i {
+            .location-status-text i {
                 font-size: 1.7rem;
             }
 
@@ -275,9 +294,17 @@
 <body>
 <div class="location-container">
     <div class="location-header">
-        <div class="location-status-btn loading" id="locationStatusBtn">
-            <i class="fas fa-spinner fa-spin"></i>
-            <span>Getting your live location</span>
+        <!-- Container for location status -->
+        <div class="location-status-container">
+            <div class="location-status-btn loading" id="locationStatusBtn">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Getting your live location</span>
+            </div>
+            <!-- This will replace the button when location is live -->
+            <div class="location-status-text" id="locationStatusText" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <span>Live location selected</span>
+            </div>
         </div>
     </div>
 
@@ -312,12 +339,24 @@
 
     function updateLocationStatusButton(isLive, message = null) {
         const btn = document.getElementById('locationStatusBtn');
-        const icon = btn.querySelector('i');
         const textSpan = btn.querySelector('span');
         
-        btn.className = isLive ? 'location-status-btn live' : 'location-status-btn loading';
-        icon.className = isLive ? 'fas fa-check-circle' : 'fas fa-spinner fa-spin';
-        textSpan.textContent = message || (isLive ? 'Live location selected' : 'Getting your live location');
+        if (isLive) {
+            // Hide the button and show the text version
+            btn.style.display = 'none';
+            const statusText = document.getElementById('locationStatusText');
+            statusText.style.display = 'flex';
+            const textSpanText = statusText.querySelector('span');
+            textSpanText.textContent = message || 'Live location selected';
+        } else {
+            // Show the button and hide the text version
+            btn.style.display = 'flex';
+            document.getElementById('locationStatusText').style.display = 'none';
+            textSpan.textContent = message || 'Getting your live location';
+            btn.className = 'location-status-btn loading';
+            const icon = btn.querySelector('i');
+            icon.className = 'fas fa-spinner fa-spin';
+        }
     }
 
     function initMap(latitude, longitude) {
@@ -372,7 +411,7 @@
                         latitude: 27.7172, 
                         longitude: 85.3240,
                         isLive: false,
-                        message: 'Enable location setting or Manually set your location'
+                        message: 'Enable location setting or manually set your location'
                     });
                 }
             };
@@ -385,12 +424,12 @@
 
             setTimeout(() => {
                 if (!resolved) {
-                    navigator.geolocation.clearWatch(watchId);
+                    navigator.geolography.clearWatch(watchId);
                     resolve({ 
                         latitude: 27.7172, 
                         longitude: 85.3240,
                         isLive: false,
-                        message: 'Default location selected (location request timed out)'
+                        message: 'Default location selected'
                     });
                 }
             }, 20000);
