@@ -1719,20 +1719,24 @@
         }
 
         .checkout-btn {
-            flex: 1;
-            padding: 0.75rem;
-            background: #25D366;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
+    flex: 1;
+    padding: 1.2rem 1.5rem;      /* increase padding for bigger button */
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 10px;         /* slightly rounder */
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.2rem;           /* larger text */
+    min-height: 60px;            /* ensures good tap size on mobile */
+    transition: background 0.3s, transform 0.2s;
+}
 
-        .checkout-btn:hover {
-            background: #128C7E;
-        }
+.checkout-btn:hover {
+    background: #1ebe57;
+    transform: translateY(-2px); /* subtle hover lift */
+}
+
 
         /* Floating WhatsApp Button */
         .floating-whatsapp {
@@ -1999,3 +2003,4 @@
 
 
 </html>
+
