@@ -42,7 +42,6 @@
             padding: 20px;
         }
 
-        /* Cart Modal Style */
         .location-container {
             background-color: white;
             border-radius: 15px;
@@ -55,7 +54,6 @@
             flex-direction: column;
         }
 
-        /* Header - Updated with Location Status Button */
         .location-header {
             background: var(--primary);
             color: #2C2D2D;
@@ -71,7 +69,6 @@
             letter-spacing: 1px;
         }
 
-        /* Location Status Button Styles */
         .location-status-btn {
             background: white;
             border: 2px solid #25D366;
@@ -107,7 +104,6 @@
             background: #fffaf0;
         }
 
-        /* Map Loading State */
         #map {
             height: 250px;
             width: 100%;
@@ -131,7 +127,6 @@
             color: #000000;
         }
 
-        /* Instructions */
         .location-instructions {
             background: #f8f9fa;
             padding: 12px 15px;
@@ -139,7 +134,6 @@
             border-left: 3px solid var(--primary);
             margin: 15px 0;
             font-size: 0.9rem;
-            font-family: 'Montserrat', sans-serif;
         }
 
         .location-instructions i {
@@ -147,7 +141,6 @@
             margin-right: 8px;
         }
 
-        /* Footer - Matching Cart Actions */
         .location-footer {
             padding: 1rem 1.5rem;
             display: flex;
@@ -167,7 +160,6 @@
             font-size: 1.2rem;
             min-height: 60px;
             transition: background 0.3s, transform 0.2s;
-            font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -183,7 +175,6 @@
             transform: translateY(0);
         }
 
-        /* Leaflet controls */
         .leaflet-control-zoom {
             border: 2px solid var(--secondary) !important;
         }
@@ -199,7 +190,6 @@
             color: var(--primary) !important;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .location-container {
                 width: 95%;
@@ -236,10 +226,6 @@
                 font-size: 1.6rem;
             }
 
-            .location-body {
-                padding: 0.8rem;
-            }
-
             #map {
                 height: 180px;
             }
@@ -260,33 +246,25 @@
 </head>
 
 <body>
-
 <div class="location-container">
-     <div class="location-header">
-        
-        <!-- Location Status Button -->
+    <div class="location-header">
         <div class="location-status-btn loading" id="locationStatusBtn">
             <i class="fas fa-spinner fa-spin"></i>
             <span>Getting your live location</span>
         </div>
     </div>
 
-    <div class="location-body">
-        <!-- Map with Loading State -->
-        <div id="map">
-            <div class="map-loading">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Getting your location...</p>
-            </div>
-        </div>
-
-        <!-- Instructions -->
-        <div class="location-instructions">
-            <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live location.</p>
+    <div id="map">
+        <div class="map-loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Getting your location...</p>
         </div>
     </div>
 
-    <!-- Confirm Button -->
+    <div class="location-instructions">
+        <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live location.</p>
+    </div>
+
     <div class="location-footer">
         <button class="confirm-btn" id="confirmLocationBtn">
             <i class="fab fa-whatsapp fa-1x"></i> Order on WhatsApp
@@ -296,51 +274,33 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    // Global variables for map and marker
-    let map;
-    let marker;
-    
-    // Load cart from localStorage
-    let cart = [];
+    let map, marker, cart = [];
+
     try {
         const savedCart = localStorage.getItem('daAlooCart');
-        if (savedCart) {
-            cart = JSON.parse(savedCart);
-        }
+        cart = savedCart ? JSON.parse(savedCart) : [];
     } catch (error) {
         console.error('Error loading cart:', error);
     }
 
-    // Function to update location status button
     function updateLocationStatusButton(isLive, message = null) {
         const btn = document.getElementById('locationStatusBtn');
         const icon = btn.querySelector('i');
         const textSpan = btn.querySelector('span');
         
-        if (isLive) {
-            btn.className = 'location-status-btn live';
-            icon.className = 'fas fa-check-circle';
-            textSpan.textContent = message || 'Live location selected';
-        } else {
-            btn.className = 'location-status-btn loading';
-            icon.className = 'fas fa-spinner fa-spin';
-            textSpan.textContent = message || 'Getting your live location';
-        }
+        btn.className = isLive ? 'location-status-btn live' : 'location-status-btn loading';
+        icon.className = isLive ? 'fas fa-check-circle' : 'fas fa-spinner fa-spin';
+        textSpan.textContent = message || (isLive ? 'Live location selected' : 'Getting your live location');
     }
 
-    // Initialize map with user's location
     function initMap(latitude, longitude) {
-        // Remove loading message
         document.getElementById('map').innerHTML = '';
-        
-        // Initialize map at user's location
         map = L.map('map').setView([latitude, longitude], 16);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors'
         }).addTo(map);
 
-        // Add draggable marker at user's location
         marker = L.marker([latitude, longitude], {
             draggable: true,
             icon: L.icon({
@@ -350,85 +310,71 @@
             })
         }).addTo(map);
 
-        // Add popup to marker
         marker.bindPopup('Drag me to adjust location').openPopup();
     }
 
-   function getUserLocation() {
-    return new Promise((resolve) => {
-        if (!navigator.geolocation) {
-            resolve({ 
-                latitude: 27.7172, 
-                longitude: 85.3240,
-                isLive: false,
-                message: 'Location services not available'
-            });
-            return;
-        }
-
-        let resolved = false;
-
-        const success = (position) => {
-            if (resolved) return;
-            resolved = true;
-
-            navigator.geolocation.clearWatch(watchId);
-
-            resolve({
-                latitude: position.coords.latitude,
-                longitude: position.coords.longitude,
-                isLive: true,
-                message: 'Live location selected'
-            });
-        };
-
-        const error = (err) => {
-            console.warn("GPS error:", err);
-            if (!resolved) {
-                navigator.geolocation.clearWatch(watchId);
+    function getUserLocation() {
+        return new Promise((resolve) => {
+            if (!navigator.geolocation) {
                 resolve({ 
                     latitude: 27.7172, 
                     longitude: 85.3240,
                     isLive: false,
-                    message: 'Enable location setting or Manually set your location'
+                    message: 'Location services not available'
                 });
+                return;
             }
-        };
 
-        const watchId = navigator.geolocation.watchPosition(
-            success,
-            error,
-            {
+            let resolved = false;
+            const success = (position) => {
+                if (resolved) return;
+                resolved = true;
+                navigator.geolocation.clearWatch(watchId);
+                resolve({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    isLive: true,
+                    message: 'Live location selected'
+                });
+            };
+
+            const error = () => {
+                if (!resolved) {
+                    navigator.geolocation.clearWatch(watchId);
+                    resolve({ 
+                        latitude: 27.7172, 
+                        longitude: 85.3240,
+                        isLive: false,
+                        message: 'Enable location setting or Manually set your location'
+                    });
+                }
+            };
+
+            const watchId = navigator.geolocation.watchPosition(success, error, {
                 enableHighAccuracy: true,
                 maximumAge: 0,
                 timeout: 20000
-            }
-        );
+            });
 
-        // Fallback after 20s
-        setTimeout(() => {
-            if (!resolved) {
-                navigator.geolocation.clearWatch(watchId);
-                resolve({ 
-                    latitude: 27.7172, 
-                    longitude: 85.3240,
-                    isLive: false,
-                    message: 'Default location selected (location request timed out)'
-                });
-            }
-        }, 20000);
-    });
-}
+            setTimeout(() => {
+                if (!resolved) {
+                    navigator.geolocation.clearWatch(watchId);
+                    resolve({ 
+                        latitude: 27.7172, 
+                        longitude: 85.3240,
+                        isLive: false,
+                        message: 'Default location selected (location request timed out)'
+                    });
+                }
+            }, 20000);
+        });
+    }
 
-    // Format order message for WhatsApp
     function formatOrderMessage(locationLink) {
-        let message = "*My ORDER*\n\n";
-        message += "*Order Details:*\n";
+        let message = "*My ORDER*\n\n*Order Details:*\n";
         
         const now = new Date();
-        const date = now.toLocaleDateString();
-        const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        message += `Date: ${date} ${time}\n\n`;
+        message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
         
         let total = 0;
         
@@ -440,94 +386,56 @@
                 total += itemTotal;
                 
                 message += `• ${item.quantity}x ${item.name}`;
-                
-                if (item.variant) {
-                    message += ` (${item.variant.name})`;
-                }
-                
-                if (item.extras && item.extras.length > 0) {
-                    message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-                }
-                
+                if (item.variant) message += ` (${item.variant.name})`;
+                if (item.extras?.length) message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
                 message += ` - Rs ${itemTotal}\n`;
             });
         }
         
-        message += `\n*Total Amount: Rs ${total}*\n\n`;
-        message += "*Delivery Location:*\n";
-        message += `${locationLink}\n\n`;
-        message += "Please confirm this order.\n Thank you!";
-        
+        message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*\n${locationLink}\n\nPlease confirm this order.\n Thank you!`;
         return message;
     }
 
-    // Send order to WhatsApp
     function sendOrderToWhatsApp() {
         if (!marker) {
             alert('Map is still loading. Please wait...');
             return;
         }
 
-        if (cart.length === 0) {
+        if (!cart.length) {
             alert('Your cart is empty! Please add items first.');
             return;
         }
         
         const pos = marker.getLatLng();
-        const lat = pos.lat.toFixed(6);
-        const lng = pos.lng.toFixed(6);
-        
-        // Create Google Maps link
-        const locationLink = `https://www.google.com/maps?q=${lat},${lng}`;
-        
-        // Format order message
+        const locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
         const message = formatOrderMessage(locationLink);
         const encodedMessage = encodeURIComponent(message);
+        const whatsappUrl = `https://wa.me/9779847695529?text=${encodedMessage}`;
         
-        // WhatsApp number
-        const whatsappNumber = '9779847695529';
-        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-        
-        // Clear cart and redirect to WhatsApp
         localStorage.removeItem('daAlooCart');
         window.open(whatsappUrl, '_blank');
         
-        // Redirect back to menu after a delay
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 2000);
     }
 
-    // Initialize everything when page loads
     document.addEventListener('DOMContentLoaded', async () => {
-        // Set initial button state
         updateLocationStatusButton(false, 'Getting your live location');
         
         try {
-            // Get user's location first
             const location = await getUserLocation();
-            
-            // Update location status button based on result
             updateLocationStatusButton(location.isLive, location.message);
-            
-            // Initialize map with user's location or default
             initMap(location.latitude, location.longitude);
-            
         } catch (error) {
             console.error('Failed to initialize map:', error);
-            // Initialize with default location
             updateLocationStatusButton(false, 'Default location selected');
             initMap(27.7172, 85.3240);
         }
 
-        // Add event listener to confirm button
         document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
     });
 </script>
-
 </body>
 </html>
-
-
-
-
