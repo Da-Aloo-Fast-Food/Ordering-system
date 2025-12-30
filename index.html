@@ -79,7 +79,7 @@
                 Total: Rs 0
             </div>
             <div class="cart-actions">
-                <button class="checkout-btn" id="checkoutBtn">Select Delivery Location</button>
+                <button class="checkout-btn" id="checkoutBtn">Confirm Delivery Location</button>
             </div>
         </div>
     </div>
@@ -1718,24 +1718,29 @@
             /* Center the single button */
         }
 
-        .checkout-btn {
-    flex: 1;
-    padding: 1.2rem 1.5rem;      /* increase padding for bigger button */
-    background: #25D366;
-    color: white;
-    border: none;
-    border-radius: 10px;         /* slightly rounder */
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 1.2rem;           /* larger text */
-    min-height: 60px;            /* ensures good tap size on mobile */
-    transition: background 0.3s, transform 0.2s;
-}
+        .confirm-btn {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-height: 60px;
+            transition: background 0.3s, transform 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
 
-.checkout-btn:hover {
-    background: #1ebe57;
-    transform: translateY(-2px); /* subtle hover lift */
-}
+        .confirm-btn:hover {
+            background: #1ebe57;
+            transform: translateY(-2px);
+        }
 
 
         /* Floating WhatsApp Button */
@@ -2003,4 +2008,5 @@
 
 
 </html>
+
 
