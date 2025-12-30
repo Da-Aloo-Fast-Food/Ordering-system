@@ -210,15 +210,6 @@
             <p>Pin your delivery location on the map</p>
         </div>
 
-        <!-- Order Summary -->
-        <div class="order-summary">
-            <h3><i class="fas fa-receipt"></i> Your Order</h3>
-            <div class="order-items" id="orderItems">
-                <!-- Order items will be populated here -->
-            </div>
-            <div class="order-total" id="orderTotal">Total: Rs 0</div>
-        </div>
-
         <!-- Map -->
         <div id="map"></div>
 
@@ -299,7 +290,7 @@
 
         // Format order message for WhatsApp
         function formatOrderMessage(locationLink) {
-            let message = "*DA ALOO ORDER*\n\n";
+            let message = "*My ORDER*\n\n";
             message += "*Order Details:*\n";
 
             const now = new Date();
@@ -329,7 +320,7 @@
             message += `\n*Total Amount: Rs ${total}*\n\n`;
             message += "*Delivery Location:*\n";
             message += `${locationLink}\n\n`;
-            message += "Please confirm this order. Thank you! 🙏";
+            message += "Please confirm this order. Thank you!";
 
             return message;
         }
@@ -395,3 +386,4 @@
 
 
 </html>
+
