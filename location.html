@@ -36,104 +36,139 @@
             font-family: 'Montserrat', sans-serif;
             background-color: var(--background);
             color: var(--secondary);
-            padding: 20px;
             min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--card);
+        /* Cart Modal Style */
+        .location-container {
+            background-color: white;
             border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            border: 3px solid var(--secondary);
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Header */
+        /* Header - Matching Cart Modal Header */
         .location-header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
             text-align: center;
-            margin-bottom: 25px;
         }
 
-        .location-header h1 {
+        .location-header h2 {
+            margin: 0;
             font-family: 'Bebas Neue', cursive;
-            font-size: 2.8rem;
-            color: var(--secondary);
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
+            font-size: 2rem;
+            letter-spacing: 1px;
         }
 
         .subtext {
-            font-size: 1rem;
+            font-size: 0.9rem;
             color: #666;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            margin-top: 8px;
         }
 
         .subtext i {
             color: var(--secondary);
-            font-size: 16px;
+            font-size: 14px;
         }
 
-        /* Order Summary */
+        /* Body - Matching Cart Items Area */
+        .location-body {
+            padding: 1rem;
+            max-height: 60vh;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* Order Summary - Matching Cart Items Style */
         .order-summary {
-            background: var(--primary);
-            border-radius: 10px;
-            padding: 15px;
             margin-bottom: 20px;
-            border: 2px solid var(--secondary);
+            border: 1px solid #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
         }
 
         .order-summary h3 {
-            color: var(--secondary);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+            background: #f8f9fa;
+            padding: 12px 15px;
+            margin: 0;
             font-family: 'Montserrat', sans-serif;
             font-weight: 600;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #eee;
         }
 
         .order-items {
             max-height: 150px;
             overflow-y: auto;
-            margin-bottom: 10px;
         }
 
         .order-item {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+        .order-item-variant {
+            font-size: 0.85rem;
+            color: #e67e22;
+            margin-top: 4px;
+        }
+
+        .order-item-extras {
+            font-size: 0.85rem;
+            color: #27ae60;
+            margin-top: 2px;
         }
 
         .order-total {
-            font-weight: bold;
+            background: #f8f9fa;
+            padding: 15px;
             font-size: 1.2rem;
-            text-align: right;
-            color: var(--secondary);
-            padding-top: 10px;
-            border-top: 2px solid var(--secondary);
+            font-weight: bold;
+            text-align: center;
+            border-top: 2px solid #eee;
         }
 
         /* Map */
         #map {
-            height: 350px;
+            height: 250px;
             width: 100%;
-            border-radius: 12px;
+            border-radius: 8px;
             margin: 15px 0;
-            border: 3px solid var(--secondary);
+            border: 2px solid #f0f0f0;
         }
 
         /* Instructions */
         .location-instructions {
-            background: var(--primary);
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--secondary);
+            background: #f8f9fa;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
             margin: 15px 0;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .location-instructions i {
@@ -141,19 +176,26 @@
             margin-right: 8px;
         }
 
-        /* Button */
+        /* Footer - Matching Cart Actions */
+        .location-footer {
+            padding: 1rem 1.5rem;
+            display: flex;
+            border-top: 2px solid #eee;
+            background: #f8f9fa;
+        }
+
         .confirm-btn {
-            background: #25D366;
-            color: var(--secondary);
             width: 100%;
-            padding: 18px;
-            border: 3px solid var(--secondary);
-            border-radius: 12px;
-            font-weight: bold;
-            font-size: 1.1rem;
+            padding: 1.2rem 1.5rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 20px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-height: 60px;
+            transition: background 0.3s, transform 0.2s;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             align-items: center;
@@ -162,10 +204,8 @@
         }
 
         .confirm-btn:hover {
-            background: var(--secondary);
-            color: var(--primary);
+            background: #1ebe57;
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         .confirm-btn:active {
@@ -190,66 +230,122 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .container {
-                padding: 20px;
+            .location-container {
+                width: 95%;
+                max-height: 95vh;
             }
 
-            .location-header h1 {
-                font-size: 2.2rem;
-            }
-
-            #map {
-                height: 300px;
-            }
-
-            .confirm-btn {
-                padding: 16px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .location-header h1 {
+            .location-header h2 {
                 font-size: 1.8rem;
             }
 
             #map {
-                height: 250px;
+                height: 200px;
             }
 
-            .order-summary {
-                padding: 12px;
+            .confirm-btn {
+                padding: 1rem 1.2rem;
+                font-size: 1.1rem;
+                min-height: 55px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+
+            .location-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .location-body {
+                padding: 0.8rem;
+            }
+
+            #map {
+                height: 180px;
+            }
+
+            .order-summary h3 {
+                padding: 10px 12px;
+                font-size: 1rem;
             }
 
             .order-item {
+                padding: 10px 12px;
                 font-size: 0.9rem;
             }
+
+            .order-total {
+                padding: 12px;
+                font-size: 1.1rem;
+            }
+
+            .confirm-btn {
+                padding: 0.9rem 1rem;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+        }
+
+        /* Scrollbar Styling */
+        .order-items::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .order-items::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .order-items::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .order-items::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="location-container">
     <div class="location-header">
-        <h1>Confirm Your Location</h1>
+        <h2>Confirm Your Location</h2>
         <div class="subtext">
             <i class="fas fa-location-dot"></i>
             Your current location is already selected
         </div>
     </div>
-    <!-- Map -->
-    <div id="map"></div>
 
-    <!-- Instructions -->
-    <div class="location-instructions">
-        <p><i class="fas fa-info-circle"></i> Drag the marker only if your delivery location is different</p>
+    <div class="location-body">
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h3>Your Order Summary</h3>
+            <div class="order-items" id="orderItems">
+                <!-- Order items will be inserted here -->
+            </div>
+            <div class="order-total" id="orderTotal">Total: Rs 0</div>
+        </div>
+
+        <!-- Map -->
+        <div id="map"></div>
+
+        <!-- Instructions -->
+        <div class="location-instructions">
+            <p><i class="fas fa-info-circle"></i> Drag the marker only if your delivery location is different</p>
+        </div>
     </div>
 
     <!-- Confirm Button -->
-    <button class="confirm-btn" id="confirmLocationBtn">
-        <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
-    </button>
+    <div class="location-footer">
+        <button class="confirm-btn" id="confirmLocationBtn">
+            <i class="fab fa-whatsapp"></i> Send Order via WhatsApp
+        </button>
+    </div>
 </div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
@@ -271,7 +367,7 @@
         const orderTotal = document.getElementById('orderTotal');
         
         if (cart.length === 0) {
-            orderItems.innerHTML = '<p>No items in cart</p>';
+            orderItems.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">No items in cart</p>';
             orderTotal.textContent = 'Total: Rs 0';
             return;
         }
@@ -283,10 +379,26 @@
             const itemTotal = item.totalPrice;
             total += itemTotal;
 
+            let variantHTML = '';
+            let extrasHTML = '';
+
+            if (item.variant) {
+                variantHTML = `<div class="order-item-variant">Variant: ${item.variant.name}</div>`;
+            }
+
+            if (item.extras && item.extras.length > 0) {
+                const extrasText = item.extras.map(extra => extra.name).join(', ');
+                extrasHTML = `<div class="order-item-extras">Extras: ${extrasText}</div>`;
+            }
+
             itemsHTML += `
                 <div class="order-item">
-                    <span>${item.quantity}x ${item.name}</span>
-                    <span>Rs ${itemTotal}</span>
+                    <div>
+                        <div>${item.quantity}x ${item.name}</div>
+                        ${variantHTML}
+                        ${extrasHTML}
+                    </div>
+                    <div style="font-weight: 600;">Rs ${itemTotal}</div>
                 </div>
             `;
         });
@@ -412,5 +524,3 @@
 
 </body>
 </html>
-
-
