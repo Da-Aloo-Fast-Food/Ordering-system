@@ -82,7 +82,6 @@
             width: fit-content;
             min-width: 250px;
             font-weight: 600;
-            font-size: 1rem;
             cursor: default;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -96,12 +95,23 @@
             border-color: #25D366;
             color: #25D366;
             background: #f0fff4;
+            font-size: 1.3rem; /* Bigger text for live status */
+            padding: 14px 28px; /* Slightly more padding for bigger text */
+        }
+
+        .location-status-btn.live i {
+            font-size: 2rem; /* Bigger icon for live status */
+        }
+
+        .location-status-btn.live span {
+            font-weight: 700; /* Bolder text for live status */
         }
 
         .location-status-btn.loading {
             border-color: #FFA500;
             color: #FFA500;
             background: #fffaf0;
+            font-size: 1rem;
         }
 
         #map {
@@ -207,7 +217,15 @@
             .location-status-btn {
                 min-width: 220px;
                 padding: 10px 20px;
-                font-size: 0.95rem;
+            }
+
+            .location-status-btn.live {
+                font-size: 1.15rem; /* Slightly smaller on tablet */
+                padding: 12px 24px;
+            }
+
+            .location-status-btn.live i {
+                font-size: 1.8rem;
             }
 
             .confirm-btn {
@@ -234,6 +252,15 @@
                 min-width: 200px;
                 padding: 8px 16px;
                 font-size: 0.9rem;
+            }
+
+            .location-status-btn.live {
+                font-size: 1.05rem; /* Slightly smaller on mobile */
+                padding: 10px 20px;
+            }
+
+            .location-status-btn.live i {
+                font-size: 1.7rem;
             }
 
             .confirm-btn {
