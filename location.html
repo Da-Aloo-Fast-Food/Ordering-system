@@ -72,16 +72,16 @@
         }
 
         .subtext {
-    font-size: 1.2rem; /* Changed from 1.8rem to 2.6rem */
-    font-weight: bold; /* Added to make text bold */
-    color: #000000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 8px;
-    margin-right: 8px;
-}
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 8px;
+            margin-right: 8px;
+        }
 
         .subtext i {
             color: #25D366;
@@ -97,69 +97,28 @@
             flex: 1;
         }
 
-        /* Order Summary - Matching Cart Items Style */
-        .order-summary {
-            margin-bottom: 20px;
-            border: 1px solid #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .order-summary h3 {
-            background: #f8f9fa;
-            padding: 12px 15px;
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .order-items {
-            max-height: 150px;
-            overflow-y: auto;
-        }
-
-        .order-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 15px;
-            border-bottom: 1px solid #f0f0f0;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .order-item:last-child {
-            border-bottom: none;
-        }
-
-        .order-item-variant {
-            font-size: 0.85rem;
-            color: #e67e22;
-            margin-top: 4px;
-        }
-
-        .order-item-extras {
-            font-size: 0.85rem;
-            color: #27ae60;
-            margin-top: 2px;
-        }
-
-        .order-total {
-            background: #f8f9fa;
-            padding: 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-align: center;
-            border-top: 2px solid #eee;
-        }
-
-        /* Map */
+        /* Map Loading State */
         #map {
             height: 250px;
             width: 100%;
             border-radius: 8px;
             margin: 15px 0;
             border: 2px solid #f0f0f0;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .map-loading {
+            text-align: center;
+            color: #666;
+        }
+
+        .map-loading i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #25D366;
         }
 
         /* Instructions */
@@ -269,45 +228,11 @@
                 height: 180px;
             }
 
-            .order-summary h3 {
-                padding: 10px 12px;
-                font-size: 1rem;
-            }
-
-            .order-item {
-                padding: 10px 12px;
-                font-size: 0.9rem;
-            }
-
-            .order-total {
-                padding: 12px;
-                font-size: 1.1rem;
-            }
-
             .confirm-btn {
                 padding: 0.9rem 1rem;
                 font-size: 1rem;
                 min-height: 50px;
             }
-        }
-
-        /* Scrollbar Styling */
-        .order-items::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .order-items::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 3px;
-        }
-
-        .order-items::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 3px;
-        }
-
-        .order-items::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
         }
     </style>
 </head>
@@ -323,9 +248,13 @@
     </div>
 
     <div class="location-body">
-
-        <!-- Map -->
-        <div id="map"></div>
+        <!-- Map with Loading State -->
+        <div id="map">
+            <div class="map-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Getting your location...</p>
+            </div>
+        </div>
 
         <!-- Instructions -->
         <div class="location-instructions">
@@ -343,6 +272,10 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
+    // Global variables for map and marker
+    let map;
+    let marker;
+    
     // Load cart from localStorage
     let cart = [];
     try {
@@ -354,71 +287,63 @@
         console.error('Error loading cart:', error);
     }
 
-    // Display order summary
-    function displayOrderSummary() {
-        const orderItems = document.getElementById('orderItems');
-        const orderTotal = document.getElementById('orderTotal');
+    // Initialize map with user's location
+    function initMap(latitude, longitude) {
+        // Remove loading message
+        document.getElementById('map').innerHTML = '';
         
-        if (cart.length === 0) {
-            orderItems.innerHTML = '<p style="padding: 20px; text-align: center; color: #666;">No items in cart</p>';
-            orderTotal.textContent = 'Total: Rs 0';
-            return;
-        }
+        // Initialize map at user's location
+        map = L.map('map').setView([latitude, longitude], 16);
 
-        let itemsHTML = '';
-        let total = 0;
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
 
-        cart.forEach(item => {
-            const itemTotal = item.totalPrice;
-            total += itemTotal;
+        // Add draggable marker at user's location
+        marker = L.marker([latitude, longitude], {
+            draggable: true,
+            icon: L.icon({
+                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            })
+        }).addTo(map);
 
-            let variantHTML = '';
-            let extrasHTML = '';
-
-            if (item.variant) {
-                variantHTML = `<div class="order-item-variant">Variant: ${item.variant.name}</div>`;
-            }
-
-            if (item.extras && item.extras.length > 0) {
-                const extrasText = item.extras.map(extra => extra.name).join(', ');
-                extrasHTML = `<div class="order-item-extras">Extras: ${extrasText}</div>`;
-            }
-
-            itemsHTML += `
-                <div class="order-item">
-                    <div>
-                        <div>${item.quantity}x ${item.name}</div>
-                        ${variantHTML}
-                        ${extrasHTML}
-                    </div>
-                    <div style="font-weight: 600;">Rs ${itemTotal}</div>
-                </div>
-            `;
-        });
-
-        orderItems.innerHTML = itemsHTML;
-        orderTotal.textContent = `Total: Rs ${total}`;
+        // Add popup to marker
+        marker.bindPopup('Drag me to adjust location').openPopup();
     }
 
-    // Initialize map
-    const map = L.map('map').setView([27.7172, 85.3240], 15); // Default to Kathmandu
+    // Get user's current location
+    function getUserLocation() {
+        return new Promise((resolve, reject) => {
+            if (!navigator.geolocation) {
+                reject(new Error('Geolocation is not supported by your browser'));
+                return;
+            }
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Add draggable marker
-    const marker = L.marker([27.7172, 85.3240], {
-        draggable: true,
-        icon: L.icon({
-            iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41]
-        })
-    }).addTo(map);
-
-    // Add popup to marker
-    marker.bindPopup('Drag me').openPopup();
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    });
+                },
+                (error) => {
+                    console.error('Geolocation error:', error);
+                    // Default to Kathmandu if location access is denied
+                    resolve({
+                        latitude: 27.7172,
+                        longitude: 85.3240
+                    });
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 0
+                }
+            );
+        });
+    }
 
     // Format order message for WhatsApp
     function formatOrderMessage(locationLink) {
@@ -432,22 +357,26 @@
         
         let total = 0;
         
-        cart.forEach(item => {
-            const itemTotal = item.totalPrice;
-            total += itemTotal;
-            
-            message += `• ${item.quantity}x ${item.name}`;
-            
-            if (item.variant) {
-                message += ` (${item.variant.name})`;
-            }
-            
-            if (item.extras && item.extras.length > 0) {
-                message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-            }
-            
-            message += ` - Rs ${itemTotal}\n`;
-        });
+        if (cart.length === 0) {
+            message += "No items in cart\n";
+        } else {
+            cart.forEach(item => {
+                const itemTotal = item.totalPrice;
+                total += itemTotal;
+                
+                message += `• ${item.quantity}x ${item.name}`;
+                
+                if (item.variant) {
+                    message += ` (${item.variant.name})`;
+                }
+                
+                if (item.extras && item.extras.length > 0) {
+                    message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
+                }
+                
+                message += ` - Rs ${itemTotal}\n`;
+            });
+        }
         
         message += `\n*Total Amount: Rs ${total}*\n\n`;
         message += "*Delivery Location:*\n";
@@ -459,6 +388,16 @@
 
     // Send order to WhatsApp
     function sendOrderToWhatsApp() {
+        if (!marker) {
+            alert('Map is still loading. Please wait...');
+            return;
+        }
+
+        if (cart.length === 0) {
+            alert('Your cart is empty! Please add items first.');
+            return;
+        }
+        
         const pos = marker.getLatLng();
         const lat = pos.lat.toFixed(6);
         const lng = pos.lng.toFixed(6);
@@ -484,64 +423,32 @@
         }, 2000);
     }
 
-    // Confirm location button event
-    document.getElementById('confirmLocationBtn').addEventListener('click', () => {
-        if (cart.length === 0) {
-            alert('Your cart is empty! Please add items first.');
-            return;
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            // Get user's location first
+            const location = await getUserLocation();
+            
+            // Initialize map with user's location
+            initMap(location.latitude, location.longitude);
+            
+            // Update header text to show live location is being used
+            const subtextElement = document.querySelector('.subtext');
+            subtextElement.innerHTML = `<i class="fas fa-location-dot fa-xs"></i> Your live location is selected.`;
+            
+        } catch (error) {
+            console.error('Failed to initialize map:', error);
+            // Initialize with default location
+            initMap(27.7172, 85.3240);
+            
+            const subtextElement = document.querySelector('.subtext');
+            subtextElement.innerHTML = `<i class="fas fa-map-marker-alt fa-xs"></i> Default location selected (enable location access for live location).`;
         }
-        
-        sendOrderToWhatsApp();
-    });
 
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        displayOrderSummary();
-        
-        // Try to get user's current location
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    map.setView([latitude, longitude], 16);
-                    marker.setLatLng([latitude, longitude]);
-                },
-                (error) => {
-                    console.log('Geolocation error:', error);
-                    // Use default location if permission denied
-                }
-            );
-        }
+        // Add event listener to confirm button
+        document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
     });
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
