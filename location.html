@@ -284,6 +284,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     let map, marker, cart = [];
+    let isLiveLocation = false;
+    let hasMarkerBeenDragged = false;
+    let defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu coordinates
 
     try {
         const savedCart = localStorage.getItem('daAlooCart');
@@ -301,7 +304,7 @@
             // Stage 1: Location is on
             statusElement.className = 'location-status';
             icon.className = 'fas fa-check-circle';
-            textSpan.textContent = 'Your Live location selected';
+            textSpan.textContent = 'Your Live location is selected';
         } else {
             // Stage 2: Location is off
             statusElement.className = 'location-status warning';
@@ -310,7 +313,7 @@
         }
     }
 
-    function initMap(latitude, longitude) {
+    function initMap(latitude, longitude, isLive) {
         document.getElementById('map').innerHTML = '';
         map = L.map('map').setView([latitude, longitude], 16);
 
@@ -328,14 +331,23 @@
         }).addTo(map);
 
         marker.bindPopup('Drag me to adjust location').openPopup();
+        
+        // Track if marker has been dragged
+        marker.on('dragend', function() {
+            hasMarkerBeenDragged = true;
+            const newPos = marker.getLatLng();
+            console.log('Marker dragged to:', newPos.lat, newPos.lng);
+        });
+        
+        isLiveLocation = isLive;
     }
 
     function getUserLocation() {
         return new Promise((resolve) => {
             if (!navigator.geolocation) {
                 resolve({ 
-                    latitude: 27.7172, 
-                    longitude: 85.3240,
+                    latitude: defaultLocation.lat, 
+                    longitude: defaultLocation.lng,
                     isLive: false
                 });
                 return;
@@ -357,8 +369,8 @@
                 if (!resolved) {
                     navigator.geolocation.clearWatch(watchId);
                     resolve({ 
-                        latitude: 27.7172, 
-                        longitude: 85.3240,
+                        latitude: defaultLocation.lat, 
+                        longitude: defaultLocation.lng,
                         isLive: false
                     });
                 }
@@ -375,8 +387,8 @@
                 if (!resolved) {
                     navigator.geolocation.clearWatch(watchId);
                     resolve({ 
-                        latitude: 27.7172, 
-                        longitude: 85.3240,
+                        latitude: defaultLocation.lat, 
+                        longitude: defaultLocation.lng,
                         isLive: false
                     });
                 }
@@ -384,7 +396,7 @@
         });
     }
 
-    function formatOrderMessage(locationLink) {
+    function formatOrderMessage(locationLink, locationText) {
         let message = "*My ORDER*\n\n*Order Details:*\n";
         
         const now = new Date();
@@ -406,7 +418,13 @@
             });
         }
         
-        message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*\n${locationLink}\n\nPlease confirm this order.\n Thank you!`;
+        message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*\n${locationText}`;
+        
+        if (locationLink !== "No location sent") {
+            message += `\n${locationLink}`;
+        }
+        
+        message += `\n\nPlease confirm this order.\n Thank you!`;
         return message;
     }
 
@@ -421,9 +439,30 @@
             return;
         }
         
-        const pos = marker.getLatLng();
-        const locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-        const message = formatOrderMessage(locationLink);
+        let locationText = "";
+        let locationLink = "";
+        
+        // Check if we have live location AND marker hasn't been dragged
+        if (isLiveLocation && !hasMarkerBeenDragged) {
+            // Case 1: Live location available and not moved
+            const pos = marker.getLatLng();
+            locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+            locationText = "Live Location Sent (via GPS)";
+        } 
+        // Check if we DON'T have live location AND marker hasn't been dragged
+        else if (!isLiveLocation && !hasMarkerBeenDragged) {
+            // Case 2: No live location and marker not moved = No location sent
+            locationText = "No location sent - User did not select location";
+            locationLink = "No location sent";
+        }
+        else {
+            // Case 3: Marker has been dragged (regardless of live location status)
+            const pos = marker.getLatLng();
+            locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+            locationText = "User Selected Location";
+        }
+        
+        const message = formatOrderMessage(locationLink, locationText);
         const encodedMessage = encodeURIComponent(message);
         const whatsappUrl = `https://wa.me/9779847695529?text=${encodedMessage}`;
         
@@ -439,11 +478,11 @@
         try {
             const location = await getUserLocation();
             updateLocationStatus(location.isLive);
-            initMap(location.latitude, location.longitude);
+            initMap(location.latitude, location.longitude, location.isLive);
         } catch (error) {
             console.error('Failed to initialize map:', error);
             updateLocationStatus(false);
-            initMap(27.7172, 85.3240);
+            initMap(defaultLocation.lat, defaultLocation.lng, false);
         }
 
         document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
@@ -451,10 +490,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
