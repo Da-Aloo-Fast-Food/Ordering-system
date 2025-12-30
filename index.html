@@ -62,30 +62,29 @@
         </section>
     </main>
 
-    <!-- Cart Modal -->
-    <div class="cart-modal" id="cartModal">
-        <div class="cart-modal-content">
-            <div class="cart-modal-header">
-                <h2>Your Order</h2>
-                <span class="close-cart" id="closeCart">&times;</span>
-            </div>
-            <div class="cart-items" id="cartItems">
-                <!-- Items injected via JS -->
-                <div class="empty-cart-message" id="emptyCartMessage">
-                    <i class="fas fa-shopping-cart"></i>
-                    <p>Your cart is empty</p>
-                </div>
-            </div>
-            <div class="cart-total" id="cartTotal">
-                Total: Rs 0
-            </div>
-            <div class="cart-actions">
-                <button class="clear-cart-btn" id="clearCart">Clear Cart</button>
-                <button class="checkout-btn" id="checkoutBtn">Checkout on WhatsApp</button>
+<!-- Cart Modal -->
+<div class="cart-modal" id="cartModal">
+    <div class="cart-modal-content">
+        <div class="cart-modal-header">
+            <h2>Your Order</h2>
+            <span class="close-cart" id="closeCart">&times;</span>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Items injected via JS -->
+            <div class="empty-cart-message" id="emptyCartMessage">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
             </div>
         </div>
+        <div class="cart-total" id="cartTotal">
+            Total: Rs 0
+        </div>
+        <div class="cart-actions">
+            <!-- Removed Clear Cart button -->
+            <button class="checkout-btn" id="checkoutBtn">Select Delivery Location</button>
+        </div>
     </div>
-
+</div>
     <!-- Item Customization Modal (Used ONLY for Variants like Mo:Mo types) -->
     <div class="customization-modal" id="customizationModal">
         <div class="customization-modal-content">
@@ -1757,10 +1756,11 @@
         }
 
         .cart-actions {
-            padding: 1rem 1.5rem;
-            display: flex;
-            gap: 1rem;
-        }
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0; /* Changed from 1rem to 0 */
+    justify-content: center; /* Center the single button */
+}
 
         .clear-cart-btn {
             flex: 1;

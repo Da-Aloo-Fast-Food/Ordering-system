@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Delivery Location - Da Aloo</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FFF9C4;
+            color: #000000;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .location-header h1 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.8rem;
+            color: #000000;
+            margin-bottom: 5px;
+            letter-spacing: 1.5px;
+        }
+
+        .location-header p {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .order-summary {
+            background: #FFF9C4;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #000000;
+        }
+
+        .order-summary h3 {
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .order-items {
+            max-height: 150px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .order-total {
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: right;
+            color: #000000;
+            padding-top: 10px;
+            border-top: 2px solid #000000;
+        }
+
+        #map {
+            height: 350px;
+            width: 100%;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 3px solid #000000;
+        }
+
+        .location-instructions {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #FDFD96;
+        }
+
+        .location-instructions i {
+            color: #FDFD96;
+            margin-right: 8px;
+        }
+
+        .confirm-btn {
+            background: #FDFD96;
+            color: #000000;
+            width: 100%;
+            padding: 18px;
+            border: 3px solid #000000;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .confirm-btn:hover {
+            background: #000000;
+            color: #FDFD96;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .confirm-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Map controls styling */
+        .leaflet-control-zoom {
+            border: 2px solid #000000 !important;
+        }
+
+        .leaflet-control-zoom a {
+            background: #FDFD96 !important;
+            color: #000000 !important;
+            border: 1px solid #000000 !important;
+        }
+
+        .leaflet-control-zoom a:hover {
+            background: #000000 !important;
+            color: #FDFD96 !important;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+
+            .location-header h1 {
+                font-size: 2.2rem;
+            }
+
+            #map {
+                height: 300px;
+            }
+
+            .confirm-btn {
+                padding: 16px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .location-header h1 {
+                font-size: 1.8rem;
+            }
+
+            #map {
+                height: 250px;
+            }
+
+            .order-summary {
+                padding: 12px;
+            }
+
+            .order-item {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="location-header">
+            <h1>Select Delivery Location</h1>
+            <p>Pin your delivery location on the map</p>
+        </div>
+
+        <!-- Order Summary -->
+        <div class="order-summary">
+            <h3><i class="fas fa-receipt"></i> Your Order</h3>
+            <div class="order-items" id="orderItems">
+                <!-- Order items will be populated here -->
+            </div>
+            <div class="order-total" id="orderTotal">Total: Rs 0</div>
+        </div>
+
+        <!-- Map -->
+        <div id="map"></div>
+
+        <!-- Instructions -->
+        <div class="location-instructions">
+            <p><i class="fas fa-info-circle"></i> Drag the marker to your exact delivery location</p>
+            <p><i class="fas fa-map-marker-alt"></i> You can zoom in/out for more precise pinning</p>
+        </div>
+
+        <!-- Confirm Button -->
+        <button class="confirm-btn" id="confirmLocationBtn">
+            <i class="fab fa-whatsapp"></i> Confirm Location & Send Order via WhatsApp
+        </button>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Load cart from localStorage
+        let cart = [];
+        try {
+            const savedCart = localStorage.getItem('daAlooCart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+            }
+        } catch (error) {
+            console.error('Error loading cart:', error);
+        }
+
+        // Display order summary
+        function displayOrderSummary() {
+            const orderItems = document.getElementById('orderItems');
+            const orderTotal = document.getElementById('orderTotal');
+
+            if (cart.length === 0) {
+                orderItems.innerHTML = '<p>No items in cart</p>';
+                orderTotal.textContent = 'Total: Rs 0';
+                return;
+            }
+
+            let itemsHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.totalPrice;
+                total += itemTotal;
+
+                itemsHTML += `
+                    <div class="order-item">
+                        <span>${item.quantity}x ${item.name}</span>
+                        <span>Rs ${itemTotal}</span>
+                    </div>
+                `;
+            });
+
+            orderItems.innerHTML = itemsHTML;
+            orderTotal.textContent = `Total: Rs ${total}`;
+        }
+
+        // Initialize map
+        const map = L.map('map').setView([27.7172, 85.3240], 15); // Default to Kathmandu
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Add draggable marker
+        const marker = L.marker([27.7172, 85.3240], {
+            draggable: true,
+            icon: L.icon({
+                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                iconSize: [25, 41],
+                iconAnchor: [12, 41]
+            })
+        }).addTo(map);
+
+        // Add popup to marker
+        marker.bindPopup('Drag me to your delivery location').openPopup();
+
+        // Format order message for WhatsApp
+        function formatOrderMessage(locationLink) {
+            let message = "*DA ALOO ORDER*\n\n";
+            message += "*Order Details:*\n";
+
+            const now = new Date();
+            const date = now.toLocaleDateString();
+            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            message += `Date: ${date} ${time}\n\n`;
+
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.totalPrice;
+                total += itemTotal;
+
+                message += `• ${item.quantity}x ${item.name}`;
+
+                if (item.variant) {
+                    message += ` (${item.variant.name})`;
+                }
+
+                if (item.extras && item.extras.length > 0) {
+                    message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
+                }
+
+                message += ` - Rs ${itemTotal}\n`;
+            });
+
+            message += `\n*Total Amount: Rs ${total}*\n\n`;
+            message += "*Delivery Location:*\n";
+            message += `${locationLink}\n\n`;
+            message += "Please confirm this order. Thank you! 🙏";
+
+            return message;
+        }
+
+        // Send order to WhatsApp
+        function sendOrderToWhatsApp() {
+            const pos = marker.getLatLng();
+            const lat = pos.lat.toFixed(6);
+            const lng = pos.lng.toFixed(6);
+
+            // Create Google Maps link
+            const locationLink = `https://www.google.com/maps?q=${lat},${lng}`;
+
+            // Format order message
+            const message = formatOrderMessage(locationLink);
+            const encodedMessage = encodeURIComponent(message);
+
+            // WhatsApp number (replace with your actual number)
+            const whatsappNumber = '9779847375984';
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+            // Clear cart and redirect to WhatsApp
+            localStorage.removeItem('daAlooCart');
+            window.open(whatsappUrl, '_blank');
+
+            // Optional: Redirect back to menu after a delay
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        // Confirm location button event
+        document.getElementById('confirmLocationBtn').addEventListener('click', () => {
+            if (cart.length === 0) {
+                alert('Your cart is empty! Please add items first.');
+                return;
+            }
+
+            sendOrderToWhatsApp();
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            displayOrderSummary();
+
+            // Try to get user's current location
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        map.setView([latitude, longitude], 16);
+                        marker.setLatLng([latitude, longitude]);
+                    },
+                    (error) => {
+                        console.log('Geolocation error:', error);
+                        // Use default location if permission denied
+                    }
+                );
+            }
+        });
+    </script>
+</body>
+
+</html>
