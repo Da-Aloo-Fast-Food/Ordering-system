@@ -312,37 +312,51 @@
         marker.bindPopup('Drag me to adjust location').openPopup();
     }
 
-    // Get user's current location
-    function getUserLocation() {
-        return new Promise((resolve, reject) => {
-            if (!navigator.geolocation) {
-                reject(new Error('Geolocation is not supported by your browser'));
-                return;
-            }
+   function getUserLocation() {
+    return new Promise((resolve) => {
+        if (!navigator.geolocation) {
+            resolve({ latitude: 27.7172, longitude: 85.3240 });
+            return;
+        }
 
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    resolve({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude
-                    });
-                },
-                (error) => {
-                    console.error('Geolocation error:', error);
-                    // Default to Kathmandu if location access is denied
-                    resolve({
-                        latitude: 27.7172,
-                        longitude: 85.3240
-                    });
-                },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 10000,
-                    maximumAge: 0
-                }
-            );
-        });
-    }
+        let resolved = false;
+
+        const success = (position) => {
+            if (resolved) return;
+            resolved = true;
+
+            navigator.geolocation.clearWatch(watchId);
+
+            resolve({
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
+            });
+        };
+
+        const error = (err) => {
+            console.warn("GPS error:", err);
+        };
+
+        const watchId = navigator.geolocation.watchPosition(
+            success,
+            error,
+            {
+                enableHighAccuracy: true,
+                maximumAge: 0,
+                timeout: 20000
+            }
+        );
+
+        // HARD fallback after 20s
+        setTimeout(() => {
+            if (!resolved) {
+                navigator.geolocation.clearWatch(watchId);
+                resolve({ latitude: 27.7172, longitude: 85.3240 });
+            }
+        }, 20000);
+    });
+}
+
 
     // Format order message for WhatsApp
     function formatOrderMessage(locationLink) {
@@ -451,6 +465,7 @@
 
 </body>
 </html>
+
 
 
 
