@@ -27,7 +27,6 @@
                         <a href="index.html" class="nav-link">Menu</a>
                         <a href="offers.html" class="nav-link">Offers</a>
                         <a href="about.html" class="nav-link">About</a>
-
                     </nav>
                 </div>
             </div>
@@ -62,29 +61,29 @@
         </section>
     </main>
 
-<!-- Cart Modal -->
-<div class="cart-modal" id="cartModal">
-    <div class="cart-modal-content">
-        <div class="cart-modal-header">
-            <h2>Your Order</h2>
-            <span class="close-cart" id="closeCart">&times;</span>
-        </div>
-        <div class="cart-items" id="cartItems">
-            <!-- Items injected via JS -->
-            <div class="empty-cart-message" id="emptyCartMessage">
-                <i class="fas fa-shopping-cart"></i>
-                <p>Your cart is empty</p>
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-modal-content">
+            <div class="cart-modal-header">
+                <h2>Your Order</h2>
+                <span class="close-cart" id="closeCart">&times;</span>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Items injected via JS -->
+                <div class="empty-cart-message" id="emptyCartMessage">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                Total: Rs 0
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">Select Delivery Location</button>
             </div>
         </div>
-        <div class="cart-total" id="cartTotal">
-            Total: Rs 0
-        </div>
-        <div class="cart-actions">
-            <!-- Removed Clear Cart button -->
-            <button class="checkout-btn" id="checkoutBtn">Select Delivery Location</button>
-        </div>
     </div>
-</div>
+
     <!-- Item Customization Modal (Used ONLY for Variants like Mo:Mo types) -->
     <div class="customization-modal" id="customizationModal">
         <div class="customization-modal-content">
@@ -255,25 +254,25 @@
                 },
             ],
             "Sandwich": [
-                { "name": "Veg Sandwich", "price": "140" },
-                { "name": "Chicken Sandwich", "price": "180" },
+                { "name": "Veg Sandwich", "price": 140 },
+                { "name": "Chicken Sandwich", "price": 180 },
             ],
             "Keema Noodles": [
-                { "name": "Paneer Keema Noodles", "price": "180" },
-                { "name": "Chicken Keema Noodles", "price": "200" },
-                { "name": "Buff Keema Noodles", "price": "180" },
+                { "name": "Paneer Keema Noodles", "price": 180 },
+                { "name": "Chicken Keema Noodles", "price": 200 },
+                { "name": "Buff Keema Noodles", "price": 180 },
             ],
             "Fried Rice": [
-                { "name": "Veg Fried Rice", "price": "120" },
-                { "name": "Chicken Fried Rice", "price": "180" },
-                { "name": "Buff Fried Rice", "price": "160" },
-                { "name": "Mixed Fried Rice", "price": "200" },
+                { "name": "Veg Fried Rice", "price": 120 },
+                { "name": "Chicken Fried Rice", "price": 180 },
+                { "name": "Buff Fried Rice", "price": 160 },
+                { "name": "Mixed Fried Rice", "price": 200 },
             ],
             "Chowmein": [
-                { "name": "Veg Chowmein", "price": "110" },
-                { "name": "Chicken Chowmein", "price": "170" },
-                { "name": "Buff Chowmein", "price": "150" },
-                { "name": "Mixed Chowmein", "price": "190" },
+                { "name": "Veg Chowmein", "price": 110 },
+                { "name": "Chicken Chowmein", "price": 170 },
+                { "name": "Buff Chowmein", "price": 150 },
+                { "name": "Mixed Chowmein", "price": 190 },
             ],
             "Snacks": [
                 { "name": "Chicken Chilly", "price": 250 },
@@ -417,6 +416,18 @@
             }
         }
 
+        // Parse price from string or number
+        function parsePrice(price) {
+            if (typeof price === 'string') {
+                if (price.includes('-')) {
+                    // Handle price ranges like "50-60" by taking the first value
+                    return parseInt(price.split('-')[0]);
+                }
+                return parseInt(price) || 0;
+            }
+            return price;
+        }
+
         // Generate menu items
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
@@ -435,11 +446,14 @@
 
                     // Display price range for variant items
                     let displayPrice = `Rs ${item.price}`;
+                    let priceForButton = parsePrice(item.price);
+
                     if (hasVariants) {
                         const prices = item.variants.map(v => v.price);
                         const minPrice = Math.min(...prices);
                         const maxPrice = Math.max(...prices);
                         displayPrice = `Rs ${minPrice} - ${maxPrice}`;
+                        priceForButton = minPrice;
                     }
 
                     // --- BUTTON LOGIC ---
@@ -469,7 +483,7 @@
                             ${item.details ? `<div class="item-details">${item.details}</div>` : ''}
                             <button class="add-to-cart-btn ${btnClass}" 
                                     data-name="${item.name}" 
-                                    data-price="${item.price}"
+                                    data-price="${priceForButton}"
                                     data-has-variants="${hasVariants}"
                                     data-has-extras="${hasExtras}">
                                 <i class="fas fa-${buttonIcon}"></i> 
@@ -535,7 +549,6 @@
             const cartIcon = document.getElementById('cartIcon');
             const cartModal = document.getElementById('cartModal');
             const closeCart = document.getElementById('closeCart');
-            const clearCart = document.getElementById('clearCart');
             const checkoutBtn = document.getElementById('checkoutBtn');
             const cartItemsContainer = document.getElementById('cartItems');
 
@@ -550,29 +563,15 @@
                 cartModal.style.display = 'none';
             });
 
-            // Clear cart
-            clearCart.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Cart is already empty!');
-                    return;
-                }
-
-                if (confirm('Want to clear your cart?')) {
-                    cart = [];
-                    saveCart();
-                    updateCartBadge();
-                    updateCartDisplay();
-
-                }
-            });
-
-            // Checkout
+            // Checkout - Redirect to location page
             checkoutBtn.addEventListener('click', () => {
                 if (cart.length === 0) {
                     alert('Your cart is empty!');
                     return;
                 }
-                sendOrderToWhatsApp();
+                // Save cart and redirect to location page
+                saveCart();
+                window.location.href = 'location.html';
             });
 
             // Close modal when clicking outside
@@ -596,7 +595,6 @@
                     const name = button.getAttribute('data-name');
                     const price = button.getAttribute('data-price');
                     const hasVariants = button.getAttribute('data-has-variants') === 'true';
-                    // const hasExtras = button.getAttribute('data-has-extras') === 'true'; // Used internally
 
                     if (hasVariants) {
                         // Open modal ONLY for Variants (Mo:Mo)
@@ -607,7 +605,7 @@
                         const itemData = findMenuItem(name);
                         const availableExtras = itemData.extras || [];
 
-                        addToCart(name, parseInt(price), null, [], availableExtras);
+                        addToCart(name, parsePrice(price), null, [], availableExtras);
                         showAddFeedback(button);
                     }
                 }
@@ -628,7 +626,6 @@
                 if (!currentCustomizationItem) return;
 
                 const selectedVariant = document.querySelector('input[name="variant"]:checked');
-                // Extras are no longer in this modal
 
                 let variant = null;
                 if (selectedVariant) {
@@ -683,8 +680,6 @@
                 basePrice = item.price;
             }
 
-            // Note: Extras section removed from here as they are now in the cart
-
             body.innerHTML = html;
             totalPrice.textContent = basePrice;
 
@@ -726,7 +721,7 @@
 
         // Updated addToCart to accept availableExtras
         function addToCart(name, price, variant, extras, availableExtras = []) {
-            console.log('Adding to cart:', name);
+            console.log('Adding to cart:', name, 'Price:', price);
 
             const cartItem = {
                 name: name,
@@ -995,46 +990,6 @@
             }
         }
 
-
-        function sendOrderToWhatsApp() {
-            let message = "My Order\n\n";
-            message += "*Order Details:*\n";
-
-            // Add date and time in simple format
-            const now = new Date();
-            const date = now.toLocaleDateString();
-            const time = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            message += ` ${date} ${time}\n\n`;
-
-            let total = 0;
-            cart.forEach(item => {
-                const itemTotal = item.totalPrice;
-                total += itemTotal;
-
-                message += `• ${item.quantity}x ${item.name}`;
-                if (item.variant) {
-                    message += ` (${item.variant.name})`;
-                }
-                if (item.extras && item.extras.length > 0) {
-                    message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-                }
-                message += ` - Rs ${itemTotal}\n`;
-            });
-
-            message += `\n*Total Amount: Rs ${total}*\n\n`;
-            message += "Please confirm this order. Thank you!";
-
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
-
-            window.open(whatsappUrl, '_blank');
-
-            cart = [];
-            saveCart();
-            updateCartBadge();
-            updateCartDisplay();
-            document.getElementById('cartModal').style.display = 'none';
-        }
         // Fallback for missing images
         function handleTabImageError(img, categoryName) {
             img.parentElement.innerHTML = `<div style="font-size:1.5rem;color:#666;">🍽️</div>`;
@@ -1114,7 +1069,6 @@
         }
 
         /* Cart Container */
-        /* Cart container */
         .cart-container {
             position: fixed;
             top: 120px;
@@ -1756,30 +1710,16 @@
         }
 
         .cart-actions {
-    padding: 1rem 1.5rem;
-    display: flex;
-    gap: 0; /* Changed from 1rem to 0 */
-    justify-content: center; /* Center the single button */
-}
-
-        .clear-cart-btn {
-            flex: 1;
-            padding: 0.75rem;
-            background: #95a5a6;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .clear-cart-btn:hover {
-            background: #7f8c8d;
+            padding: 1rem 1.5rem;
+            display: flex;
+            gap: 0;
+            /* Changed from 1rem to 0 */
+            justify-content: center;
+            /* Center the single button */
         }
 
         .checkout-btn {
-            flex: 2;
+            flex: 1;
             padding: 0.75rem;
             background: #25D366;
             color: white;
@@ -1994,6 +1934,8 @@
 
             .cart-actions {
                 flex-direction: column;
+                gap: 0;
+                justify-content: center;
             }
         }
 
@@ -2054,6 +1996,5 @@
     </style>
 
 </body>
-
 
 </html>
