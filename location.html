@@ -447,7 +447,7 @@
             // Case 1: Live location available and not moved
             const pos = marker.getLatLng();
             locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-            locationText = "Live Location Sent (via GPS)";
+            
         } 
         // Check if we DON'T have live location AND marker hasn't been dragged
         else if (!isLiveLocation && !hasMarkerBeenDragged) {
@@ -490,3 +490,4 @@
 </script>
 </body>
 </html>
+
