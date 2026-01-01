@@ -1609,6 +1609,7 @@ body {
         }
 
         // Initialize the page
+       // Initialize the page
         function init() {
             // Load cart from storage
             loadCart();
@@ -1617,22 +1618,23 @@ body {
             generateItemCards('khaja-items', COMBO_ITEMS.khaja, 2);
             generateItemCards('maza-items', COMBO_ITEMS.maza, 1);
 
-            // Set up event listeners
-            document.getElementById('reset-btn').addEventListener('click', resetCombo);
-            document.getElementById('add-to-cart-btn').addEventListener('click', addComboToCart);
-
-            // Set up cart functionality
-            setupCart();
-
             // Update cart badge
             updateCartBadge();
 
-            // Set current year in footer
+            // Setup cart event listeners
+            setupCart();
+
+            // Setup combo buttons
+            document.getElementById('reset-btn').addEventListener('click', resetCombo);
+            document.getElementById('add-to-cart-btn').addEventListener('click', addComboToCart);
+
+            // Set footer year
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         }
 
-        // Initialize when page loads
+        // Run init on page load
         document.addEventListener('DOMContentLoaded', init);
+
     </script>
 </body>
 
