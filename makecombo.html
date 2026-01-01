@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,19 +115,12 @@
         }
 
         .combo-sections {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        /* Combo Section Cards */
+        /* NEW: Combo Section Cards - Similar to Menu Categories */
         .combo-section {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e0e0e0;
+            margin-bottom: 3rem;
         }
 
         .section-header {
@@ -154,24 +148,27 @@
             font-size: 0.9rem;
         }
 
-        /* Item Selection Grid */
+        /* NEW: Category-style Item Grid - Similar to index.html */
         .items-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1rem;
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         .item-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0f0f0;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            min-height: 300px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .item-card:hover {
@@ -183,15 +180,18 @@
         .item-card.selected {
             border-color: #2ecc71;
             background-color: rgba(46, 204, 113, 0.05);
+            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
         }
 
         .item-card.disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            pointer-events: none;
         }
 
-        .item-image {
-            height: 120px;
+        /* NEW: Image container - Rectangular like menu categories */
+        .item-image-container {
+            height: 150px;
             width: 100%;
             border-radius: 8px;
             overflow: hidden;
@@ -200,17 +200,30 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
         }
 
-        .item-image img {
+        .item-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        .item-image .placeholder-icon {
-            font-size: 2rem;
+        .item-card:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-image-container .placeholder-icon {
+            font-size: 3rem;
             color: #ccc;
+        }
+
+        /* NEW: Item content - Stacked vertically */
+        .item-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .item-name {
@@ -223,15 +236,16 @@
         .item-description {
             font-size: 0.9rem;
             color: #666;
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
             line-height: 1.4;
+            flex-grow: 1;
         }
 
-        .item-footer {
+        .item-price-container {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 0.5rem;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin-top: auto;
         }
 
         .item-price {
@@ -244,7 +258,8 @@
             font-size: 0.8rem;
             color: #777;
             text-decoration: line-through;
-            display: block;
+            display: inline-block;
+            margin-right: 8px;
         }
 
         .item-price .half-price {
@@ -252,21 +267,31 @@
             font-size: 1.2rem;
         }
 
-        .select-checkbox {
-            width: 24px;
-            height: 24px;
+        /* NEW: Selection indicator - Similar to menu categories */
+        .select-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
             border: 2px solid #ccc;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: rgba(255, 255, 255, 0.9);
             transition: all 0.3s;
         }
 
-        .item-card.selected .select-checkbox {
+        .item-card.selected .select-indicator {
             background-color: #2ecc71;
             border-color: #2ecc71;
             color: white;
+            transform: scale(1.1);
+        }
+
+        .select-indicator i {
+            font-size: 0.9rem;
         }
 
         /* Combo Summary */
@@ -711,10 +736,6 @@
 
         /* Responsive Design */
         @media (max-width: 992px) {
-            .combo-sections {
-                grid-template-columns: 1fr;
-            }
-
             .items-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -734,7 +755,17 @@
             }
 
             .items-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .item-card {
+                min-height: 280px;
+                padding: 1rem;
+            }
+
+            .item-image-container {
+                height: 120px;
             }
 
             .cart-container {
@@ -766,6 +797,16 @@
             .btn {
                 width: 100%;
             }
+
+            .summary-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+
+            .summary-price {
+                text-align: left;
+            }
         }
 
         @media (max-width: 576px) {
@@ -774,13 +815,25 @@
             }
 
             .combo-section {
-                padding: 1rem;
+                padding: 0;
             }
 
             .section-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 0.5rem;
+            }
+
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-card {
+                min-height: 260px;
+            }
+
+            .item-image-container {
+                height: 140px;
             }
 
             .summary-price {
@@ -797,6 +850,20 @@
 
             .selected-item-tag {
                 width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item-card {
+                min-height: 250px;
+            }
+
+            .item-image-container {
+                height: 130px;
             }
         }
     </style>
@@ -1061,7 +1128,7 @@
             }
         }
 
-        // Generate item cards for a section
+        // Generate item cards for a section - UPDATED to match menu category style
         function generateItemCards(sectionId, items, maxSelection) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1085,21 +1152,23 @@
                 card.setAttribute('data-section', isKhaja ? 'khaja' : 'maza');
 
                 card.innerHTML = `
-                    <div class="item-image">
+                    <div class="select-indicator">
+                        ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                    </div>
+                    <div class="item-image-container">
                         ${item.image
-                        ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<i class=\"fas fa-utensils placeholder-icon\"></i>'">`
+                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
                         : `<i class="fas fa-${isKhaja ? 'utensils' : 'glass-cheers'} placeholder-icon"></i>`
                     }
                     </div>
-                    <div class="item-name">${item.name}</div>
-                    <div class="item-description">${item.description}</div>
-                    <div class="item-footer">
-                        <div class="item-price">
-                            <span class="full-price">Full: Rs ${item.fullPrice}</span>
-                            <span class="half-price">Half: Rs ${halfPrice}</span>
-                        </div>
-                        <div class="select-checkbox">
-                            ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                    <div class="item-content">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-description">${item.description}</div>
+                        <div class="item-price-container">
+                            <div class="item-price">
+                                <span class="full-price">Full: Rs ${item.fullPrice}</span>
+                                <span class="half-price">Half: Rs ${halfPrice}</span>
+                            </div>
                         </div>
                     </div>
                 `;
