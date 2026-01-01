@@ -11,15 +11,15 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         /* CSS Variables from your existing site */
         :root {
-            --primary: #FFC107;
-            --secondary: #1a1a1a;
-            --accent: #e74c3c;
-            --light-bg: #f9f9f9;
-            --border: #e0e0e0;
-            --success: #2ecc71;
+            --primary: #FDFD96;
+            --primary-dark: #E6B800;
+            --secondary: #000000;
+            --background: #FFF9C4;
+            --card: #ffffff;
         }
 
         * {
@@ -86,7 +86,7 @@
 
         /* Combo Builder Sections */
         .combo-instructions {
-            background-color: var(--light-bg);
+            background-color: #f9f9f9;
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 2rem;
@@ -126,7 +126,7 @@
             border-radius: 15px;
             padding: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            border: 1px solid var(--border);
+            border: 1px solid #e0e0e0;
         }
 
         .section-header {
@@ -135,7 +135,7 @@
             align-items: center;
             margin-bottom: 1.5rem;
             padding-bottom: 0.8rem;
-            border-bottom: 2px solid var(--light-bg);
+            border-bottom: 2px solid #f9f9f9;
         }
 
         .section-title-inner {
@@ -165,7 +165,7 @@
             background-color: white;
             border-radius: 10px;
             padding: 1rem;
-            border: 2px solid var(--border);
+            border: 2px solid #e0e0e0;
             transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
@@ -181,7 +181,7 @@
         }
 
         .item-card.selected {
-            border-color: var(--success);
+            border-color: #2ecc71;
             background-color: rgba(46, 204, 113, 0.05);
         }
 
@@ -248,7 +248,7 @@
         }
 
         .item-price .half-price {
-            color: var(--accent);
+            color: #e74c3c;
             font-size: 1.2rem;
         }
 
@@ -264,14 +264,14 @@
         }
 
         .item-card.selected .select-checkbox {
-            background-color: var(--success);
-            border-color: var(--success);
+            background-color: #2ecc71;
+            border-color: #2ecc71;
             color: white;
         }
 
         /* Combo Summary */
         .combo-summary {
-            background-color: var(--light-bg);
+            background-color: #f9f9f9;
             border-radius: 15px;
             padding: 2rem;
             margin: 3rem auto;
@@ -296,7 +296,7 @@
         .summary-price {
             font-size: 2rem;
             font-weight: 700;
-            color: var(--accent);
+            color: #e74c3c;
             text-align: right;
         }
 
@@ -351,7 +351,7 @@
         }
 
         .selected-item-tag i {
-            color: var(--success);
+            color: #2ecc71;
             font-size: 0.8rem;
         }
 
@@ -365,7 +365,7 @@
             display: flex;
             gap: 1rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--border);
+            border-top: 1px solid #e0e0e0;
         }
 
         .btn {
@@ -683,29 +683,30 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button */
-        .floating-call {
+        /* Floating Call Button - Using WhatsApp style from your CSS */
+        .floating-whatsapp {
             position: fixed;
-            right: 20px;
-            bottom: 20px;
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 12px 20px;
-            border-radius: 50px;
+            bottom: 15px;
+            right: 15px;
+            background: #25D366;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 40px;
+            font-weight: 600;
             text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            z-index: 1000;
+            gap: 6px;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .floating-call:hover {
-            background-color: #ffb300;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        .floating-whatsapp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Responsive Design */
@@ -811,7 +812,7 @@
 </script>
 
 <body>
-    <!-- Header - Same as offers.html -->
+    <!-- Header - Using style.css -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -822,7 +823,7 @@
                     </div>
                     <nav class="site-nav">
                         <a href="index.html" class="nav-link">Menu</a>
-                        <a href="make-combo.html" class="nav-link">Make Combo</a>
+                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
                         <a href="offers.html" class="nav-link">Offers</a>
                         <a href="about.html" class="nav-link">About</a>
                     </nav>
@@ -961,8 +962,8 @@
         </div>
     </footer>
 
-    <!-- Floating Call Button -->
-    <a class="floating-call" href="tel:+9779847375984">
+    <!-- Floating Call Button - Using WhatsApp style -->
+    <a class="floating-whatsapp" href="tel:+9779847375984">
         <i class="fas fa-phone-alt"></i> Call Now
     </a>
 
