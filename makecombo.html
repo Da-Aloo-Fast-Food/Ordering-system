@@ -12,17 +12,16 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* CSS Variables */
+        /* CSS Variables from your existing site */
         :root {
             --primary: #FFC107;
             --secondary: #1a1a1a;
             --accent: #e74c3c;
-            --success: #2ecc71;
             --light-bg: #f9f9f9;
             --border: #e0e0e0;
+            --success: #2ecc71;
         }
 
-        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -43,7 +42,7 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        /* Header Styles - Same as index.html */
         .site-header {
             background-color: var(--secondary);
             padding: 1rem 0;
@@ -110,13 +109,30 @@
             border-bottom: 2px solid var(--primary);
         }
 
-        /* Combo Page Header */
+        /* Main Content Area */
+        main {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.8rem;
+            color: var(--secondary);
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        /* Page Header - Similar to offers.html */
         .page-header {
             text-align: center;
-            padding: 2rem 0 1rem;
+            padding: 2rem 0;
             background: linear-gradient(to right, #fef9e7, #fff);
             margin-bottom: 2rem;
-            border-bottom: 3px solid var(--primary);
         }
 
         .page-title {
@@ -135,17 +151,16 @@
             font-weight: 400;
         }
 
-        /* Combo Builder Section */
-        .combo-builder {
-            padding: 1rem 0 3rem;
-        }
-
+        /* Combo Builder Sections */
         .combo-instructions {
             background-color: var(--light-bg);
             padding: 1.5rem;
             border-radius: 10px;
             margin-bottom: 2rem;
             border-left: 4px solid var(--primary);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .instructions-title {
@@ -166,15 +181,15 @@
         }
 
         .combo-sections {
-            display: flex;
-            flex-direction: column;
-            gap: 2.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             margin-bottom: 3rem;
         }
 
-        /* Section Styles */
+        /* Combo Section Cards */
         .combo-section {
-            background-color: white;
+            background: white;
             border-radius: 15px;
             padding: 1.5rem;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
@@ -190,9 +205,9 @@
             border-bottom: 2px solid var(--light-bg);
         }
 
-        .section-title {
+        .section-title-inner {
             font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             color: var(--secondary);
             letter-spacing: 1px;
         }
@@ -206,17 +221,17 @@
             font-size: 0.9rem;
         }
 
+        /* Item Selection Grid */
         .items-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
         }
 
-        /* Item Card */
         .item-card {
             background-color: white;
-            border-radius: 12px;
-            padding: 1.2rem;
+            border-radius: 10px;
+            padding: 1rem;
             border: 2px solid var(--border);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -228,8 +243,8 @@
 
         .item-card:hover {
             border-color: var(--primary);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .item-card.selected {
@@ -238,7 +253,7 @@
         }
 
         .item-card.disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
         }
 
@@ -261,12 +276,8 @@
         }
 
         .item-image .placeholder-icon {
-            font-size: 3rem;
+            font-size: 2rem;
             color: #ccc;
-        }
-
-        .item-info {
-            flex-grow: 1;
         }
 
         .item-name {
@@ -283,17 +294,6 @@
             line-height: 1.4;
         }
 
-        .item-note {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-style: italic;
-            margin-bottom: 0.8rem;
-            padding: 4px 8px;
-            background-color: rgba(231, 76, 60, 0.08);
-            border-radius: 4px;
-            display: inline-block;
-        }
-
         .item-footer {
             display: flex;
             justify-content: space-between;
@@ -303,16 +303,20 @@
 
         .item-price {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--secondary);
         }
 
-        .item-price span {
-            font-size: 0.9rem;
+        .item-price .full-price {
+            font-size: 0.8rem;
             color: #777;
-            font-weight: 400;
             text-decoration: line-through;
-            margin-right: 5px;
+            display: block;
+        }
+
+        .item-price .half-price {
+            color: var(--accent);
+            font-size: 1.2rem;
         }
 
         .select-checkbox {
@@ -332,16 +336,13 @@
             color: white;
         }
 
-        .item-card.selected .select-checkbox i {
-            font-size: 0.8rem;
-        }
-
-        /* Combo Summary */
+        /* Combo Summary - Similar style to offers section */
         .combo-summary {
             background-color: var(--light-bg);
             border-radius: 15px;
             padding: 2rem;
-            margin-bottom: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
             border: 2px solid var(--primary);
         }
 
@@ -363,6 +364,7 @@
             font-size: 2rem;
             font-weight: 700;
             color: var(--accent);
+            text-align: right;
         }
 
         .summary-price .original-price {
@@ -428,7 +430,6 @@
 
         .summary-actions {
             display: flex;
-            justify-content: center;
             gap: 1rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border);
@@ -447,6 +448,7 @@
             justify-content: center;
             gap: 10px;
             font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
         }
 
         .btn-primary {
@@ -478,7 +480,94 @@
             box-shadow: none !important;
         }
 
-        /* Cart Modal (Same as Menu Page) */
+        /* Cart Container - Same as index.html */
+        .cart-container {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .cart-icon {
+            background: #FFFFFF;
+            color: #000000;
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            border: 3px solid #35E539;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-size: 1.7rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25),
+                0 0 0 6px rgba(255, 235, 59, 0.35);
+            transition: 0.25s ease;
+            animation: cartPulse 2s infinite;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.12);
+        }
+
+        @keyframes cartPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            70% {
+                box-shadow: 0 0 0 12px rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #35E539;
+            color: #000000;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-badge.bounce {
+            animation: badgeBounce 0.4s ease;
+        }
+
+        @keyframes badgeBounce {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.4);
+            }
+
+            60% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Cart Modal - Same as index.html */
         .cart-modal {
             display: none;
             position: fixed;
@@ -647,72 +736,7 @@
             transform: translateY(-2px);
         }
 
-        /* Cart Icon */
-        .cart-container {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 999;
-        }
-
-        .cart-icon {
-            background: #FFFFFF;
-            color: #000000;
-            width: 64px;
-            height: 64px;
-            border-radius: 14px;
-            border: 3px solid #35E539;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-            font-size: 1.7rem;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25),
-                0 0 0 6px rgba(255, 235, 59, 0.35);
-            transition: 0.25s ease;
-            animation: cartPulse 2s infinite;
-        }
-
-        .cart-icon:hover {
-            transform: scale(1.12);
-        }
-
-        @keyframes cartPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
-            }
-
-            70% {
-                box-shadow: 0 0 0 12px rgba(255, 235, 59, 0),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
-            }
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #35E539;
-            color: #000000;
-            width: 26px;
-            height: 26px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Footer */
+        /* Footer - Same as other pages */
         .site-footer {
             background-color: var(--secondary);
             color: white;
@@ -726,7 +750,7 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button */
+        /* Floating Call Button - Same as other pages */
         .floating-call {
             position: fixed;
             right: 20px;
@@ -751,8 +775,12 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
-        /* Responsive Styles */
+        /* Responsive Design */
         @media (max-width: 992px) {
+            .combo-sections {
+                grid-template-columns: 1fr;
+            }
+
             .items-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -767,8 +795,8 @@
                 font-size: 1rem;
             }
 
-            .section-title {
-                font-size: 2rem;
+            .section-title-inner {
+                font-size: 1.8rem;
             }
 
             .items-grid {
@@ -855,9 +883,18 @@
         }
     </style>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-CFXTRJEMHN');
+</script>
 
 <body>
-    <!-- Header -->
+    <!-- Header - Same as other pages -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -868,8 +905,8 @@
                     </div>
                     <nav class="site-nav">
                         <a href="index.html" class="nav-link">Menu</a>
-                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
                         <a href="offers.html" class="nav-link">Offers</a>
+                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
                         <a href="about.html" class="nav-link">About</a>
                     </nav>
                 </div>
@@ -877,23 +914,24 @@
         </div>
     </header>
 
-    <!-- Page Header -->
-    <div class="page-header">
+    <!-- Main Content -->
+    <main>
         <div class="container">
-            <h1 class="page-title">Make Your Combo</h1>
-            <p class="page-subtitle">Create your own perfect combo meal by selecting items from each section below. All items are served in half portions for the perfect combo experience!</p>
-        </div>
-    </div>
+            <!-- Page Header -->
+            <div class="page-header">
+                <h1 class="page-title">Make Your Combo</h1>
+                <p class="page-subtitle">Create your perfect combo meal by selecting items from each section below. All
+                    items are served in half portions for the perfect combo experience!</p>
+            </div>
 
-    <!-- Combo Builder -->
-    <main class="combo-builder">
-        <div class="container">
             <!-- Instructions -->
             <div class="combo-instructions">
                 <h3 class="instructions-title">How It Works</h3>
                 <ul class="instructions-list">
-                    <li>Select <strong>2 items</strong> from the <strong>Khaja (Main)</strong> section (both served in half portions)</li>
-                    <li>Select <strong>1 item</strong> from the <strong>Maza (Drink)</strong> section (served in half portion)</li>
+                    <li>Select <strong>2 items</strong> from the <strong>Khaja (Main)</strong> section (both served in
+                        half portions)</li>
+                    <li>Select <strong>1 item</strong> from the <strong>Maza (Drink)</strong> section (served in half
+                        portion)</li>
                     <li>Review your combo and price in the summary section</li>
                     <li>Add to cart and proceed to checkout</li>
                 </ul>
@@ -904,7 +942,7 @@
                 <!-- Khaja Section -->
                 <section class="combo-section" id="khaja-section">
                     <div class="section-header">
-                        <h2 class="section-title">Khaja (Main)</h2>
+                        <h2 class="section-title-inner">Khaja (Main)</h2>
                         <div class="section-requirement">Select 2 Items</div>
                     </div>
                     <div class="items-grid" id="khaja-items">
@@ -915,7 +953,7 @@
                 <!-- Maza Section -->
                 <section class="combo-section" id="maza-section">
                     <div class="section-header">
-                        <h2 class="section-title">Maza (Drink)</h2>
+                        <h2 class="section-title-inner">Maza (Drink)</h2>
                         <div class="section-requirement">Select 1 Item</div>
                     </div>
                     <div class="items-grid" id="maza-items">
@@ -1111,50 +1149,47 @@
             if (!container) return;
 
             container.innerHTML = '';
-            
+
             items.forEach(item => {
                 const halfPrice = Math.round(item.fullPrice / 2);
                 const isKhaja = sectionId === 'khaja-items';
-                const isSelected = isKhaja 
+                const isSelected = isKhaja
                     ? selectedKhaja.some(selected => selected.id === item.id)
                     : selectedMaza && selectedMaza.id === item.id;
-                
-                const isDisabled = isKhaja 
+
+                const isDisabled = isKhaja
                     ? selectedKhaja.length >= maxSelection && !isSelected
                     : selectedMaza && !isSelected;
-                
+
                 const card = document.createElement('div');
                 card.className = `item-card ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`;
                 card.setAttribute('data-id', item.id);
                 card.setAttribute('data-section', isKhaja ? 'khaja' : 'maza');
-                
+
                 card.innerHTML = `
                     <div class="item-image">
-                        ${item.image 
-                            ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<i class=\"fas fa-utensils placeholder-icon\"></i>'">`
-                            : `<i class="fas fa-${isKhaja ? 'utensils' : 'glass-cheers'} placeholder-icon"></i>`
-                        }
+                        ${item.image
+                        ? `<img src="${item.image}" alt="${item.name}" onerror="this.parentElement.innerHTML='<i class=\"fas fa-utensils placeholder-icon\"></i>'">`
+                        : `<i class="fas fa-${isKhaja ? 'utensils' : 'glass-cheers'} placeholder-icon"></i>`
+                    }
                     </div>
-                    <div class="item-info">
-                        <h4 class="item-name">${item.name}</h4>
-                        <p class="item-description">${item.description}</p>
-                        <div class="item-note">Half Serving in Combo</div>
-                    </div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-description">${item.description}</div>
                     <div class="item-footer">
                         <div class="item-price">
-                            <span>Rs ${item.fullPrice}</span>
-                            Rs ${halfPrice}
+                            <span class="full-price">Full: Rs ${item.fullPrice}</span>
+                            <span class="half-price">Half: Rs ${halfPrice}</span>
                         </div>
                         <div class="select-checkbox">
                             ${isSelected ? '<i class="fas fa-check"></i>' : ''}
                         </div>
                     </div>
                 `;
-                
+
                 if (!isDisabled) {
                     card.addEventListener('click', () => toggleSelection(item, isKhaja));
                 }
-                
+
                 container.appendChild(card);
             });
         }
@@ -1164,7 +1199,7 @@
             if (isKhaja) {
                 // For Khaja section (select up to 2 items)
                 const index = selectedKhaja.findIndex(selected => selected.id === item.id);
-                
+
                 if (index > -1) {
                     // Deselect if already selected
                     selectedKhaja.splice(index, 1);
@@ -1188,7 +1223,7 @@
                     };
                 }
             }
-            
+
             updateUI();
         }
 
@@ -1196,20 +1231,20 @@
         function calculateComboPrice() {
             let total = 0;
             let originalTotal = 0;
-            
+
             selectedKhaja.forEach(item => {
                 total += item.halfPrice;
                 originalTotal += item.fullPrice;
             });
-            
+
             if (selectedMaza) {
                 total += selectedMaza.halfPrice;
                 originalTotal += selectedMaza.fullPrice;
             }
-            
+
             // Apply combo discount (additional 10% off for making a combo)
             const discountedTotal = Math.round(total * 0.9);
-            
+
             return {
                 total: discountedTotal,
                 originalTotal: originalTotal,
@@ -1222,22 +1257,22 @@
             // Update item cards
             generateItemCards('khaja-items', COMBO_ITEMS.khaja, 2);
             generateItemCards('maza-items', COMBO_ITEMS.maza, 1);
-            
+
             // Update selected items display
             updateSelectedItemsDisplay();
-            
+
             // Calculate and update price
             const priceInfo = calculateComboPrice();
-            
+
             document.getElementById('original-price').textContent = `Rs ${priceInfo.originalTotal}`;
             document.getElementById('combo-price').textContent = `Rs ${priceInfo.total}`;
-            
+
             // Enable/disable add to cart button
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const isComboComplete = selectedKhaja.length === 2 && selectedMaza !== null;
-            
+
             addToCartBtn.disabled = !isComboComplete;
-            
+
             if (isComboComplete) {
                 addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo to Cart - Rs ${priceInfo.total}`;
             } else {
@@ -1249,7 +1284,7 @@
         function updateSelectedItemsDisplay() {
             const khajaContainer = document.getElementById('selected-khaja');
             const mazaContainer = document.getElementById('selected-maza');
-            
+
             // Update Khaja items
             if (selectedKhaja.length > 0) {
                 khajaContainer.innerHTML = '';
@@ -1258,14 +1293,14 @@
                     tag.className = 'selected-item-tag';
                     tag.innerHTML = `
                         <i class="fas fa-check"></i>
-                        ${item.name} (Rs ${item.halfPrice})
+                        ${item.name} (Half: Rs ${item.halfPrice})
                     `;
                     khajaContainer.appendChild(tag);
                 });
             } else {
                 khajaContainer.innerHTML = '<div class="empty-selection">No items selected yet</div>';
             }
-            
+
             // Update Maza item
             if (selectedMaza) {
                 mazaContainer.innerHTML = '';
@@ -1273,7 +1308,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMaza.name} (Rs ${selectedMaza.halfPrice})
+                    ${selectedMaza.name} (Half: Rs ${selectedMaza.halfPrice})
                 `;
                 mazaContainer.appendChild(tag);
             } else {
@@ -1293,11 +1328,11 @@
         // Add combo to cart
         function addComboToCart() {
             const priceInfo = calculateComboPrice();
-            
+
             // Create combo item description
             const khajaNames = selectedKhaja.map(item => item.name).join(' + ');
             const mazaName = selectedMaza.name;
-            
+
             const comboItem = {
                 id: `combo-${Date.now()}`,
                 name: `Custom Combo: ${khajaNames} with ${mazaName}`,
@@ -1306,26 +1341,26 @@
                 details: `Khaja: ${khajaNames} | Maza: ${mazaName}`,
                 type: 'combo'
             };
-            
+
             // Add to cart
             cart.push(comboItem);
             saveCart();
             updateCartBadge();
-            
+
             // Show feedback
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const originalText = addToCartBtn.innerHTML;
             addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
             addToCartBtn.style.background = '#2ecc71';
-            
+
             setTimeout(() => {
                 addToCartBtn.innerHTML = originalText;
                 addToCartBtn.style.background = '';
             }, 1500);
-            
+
             // Open cart modal
             openCartModal();
-            
+
             // Reset combo for next order
             setTimeout(() => {
                 selectedKhaja = [];
@@ -1479,7 +1514,7 @@
             const badge = document.getElementById('cartBadge');
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             badge.textContent = totalItems;
-            
+
             // Add bounce animation
             badge.classList.add('bounce');
             setTimeout(() => badge.classList.remove('bounce'), 300);
@@ -1489,21 +1524,21 @@
         function init() {
             // Load cart from storage
             loadCart();
-            
+
             // Generate initial item cards
             generateItemCards('khaja-items', COMBO_ITEMS.khaja, 2);
             generateItemCards('maza-items', COMBO_ITEMS.maza, 1);
-            
+
             // Set up event listeners
             document.getElementById('reset-btn').addEventListener('click', resetCombo);
             document.getElementById('add-to-cart-btn').addEventListener('click', addComboToCart);
-            
+
             // Set up cart functionality
             setupCart();
-            
+
             // Update cart badge
             updateCartBadge();
-            
+
             // Set current year in footer
             document.getElementById('currentYear').textContent = new Date().getFullYear();
         }
