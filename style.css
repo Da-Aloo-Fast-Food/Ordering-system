@@ -269,20 +269,20 @@ body {
         flex-shrink: 0;
     }
 
-    /* ADJUSTED LOGO CONTAINER - PERFECTLY CENTERED TAGLINE */
+    /* ADJUSTED LOGO CONTAINER - LOGO AND TAGLINE GROUP CENTERED */
     .logo-container {
-        padding: 8px 30px !important; /* Adjusted for perfect centering */
+        padding: 12px 30px !important; /* Increased vertical padding for balance */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin-bottom: 0;
-        min-width: 250px !important; /* Slightly wider for tagline */
-        max-width: 260px !important;
+        min-width: 260px !important; /* Adjusted width for proper centering */
+        max-width: 280px !important;
         margin-left: 0;
         margin-right: 0;
         text-align: center;
-        border-radius: 10px !important;
+        border-radius: 12px !important;
         border-width: 2px !important;
         background: white;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
@@ -292,17 +292,17 @@ body {
     .main-logo {
         width: 100px !important;
         height: 50px !important;
-        margin-bottom: 0;
+        margin-bottom: 4px !important; /* Reduced space between logo and tagline */
         object-fit: contain;
         display: block;
     }
 
-    /* PERFECTLY CENTERED TAGLINE */
+    /* PERFECTLY CENTERED TAGLINE - GROUPED WITH LOGO */
     .tagline {
         font-size: 0.75rem !important;
         white-space: nowrap;
         text-align: center;
-        margin: 4px 0 0 0 !important;
+        margin: 0 !important; /* Reset all margins */
         font-weight: 500;
         width: 100%;
         padding: 0;
@@ -357,15 +357,16 @@ body {
 /* Desktop - Larger screens */
 @media (min-width: 1024px) {
     .logo-container {
-        padding: 10px 32px !important;
-        min-width: 260px !important;
-        max-width: 270px !important;
-        border-radius: 11px !important;
+        padding: 14px 32px !important;
+        min-width: 270px !important;
+        max-width: 290px !important;
+        border-radius: 13px !important;
     }
 
     .main-logo {
         width: 105px !important;
         height: 52px !important;
+        margin-bottom: 5px !important;
     }
 
     .tagline {
@@ -392,15 +393,16 @@ body {
     }
 
     .logo-container {
-        padding: 12px 34px !important;
-        min-width: 270px !important;
-        max-width: 280px !important;
-        border-radius: 12px !important;
+        padding: 16px 34px !important;
+        min-width: 280px !important;
+        max-width: 300px !important;
+        border-radius: 14px !important;
     }
 
     .main-logo {
         width: 110px !important;
         height: 55px !important;
+        margin-bottom: 6px !important;
     }
 
     .tagline {
@@ -423,15 +425,16 @@ body {
 /* Extra Large Desktop */
 @media (min-width: 1400px) {
     .logo-container {
-        padding: 14px 36px !important;
-        min-width: 280px !important;
-        max-width: 290px !important;
-        border-radius: 13px !important;
+        padding: 18px 36px !important;
+        min-width: 290px !important;
+        max-width: 310px !important;
+        border-radius: 15px !important;
     }
 
     .main-logo {
         width: 115px !important;
         height: 57px !important;
+        margin-bottom: 7px !important;
     }
 
     .tagline {
