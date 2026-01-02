@@ -240,74 +240,79 @@ body {
     }
 }
 
-/* ===== UPDATED DESKTOP HEADER (Optimized for Vertical Space) ===== */
+/* ===== COMPACT DESKTOP HEADER ===== */
 
 @media (min-width: 768px) {
     .site-header {
-        padding: 5px 0; /* Reduced vertical padding */
+        padding: 5px 0; /* Minimal vertical space */
     }
 
     .header-content {
-        flex-direction: row; /* Align logo and nav side-by-side */
-        justify-content: space-between; /* Space them out */
+        flex-direction: row; 
+        justify-content: space-between;
         align-items: center;
-        gap: 20px;
+        gap: 30px;
     }
 
     .logo-section {
         text-align: left;
         width: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Align logo/tagline to the left */
+        flex-shrink: 0; /* Prevents the logo from being squeezed */
     }
 
+    /* Smaller Logo Box */
     .logo-container {
-        padding: 8px 25px; /* Slimmer container */
-        margin-bottom: 2px;
-        min-width: auto; /* Allow it to shrink */
-        margin-left: 0;
-        margin-right: 0;
+        padding: 5px 20px; /* Reduced padding for a smaller box */
+        border-radius: 10px;
+        margin-bottom: 0;
+        min-width: auto;
+        border-width: 1px; /* Thinner border looks cleaner when small */
     }
 
     .main-logo {
-        width: 140px; /* Scaled down for better desktop fit */
-        height: auto;
-        margin-bottom: 0;
+        width: 120px; /* Smaller width */
+        height: 60px; /* Reduced height */
+        display: block;
     }
 
     .tagline {
-        font-size: 0.85rem;
+        font-size: 0.75rem; /* Smaller font for desktop quote */
         margin-top: 2px;
+        text-align: center;
     }
 
+    /* Spread-out Navigation */
     .site-nav {
-        width: auto;
-        max-width: none;
+        flex-grow: 1; /* This makes the nav take up the remaining space */
+        display: flex;
+        justify-content: center; /* Keeps buttons centered within that space */
+        max-width: 600px; /* Allows it to spread wider than before */
         gap: 15px;
-        padding: 8px 15px;
-        margin: 0;
-        background: rgba(255, 255, 255, 0.4); /* Slightly more visible on desktop */
+        padding: 10px;
+        background: none; /* Removed background for a cleaner desktop look */
+        backdrop-filter: none;
     }
 
     .nav-link {
-        padding: 8px 20px;
-        font-size: 0.95rem;
-        flex: none;
+        flex: 1; /* Forces buttons to share width and spread out */
+        padding: 8px 15px;
+        font-size: 0.9rem;
+        white-space: nowrap;
     }
 }
 
-/* Desktop - High resolution refinements */
+/* Refinement for larger screens */
 @media (min-width: 1024px) {
-    .main-logo {
-        width: 160px; /* Slightly larger on very big screens */
-    }
-
     .site-nav {
-        gap: 20px;
+        max-width: 800px; /* Even more spread on large monitors */
+        gap: 25px;
+    }
+    
+    .main-logo {
+        width: 140px;
+        height: 70px;
     }
 }
-
 /* ===== HERO SECTION STYLES ===== */
 
 .hero-section {
@@ -540,3 +545,4 @@ body {
         height: 20px;
     }
 }
+
