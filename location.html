@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Delivery Location - Da Aloo</title>
+
+    <!-- Force HTTPS Redirect -->
+    <script>
+        // Auto-redirect HTTP to HTTPS
+        if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
+            window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
+        }
+    </script>
 
     <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -14,7 +23,8 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -252,245 +262,251 @@
         }
     </style>
 </head>
-
-<body>
-<div class="location-container">
-    <div class="location-header">
-        <!-- Location Status - Will show one of two states -->
-        <div class="location-status" id="locationStatus">
-            <i class="fas fa-spinner fa-spin"></i>
-            <span>Checking location...</span>
-        </div>
-    </div>
-
-    <div id="map">
-        <div class="map-loading">
-            <i class="fas fa-spinner fa-spin"></i>
-            <p>Getting your location...</p>
-        </div>
-    </div>
-
-    <div class="location-instructions">
-        <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live location.</p>
-    </div>
-
-    <div class="location-footer">
-        <button class="confirm-btn" id="confirmLocationBtn">
-            <i class="fab fa-whatsapp fa-1x"></i> Order on WhatsApp
-        </button>
-    </div>
-</div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
 <script>
-    let map, marker, cart = [];
-    let isLiveLocation = false;
-    let hasMarkerBeenDragged = false;
-    let defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu coordinates
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    try {
-        const savedCart = localStorage.getItem('daAlooCart');
-        cart = savedCart ? JSON.parse(savedCart) : [];
-    } catch (error) {
-        console.error('Error loading cart:', error);
-    }
+    gtag('config', 'G-CFXTRJEMHN');
+</script>
+<body>
+    <div class="location-container">
+        <div class="location-header">
+            <!-- Location Status - Will show one of two states -->
+            <div class="location-status" id="locationStatus">
+                <i class="fas fa-spinner fa-spin"></i>
+                <span>Checking location...</span>
+            </div>
+        </div>
 
-    function updateLocationStatus(isLive) {
-        const statusElement = document.getElementById('locationStatus');
-        const icon = statusElement.querySelector('i');
-        const textSpan = statusElement.querySelector('span');
-        
-        if (isLive) {
-            // Stage 1: Location is on
-            statusElement.className = 'location-status';
-            icon.className = 'fas fa-check-circle';
-            textSpan.textContent = 'Your Live location is selected';
-        } else {
-            // Stage 2: Location is off
-            statusElement.className = 'location-status warning';
-            icon.className = 'fas fa-exclamation-triangle';
-            textSpan.textContent = 'Turn on Location Setting on your device';
+        <div id="map">
+            <div class="map-loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Getting your location...</p>
+            </div>
+        </div>
+
+        <div class="location-instructions">
+            <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live
+                location.</p>
+        </div>
+
+        <div class="location-footer">
+            <button class="confirm-btn" id="confirmLocationBtn">
+                <i class="fab fa-whatsapp fa-1x"></i> Order on WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        let map, marker, cart = [];
+        let isLiveLocation = false;
+        let hasMarkerBeenDragged = false;
+        let defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu coordinates
+
+        try {
+            const savedCart = localStorage.getItem('daAlooCart');
+            cart = savedCart ? JSON.parse(savedCart) : [];
+        } catch (error) {
+            console.error('Error loading cart:', error);
         }
-    }
 
-    function initMap(latitude, longitude, isLive) {
-        document.getElementById('map').innerHTML = '';
-        map = L.map('map').setView([latitude, longitude], 16);
+        function updateLocationStatus(isLive) {
+            const statusElement = document.getElementById('locationStatus');
+            const icon = statusElement.querySelector('i');
+            const textSpan = statusElement.querySelector('span');
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+            if (isLive) {
+                // Stage 1: Location is on
+                statusElement.className = 'location-status';
+                icon.className = 'fas fa-check-circle';
+                textSpan.textContent = 'Your Live location is selected';
+            } else {
+                // Stage 2: Location is off
+                statusElement.className = 'location-status warning';
+                icon.className = 'fas fa-exclamation-triangle';
+                textSpan.textContent = 'Turn on Location Setting on your device';
+            }
+        }
 
-        marker = L.marker([latitude, longitude], {
-            draggable: true,
-            icon: L.icon({
-                iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                iconSize: [25, 41],
-                iconAnchor: [12, 41]
-            })
-        }).addTo(map);
+        function initMap(latitude, longitude, isLive) {
+            document.getElementById('map').innerHTML = '';
+            map = L.map('map').setView([latitude, longitude], 16);
 
-        marker.bindPopup('Drag me to adjust location').openPopup();
-        
-        // Track if marker has been dragged
-        marker.on('dragend', function() {
-            hasMarkerBeenDragged = true;
-            const newPos = marker.getLatLng();
-            console.log('Marker dragged to:', newPos.lat, newPos.lng);
-        });
-        
-        isLiveLocation = isLive;
-    }
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
 
-    function getUserLocation() {
-        return new Promise((resolve) => {
-            if (!navigator.geolocation) {
-                resolve({ 
-                    latitude: defaultLocation.lat, 
-                    longitude: defaultLocation.lng,
-                    isLive: false
+            marker = L.marker([latitude, longitude], {
+                draggable: true,
+                icon: L.icon({
+                    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41]
+                })
+            }).addTo(map);
+
+            marker.bindPopup('Drag me to adjust location').openPopup();
+
+            // Track if marker has been dragged
+            marker.on('dragend', function () {
+                hasMarkerBeenDragged = true;
+                const newPos = marker.getLatLng();
+                console.log('Marker dragged to:', newPos.lat, newPos.lng);
+            });
+
+            isLiveLocation = isLive;
+        }
+
+        function getUserLocation() {
+            return new Promise((resolve) => {
+                if (!navigator.geolocation) {
+                    resolve({
+                        latitude: defaultLocation.lat,
+                        longitude: defaultLocation.lng,
+                        isLive: false
+                    });
+                    return;
+                }
+
+                let resolved = false;
+                const success = (position) => {
+                    if (resolved) return;
+                    resolved = true;
+                    navigator.geolocation.clearWatch(watchId);
+                    resolve({
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        isLive: true
+                    });
+                };
+
+                const error = () => {
+                    if (!resolved) {
+                        navigator.geolocation.clearWatch(watchId);
+                        resolve({
+                            latitude: defaultLocation.lat,
+                            longitude: defaultLocation.lng,
+                            isLive: false
+                        });
+                    }
+                };
+
+                const watchId = navigator.geolocation.watchPosition(success, error, {
+                    enableHighAccuracy: true,
+                    maximumAge: 0,
+                    timeout: 15000
                 });
+
+                // Timeout after 15 seconds
+                setTimeout(() => {
+                    if (!resolved) {
+                        navigator.geolocation.clearWatch(watchId);
+                        resolve({
+                            latitude: defaultLocation.lat,
+                            longitude: defaultLocation.lng,
+                            isLive: false
+                        });
+                    }
+                }, 15000);
+            });
+        }
+
+        function formatOrderMessage(locationLink, locationText) {
+            let message = "*My ORDER*\n\n*Order Details:*\n";
+
+            const now = new Date();
+            message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
+
+            let total = 0;
+
+            if (cart.length === 0) {
+                message += "No items in cart\n";
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.totalPrice;
+                    total += itemTotal;
+
+                    message += `• ${item.quantity}x ${item.name}`;
+                    if (item.variant) message += ` (${item.variant.name})`;
+                    if (item.extras?.length) message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
+                    message += ` - Rs ${itemTotal}\n`;
+                });
+            }
+
+            message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*${locationText}`;
+
+            if (locationLink !== "No location sent") {
+                message += `\n${locationLink}`;
+            }
+
+            message += `\n\nPlease confirm this order.\n Thank you!`;
+            return message;
+        }
+
+        function sendOrderToWhatsApp() {
+            if (!marker) {
+                alert('Map is still loading. Please wait...');
                 return;
             }
 
-            let resolved = false;
-            const success = (position) => {
-                if (resolved) return;
-                resolved = true;
-                navigator.geolocation.clearWatch(watchId);
-                resolve({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
-                    isLive: true
-                });
-            };
+            if (!cart.length) {
+                alert('Your cart is empty! Please add items first.');
+                return;
+            }
 
-            const error = () => {
-                if (!resolved) {
-                    navigator.geolocation.clearWatch(watchId);
-                    resolve({ 
-                        latitude: defaultLocation.lat, 
-                        longitude: defaultLocation.lng,
-                        isLive: false
-                    });
-                }
-            };
+            let locationText = "";
+            let locationLink = "";
 
-            const watchId = navigator.geolocation.watchPosition(success, error, {
-                enableHighAccuracy: true,
-                maximumAge: 0,
-                timeout: 15000
-            });
+            // Check if we have live location AND marker hasn't been dragged
+            if (isLiveLocation && !hasMarkerBeenDragged) {
+                // Case 1: Live location available and not moved
+                const pos = marker.getLatLng();
+                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
 
-            // Timeout after 15 seconds
+            }
+            // Check if we DON'T have live location AND marker hasn't been dragged
+            else if (!isLiveLocation && !hasMarkerBeenDragged) {
+                // Case 2: No live location and marker not moved = No location sent
+                locationText = "No location sent - User did not select location";
+                locationLink = "No location sent";
+            }
+            else {
+                // Case 3: Marker has been dragged (regardless of live location status)
+                const pos = marker.getLatLng();
+                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+                locationText = "User Selected Location";
+            }
+
+            const message = formatOrderMessage(locationLink, locationText);
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
+
+            localStorage.removeItem('daAlooCart');
+            window.open(whatsappUrl, '_blank');
+
             setTimeout(() => {
-                if (!resolved) {
-                    navigator.geolocation.clearWatch(watchId);
-                    resolve({ 
-                        latitude: defaultLocation.lat, 
-                        longitude: defaultLocation.lng,
-                        isLive: false
-                    });
-                }
-            }, 15000);
+                window.location.href = 'index.html';
+            }, 2000);
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const location = await getUserLocation();
+                updateLocationStatus(location.isLive);
+                initMap(location.latitude, location.longitude, location.isLive);
+            } catch (error) {
+                console.error('Failed to initialize map:', error);
+                updateLocationStatus(false);
+                initMap(defaultLocation.lat, defaultLocation.lng, false);
+            }
+
+            document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
         });
-    }
-
-    function formatOrderMessage(locationLink, locationText) {
-        let message = "*My ORDER*\n\n*Order Details:*\n";
-        
-        const now = new Date();
-        message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
-        
-        let total = 0;
-        
-        if (cart.length === 0) {
-            message += "No items in cart\n";
-        } else {
-            cart.forEach(item => {
-                const itemTotal = item.totalPrice;
-                total += itemTotal;
-                
-                message += `• ${item.quantity}x ${item.name}`;
-                if (item.variant) message += ` (${item.variant.name})`;
-                if (item.extras?.length) message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-                message += ` - Rs ${itemTotal}\n`;
-            });
-        }
-        
-        message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*${locationText}`;
-        
-        if (locationLink !== "No location sent") {
-            message += `\n${locationLink}`;
-        }
-        
-        message += `\n\nPlease confirm this order.\n Thank you!`;
-        return message;
-    }
-
-    function sendOrderToWhatsApp() {
-        if (!marker) {
-            alert('Map is still loading. Please wait...');
-            return;
-        }
-
-        if (!cart.length) {
-            alert('Your cart is empty! Please add items first.');
-            return;
-        }
-        
-        let locationText = "";
-        let locationLink = "";
-        
-        // Check if we have live location AND marker hasn't been dragged
-        if (isLiveLocation && !hasMarkerBeenDragged) {
-            // Case 1: Live location available and not moved
-            const pos = marker.getLatLng();
-            locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-            
-        } 
-        // Check if we DON'T have live location AND marker hasn't been dragged
-        else if (!isLiveLocation && !hasMarkerBeenDragged) {
-            // Case 2: No live location and marker not moved = No location sent
-            locationText = "No location sent - User did not select location";
-            locationLink = "No location sent";
-        }
-        else {
-            // Case 3: Marker has been dragged (regardless of live location status)
-            const pos = marker.getLatLng();
-            locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-            locationText = "User Selected Location";
-        }
-        
-        const message = formatOrderMessage(locationLink, locationText);
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappUrl = `https://wa.me/9779847695529?text=${encodedMessage}`;
-        
-        localStorage.removeItem('daAlooCart');
-        window.open(whatsappUrl, '_blank');
-        
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 2000);
-    }
-
-    document.addEventListener('DOMContentLoaded', async () => {
-        try {
-            const location = await getUserLocation();
-            updateLocationStatus(location.isLive);
-            initMap(location.latitude, location.longitude, location.isLive);
-        } catch (error) {
-            console.error('Failed to initialize map:', error);
-            updateLocationStatus(false);
-            initMap(defaultLocation.lat, defaultLocation.lng, false);
-        }
-
-        document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
-    });
-</script>
+    </script>
 </body>
+
 </html>
-
-
-
-
