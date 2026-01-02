@@ -40,80 +40,102 @@ body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* DESKTOP OPTIMIZATION: More compact header layout */
-@media (min-width: 768px) {
-    .site-header {
-        padding: 8px 0;
-    }
-    
-    .header-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 0;
-    }
-    
-    .logo-section {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        width: auto;
-        text-align: left;
-    }
-    
-    .logo-container {
-        background: white;
-        border-radius: 15px;
-        padding: 5px 25px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 0;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        border: 2px solid var(--secondary);
-        min-width: auto;
-        max-width: none;
-    }
-    
-    /* Logo Image */
-    .main-logo {
-        width: 120px;
-        height: 60px;
-        object-fit: contain;
-        margin-bottom: 0;
-    }
-    
-    .tagline {
-        font-style: italic;
-        font-weight: 500;
-        color: var(--secondary);
-        font-size: 0.9rem;
-        margin-top: 0;
-        white-space: nowrap;
-        font-family: 'Montserrat', sans-serif;
-    }
-    
-    /* Navigation Styles */
-    .site-nav {
-        background: rgba(255, 255, 255, 0.2);
-        padding: 8px 20px;
-        border-radius: 25px;
-        backdrop-filter: blur(10px);
-        width: auto;
-        max-width: none;
-        margin: 0;
-        display: flex;
-        gap: 15px;
-    }
-    
-    .nav-link {
-        padding: 8px 20px;
-        font-size: 0.95rem;
-        min-width: 80px;
-    }
+/* Center align header content */
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
 }
 
-/* Mobile Optimizations - EXACTLY AS BEFORE */
+.logo-section {
+    text-align: center;
+    width: 100%;
+}
+
+/* Logo Container */
+.logo-container {
+    background: white;
+    border-radius: 15px;
+    padding: 8px 35px;
+    display: inline-block;
+    margin-bottom: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid var(--secondary);
+    min-width: fit-content;
+    max-width: 90%;
+}
+
+/* Logo Image */
+.main-logo {
+    width: 180px;
+    height: 90px;
+    object-fit: cover;
+    margin-bottom: 0px;
+}
+
+.tagline {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    margin-top: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Navigation Styles */
+.site-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--secondary);
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: white;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    border: 2px solid var(--secondary);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    text-align: center;
+    min-width: 70px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-link:hover {
+    background: var(--secondary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link:active {
+    transform: translateY(0);
+}
+
+/* Active state for current page */
+.nav-link.active {
+    background: var(--secondary);
+    color: var(--primary);
+    border-color: var(--secondary);
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Mobile Optimizations - ENSURE CENTERED LAYOUT */
 @media (max-width: 767px) {
     .site-header {
         padding: 8px 0;
@@ -219,30 +241,55 @@ body {
     }
 }
 
-/* Desktop - Slightly larger sizes - ADJUSTED FOR COMPACTNESS */
-@media (min-width: 1024px) {
+/* DESKTOP VERSION - Only changes the structure, keeps the style */
+@media (min-width: 768px) {
+    .site-header {
+        padding: 6px 0; /* Reduced vertical padding */
+    }
+    
+    .header-content {
+        flex-direction: row; /* Change from column to row */
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .logo-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        width: auto;
+    }
+    
     .logo-container {
-        padding: 6px 30px;
-        gap: 20px;
+        margin-bottom: 0;
+        padding: 4px 30px; /* Reduced padding */
+        min-width: auto;
+        max-width: none;
     }
-
+    
     .main-logo {
-        width: 140px;
-        height: 70px;
+        width: 120px; /* Smaller logo on desktop */
+        height: 60px;
     }
-
+    
     .tagline {
-        font-size: 0.95rem;
+        font-size: 0.85rem;
+        margin-top: 2px;
     }
-
+    
     .site-nav {
-        padding: 8px 25px;
-        gap: 20px;
+        margin: 0;
+        max-width: none;
+        width: auto;
+        padding: 6px 15px; /* Reduced padding */
     }
-
+    
     .nav-link {
-        padding: 10px 25px;
-        font-size: 1rem;
+        padding: 6px 15px;
+        font-size: 0.9rem;
+        min-width: auto;
     }
 }
 
