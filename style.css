@@ -262,6 +262,7 @@ body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        flex: 1;
     }
 
     .logo-container {
@@ -296,6 +297,7 @@ body {
         padding: 12px 25px;
         margin: 0;
         justify-content: flex-end;
+        flex-shrink: 0;
     }
 
     .nav-link {
@@ -595,4 +597,5 @@ body {
         height: 20px;
     }
 }
+
 
