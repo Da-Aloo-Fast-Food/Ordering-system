@@ -1,4 +1,5 @@
-/* style.css (updated with mobile header optimizations and centered navigation) */
+/* style.css v1.2 - Updated with perfectly centered navigation in desktop view */
+/* Last Updated: [Current Date/Time] */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -245,11 +246,8 @@ body {
 /* Tablet and Desktop - Horizontal Layout */
 @media (min-width: 768px) {
     .site-header {
-        padding: 15px 0 !important; /* Increased header padding to show full logo container */
+        padding: 10px 0;
         position: relative;
-        min-height: 110px; /* Ensure enough space for logo container */
-        display: flex;
-        align-items: center;
     }
 
     /* CHANGED: Simplified layout for centered navigation */
@@ -261,7 +259,7 @@ body {
         gap: 20px;
         width: 100%;
         position: relative;
-        padding: 5px 0; /* Added padding to give space for logo container */
+        height: 70px; /* Fixed height for consistent centering */
     }
 
     .logo-section {
@@ -273,27 +271,25 @@ body {
         flex-shrink: 0;
         order: 1; /* Logo on left */
         z-index: 1;
-        position: relative;
-        top: 0; /* Reset any positioning that might hide top */
     }
 
-    /* LOGO CONTAINER - FIXED TOP VISIBILITY */
+    /* LOGO CONTAINER - LOGO AND TAGLINE GROUP CENTERED */
     .logo-container {
         padding: 12px 30px !important;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        margin: 0 !important; /* Reset margin to prevent cutting off */
+        margin-bottom: 0;
         min-width: 260px !important;
         max-width: 280px !important;
+        margin-left: 0;
+        margin-right: 0;
         text-align: center;
         border-radius: 12px !important;
         border-width: 2px !important;
         background: white;
         box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-        position: relative;
-        top: 0; /* Ensure it's not positioned out of view */
     }
 
     /* Logo Image */
@@ -363,11 +359,6 @@ body {
 
 /* Desktop - Larger screens */
 @media (min-width: 1024px) {
-    .site-header {
-        padding: 18px 0 !important; /* More padding for larger screens */
-        min-height: 120px;
-    }
-
     .logo-container {
         padding: 14px 32px !important;
         min-width: 270px !important;
@@ -400,11 +391,6 @@ body {
 
 /* Large Desktop */
 @media (min-width: 1200px) {
-    .site-header {
-        padding: 20px 0 !important;
-        min-height: 130px;
-    }
-
     .header-content {
         gap: 25px;
     }
@@ -441,11 +427,6 @@ body {
 
 /* Extra Large Desktop */
 @media (min-width: 1400px) {
-    .site-header {
-        padding: 22px 0 !important;
-        min-height: 140px;
-    }
-
     .logo-container {
         padding: 18px 36px !important;
         min-width: 290px !important;
