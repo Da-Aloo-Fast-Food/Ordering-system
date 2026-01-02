@@ -240,34 +240,38 @@ body {
     }
 }
 
-/* Tablet and Desktop - Centered Layout */
+/* ===== DESKTOP LAYOUT CHANGES ===== */
+
+/* Tablet and Desktop - Horizontal Layout */
 @media (min-width: 768px) {
     .site-header {
         padding: 15px 0;
     }
 
+    /* Change header content to horizontal row layout */
     .header-content {
-        flex-direction: column;
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
         gap: 20px;
     }
 
     .logo-section {
-        text-align: center;
-        width: 100%;
+        text-align: left;
+        width: auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-start;
     }
 
     .logo-container {
-        padding: 12px 45px;
+        padding: 12px 35px;
         display: inline-block;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         min-width: 320px;
-        margin-left: auto;
-        margin-right: auto;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: center;
     }
 
     .main-logo {
@@ -279,19 +283,23 @@ body {
     .tagline {
         font-size: 1rem;
         white-space: nowrap;
+        text-align: left;
+        margin-left: 10px;
+        margin-top: 5px;
     }
 
+    /* Navigation moved to right side */
     .site-nav {
-        width: 100%;
+        width: auto;
         max-width: 400px;
-        gap: 25px;
-        padding: 12px 30px;
-        margin: 0 auto;
-        justify-content: center;
+        gap: 15px;
+        padding: 12px 25px;
+        margin: 0;
+        justify-content: flex-end;
     }
 
     .nav-link {
-        padding: 10px 25px;
+        padding: 10px 20px;
         font-size: 1rem;
         flex: none;
         min-width: auto;
@@ -299,35 +307,63 @@ body {
     }
 }
 
-/* Desktop - Slightly larger sizes */
+/* Desktop - Larger screens */
 @media (min-width: 1024px) {
     .logo-container {
-        padding: 15px 55px;
-        min-width: 380px;
+        padding: 15px 45px;
+        min-width: 350px;
     }
 
     .main-logo {
-        width: 180px;
-        height: 90px;
+        width: 250px;
+        height: 125px;
     }
 
     .tagline {
         font-size: 1.1rem;
+        margin-left: 15px;
     }
 
     .site-nav {
         max-width: 450px;
-        gap: 30px;
-        padding: 15px 35px;
+        gap: 20px;
+        padding: 15px 30px;
     }
 
     .nav-link {
-        padding: 12px 30px;
+        padding: 12px 25px;
         font-size: 1.1rem;
     }
 }
 
-/* ===== HERO SECTION STYLES ===== */
+/* Large Desktop */
+@media (min-width: 1200px) {
+    .logo-container {
+        padding: 18px 55px;
+        min-width: 380px;
+    }
+
+    .main-logo {
+        width: 280px;
+        height: 140px;
+    }
+
+    .tagline {
+        font-size: 1.2rem;
+        margin-left: 20px;
+    }
+
+    .site-nav {
+        max-width: 500px;
+        gap: 25px;
+        padding: 18px 35px;
+    }
+
+    .nav-link {
+        padding: 14px 30px;
+        font-size: 1.2rem;
+    }
+}/* ===== HERO SECTION STYLES ===== */
 
 .hero-section {
     padding: 30px 20px;
@@ -559,3 +595,4 @@ body {
         height: 20px;
     }
 }
+
