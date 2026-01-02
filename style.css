@@ -1,4 +1,3 @@
-
 /* style.css (updated with mobile header optimizations and centered navigation) */
 
 /* CSS Variables for consistent theming */
@@ -241,55 +240,71 @@ body {
     }
 }
 
-/* DESKTOP VERSION - Only changes the structure, keeps the style */
+/* ===== UPDATED DESKTOP HEADER (Optimized for Vertical Space) ===== */
+
 @media (min-width: 768px) {
     .site-header {
-        padding: 6px 0; /* Reduced vertical padding */
+        padding: 5px 0; /* Reduced vertical padding */
     }
-    
+
     .header-content {
-        flex-direction: row; /* Change from column to row */
-        justify-content: space-between;
+        flex-direction: row; /* Align logo and nav side-by-side */
+        justify-content: space-between; /* Space them out */
         align-items: center;
         gap: 20px;
     }
-    
+
     .logo-section {
+        text-align: left;
+        width: auto;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        width: auto;
+        align-items: flex-start; /* Align logo/tagline to the left */
     }
-    
+
     .logo-container {
-        margin-bottom: 0;
-        padding: 4px 30px; /* Reduced padding */
-        min-width: auto;
-        max-width: none;
+        padding: 8px 25px; /* Slimmer container */
+        margin-bottom: 2px;
+        min-width: auto; /* Allow it to shrink */
+        margin-left: 0;
+        margin-right: 0;
     }
-    
+
     .main-logo {
-        width: 120px; /* Smaller logo on desktop */
-        height: 60px;
+        width: 140px; /* Scaled down for better desktop fit */
+        height: auto;
+        margin-bottom: 0;
     }
-    
+
     .tagline {
         font-size: 0.85rem;
         margin-top: 2px;
     }
-    
+
     .site-nav {
-        margin: 0;
-        max-width: none;
         width: auto;
-        padding: 6px 15px; /* Reduced padding */
+        max-width: none;
+        gap: 15px;
+        padding: 8px 15px;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.4); /* Slightly more visible on desktop */
     }
-    
+
     .nav-link {
-        padding: 6px 15px;
-        font-size: 0.9rem;
-        min-width: auto;
+        padding: 8px 20px;
+        font-size: 0.95rem;
+        flex: none;
+    }
+}
+
+/* Desktop - High resolution refinements */
+@media (min-width: 1024px) {
+    .main-logo {
+        width: 160px; /* Slightly larger on very big screens */
+    }
+
+    .site-nav {
+        gap: 20px;
     }
 }
 
