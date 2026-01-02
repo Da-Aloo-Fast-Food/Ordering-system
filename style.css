@@ -248,12 +248,13 @@ body {
         padding: 12px 0;
     }
 
-    /* Change header content to horizontal row layout */
+    /* CENTERED NAVIGATION LAYOUT */
     .header-content {
-        flex-direction: row;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
-        gap: 10px; /* Reduced from 15px to bring elements closer */
+        gap: 20px;
+        width: 100%;
     }
 
     .logo-section {
@@ -262,16 +263,17 @@ body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        flex-shrink: 0;
+        justify-self: start;
+        grid-column: 1;
     }
 
     /* LARGER LOGO CONTAINER TO FIT TAGLINE */
     .logo-container {
-        padding: 10px 30px !important; /* Increased padding */
+        padding: 10px 30px !important;
         display: inline-block;
         margin-bottom: 5px;
-        min-width: 280px !important; /* Increased to fit tagline */
-        max-width: 300px !important; /* Increased max-width */
+        min-width: 280px !important;
+        max-width: 300px !important;
         margin-left: 0;
         margin-right: 0;
         text-align: center;
@@ -288,7 +290,7 @@ body {
 
     /* TAGLINE FIXES */
     .tagline {
-        font-size: 0.85rem !important; /* Adjusted for better fit */
+        font-size: 0.85rem !important;
         white-space: nowrap;
         text-align: center;
         margin-left: 0;
@@ -298,19 +300,21 @@ body {
         padding: 0 5px;
     }
 
-    /* Navigation - positioned closer to logo */
+    /* Navigation - CENTERED IN HEADER */
     .site-nav {
+        grid-column: 2;
+        justify-self: center;
         width: auto;
         max-width: 380px;
-        gap: 10px; /* Reduced gap */
-        padding: 8px 18px; /* Reduced padding */
+        gap: 10px;
+        padding: 8px 18px;
         margin: 0;
-        justify-content: flex-end;
         border-radius: 20px !important;
+        display: flex;
     }
 
     .nav-link {
-        padding: 9px 16px; /* Slightly reduced padding */
+        padding: 9px 16px;
         font-size: 0.95rem;
         flex: none;
         min-width: auto;
@@ -351,7 +355,7 @@ body {
 /* Large Desktop */
 @media (min-width: 1200px) {
     .header-content {
-        gap: 15px; /* Slightly increased on large screens */
+        gap: 30px;
     }
 
     .logo-container {
@@ -383,10 +387,6 @@ body {
 
 /* Extra Large Desktop */
 @media (min-width: 1400px) {
-    .header-content {
-        gap: 20px;
-    }
-
     .logo-container {
         padding: 14px 38px !important;
         min-width: 310px !important;
