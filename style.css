@@ -31,42 +31,44 @@ body {
     padding: 0 20px;
 }
 
-/* ===== HEADER STYLES (REWRITTEN FOR IMAGE MATCH) ===== */
+/* ===== HEADER STYLES (MATCHING REFERENCE IMAGE) ===== */
 
 .site-header {
     background: var(--primary);
-    padding: 15px 0;
+    padding: 12px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
     display: flex;
-    justify-content: space-between; /* Logo Left, Nav Center, Cart Right */
+    justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 25px;
 }
 
-/* Logo Box styling */
+/* ===== LOGO SECTION - COMPACT DESIGN ===== */
 .logo-section {
     flex: 0 0 auto;
+    margin-right: auto;
 }
 
 .logo-container {
     background: white;
-    border: 2px solid var(--secondary);
-    border-radius: 12px;
-    padding: 10px 20px;
+    border: 3px solid var(--secondary);
+    border-radius: 10px;
+    padding: 8px 18px;
     text-align: center;
-    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.12);
+    min-width: 160px;
 }
 
 .main-logo {
-    width: 100px;
+    width: 85px;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -74,19 +76,22 @@ body {
 
 .tagline {
     font-size: 0.7rem;
-    font-weight: 700;
-    margin-top: 5px;
+    font-weight: 800;
+    margin-top: 4px;
     white-space: nowrap;
+    letter-spacing: 0.5px;
     font-family: 'Montserrat', sans-serif;
 }
 
-/* Navigation - Centered Pill Buttons */
+/* ===== NAVIGATION - WIDE SPACING LIKE IMAGE ===== */
 .site-nav {
     display: flex;
-    gap: 15px;
+    gap: 25px;
     justify-content: center;
-    flex-grow: 1;
-    padding: 0 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 15px;
 }
 
 .nav-link {
@@ -94,20 +99,29 @@ body {
     color: var(--secondary);
     background: white;
     border: 3px solid var(--secondary);
-    padding: 10px 25px;
-    border-radius: 50px; /* Perfect pill shape */
-    font-weight: 700;
-    font-size: 1.1rem;
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 1.2rem;
     transition: all 0.3s ease;
     font-family: 'Montserrat', sans-serif;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    min-width: 110px;
+    text-align: center;
+}
+
+/* Home button should be more prominent (black background) */
+.nav-link:first-child {
+    background: var(--secondary);
+    color: var(--primary);
+    border-color: var(--secondary);
 }
 
 .nav-link:hover {
     background: var(--secondary);
     color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .nav-link:active {
@@ -121,48 +135,51 @@ body {
     border-color: var(--secondary);
 }
 
-/* Cart Icon Container (The green box on the right) */
+/* ===== CART SECTION - GREEN BORDER BOX ===== */
 .cart-section {
     flex: 0 0 auto;
+    margin-left: auto;
 }
 
 .cart-trigger {
     position: relative;
     background: white;
     border: 3px solid var(--success-green);
-    border-radius: 12px;
-    padding: 12px;
+    border-radius: 10px;
+    padding: 14px;
     cursor: pointer;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
 .cart-trigger:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    border-color: #388E3C;
 }
 
 .cart-trigger i {
-    font-size: 24px;
+    font-size: 26px;
     color: var(--secondary);
 }
 
 /* Cart Badge */
 #cart-count {
     position: absolute;
-    top: -10px;
-    right: -10px;
+    top: -8px;
+    right: -8px;
     background: var(--success-green);
     color: white;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 50%;
     font-family: 'Montserrat', sans-serif;
+    border: 2px solid white;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -178,6 +195,7 @@ body {
     .logo-container {
         padding: 5px 10px;
         min-width: 160px;
+        border: 2px solid var(--secondary);
     }
 
     .main-logo {
@@ -189,7 +207,9 @@ body {
     }
 
     .site-nav {
-        order: 3; /* Move nav to bottom row on mobile */
+        position: static;
+        transform: none;
+        order: 3;
         width: 100%;
         margin-top: 10px;
         padding: 8px 15px;
@@ -199,6 +219,7 @@ body {
         max-width: 350px;
         margin-left: auto;
         margin-right: auto;
+        gap: 15px;
     }
 
     .nav-link {
@@ -208,10 +229,18 @@ body {
         flex: 1;
         text-align: center;
         min-width: 70px;
+        font-weight: 700;
+    }
+
+    /* Reset first-child styling on mobile */
+    .nav-link:first-child {
+        background: white;
+        color: var(--secondary);
     }
 
     .cart-trigger {
         padding: 10px;
+        border-width: 2px;
     }
 
     .cart-trigger i {
@@ -222,6 +251,10 @@ body {
         width: 20px;
         height: 20px;
         font-size: 10px;
+        top: -10px;
+        right: -10px;
+        border-radius: 6px;
+        border: none;
     }
 }
 
@@ -301,72 +334,77 @@ body {
     }
 }
 
-/* ===== COMPACT DESKTOP HEADER - REFINED PROPORTIONS ===== */
-
+/* ===== DESKTOP ENHANCEMENTS ===== */
 @media (min-width: 769px) {
     .site-header {
-        padding: 8px 0; /* Tight vertical height */
+        padding: 10px 0;
     }
-
+    
     .header-content {
+        padding: 0 30px;
+    }
+    
+    /* Even more compact logo for desktop */
+    .logo-container {
+        padding: 6px 15px;
+        min-width: 150px;
+        border-radius: 8px;
+    }
+    
+    .main-logo {
+        width: 75px;
+    }
+    
+    .tagline {
+        font-size: 0.65rem;
+        margin-top: 3px;
+    }
+    
+    /* Navigation with even wider spread on desktop */
+    .site-nav {
+        gap: 30px;
         padding: 0 20px;
     }
-
-    /* Smaller, compact Logo Box */
-    .logo-container {
-        padding: 5px 15px; /* Significant reduction in padding */
-        border-radius: 10px;
-        min-width: 180px; /* Reduced width */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .main-logo {
-        width: 90px; /* Smaller logo image */
-        height: auto;
-    }
-
-    .tagline {
-        font-size: 0.65rem; /* Very small tagline to keep box height low */
-        margin-top: 2px;
-        line-height: 1;
-        white-space: nowrap;
-    }
-
-    /* Longitudinally spread and bigger navigation buttons */
-    .site-nav {
-        flex-grow: 1; /* Takes up all remaining horizontal space */
-        display: flex;
-        justify-content: space-between; /* Spreads buttons edge-to-edge in their container */
-        max-width: 700px; /* Allows buttons to spread wide across the screen */
-        gap: 15px;
-        padding: 5px;
-        background: transparent; /* Removes the bubble background for a cleaner spread */
-        backdrop-filter: none;
-        margin: 0 auto;
-    }
-
+    
     .nav-link {
-        flex: 1; /* Makes all buttons the same width */
-        padding: 12px 20px; /* Increased padding makes buttons feel "bigger" */
-        font-size: 1.1rem; /* Slightly larger font size */
-        border-radius: 50px;
-        text-align: center;
-        min-width: 120px; /* Ensures they stay substantial */
+        padding: 13px 32px;
+        font-size: 1.3rem;
+        min-width: 120px;
+        border-width: 4px;
+    }
+    
+    /* Make cart slightly larger on desktop */
+    .cart-trigger {
+        padding: 16px;
+    }
+    
+    .cart-trigger i {
+        font-size: 28px;
+    }
+    
+    #cart-count {
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+        top: -10px;
+        right: -10px;
     }
 }
 
-/* Extra spread for very large screens */
+/* For very wide screens */
 @media (min-width: 1200px) {
     .site-nav {
-        max-width: 850px; /* Spreads even further on wide monitors */
+        gap: 35px;
     }
-
+    
     .nav-link {
-        font-size: 1.2rem;
-        padding: 14px 25px;
+        padding: 14px 35px;
+        font-size: 1.4rem;
+        min-width: 130px;
+    }
+    
+    .header-content {
+        max-width: 1400px;
     }
 }
 
