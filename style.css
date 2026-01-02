@@ -242,75 +242,81 @@ body {
 
 /* ===== COMPACT DESKTOP HEADER ===== */
 
+/* ===== COMPACT DESKTOP HEADER - REFINED ===== */
+
 @media (min-width: 768px) {
     .site-header {
-        padding: 5px 0; /* Minimal vertical space */
+        padding: 5px 0; /* Keeps vertical height very low */
     }
 
     .header-content {
         flex-direction: row; 
-        justify-content: space-between;
+        justify-content: flex-start; /* Aligns items from left to right */
         align-items: center;
-        gap: 30px;
+        gap: 20px;
+        width: 100%;
     }
 
     .logo-section {
         text-align: left;
         width: auto;
-        flex-shrink: 0; /* Prevents the logo from being squeezed */
+        flex-shrink: 0; /* Ensures logo box doesn't get squeezed */
     }
 
-    /* Smaller Logo Box */
+    /* Smaller Logo Box aligned left */
     .logo-container {
-        padding: 5px 20px; /* Reduced padding for a smaller box */
-        border-radius: 10px;
+        padding: 4px 15px; /* Thinner padding */
+        border-radius: 8px;
         margin-bottom: 0;
         min-width: auto;
-        border-width: 1px; /* Thinner border looks cleaner when small */
+        border-width: 2px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .main-logo {
-        width: 120px; /* Smaller width */
-        height: 60px; /* Reduced height */
-        display: block;
+        width: 100px; /* Reduced width for desktop */
+        height: 50px; /* Reduced height for desktop */
+        object-fit: contain;
     }
 
     .tagline {
-        font-size: 0.75rem; /* Smaller font for desktop quote */
-        margin-top: 2px;
-        text-align: center;
+        font-size: 0.65rem; /* Smaller tagline to keep box small */
+        margin-top: 0;
+        line-height: 1;
     }
 
-    /* Spread-out Navigation */
+    /* Spread-out Navigation across longitudinal area */
     .site-nav {
-        flex-grow: 1; /* This makes the nav take up the remaining space */
+        flex-grow: 1; /* Forces nav to fill all available horizontal space */
         display: flex;
-        justify-content: center; /* Keeps buttons centered within that space */
-        max-width: 600px; /* Allows it to spread wider than before */
-        gap: 15px;
-        padding: 10px;
-        background: none; /* Removed background for a cleaner desktop look */
+        justify-content: space-around; /* Spreads buttons evenly */
+        max-width: none; /* Removes the width restriction */
+        gap: 10px;
+        padding: 5px 0;
+        background: transparent; /* Cleaner look for wide layout */
         backdrop-filter: none;
     }
 
     .nav-link {
-        flex: 1; /* Forces buttons to share width and spread out */
-        padding: 8px 15px;
-        font-size: 0.9rem;
-        white-space: nowrap;
+        flex: 1; /* Each button takes up equal space */
+        max-width: 200px; /* Prevents buttons from becoming too stretched on huge screens */
+        padding: 10px 0;
+        font-size: 0.95rem;
+        border-radius: 12px;
+        text-align: center;
     }
 }
 
-/* Refinement for larger screens */
-@media (min-width: 1024px) {
-    .site-nav {
-        max-width: 800px; /* Even more spread on large monitors */
-        gap: 25px;
+/* Specific adjustment for very large screens */
+@media (min-width: 1200px) {
+    .header-content {
+        gap: 50px; /* Adds more breathing room between logo and buttons */
     }
     
-    .main-logo {
-        width: 140px;
-        height: 70px;
+    .nav-link {
+        font-size: 1rem;
     }
 }
 /* ===== HERO SECTION STYLES ===== */
@@ -545,4 +551,5 @@ body {
         height: 20px;
     }
 }
+
 
