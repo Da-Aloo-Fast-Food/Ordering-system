@@ -1,4 +1,5 @@
-/* style.css (updated with mobile header optimizations and centered navigation) */
+/* style.css v1.2 - Updated with perfectly centered navigation in desktop view */
+/* Last Updated: [Current Date/Time] */
 
 /* CSS Variables for consistent theming */
 :root {
@@ -246,6 +247,7 @@ body {
 @media (min-width: 768px) {
     .site-header {
         padding: 10px 0;
+        position: relative;
     }
 
     /* CHANGED: Simplified layout for centered navigation */
@@ -257,6 +259,7 @@ body {
         gap: 20px;
         width: 100%;
         position: relative;
+        height: 70px; /* Fixed height for consistent centering */
     }
 
     .logo-section {
@@ -267,6 +270,7 @@ body {
         align-items: flex-start;
         flex-shrink: 0;
         order: 1; /* Logo on left */
+        z-index: 1;
     }
 
     /* LOGO CONTAINER - LOGO AND TAGLINE GROUP CENTERED */
@@ -318,7 +322,7 @@ body {
         position: absolute;
         left: 50%;
         top: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) !important;
         gap: 10px;
         padding: 6px 20px !important;
         margin: 0;
