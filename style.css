@@ -245,13 +245,13 @@ body {
 /* Tablet and Desktop - Horizontal Layout */
 @media (min-width: 768px) {
     .site-header {
-        padding: 12px 0;
+        padding: 8px 0; /* Reduced padding */
     }
 
     /* CENTERED NAVIGATION LAYOUT */
     .header-content {
         display: grid;
-        grid-template-columns: 1fr auto 1fr;
+        grid-template-columns: auto 1fr auto;
         align-items: center;
         gap: 20px;
         width: 100%;
@@ -265,39 +265,44 @@ body {
         align-items: flex-start;
         justify-self: start;
         grid-column: 1;
+        flex-shrink: 0;
     }
 
-    /* LARGER LOGO CONTAINER TO FIT TAGLINE */
+    /* MUCH SMALLER LOGO CONTAINER - ALIGNED LEFT */
     .logo-container {
-        padding: 10px 30px !important;
+        padding: 4px 15px !important; /* Much smaller padding */
         display: inline-block;
-        margin-bottom: 5px;
-        min-width: 280px !important;
-        max-width: 300px !important;
+        margin-bottom: 0;
+        min-width: 180px !important; /* Much smaller width */
+        max-width: 200px !important; /* Much smaller max-width */
         margin-left: 0;
         margin-right: 0;
         text-align: center;
-        border-radius: 12px !important;
-        border-width: 2px !important;
+        border-radius: 8px !important; /* Smaller radius */
+        border-width: 1.5px !important; /* Thinner border */
+        background: white;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* Logo Image */
+    /* MUCH SMALLER LOGO IMAGE */
     .main-logo {
-        width: 120px !important;
-        height: 60px !important;
+        width: 80px !important; /* Much smaller */
+        height: 40px !important; /* Much smaller */
         margin-bottom: 0;
+        object-fit: contain;
     }
 
-    /* TAGLINE FIXES */
+    /* MUCH SMALLER TAGLINE - ALIGNED LEFT */
     .tagline {
-        font-size: 0.85rem !important;
+        font-size: 0.65rem !important; /* Much smaller */
         white-space: nowrap;
         text-align: center;
         margin-left: 0;
         margin-top: 2px;
         font-weight: 500;
         width: 100%;
-        padding: 0 5px;
+        padding: 0 2px;
+        font-style: italic;
     }
 
     /* Navigation - CENTERED IN HEADER */
@@ -306,111 +311,120 @@ body {
         justify-self: center;
         width: auto;
         max-width: 380px;
-        gap: 10px;
-        padding: 8px 18px;
+        gap: 8px; /* Reduced gap */
+        padding: 6px 15px; /* Reduced padding */
         margin: 0;
-        border-radius: 20px !important;
+        border-radius: 18px !important; /* Slightly smaller */
         display: flex;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(10px);
     }
 
     .nav-link {
-        padding: 9px 16px;
-        font-size: 0.95rem;
+        padding: 6px 12px; /* Reduced padding */
+        font-size: 0.85rem; /* Smaller font */
         flex: none;
         min-width: auto;
         text-align: center;
-        border-width: 2px !important;
+        border-width: 1.5px !important; /* Thinner border */
+        border-radius: 15px;
     }
 }
 
 /* Desktop - Larger screens */
 @media (min-width: 1024px) {
     .logo-container {
-        padding: 10px 32px !important;
-        min-width: 290px !important;
-        max-width: 310px !important;
+        padding: 5px 16px !important;
+        min-width: 190px !important;
+        max-width: 210px !important;
+        border-radius: 9px !important;
     }
 
     .main-logo {
-        width: 130px !important;
-        height: 65px !important;
+        width: 90px !important;
+        height: 45px !important;
     }
 
     .tagline {
-        font-size: 0.9rem !important;
+        font-size: 0.7rem !important;
     }
 
     .site-nav {
         max-width: 400px;
-        gap: 12px;
-        padding: 10px 22px;
+        gap: 10px;
+        padding: 8px 18px;
+        border-radius: 20px !important;
     }
 
     .nav-link {
-        padding: 10px 20px;
-        font-size: 1rem;
+        padding: 7px 14px;
+        font-size: 0.9rem;
     }
 }
 
 /* Large Desktop */
 @media (min-width: 1200px) {
     .header-content {
-        gap: 30px;
+        gap: 25px;
     }
 
     .logo-container {
-        padding: 12px 35px !important;
-        min-width: 300px !important;
-        max-width: 320px !important;
+        padding: 6px 18px !important;
+        min-width: 200px !important;
+        max-width: 220px !important;
+        border-radius: 10px !important;
     }
 
     .main-logo {
-        width: 140px !important;
-        height: 70px !important;
+        width: 100px !important;
+        height: 50px !important;
     }
 
     .tagline {
-        font-size: 0.95rem !important;
+        font-size: 0.75rem !important;
     }
 
     .site-nav {
         max-width: 420px;
-        gap: 15px;
-        padding: 12px 25px;
+        gap: 12px;
+        padding: 10px 22px;
+        border-radius: 22px !important;
     }
 
     .nav-link {
-        padding: 12px 22px;
-        font-size: 1.05rem;
+        padding: 8px 16px;
+        font-size: 0.95rem;
     }
 }
 
 /* Extra Large Desktop */
 @media (min-width: 1400px) {
     .logo-container {
-        padding: 14px 38px !important;
-        min-width: 310px !important;
-        max-width: 330px !important;
+        padding: 7px 20px !important;
+        min-width: 210px !important;
+        max-width: 230px !important;
+        border-radius: 11px !important;
     }
 
     .main-logo {
-        width: 150px !important;
-        height: 75px !important;
+        width: 110px !important;
+        height: 55px !important;
     }
 
     .tagline {
-        font-size: 1rem !important;
+        font-size: 0.8rem !important;
     }
 
     .site-nav {
         max-width: 450px;
-        gap: 18px;
-        padding: 14px 28px;
+        gap: 15px;
+        padding: 12px 25px;
+        border-radius: 25px !important;
     }
 
     .nav-link {
-        padding: 14px 25px;
-        font-size: 1.1rem;
+        padding: 10px 18px;
+        font-size: 1rem;
     }
 }
 
