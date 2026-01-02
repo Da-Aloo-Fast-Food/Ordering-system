@@ -262,27 +262,27 @@ body {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        flex: 1;
+        flex: 0 0 auto; /* Don't grow or shrink */
     }
 
     .logo-container {
-        padding: 12px 35px;
+        padding: 10px 25px; /* Reduced padding */
         display: inline-block;
         margin-bottom: 8px;
-        min-width: 320px;
+        min-width: 280px; /* Reduced from 320px */
         margin-left: 0;
         margin-right: 0;
         text-align: center;
     }
 
     .main-logo {
-        width: 220px;
-        height: 110px;
+        width: 180px; /* Reduced from 220px */
+        height: 90px; /* Reduced from 110px */
         margin-bottom: 0;
     }
 
     .tagline {
-        font-size: 1rem;
+        font-size: 0.9rem; /* Reduced from 1rem */
         white-space: nowrap;
         text-align: left;
         margin-left: 10px;
@@ -297,7 +297,6 @@ body {
         padding: 12px 25px;
         margin: 0;
         justify-content: flex-end;
-        flex-shrink: 0;
     }
 
     .nav-link {
@@ -312,17 +311,17 @@ body {
 /* Desktop - Larger screens */
 @media (min-width: 1024px) {
     .logo-container {
-        padding: 15px 45px;
-        min-width: 350px;
+        padding: 12px 30px; /* Reduced from 15px 45px */
+        min-width: 300px; /* Reduced from 350px */
     }
 
     .main-logo {
-        width: 250px;
-        height: 125px;
+        width: 200px; /* Reduced from 250px */
+        height: 100px; /* Reduced from 125px */
     }
 
     .tagline {
-        font-size: 1.1rem;
+        font-size: 1rem; /* Reduced from 1.1rem */
         margin-left: 15px;
     }
 
@@ -341,17 +340,17 @@ body {
 /* Large Desktop */
 @media (min-width: 1200px) {
     .logo-container {
-        padding: 18px 55px;
-        min-width: 380px;
+        padding: 12px 35px; /* Reduced from 18px 55px */
+        min-width: 320px; /* Reduced from 380px */
     }
 
     .main-logo {
-        width: 280px;
-        height: 140px;
+        width: 220px; /* Reduced from 280px */
+        height: 110px; /* Reduced from 140px */
     }
 
     .tagline {
-        font-size: 1.2rem;
+        font-size: 1.1rem; /* Reduced from 1.2rem */
         margin-left: 20px;
     }
 
@@ -365,6 +364,7 @@ body {
         padding: 14px 30px;
         font-size: 1.2rem;
     }
+}
 }/* ===== HERO SECTION STYLES ===== */
 
 .hero-section {
@@ -597,5 +597,6 @@ body {
         height: 20px;
     }
 }
+
 
 
