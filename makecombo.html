@@ -114,19 +114,17 @@
             flex-wrap: wrap;
         }
 
-        /* Item Card - NEW STYLE matching the design */
+        /* Item Card - NEW STYLE matching the design - IMAGE + NAME BELOW */
         .item-card {
             background: #FFFFFF;
             border: 2px solid #E0E0E0;
             border-radius: 30px;
-            padding: 1.2rem;
+            padding: 1.5rem 1rem;
             cursor: pointer;
             width: 180px;
-            height: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             position: relative;
@@ -151,7 +149,7 @@
             height: 140px;
             border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 12px;
+            margin-bottom: 15px;
             background: #f9f9f9;
             display: flex;
             align-items: center;
@@ -174,8 +172,8 @@
             color: #aaa;
         }
 
-        /* Item Name Label - Styled like the design */
-        .item-label {
+        /* Item Name Label - Below the image */
+        .item-name {
             font-size: 1.3rem;
             font-weight: 700;
             color: #2D3748;
@@ -187,8 +185,8 @@
         /* Checkmark Indicator - NEW DESIGN */
         .select-indicator {
             position: absolute;
-            top: 12px;
-            right: 12px;
+            top: 15px;
+            right: 15px;
             background: var(--primary);
             color: black;
             width: 28px;
@@ -659,9 +657,8 @@
             .item-card {
                 flex: 0 0 auto;
                 width: 160px;
-                height: 200px;
                 min-width: 160px;
-                padding: 1rem;
+                padding: 1.2rem 0.8rem;
             }
 
             .item-image-container {
@@ -669,7 +666,7 @@
                 height: 120px;
             }
 
-            .item-label {
+            .item-name {
                 font-size: 1.1rem;
             }
 
@@ -733,9 +730,8 @@
 
             .item-card {
                 width: 140px;
-                height: 180px;
                 min-width: 140px;
-                padding: 0.8rem;
+                padding: 1rem 0.6rem;
             }
 
             .item-image-container {
@@ -743,7 +739,7 @@
                 height: 100px;
             }
 
-            .item-label {
+            .item-name {
                 font-size: 1rem;
             }
 
@@ -790,9 +786,8 @@
 
             .item-card {
                 width: 130px;
-                height: 170px;
                 min-width: 130px;
-                padding: 0.7rem;
+                padding: 0.8rem 0.5rem;
             }
 
             .item-image-container {
@@ -800,15 +795,15 @@
                 height: 90px;
             }
 
-            .item-label {
+            .item-name {
                 font-size: 0.95rem;
             }
 
             .select-indicator {
                 width: 24px;
                 height: 24px;
-                top: 10px;
-                right: 10px;
+                top: 12px;
+                right: 12px;
             }
         }
     </style>
@@ -1080,7 +1075,7 @@
             }
         }
 
-        // Generate item cards for a section - UPDATED FOR NEW DESIGN
+        // Generate item cards for a section - UPDATED FOR IMAGE + NAME DESIGN
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1119,7 +1114,7 @@
                         : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
                     }
                     </div>
-                    <div class="item-label">${item.name}</div>
+                    <div class="item-name">${item.name}</div>
                 `;
 
                 card.addEventListener('click', () => toggleSelection(item, sectionType));
