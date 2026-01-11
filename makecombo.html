@@ -1137,28 +1137,28 @@
     </a>
 
     <script>
-        // Combo Items Data - Updated with 3 categories
+        // Combo Items Data - Updated with direct half serving prices
         const COMBO_ITEMS = {
             main: [
                 {
                     id: 1,
                     name: "Sandwich",
                     description: "Delicious sandwich with fresh ingredients",
-                    fullPrice: 170,
+                    price: 85, // Direct half serving price
                     image: "images/categories/sandwich.jpg"
                 },
                 {
                     id: 2,
                     name: "Fried Rice",
                     description: "Flavorful fried rice with vegetables and spices",
-                    fullPrice: 180,
+                    price: 90, // Direct half serving price
                     image: "images/categories/fried-rice.jpg"
                 },
                 {
                     id: 3,
                     name: "Chowmein",
                     description: "Stir-fried noodles with vegetables and seasonings",
-                    fullPrice: 180,
+                    price: 90, // Direct half serving price
                     image: "images/categories/chowmein.jpg"
                 }
             ],
@@ -1167,21 +1167,21 @@
                     id: 4,
                     name: "Chicken Nuggets",
                     description: "Crispy chicken nuggets with special seasoning",
-                    fullPrice: 220,
+                    price: 110, // Direct half serving price
                     image: "images/categories/chicken-nuggets.jpg"
                 },
                 {
                     id: 5,
                     name: "Paneer Nuggets",
                     description: "Crispy paneer nuggets with herbs",
-                    fullPrice: 200,
+                    price: 100, // Direct half serving price
                     image: "images/categories/paneer-nuggets.jpg"
                 },
                 {
                     id: 6,
                     name: "Battered Fries",
                     description: "Crispy battered potato fries",
-                    fullPrice: 150,
+                    price: 75, // Direct half serving price
                     image: "images/categories/battered-fries.jpg"
                 }
             ],
@@ -1190,21 +1190,21 @@
                     id: 7,
                     name: "Chicken Mo:Mo",
                     description: "Steamed dumplings with chicken filling",
-                    fullPrice: 220,
+                    price: 110, // Direct half serving price
                     image: "images/categories/chicken-momo.jpg"
                 },
                 {
                     id: 8,
                     name: "Paneer Mo:Mo",
                     description: "Steamed dumplings with paneer filling",
-                    fullPrice: 200,
+                    price: 100, // Direct half serving price
                     image: "images/categories/paneer-momo.jpg"
                 },
                 {
                     id: 9,
                     name: "Aloo Mo:Mo",
                     description: "Steamed dumplings with potato filling",
-                    fullPrice: 180,
+                    price: 90, // Direct half serving price
                     image: "images/categories/aloo-momo.jpg"
                 }
             ]
@@ -1248,7 +1248,6 @@
             container.innerHTML = '';
 
             items.forEach(item => {
-                const halfPrice = Math.round(item.fullPrice / 2);
                 let isSelected = false;
                 
                 // Check if this item is selected based on section type
@@ -1284,7 +1283,7 @@
                         <div class="item-description">${item.description}</div>
                         <div class="item-price-container">
                             <div class="item-price">
-                                Rs ${halfPrice}
+                                Rs ${item.price}
                             </div>
                         </div>
                     </div>
@@ -1300,20 +1299,17 @@
             switch(sectionType) {
                 case 'main':
                     selectedMain = selectedMain && selectedMain.id === item.id ? null : {
-                        ...item,
-                        halfPrice: Math.round(item.fullPrice / 2)
+                        ...item
                     };
                     break;
                 case 'crispySide':
                     selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
-                        ...item,
-                        halfPrice: Math.round(item.fullPrice / 2)
+                        ...item
                     };
                     break;
                 case 'momo':
                     selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
-                        ...item,
-                        halfPrice: Math.round(item.fullPrice / 2)
+                        ...item
                     };
                     break;
             }
@@ -1321,29 +1317,23 @@
             updateUI();
         }
 
-        // Calculate combo price
+        // Calculate combo price - SIMPLIFIED: No discount applied
         function calculateComboPrice() {
             let total = 0;
 
             if (selectedMain) {
-                total += selectedMain.halfPrice;
+                total += selectedMain.price;
             }
 
             if (selectedCrispySide) {
-                total += selectedCrispySide.halfPrice;
+                total += selectedCrispySide.price;
             }
 
             if (selectedMomo) {
-                total += selectedMomo.halfPrice;
+                total += selectedMomo.price;
             }
 
-            // Apply combo discount (additional 10% off for making a combo)
-            const discountedTotal = Math.round(total * 0.9);
-
-            return {
-                total: discountedTotal,
-                savings: total - discountedTotal
-            };
+            return total;
         }
 
         // Update UI based on selections
@@ -1357,9 +1347,9 @@
             updateSelectedItemsDisplay();
 
             // Calculate and update price
-            const priceInfo = calculateComboPrice();
+            const totalPrice = calculateComboPrice();
 
-            document.getElementById('combo-price').textContent = `Rs ${priceInfo.total}`;
+            document.getElementById('combo-price').textContent = `Rs ${totalPrice}`;
 
             // Enable/disable add to cart button
             const addToCartBtn = document.getElementById('add-to-cart-btn');
@@ -1368,7 +1358,7 @@
             addToCartBtn.disabled = !isComboComplete;
 
             if (isComboComplete) {
-                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo - Rs ${priceInfo.total}`;
+                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo - Rs ${totalPrice}`;
             } else {
                 addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo to Cart`;
             }
@@ -1387,7 +1377,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMain.name} (Rs ${selectedMain.halfPrice})
+                    ${selectedMain.name} (Rs ${selectedMain.price})
                 `;
                 mainContainer.appendChild(tag);
             } else {
@@ -1401,7 +1391,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.halfPrice})
+                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.price})
                 `;
                 crispySideContainer.appendChild(tag);
             } else {
@@ -1415,7 +1405,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMomo.name} (Rs ${selectedMomo.halfPrice})
+                    ${selectedMomo.name} (Rs ${selectedMomo.price})
                 `;
                 momoContainer.appendChild(tag);
             } else {
@@ -1435,15 +1425,15 @@
 
         // Add combo to cart
         function addComboToCart() {
-            const priceInfo = calculateComboPrice();
+            const totalPrice = calculateComboPrice();
 
             // Create combo item description
             const comboItem = {
                 id: `combo-${Date.now()}`,
                 name: `Custom Combo: ${selectedMain.name} + ${selectedCrispySide.name} + ${selectedMomo.name}`,
-                price: priceInfo.total,
+                price: totalPrice,
                 quantity: 1,
-                details: `Main: ${selectedMain.name} | Side: ${selectedCrispySide.name} | Mo:Mo: ${selectedMomo.name}`,
+                details: `Main: ${selectedMain.name} (Rs ${selectedMain.price}) | Side: ${selectedCrispySide.name} (Rs ${selectedCrispySide.price}) | Mo:Mo: ${selectedMomo.name} (Rs ${selectedMomo.price})`,
                 type: 'combo'
             };
 
