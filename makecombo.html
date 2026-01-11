@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Da Aloo - Make Your Combo</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -12,17 +13,34 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17846211641"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'AW-17846211641');
+    </script>
+    
+    <!-- Combo Page View Conversion -->
+    <script>
+        gtag('event', 'conversion', {
+            'send_to': 'AW-17846211641/vjYUCLnTv90bELmo3r1C',
+            'value': 1.0,
+            'currency': 'NPR'
+        });
+    </script>
+
     <style>
-        /* CSS Variables - Updated to match the design */
+        /* CSS Variables - Match index.html */
         :root {
             --primary: #FFEB3B;
-            --primary-hover: #FDD835;
             --secondary: #000000;
-            --bg-light: #fef9e7; /* Light yellow background */
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: #ffffff;
             color: #333;
             font-family: 'Montserrat', sans-serif;
         }
@@ -34,51 +52,52 @@
             padding: 0 20px;
         }
 
-        /* Main Content Area */
+        /* Main Content Area - Match menu page */
         main {
             padding: 2rem 0;
         }
 
-        .section-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.8rem;
-            color: var(--secondary);
-            letter-spacing: 1.5px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        /* Page Header - Simplified */
-        .page-header {
-            text-align: center;
-            padding: 2rem 0;
+        /* Page Header - Match index.html menu header */
+        .menu-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-bottom: 2rem;
+            flex-wrap: nowrap;
+            gap: 1rem;
+            position: relative;
+            width: 100%;
         }
 
-        .page-title {
-            font-family: 'Bebas Neue', cursive;
+        .section-title.menu-page-title {
+            margin: 0;
+            color: rgb(12, 1, 1);
             font-size: 3.5rem;
-            color: var(--secondary);
+            font-weight: 700;
+            white-space: nowrap;
+            align-items: center;
+            font-family: 'Bebas Neue', cursive;
             letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
+            text-align: center;
         }
 
         .page-subtitle {
             color: #666;
             font-size: 1.1rem;
             max-width: 700px;
-            margin: 0 auto;
+            margin: 0 auto 2rem;
             font-weight: 400;
             line-height: 1.4;
+            text-align: center;
         }
 
-        /* Combo Sections Layout - NEW DESIGN */
+        /* Combo Sections Layout */
         .combo-section {
             margin-bottom: 3rem;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .section-header {
@@ -106,7 +125,7 @@
             font-size: 0.9rem;
         }
 
-        /* Grid for Items - NEW DESIGN */
+        /* Grid for Items */
         .items-grid {
             display: flex;
             justify-content: center;
@@ -114,18 +133,18 @@
             flex-wrap: wrap;
         }
 
-        /* Item Card - NEW STYLE matching the design - IMAGE + NAME BELOW */
+        /* Item Card - Match index.html style */
         .item-card {
-            background: #FFFFFF;
-            border: 2px solid #E0E0E0;
-            border-radius: 30px;
-            padding: 1.5rem 1rem;
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f0f0f0;
             cursor: pointer;
             width: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             position: relative;
             text-align: center;
@@ -138,16 +157,16 @@
         }
 
         .item-card.selected {
-            border: 3px solid var(--primary);
-            background: #fff;
+            border: 2px solid var(--primary);
+            background: #fffdf0;
             box-shadow: 0 6px 15px rgba(255, 235, 59, 0.2);
         }
 
-        /* Image Container inside Card */
+        /* Image Container */
         .item-image-container {
             width: 140px;
             height: 140px;
-            border-radius: 20px;
+            border-radius: 10px;
             overflow: hidden;
             margin-bottom: 15px;
             background: #f9f9f9;
@@ -166,48 +185,52 @@
         .item-card:hover .item-image {
             transform: scale(1.05);
         }
-        }
 
-        /* Item Name Label - Below the image */
+        /* Item Name */
         .item-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #2D3748;
-            margin-top: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.2;
+            margin-top: 5px;
         }
 
-        /* Checkmark Indicator - NEW DESIGN */
+        .item-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            color: #e74c3c;
+            margin-top: 5px;
+        }
+
+        /* Checkmark Indicator */
         .select-indicator {
             position: absolute;
-            top: 15px;
-            right: 15px;
+            top: 10px;
+            right: 10px;
             background: var(--primary);
             color: black;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             display: none;
             align-items: center;
             justify-content: center;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             z-index: 2;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .item-card.selected .select-indicator {
             display: flex;
         }
 
-        /* Combo Summary - NEW DESIGN */
+        /* Combo Summary */
         .combo-summary {
             background-color: white;
-            border-radius: 20px;
+            border-radius: 15px;
             padding: 2rem;
             margin: 3rem auto;
             max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             border: 2px solid var(--primary);
         }
 
@@ -238,7 +261,7 @@
         .summary-section {
             background-color: #f8f9fa;
             padding: 1rem 1.5rem;
-            border-radius: 12px;
+            border-radius: 8px;
             margin-bottom: 1rem;
             border-left: 4px solid var(--primary);
         }
@@ -294,11 +317,11 @@
             border-top: 1px solid #e0e0e0;
         }
 
-        /* Buttons - Updated */
+        /* Buttons - Match index.html */
         .btn {
             padding: 1rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 700;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 1rem;
             border: none;
             cursor: pointer;
@@ -318,9 +341,14 @@
         }
 
         .btn-primary:hover {
-            background-color: #ffb300;
+            background-color: #f8e800;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
         .btn-secondary {
@@ -333,60 +361,91 @@
             background-color: #e0e0e0;
         }
 
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Cart Container - Updated */
+        /* Cart Container - Match index.html */
         .cart-container {
             position: fixed;
-            top: 100px;
-            right: 15px;
+            top: 120px;
+            right: 20px;
             z-index: 999;
         }
 
+        /* Cart Icon - Match index.html exactly */
         .cart-icon {
             background: #FFFFFF;
             color: #000000;
-            width: 60px;
-            height: 60px;
-            border-radius: 15px;
-            border: 2px solid #35E539;
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            border: 3px solid #35E539;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             position: relative;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            font-size: 1.7rem;
+
+            box-shadow:
+                0 6px 20px rgba(0, 0, 0, 0.25),
+                0 0 0 6px rgba(255, 235, 59, 0.35);
+
             transition: 0.25s ease;
+            animation: cartPulse 2s infinite;
         }
 
         .cart-icon:hover {
             transform: scale(1.12);
         }
 
+        @keyframes cartPulse {
+            0% {
+                box-shadow:
+                    0 0 0 0 rgba(255, 235, 59, 0.6),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            70% {
+                box-shadow:
+                    0 0 0 12px rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 0 0 rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        /* Badge */
         .cart-badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
+            top: -8px;
+            right: -8px;
             background: #35E539;
             color: #000000;
-            width: 24px;
-            height: 24px;
-            border-radius: 6px;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Cart Modal - Updated */
+        .cart-badge.bounce {
+            animation: badgeBounce 0.4s ease;
+        }
+
+        @keyframes badgeBounce {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            60% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Cart Modal - Match index.html */
         .cart-modal {
             display: none;
             position: fixed;
@@ -400,11 +459,11 @@
 
         .cart-modal-content {
             background-color: white;
-            margin: 10% auto;
+            margin: 5% auto;
             padding: 0;
-            border-radius: 20px;
+            border-radius: 15px;
             width: 90%;
-            max-width: 450px;
+            max-width: 500px;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -414,7 +473,7 @@
             background: var(--primary);
             color: var(--secondary);
             padding: 1.5rem;
-            border-radius: 20px 20px 0 0;
+            border-radius: 15px 15px 0 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -439,7 +498,7 @@
 
         .cart-items {
             padding: 1rem;
-            max-height: 400px;
+            max-height: 300px;
             overflow-y: auto;
         }
 
@@ -469,14 +528,14 @@
 
         .cart-item-name {
             font-weight: 600;
-            margin-bottom: 0.3rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.25rem;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .cart-item-details {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #666;
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.25rem;
         }
 
         .cart-item-price {
@@ -493,40 +552,37 @@
         .quantity-btn {
             background: var(--primary);
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 0.9rem;
         }
 
         .quantity-display {
-            min-width: 28px;
+            min-width: 30px;
             text-align: center;
             font-weight: bold;
-            font-size: 0.95rem;
         }
 
         .remove-btn {
             background: #e74c3c;
             color: white;
             border: none;
-            width: 28px;
-            height: 28px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
         }
 
         .cart-total {
-            padding: 1.2rem 1.5rem;
+            padding: 1rem 1.5rem;
             background: #f8f9fa;
             font-size: 1.2rem;
             font-weight: bold;
@@ -535,28 +591,31 @@
         }
 
         .cart-actions {
-            padding: 1.5rem;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: center;
             align-items: center;
             border-top: 2px solid #eee;
         }
 
+        /* Checkout Button - Match index.html */
         .checkout-btn {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1.2rem 1.5rem;
             background: #25D366;
             color: white;
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            font-weight: 700;
-            font-size: 1.1rem;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-height: 60px;
             transition: background 0.3s, transform 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .checkout-btn:hover {
@@ -564,50 +623,58 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
-        .site-footer {
-            background-color: var(--secondary);
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            margin-top: 3rem;
+        .checkout-btn:active {
+            transform: translateY(0);
         }
 
-        .site-footer p {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Floating Call Button */
+        /* Floating Call Button - Match index.html */
         .floating-whatsapp {
             position: fixed;
-            bottom: 15px;
-            right: 15px;
-            background: #25D366;
+            right: 20px;
+            bottom: 20px;
+            background-color: hsl(142, 70%, 49%);
             color: white;
-            padding: 12px 15px;
-            border-radius: 40px;
-            font-weight: 700;
+            padding: 12px 20px;
+            border-radius: 50px;
             text-decoration: none;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 600;
+            z-index: 1000;
             transition: all 0.3s ease;
-            font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
         }
 
         .floating-whatsapp:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            background-color: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
-        /* RESPONSIVE DESIGN - MOBILE VIEW - UPDATED */
+        /* RESPONSIVE DESIGN - MOBILE VIEW - Match index.html */
         @media (max-width: 768px) {
-            .page-title {
+            .menu-header {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 1rem;
+                position: relative;
+                padding: 0 60px 0 10px;
+                min-height: 50px;
+            }
+
+            .section-title.menu-page-title {
                 font-size: 2.5rem;
+                margin: 0;
+                text-align: center;
+                color: rgb(12, 1, 1);
+                width: 100%;
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
             }
 
             .page-subtitle {
@@ -663,7 +730,11 @@
             }
 
             .item-name {
-                font-size: 1.1rem;
+                font-size: 1rem;
+            }
+
+            .item-price {
+                font-size: 1rem;
             }
 
             .summary-header {
@@ -694,26 +765,37 @@
             }
 
             .cart-container {
-                top: 90px;
-                right: 10px;
+                top: 100px;
+                right: 15px;
             }
 
             .cart-icon {
-                width: 55px;
-                height: 55px;
+                width: 50px;
+                height: 50px;
                 font-size: 1.2rem;
             }
 
             .cart-badge {
-                width: 22px;
-                height: 22px;
-                font-size: 0.75rem;
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+            }
+
+            .checkout-btn {
+                padding: 1rem 1.2rem;
+                font-size: 1.1rem;
+                min-height: 55px;
             }
         }
 
         @media (max-width: 576px) {
-            .page-title {
-                font-size: 2rem;
+            .menu-header {
+                padding: 0 55px 0 10px;
+                min-height: 45px;
+            }
+
+            .section-title.menu-page-title {
+                font-size: 2.2rem;
             }
 
             .section-title-inner {
@@ -736,7 +818,11 @@
             }
 
             .item-name {
-                font-size: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .item-price {
+                font-size: 0.95rem;
             }
 
             .combo-summary {
@@ -761,15 +847,22 @@
                 width: 95%;
                 margin: 5% auto;
             }
+
+            .checkout-btn {
+                padding: 0.9rem 1rem;
+                font-size: 1rem;
+                min-height: 50px;
+            }
         }
 
-        @media (max-width: 400px) {
-            .page-title {
-                font-size: 1.8rem;
+        @media (max-width: 480px) {
+            .menu-header {
+                padding: 0 50px 0 8px;
+                min-height: 40px;
             }
 
-            .page-subtitle {
-                font-size: 0.9rem;
+            .section-title.menu-page-title {
+                font-size: 2rem;
             }
 
             .section-title-inner {
@@ -792,30 +885,48 @@
             }
 
             .item-name {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
+            }
+
+            .item-price {
+                font-size: 0.9rem;
             }
 
             .select-indicator {
-                width: 24px;
-                height: 24px;
-                top: 12px;
-                right: 12px;
+                width: 22px;
+                height: 22px;
+                top: 8px;
+                right: 8px;
+                font-size: 0.7rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .menu-header {
+                padding: 0 45px 0 6px;
+                min-height: 38px;
+            }
+
+            .section-title.menu-page-title {
+                font-size: 1.8rem;
+            }
+
+            .item-card {
+                width: 120px;
+                min-width: 120px;
+                padding: 0.7rem 0.4rem;
+            }
+
+            .item-image-container {
+                width: 80px;
+                height: 80px;
             }
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-CFXTRJEMHN');
-</script>
 
 <body>
-    <!-- Header - Using style.css -->
+    <!-- Header - Match index.html exactly -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -824,120 +935,122 @@
                         <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
                         <div class="tagline">"Where Hunger Comes to An End"</div>
                     </div>
-                    <nav class="site-nav">
-                        <a href="index.html" class="nav-link">Menu</a>
-                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
-                        <a href="offers.html" class="nav-link">Offers</a>
-                        <a href="about.html" class="nav-link">About</a>
-                    </nav>
                 </div>
+                <nav class="site-nav">
+                    <a href="index.html" class="nav-link">Menu</a>
+                    <a href="offers.html" class="nav-link">Offers</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main>
-        <div class="container">
-            <!-- Page Header -->
-            <div class="page-header">
-                <h1 class="page-title">Make Your Combo</h1>
+        <section class="menu-section">
+            <div class="container">
+                <!-- Page Header - Match index.html menu header style -->
+                <div class="menu-header">
+                    <h1 class="section-title menu-page-title">Make Your Combo</h1>
+                </div>
+
                 <p class="page-subtitle">Create your perfect combo meal by selecting items from each section below. All
                     items are served in half portions for the perfect combo experience!</p>
-            </div>
 
-            <!-- Combo Sections -->
-            <div class="combo-sections">
-                <!-- Main Section -->
-                <section class="combo-section" id="main-section">
-                    <div class="section-header">
-                        <h2 class="section-title-inner">Main</h2>
-                        <div class="section-requirement">Select 1 Item</div>
-                    </div>
-                    <div class="items-grid" id="main-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
-                </section>
-
-                <!-- Crispy Side Section -->
-                <section class="combo-section" id="crispy-side-section">
-                    <div class="section-header">
-                        <h2 class="section-title-inner">Crispy Side</h2>
-                        <div class="section-requirement">Select 1 Item</div>
-                    </div>
-                    <div class="items-grid" id="crispy-side-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
-                </section>
-
-                <!-- Mo:Mo Section -->
-                <section class="combo-section" id="momo-section">
-                    <div class="section-header">
-                        <h2 class="section-title-inner">Mo:Mo</h2>
-                        <div class="section-requirement">Select 1 Item</div>
-                    </div>
-                    <div class="items-grid" id="momo-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
-                </section>
-            </div>
-
-            <!-- Combo Summary -->
-            <div class="combo-summary" id="combo-summary">
-                <div class="summary-header">
-                    <h3 class="summary-title">Your Combo</h3>
-                    <div class="summary-price">
-                        <span id="combo-price">Rs 0</span>
+                <!-- Cart Container -->
+                <div class="cart-container">
+                    <div class="cart-icon" id="cartIcon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartBadge">0</span>
                     </div>
                 </div>
 
-                <div class="summary-items">
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-utensils"></i> Main - 1 Item
+                <!-- Combo Sections -->
+                <div class="combo-sections">
+                    <!-- Main Section -->
+                    <section class="combo-section" id="main-section">
+                        <div class="section-header">
+                            <h2 class="section-title-inner">Main</h2>
+                            <div class="section-requirement">Select 1 Item</div>
                         </div>
-                        <div class="selected-items-list" id="selected-main">
-                            <div class="empty-selection">No item selected yet</div>
+                        <div class="items-grid" id="main-items">
+                            <!-- Items will be populated by JavaScript -->
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-bacon"></i> Crispy Side - 1 Item
+                    <!-- Crispy Side Section -->
+                    <section class="combo-section" id="crispy-side-section">
+                        <div class="section-header">
+                            <h2 class="section-title-inner">Crispy Side</h2>
+                            <div class="section-requirement">Select 1 Item</div>
                         </div>
-                        <div class="selected-items-list" id="selected-crispy-side">
-                            <div class="empty-selection">No item selected yet</div>
+                        <div class="items-grid" id="crispy-side-items">
+                            <!-- Items will be populated by JavaScript -->
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-dumpling"></i> Mo:Mo - 1 Item
+                    <!-- Mo:Mo Section -->
+                    <section class="combo-section" id="momo-section">
+                        <div class="section-header">
+                            <h2 class="section-title-inner">Mo:Mo</h2>
+                            <div class="section-requirement">Select 1 Item</div>
                         </div>
-                        <div class="selected-items-list" id="selected-momo">
-                            <div class="empty-selection">No item selected yet</div>
+                        <div class="items-grid" id="momo-items">
+                            <!-- Items will be populated by JavaScript -->
                         </div>
-                    </div>
+                    </section>
                 </div>
 
-                <div class="summary-actions">
-                    <button class="btn btn-secondary" id="reset-btn">
-                        <i class="fas fa-redo"></i> Reset Combo
-                    </button>
-                    <button class="btn btn-primary" id="add-to-cart-btn" disabled>
-                        <i class="fas fa-cart-plus"></i> Add Combo to Cart
-                    </button>
+                <!-- Combo Summary -->
+                <div class="combo-summary" id="combo-summary">
+                    <div class="summary-header">
+                        <h3 class="summary-title">Your Combo</h3>
+                        <div class="summary-price">
+                            <span id="combo-price">Rs 0</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-items">
+                        <div class="summary-section">
+                            <div class="summary-section-title">
+                                <i class="fas fa-utensils"></i> Main - 1 Item
+                            </div>
+                            <div class="selected-items-list" id="selected-main">
+                                <div class="empty-selection">No item selected yet</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-section">
+                            <div class="summary-section-title">
+                                <i class="fas fa-bacon"></i> Crispy Side - 1 Item
+                            </div>
+                            <div class="selected-items-list" id="selected-crispy-side">
+                                <div class="empty-selection">No item selected yet</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-section">
+                            <div class="summary-section-title">
+                                <i class="fas fa-dumpling"></i> Mo:Mo - 1 Item
+                            </div>
+                            <div class="selected-items-list" id="selected-momo">
+                                <div class="empty-selection">No item selected yet</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="summary-actions">
+                        <button class="btn btn-secondary" id="reset-btn">
+                            <i class="fas fa-redo"></i> Reset Combo
+                        </button>
+                        <button class="btn btn-primary" id="add-to-cart-btn" disabled>
+                            <i class="fas fa-cart-plus"></i> Add Combo to Cart
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     </main>
-
-    <!-- Cart Container -->
-    <div class="cart-container">
-        <div class="cart-icon" id="cartIcon">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge" id="cartBadge">0</span>
-        </div>
-    </div>
 
     <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
@@ -964,7 +1077,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer - Match index.html -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
@@ -978,7 +1091,6 @@
 
     <script>
         // Combo Items Data - Updated with direct half serving prices
-               // Combo Items Data - Updated with direct half serving prices
         const COMBO_ITEMS = {
             main: [
                 {
@@ -1048,7 +1160,7 @@
         let selectedCrispySide = null;
         let selectedMomo = null;
 
-        // Load cart from localStorage
+        // Load cart from localStorage - Match index.html function
         function loadCart() {
             try {
                 const savedCart = localStorage.getItem('daAlooCart');
@@ -1062,7 +1174,7 @@
             }
         }
 
-        // Save cart to localStorage
+        // Save cart to localStorage - Match index.html function
         function saveCart() {
             try {
                 localStorage.setItem('daAlooCart', JSON.stringify(cart));
@@ -1107,11 +1219,12 @@
                     </div>
                     <div class="item-image-container">
                         ${item.image 
-                            ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/></svg>'">`
+                            ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"10\"/></svg>'">`
                             : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'}" style="font-size: 50px; color: #ccc;"></i>`
                         }
                     </div>
-                    <div class="item-name"><strong>${item.name}</strong></div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">Rs ${item.price}</div>
                 `;
 
                 card.addEventListener('click', () => toggleSelection(item, sectionType));
@@ -1284,7 +1397,7 @@
             }, 2000);
         }
 
-        // Cart functionality
+        // Cart functionality - Match index.html
         function setupCart() {
             const cartIcon = document.getElementById('cartIcon');
             const cartModal = document.getElementById('cartModal');
@@ -1334,25 +1447,19 @@
             updateCartDisplay();
         }
 
-        // Update cart display
+        // Update cart display - Match index.html
         function updateCartDisplay() {
             const cartItems = document.getElementById('cartItems');
             const cartTotal = document.getElementById('cartTotal');
-            const emptyCartMessage = document.getElementById('emptyCartMessage');
 
             if (cart.length === 0) {
                 cartItems.innerHTML = `
-                    <div class="empty-cart-message" id="emptyCartMessage">
+                    <div class="empty-cart-message" id="emptyCartMessage" style="display: block;">
                         <i class="fas fa-shopping-cart"></i>
                         <p>Your cart is empty</p>
                     </div>`;
                 cartTotal.textContent = 'Total: Rs 0';
                 return;
-            }
-
-            // Hide empty cart message
-            if (emptyCartMessage) {
-                emptyCartMessage.style.display = 'none';
             }
 
             let itemsHTML = '';
@@ -1383,7 +1490,7 @@
             cartTotal.textContent = `Total: Rs ${total}`;
         }
 
-        // Handle cart item click events
+        // Handle cart item click events - Match index.html
         function handleCartItemClick(e) {
             // Handle quantity buttons
             if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
@@ -1424,7 +1531,7 @@
             }
         }
 
-        // Update cart badge
+        // Update cart badge - Match index.html
         function updateCartBadge() {
             const badge = document.getElementById('cartBadge');
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
@@ -1465,8 +1572,3 @@
 </body>
 
 </html>
-
-
-
-
-
