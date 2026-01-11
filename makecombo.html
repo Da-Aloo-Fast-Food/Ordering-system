@@ -276,19 +276,6 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        .item-price .full-price {
-            font-size: 0.7rem;
-            color: #777;
-            text-decoration: line-through;
-            display: inline-block;
-            margin-right: 4px;
-        }
-
-        .item-price .half-price {
-            color: #e74c3c;
-            font-size: 0.9rem;
-        }
-
         /* Selection indicator */
         .select-indicator {
             position: absolute;
@@ -346,13 +333,6 @@
             font-weight: 700;
             color: #e74c3c;
             text-align: right;
-        }
-
-        .summary-price .original-price {
-            font-size: 1rem;
-            color: #777;
-            text-decoration: line-through;
-            margin-right: 8px;
         }
 
         .summary-items {
@@ -840,15 +820,6 @@
                 font-size: 0.9rem;
             }
 
-            .item-price .full-price {
-                font-size: 0.7rem;
-                margin-right: 4px;
-            }
-
-            .item-price .half-price {
-                font-size: 0.9rem;
-            }
-
             .select-indicator {
                 width: 22px;
                 height: 22px;
@@ -874,10 +845,6 @@
             .summary-price {
                 text-align: left;
                 font-size: 1.3rem;
-            }
-
-            .summary-price .original-price {
-                font-size: 0.9rem;
             }
 
             .summary-actions {
@@ -1079,7 +1046,6 @@
                 <div class="summary-header">
                     <h3 class="summary-title">Your Combo</h3>
                     <div class="summary-price">
-                        <span class="original-price" id="original-price">Rs 0</span>
                         <span id="combo-price">Rs 0</span>
                     </div>
                 </div>
@@ -1171,28 +1137,28 @@
     </a>
 
     <script>
-        // Combo Items Data - Updated with 3 categories and prices from daaloofastfood.com.np
+        // Combo Items Data - Updated with 3 categories
         const COMBO_ITEMS = {
             main: [
                 {
                     id: 1,
                     name: "Sandwich",
                     description: "Delicious sandwich with fresh ingredients",
-                    fullPrice: 170, // Approximate from website
+                    fullPrice: 170,
                     image: "images/categories/sandwich.jpg"
                 },
                 {
                     id: 2,
                     name: "Fried Rice",
                     description: "Flavorful fried rice with vegetables and spices",
-                    fullPrice: 180, // Approximate from website
+                    fullPrice: 180,
                     image: "images/categories/fried-rice.jpg"
                 },
                 {
                     id: 3,
                     name: "Chowmein",
                     description: "Stir-fried noodles with vegetables and seasonings",
-                    fullPrice: 180, // Approximate from website
+                    fullPrice: 180,
                     image: "images/categories/chowmein.jpg"
                 }
             ],
@@ -1201,21 +1167,21 @@
                     id: 4,
                     name: "Chicken Nuggets",
                     description: "Crispy chicken nuggets with special seasoning",
-                    fullPrice: 220, // For 8 pieces - from website
+                    fullPrice: 220,
                     image: "images/categories/chicken-nuggets.jpg"
                 },
                 {
                     id: 5,
                     name: "Paneer Nuggets",
                     description: "Crispy paneer nuggets with herbs",
-                    fullPrice: 200, // For 8 pieces - from website
+                    fullPrice: 200,
                     image: "images/categories/paneer-nuggets.jpg"
                 },
                 {
                     id: 6,
                     name: "Battered Fries",
                     description: "Crispy battered potato fries",
-                    fullPrice: 150, // From website
+                    fullPrice: 150,
                     image: "images/categories/battered-fries.jpg"
                 }
             ],
@@ -1224,21 +1190,21 @@
                     id: 7,
                     name: "Chicken Mo:Mo",
                     description: "Steamed dumplings with chicken filling",
-                    fullPrice: 220, // For 8 pieces - from website
+                    fullPrice: 220,
                     image: "images/categories/chicken-momo.jpg"
                 },
                 {
                     id: 8,
                     name: "Paneer Mo:Mo",
                     description: "Steamed dumplings with paneer filling",
-                    fullPrice: 200, // For 8 pieces - from website
+                    fullPrice: 200,
                     image: "images/categories/paneer-momo.jpg"
                 },
                 {
                     id: 9,
                     name: "Aloo Mo:Mo",
                     description: "Steamed dumplings with potato filling",
-                    fullPrice: 180, // For 8 pieces - from website
+                    fullPrice: 180,
                     image: "images/categories/aloo-momo.jpg"
                 }
             ]
@@ -1318,8 +1284,7 @@
                         <div class="item-description">${item.description}</div>
                         <div class="item-price-container">
                             <div class="item-price">
-                                <span class="full-price">Full: Rs ${item.fullPrice}</span>
-                                <span class="half-price">Half: Rs ${halfPrice}</span>
+                                Rs ${halfPrice}
                             </div>
                         </div>
                     </div>
@@ -1359,21 +1324,17 @@
         // Calculate combo price
         function calculateComboPrice() {
             let total = 0;
-            let originalTotal = 0;
 
             if (selectedMain) {
                 total += selectedMain.halfPrice;
-                originalTotal += selectedMain.fullPrice;
             }
 
             if (selectedCrispySide) {
                 total += selectedCrispySide.halfPrice;
-                originalTotal += selectedCrispySide.fullPrice;
             }
 
             if (selectedMomo) {
                 total += selectedMomo.halfPrice;
-                originalTotal += selectedMomo.fullPrice;
             }
 
             // Apply combo discount (additional 10% off for making a combo)
@@ -1381,7 +1342,6 @@
 
             return {
                 total: discountedTotal,
-                originalTotal: originalTotal,
                 savings: total - discountedTotal
             };
         }
@@ -1399,7 +1359,6 @@
             // Calculate and update price
             const priceInfo = calculateComboPrice();
 
-            document.getElementById('original-price').textContent = `Rs ${priceInfo.originalTotal}`;
             document.getElementById('combo-price').textContent = `Rs ${priceInfo.total}`;
 
             // Enable/disable add to cart button
@@ -1428,7 +1387,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMain.name} (Half: Rs ${selectedMain.halfPrice})
+                    ${selectedMain.name} (Rs ${selectedMain.halfPrice})
                 `;
                 mainContainer.appendChild(tag);
             } else {
@@ -1442,7 +1401,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedCrispySide.name} (Half: Rs ${selectedCrispySide.halfPrice})
+                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.halfPrice})
                 `;
                 crispySideContainer.appendChild(tag);
             } else {
@@ -1456,7 +1415,7 @@
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMomo.name} (Half: Rs ${selectedMomo.halfPrice})
+                    ${selectedMomo.name} (Rs ${selectedMomo.halfPrice})
                 `;
                 momoContainer.appendChild(tag);
             } else {
