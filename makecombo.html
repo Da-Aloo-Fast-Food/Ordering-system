@@ -142,26 +142,27 @@
             font-size: 0.8rem;
         }
 
-        /* Category-style Item Grid */
+        /* Category-style Item Grid - UPDATED */
         .items-grid {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-top: 1rem;
             flex-wrap: wrap;
         }
 
+        /* Desktop item cards - SMALLER */
         .item-card {
             background: linear-gradient(135deg, #ffffff, #f7f7f7);
             border: 2px solid #e0e0e0;
-            border-radius: 20px;
-            padding: 1.5rem;
+            border-radius: 16px;
+            padding: 1rem;
             cursor: pointer;
             font-weight: 600;
             color: #555;
             transition: all 0.25s ease;
-            width: 180px;
-            height: 180px;
+            width: 160px; /* Reduced from 180px */
+            height: 160px; /* Reduced from 180px */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -193,14 +194,14 @@
             pointer-events: none;
         }
 
-        /* Image container - FIXED */
+        /* Image container - SMALLER */
         .item-image-container {
-            height: 80px;
-            width: 80px;
-            min-height: 80px;
+            height: 60px; /* Reduced from 80px */
+            width: 60px; /* Reduced from 80px */
+            min-height: 60px; /* Reduced from 80px */
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem; /* Reduced from 1rem */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -220,11 +221,11 @@
         }
 
         .item-image-container .placeholder-icon {
-            font-size: 2rem;
+            font-size: 1.5rem; /* Reduced from 2rem */
             color: #aaa;
         }
 
-        /* Item content */
+        /* Item content - SMALLER TEXT */
         .item-content {
             display: flex;
             flex-direction: column;
@@ -237,8 +238,8 @@
 
         .item-name {
             font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 0.4rem;
+            font-size: 0.85rem; /* Reduced from 0.9rem */
+            margin-bottom: 0.3rem; /* Reduced from 0.4rem */
             color: var(--secondary);
             line-height: 1.2;
             font-family: 'Montserrat', sans-serif;
@@ -249,15 +250,15 @@
         }
 
         .item-description {
-            font-size: 0.75rem;
+            font-size: 0.7rem; /* Reduced from 0.75rem */
             color: #666;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem; /* Reduced from 0.6rem */
             line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 2.6rem;
+            min-height: 2.2rem; /* Reduced from 2.6rem */
         }
 
         .item-price-container {
@@ -271,18 +272,18 @@
 
         .item-price {
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Reduced from 0.9rem */
             color: var(--secondary);
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* Selection indicator */
+        /* Selection indicator - SMALLER */
         .select-indicator {
             position: absolute;
-            top: 12px;
-            right: 12px;
-            width: 22px;
-            height: 22px;
+            top: 10px; /* Reduced from 12px */
+            right: 10px; /* Reduced from 12px */
+            width: 20px; /* Reduced from 22px */
+            height: 20px; /* Reduced from 22px */
             border-radius: 50%;
             border: 2px solid #ccc;
             display: flex;
@@ -301,7 +302,7 @@
         }
 
         .select-indicator i {
-            font-size: 0.7rem;
+            font-size: 0.65rem; /* Reduced from 0.7rem */
         }
 
         /* Combo Summary */
@@ -742,20 +743,24 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Desktop-specific styles */
+        /* Desktop-specific styles - UPDATED for smaller cards */
         @media (min-width: 769px) {
             .items-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                display: flex;
+                justify-content: center;
                 gap: 1.2rem;
+                flex-wrap: wrap;
             }
 
             .item-card {
-                min-height: 280px;
-                padding: 1.2rem;
+                width: 160px; /* Keep consistent size */
+                height: 160px; /* Keep consistent size */
+                padding: 1rem;
             }
 
             .item-image-container {
-                height: 140px;
+                height: 60px; /* Keep consistent size */
+                width: 60px; /* Keep consistent size */
             }
 
             .cart-container {
@@ -776,7 +781,7 @@
             }
         }
 
-        /* Responsive Design */
+        /* RESPONSIVE DESIGN - MOBILE VIEW - UPDATED FOR HORIZONTAL ROW */
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.2rem;
@@ -791,44 +796,71 @@
                 font-size: 1.5rem;
             }
 
+            /* UPDATED: Single row for mobile */
             .items-grid {
-                grid-template-columns: repeat(2, 1fr);
+                display: flex;
+                flex-wrap: nowrap; /* Prevent wrapping to next line */
+                overflow-x: auto; /* Enable horizontal scrolling if needed */
+                justify-content: flex-start; /* Align items to start */
                 gap: 0.8rem;
+                padding-bottom: 0.5rem;
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                scrollbar-width: thin; /* For Firefox */
+            }
+
+            /* Hide scrollbar for Chrome, Safari and Opera */
+            .items-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .items-grid::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+
+            .items-grid::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 4px;
             }
 
             .item-card {
-                min-height: 220px;
+                flex: 0 0 auto; /* Don't grow or shrink, base on width */
+                width: 150px; /* Even smaller for mobile */
+                height: 150px; /* Even smaller for mobile */
+                min-width: 150px; /* Prevent shrinking */
                 padding: 0.8rem;
             }
 
             .item-image-container {
-                height: 100px;
+                height: 55px; /* Smaller for mobile */
+                width: 55px; /* Smaller for mobile */
+                min-height: 55px; /* Smaller for mobile */
                 margin-bottom: 0.6rem;
             }
 
             .item-name {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
                 margin-bottom: 0.3rem;
             }
 
             .item-description {
-                font-size: 0.75rem;
-                margin-bottom: 0.6rem;
+                font-size: 0.7rem;
+                margin-bottom: 0.5rem;
             }
 
             .item-price {
-                font-size: 0.9rem;
+                font-size: 0.85rem;
             }
 
             .select-indicator {
-                width: 22px;
-                height: 22px;
-                top: 10px;
-                right: 10px;
+                width: 18px; /* Smaller for mobile */
+                height: 18px; /* Smaller for mobile */
+                top: 8px; /* Adjusted position */
+                right: 8px; /* Adjusted position */
             }
 
             .select-indicator i {
-                font-size: 0.7rem;
+                font-size: 0.6rem; /* Smaller for mobile */
             }
 
             .summary-header {
@@ -868,18 +900,34 @@
                 font-size: 1.3rem;
             }
 
+            /* UPDATED: Keep single row even on very small screens */
             .items-grid {
-                grid-template-columns: 1fr;
-                gap: 0.8rem;
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 0.6rem; /* Smaller gap on very small screens */
             }
 
             .item-card {
-                min-height: 200px;
-                padding: 0.8rem;
+                width: 140px; /* Smaller for very small screens */
+                height: 140px; /* Smaller for very small screens */
+                min-width: 140px;
+                padding: 0.7rem;
             }
 
             .item-image-container {
-                height: 120px;
+                height: 50px; /* Smaller for very small screens */
+                width: 50px; /* Smaller for very small screens */
+                min-height: 50px;
+            }
+
+            .item-name {
+                font-size: 0.8rem;
+            }
+
+            .item-description {
+                font-size: 0.65rem;
+                min-height: 2rem;
             }
 
             .combo-instructions {
@@ -940,21 +988,52 @@
                 padding: 0.25rem 0.6rem;
             }
 
+            /* UPDATED: Keep single row */
+            .items-grid {
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                gap: 0.5rem;
+            }
+
             .item-card {
-                min-height: 190px;
-                padding: 0.7rem;
+                width: 130px; /* Smallest size for tiny screens */
+                height: 130px; /* Smallest size for tiny screens */
+                min-width: 130px;
+                padding: 0.6rem;
             }
 
             .item-image-container {
-                height: 110px;
+                height: 45px; /* Smallest size for tiny screens */
+                width: 45px; /* Smallest size for tiny screens */
+                min-height: 45px;
+                margin-bottom: 0.5rem;
             }
 
             .item-name {
-                font-size: 0.85rem;
+                font-size: 0.75rem;
+                margin-bottom: 0.2rem;
             }
 
             .item-description {
-                font-size: 0.7rem;
+                font-size: 0.6rem;
+                margin-bottom: 0.4rem;
+                min-height: 1.8rem;
+            }
+
+            .item-price {
+                font-size: 0.75rem;
+            }
+
+            .select-indicator {
+                width: 16px;
+                height: 16px;
+                top: 6px;
+                right: 6px;
+            }
+
+            .select-indicator i {
+                font-size: 0.55rem;
             }
 
             .cart-modal-content {
