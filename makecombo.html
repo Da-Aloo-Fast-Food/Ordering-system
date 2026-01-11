@@ -15,17 +15,18 @@
     <style>
         /* CSS Variables from your existing site */
         :root {
-    --primary: #FFEB3B; /* Specific yellow used in index.html */
-    --primary-hover: #FDD835;
-    --secondary: #000000;
-    --bg-light: #f4f4f4;
-}
+            --primary: #FFEB3B;
+            /* Specific yellow used in index.html */
+            --primary-hover: #FDD835;
+            --secondary: #000000;
+            --bg-light: #f4f4f4;
+        }
 
-body {
-    background-color: var(--bg-light);
-    color: #333;
-    font-family: 'Montserrat', sans-serif;
-}
+        body {
+            background-color: var(--bg-light);
+            color: #333;
+            font-family: 'Montserrat', sans-serif;
+        }
 
         .container {
             width: 100%;
@@ -142,180 +143,180 @@ body {
         }
 
         /* Category-style Item Grid */
-/* Category-style Item Grid */
-.items-grid {
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-}
+        .items-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
 
-.item-card {
-    background: linear-gradient(135deg, #ffffff, #f7f7f7);
-    border: 2px solid #e0e0e0;
-    border-radius: 20px;
-    padding: 1.5rem;
-    cursor: pointer;
-    font-weight: 600;
-    color: #555;
-    transition: all 0.25s ease;
-    width: 180px;
-    height: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
-    font-family: 'Montserrat', sans-serif;
-    position: relative;
-    overflow: hidden;
-}
+        .item-card {
+            background: linear-gradient(135deg, #ffffff, #f7f7f7);
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.25s ease;
+            width: 180px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
 
-.item-card:hover {
-    border-color: var(--primary);
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-}
+        .item-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
 
-.item-card.selected {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: var(--secondary);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
+        .item-card.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: var(--secondary);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
 
-.item-card.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    pointer-events: none;
-}
+        .item-card.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
 
-/* Image container - FIXED */
-.item-image-container {
-    height: 80px;
-    width: 80px;
-    min-height: 80px;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-    position: relative;
-}
+        /* Image container - FIXED */
+        .item-image-container {
+            height: 80px;
+            width: 80px;
+            min-height: 80px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            position: relative;
+        }
 
-.item-image {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* Changed from cover to contain */
-    transition: transform 0.3s ease;
-}
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
 
-.item-card:hover .item-image {
-    transform: scale(1.08);
-}
+        .item-card:hover .item-image {
+            transform: scale(1.08);
+        }
 
-.item-image-container .placeholder-icon {
-    font-size: 2rem;
-    color: #aaa;
-}
+        .item-image-container .placeholder-icon {
+            font-size: 2rem;
+            color: #aaa;
+        }
 
-/* Item content */
-.item-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    text-align: center;
-    width: 100%;
-    flex: 1;
-}
+        /* Item content */
+        .item-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            width: 100%;
+            flex: 1;
+        }
 
-.item-name {
-    font-weight: 700;
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-    color: var(--secondary);
-    line-height: 1.2;
-    font-family: 'Montserrat', sans-serif;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+        .item-name {
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: var(--secondary);
+            line-height: 1.2;
+            font-family: 'Montserrat', sans-serif;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-.item-description {
-    font-size: 0.75rem;
-    color: #666;
-    margin-bottom: 0.6rem;
-    line-height: 1.3;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    min-height: 2.6rem;
-}
+        .item-description {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.6rem;
+        }
 
-.item-price-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.2rem;
-    width: 100%;
-    margin-top: auto;
-}
+        .item-price-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            width: 100%;
+            margin-top: auto;
+        }
 
-.item-price {
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--secondary);
-    font-family: 'Montserrat', sans-serif;
-}
+        .item-price {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+        }
 
-.item-price .full-price {
-    font-size: 0.7rem;
-    color: #777;
-    text-decoration: line-through;
-    display: inline-block;
-    margin-right: 4px;
-}
+        .item-price .full-price {
+            font-size: 0.7rem;
+            color: #777;
+            text-decoration: line-through;
+            display: inline-block;
+            margin-right: 4px;
+        }
 
-.item-price .half-price {
-    color: #e74c3c;
-    font-size: 0.9rem;
-}
+        .item-price .half-price {
+            color: #e74c3c;
+            font-size: 0.9rem;
+        }
 
-/* Selection indicator */
-.select-indicator {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    border: 2px solid #ccc;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
-    transition: all 0.25s ease;
-    z-index: 2;
-}
+        /* Selection indicator */
+        .select-indicator {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.95);
+            transition: all 0.25s ease;
+            z-index: 2;
+        }
 
-.item-card.selected .select-indicator {
-    background-color: var(--secondary);
-    border-color: var(--secondary);
-    color: var(--primary);
-    transform: scale(1.1);
-}
+        .item-card.selected .select-indicator {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
 
-.select-indicator i {
-    font-size: 0.7rem;
-}
+        .select-indicator i {
+            font-size: 0.7rem;
+        }
+
         /* Combo Summary */
         .combo-summary {
             background-color: #f9f9f9;
@@ -1037,28 +1038,37 @@ body {
                     items are served in half portions for the perfect combo experience!</p>
             </div>
 
-           
-
             <!-- Combo Sections -->
             <div class="combo-sections">
-                <!-- Khaja Section -->
-                <section class="combo-section" id="khaja-section">
+                <!-- Main Section -->
+                <section class="combo-section" id="main-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Khaja (Main)</h2>
-                        <div class="section-requirement">Select 2 Items</div>
+                        <h2 class="section-title-inner">Main</h2>
+                        <div class="section-requirement">Select 1 Item</div>
                     </div>
-                    <div class="items-grid" id="khaja-items">
+                    <div class="items-grid" id="main-items">
                         <!-- Items will be populated by JavaScript -->
                     </div>
                 </section>
 
-                <!-- Maza Section -->
-                <section class="combo-section" id="maza-section">
+                <!-- Crispy Side Section -->
+                <section class="combo-section" id="crispy-side-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Maza (Drink)</h2>
+                        <h2 class="section-title-inner">Crispy Side</h2>
                         <div class="section-requirement">Select 1 Item</div>
                     </div>
-                    <div class="items-grid" id="maza-items">
+                    <div class="items-grid" id="crispy-side-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Mo:Mo Section -->
+                <section class="combo-section" id="momo-section">
+                    <div class="section-header">
+                        <h2 class="section-title-inner">Mo:Mo</h2>
+                        <div class="section-requirement">Select 1 Item</div>
+                    </div>
+                    <div class="items-grid" id="momo-items">
                         <!-- Items will be populated by JavaScript -->
                     </div>
                 </section>
@@ -1077,18 +1087,27 @@ body {
                 <div class="summary-items">
                     <div class="summary-section">
                         <div class="summary-section-title">
-                            <i class="fas fa-utensils"></i> Khaja (Main) - 2 Items
+                            <i class="fas fa-utensils"></i> Main - 1 Item
                         </div>
-                        <div class="selected-items-list" id="selected-khaja">
-                            <div class="empty-selection">No items selected yet</div>
+                        <div class="selected-items-list" id="selected-main">
+                            <div class="empty-selection">No item selected yet</div>
                         </div>
                     </div>
 
                     <div class="summary-section">
                         <div class="summary-section-title">
-                            <i class="fas fa-glass-cheers"></i> Maza (Drink) - 1 Item
+                            <i class="fas fa-bacon"></i> Crispy Side - 1 Item
                         </div>
-                        <div class="selected-items-list" id="selected-maza">
+                        <div class="selected-items-list" id="selected-crispy-side">
+                            <div class="empty-selection">No item selected yet</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="summary-section-title">
+                            <i class="fas fa-dumpling"></i> Mo:Mo - 1 Item
+                        </div>
+                        <div class="selected-items-list" id="selected-momo">
                             <div class="empty-selection">No item selected yet</div>
                         </div>
                     </div>
@@ -1152,74 +1171,84 @@ body {
     </a>
 
     <script>
-        // Combo Items Data
+        // Combo Items Data - Updated with 3 categories and prices from daaloofastfood.com.np
         const COMBO_ITEMS = {
-            khaja: [
+            main: [
                 {
                     id: 1,
-                    name: "Aloo Fries",
-                    description: "Crispy golden potato fries with special seasoning",
-                    fullPrice: 140,
-                    image: "images/categories/aloo-fries.jpg"
+                    name: "Sandwich",
+                    description: "Delicious sandwich with fresh ingredients",
+                    fullPrice: 170, // Approximate from website
+                    image: "images/categories/sandwich.jpg"
                 },
                 {
                     id: 2,
-                    name: "Spirals",
-                    description: "Twisted potato spirals with your choice of seasoning",
-                    fullPrice: 120,
-                    image: "images/categories/spirals.jpg"
+                    name: "Fried Rice",
+                    description: "Flavorful fried rice with vegetables and spices",
+                    fullPrice: 180, // Approximate from website
+                    image: "images/categories/fried-rice.jpg"
                 },
                 {
                     id: 3,
-                    name: "Katti Roll",
-                    description: "Soft wrap filled with savory fillings and spices",
-                    fullPrice: 160,
-                    image: "images/categories/katti-roll.jpg"
-                },
-                {
-                    id: 4,
-                    name: "Mo:Mo",
-                    description: "Steamed dumplings with delicious fillings",
-                    fullPrice: 130,
-                    image: "images/categories/momo.jpg"
+                    name: "Chowmein",
+                    description: "Stir-fried noodles with vegetables and seasonings",
+                    fullPrice: 180, // Approximate from website
+                    image: "images/categories/chowmein.jpg"
                 }
             ],
-            maza: [
+            crispySide: [
+                {
+                    id: 4,
+                    name: "Chicken Nuggets",
+                    description: "Crispy chicken nuggets with special seasoning",
+                    fullPrice: 220, // For 8 pieces - from website
+                    image: "images/categories/chicken-nuggets.jpg"
+                },
                 {
                     id: 5,
-                    name: "Coke / Fanta / Sprite",
-                    description: "Refreshing carbonated soft drink",
-                    fullPrice: 70,
-                    image: "images/categories/cold-drinks.jpg"
+                    name: "Paneer Nuggets",
+                    description: "Crispy paneer nuggets with herbs",
+                    fullPrice: 200, // For 8 pieces - from website
+                    image: "images/categories/paneer-nuggets.jpg"
                 },
                 {
                     id: 6,
-                    name: "Cold Coffee",
-                    description: "Chilled coffee with milk and sweetness",
-                    fullPrice: 120,
-                    image: "images/categories/cold-drinks.jpg"
-                },
+                    name: "Battered Fries",
+                    description: "Crispy battered potato fries",
+                    fullPrice: 150, // From website
+                    image: "images/categories/battered-fries.jpg"
+                }
+            ],
+            momo: [
                 {
                     id: 7,
-                    name: "Ice Mint Lemonade",
-                    description: "Fresh lemonade with mint and ice",
-                    fullPrice: 140,
-                    image: "images/categories/cold-drinks.jpg"
+                    name: "Chicken Mo:Mo",
+                    description: "Steamed dumplings with chicken filling",
+                    fullPrice: 220, // For 8 pieces - from website
+                    image: "images/categories/chicken-momo.jpg"
                 },
                 {
                     id: 8,
-                    name: "Green Apple Mojito",
-                    description: "Refreshing green apple flavored mojito",
-                    fullPrice: 150,
-                    image: "images/categories/cold-drinks.jpg"
+                    name: "Paneer Mo:Mo",
+                    description: "Steamed dumplings with paneer filling",
+                    fullPrice: 200, // For 8 pieces - from website
+                    image: "images/categories/paneer-momo.jpg"
+                },
+                {
+                    id: 9,
+                    name: "Aloo Mo:Mo",
+                    description: "Steamed dumplings with potato filling",
+                    fullPrice: 180, // For 8 pieces - from website
+                    image: "images/categories/aloo-momo.jpg"
                 }
             ]
         };
 
         // Shopping cart
         let cart = [];
-        let selectedKhaja = [];
-        let selectedMaza = null;
+        let selectedMain = null;
+        let selectedCrispySide = null;
+        let selectedMomo = null;
 
         // Load cart from localStorage
         function loadCart() {
@@ -1246,7 +1275,7 @@ body {
         }
 
         // Generate item cards for a section
-        function generateItemCards(sectionId, items, maxSelection) {
+        function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
 
@@ -1254,19 +1283,25 @@ body {
 
             items.forEach(item => {
                 const halfPrice = Math.round(item.fullPrice / 2);
-                const isKhaja = sectionId === 'khaja-items';
-                const isSelected = isKhaja
-                    ? selectedKhaja.some(selected => selected.id === item.id)
-                    : selectedMaza && selectedMaza.id === item.id;
-
-                const isDisabled = isKhaja
-                    ? selectedKhaja.length >= maxSelection && !isSelected
-                    : selectedMaza && !isSelected;
+                let isSelected = false;
+                
+                // Check if this item is selected based on section type
+                switch(sectionType) {
+                    case 'main':
+                        isSelected = selectedMain && selectedMain.id === item.id;
+                        break;
+                    case 'crispySide':
+                        isSelected = selectedCrispySide && selectedCrispySide.id === item.id;
+                        break;
+                    case 'momo':
+                        isSelected = selectedMomo && selectedMomo.id === item.id;
+                        break;
+                }
 
                 const card = document.createElement('div');
-                card.className = `item-card ${isSelected ? 'selected' : ''} ${isDisabled ? 'disabled' : ''}`;
+                card.className = `item-card ${isSelected ? 'selected' : ''}`;
                 card.setAttribute('data-id', item.id);
-                card.setAttribute('data-section', isKhaja ? 'khaja' : 'maza');
+                card.setAttribute('data-section', sectionType);
 
                 card.innerHTML = `
                     <div class="select-indicator">
@@ -1275,7 +1310,7 @@ body {
                     <div class="item-image-container">
                         ${item.image
                         ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
-                        : `<i class="fas fa-${isKhaja ? 'utensils' : 'glass-cheers'} placeholder-icon"></i>`
+                        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
                     }
                     </div>
                     <div class="item-content">
@@ -1290,42 +1325,32 @@ body {
                     </div>
                 `;
 
-                if (!isDisabled) {
-                    card.addEventListener('click', () => toggleSelection(item, isKhaja));
-                }
-
+                card.addEventListener('click', () => toggleSelection(item, sectionType));
                 container.appendChild(card);
             });
         }
 
         // Toggle item selection
-        function toggleSelection(item, isKhaja) {
-            if (isKhaja) {
-                // For Khaja section (select up to 2 items)
-                const index = selectedKhaja.findIndex(selected => selected.id === item.id);
-
-                if (index > -1) {
-                    // Deselect if already selected
-                    selectedKhaja.splice(index, 1);
-                } else if (selectedKhaja.length < 2) {
-                    // Select if less than 2 items selected
-                    selectedKhaja.push({
-                        ...item,
-                        halfPrice: Math.round(item.fullPrice / 2)
-                    });
-                }
-            } else {
-                // For Maza section (select only 1 item)
-                if (selectedMaza && selectedMaza.id === item.id) {
-                    // Deselect if already selected
-                    selectedMaza = null;
-                } else {
-                    // Select new item
-                    selectedMaza = {
+        function toggleSelection(item, sectionType) {
+            switch(sectionType) {
+                case 'main':
+                    selectedMain = selectedMain && selectedMain.id === item.id ? null : {
                         ...item,
                         halfPrice: Math.round(item.fullPrice / 2)
                     };
-                }
+                    break;
+                case 'crispySide':
+                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
+                        ...item,
+                        halfPrice: Math.round(item.fullPrice / 2)
+                    };
+                    break;
+                case 'momo':
+                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
+                        ...item,
+                        halfPrice: Math.round(item.fullPrice / 2)
+                    };
+                    break;
             }
 
             updateUI();
@@ -1336,14 +1361,19 @@ body {
             let total = 0;
             let originalTotal = 0;
 
-            selectedKhaja.forEach(item => {
-                total += item.halfPrice;
-                originalTotal += item.fullPrice;
-            });
+            if (selectedMain) {
+                total += selectedMain.halfPrice;
+                originalTotal += selectedMain.fullPrice;
+            }
 
-            if (selectedMaza) {
-                total += selectedMaza.halfPrice;
-                originalTotal += selectedMaza.fullPrice;
+            if (selectedCrispySide) {
+                total += selectedCrispySide.halfPrice;
+                originalTotal += selectedCrispySide.fullPrice;
+            }
+
+            if (selectedMomo) {
+                total += selectedMomo.halfPrice;
+                originalTotal += selectedMomo.fullPrice;
             }
 
             // Apply combo discount (additional 10% off for making a combo)
@@ -1359,8 +1389,9 @@ body {
         // Update UI based on selections
         function updateUI() {
             // Update item cards
-            generateItemCards('khaja-items', COMBO_ITEMS.khaja, 2);
-            generateItemCards('maza-items', COMBO_ITEMS.maza, 1);
+            generateItemCards('main-items', COMBO_ITEMS.main, 'main');
+            generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
+            generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
 
             // Update selected items display
             updateSelectedItemsDisplay();
@@ -1373,7 +1404,7 @@ body {
 
             // Enable/disable add to cart button
             const addToCartBtn = document.getElementById('add-to-cart-btn');
-            const isComboComplete = selectedKhaja.length === 2 && selectedMaza !== null;
+            const isComboComplete = selectedMain !== null && selectedCrispySide !== null && selectedMomo !== null;
 
             addToCartBtn.disabled = !isComboComplete;
 
@@ -1386,45 +1417,59 @@ body {
 
         // Update selected items display
         function updateSelectedItemsDisplay() {
-            const khajaContainer = document.getElementById('selected-khaja');
-            const mazaContainer = document.getElementById('selected-maza');
+            const mainContainer = document.getElementById('selected-main');
+            const crispySideContainer = document.getElementById('selected-crispy-side');
+            const momoContainer = document.getElementById('selected-momo');
 
-            // Update Khaja items
-            if (selectedKhaja.length > 0) {
-                khajaContainer.innerHTML = '';
-                selectedKhaja.forEach(item => {
-                    const tag = document.createElement('div');
-                    tag.className = 'selected-item-tag';
-                    tag.innerHTML = `
-                        <i class="fas fa-check"></i>
-                        ${item.name} (Half: Rs ${item.halfPrice})
-                    `;
-                    khajaContainer.appendChild(tag);
-                });
-            } else {
-                khajaContainer.innerHTML = '<div class="empty-selection">No items selected yet</div>';
-            }
-
-            // Update Maza item
-            if (selectedMaza) {
-                mazaContainer.innerHTML = '';
+            // Update Main item
+            if (selectedMain) {
+                mainContainer.innerHTML = '';
                 const tag = document.createElement('div');
                 tag.className = 'selected-item-tag';
                 tag.innerHTML = `
                     <i class="fas fa-check"></i>
-                    ${selectedMaza.name} (Half: Rs ${selectedMaza.halfPrice})
+                    ${selectedMain.name} (Half: Rs ${selectedMain.halfPrice})
                 `;
-                mazaContainer.appendChild(tag);
+                mainContainer.appendChild(tag);
             } else {
-                mazaContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+                mainContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+            }
+
+            // Update Crispy Side item
+            if (selectedCrispySide) {
+                crispySideContainer.innerHTML = '';
+                const tag = document.createElement('div');
+                tag.className = 'selected-item-tag';
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedCrispySide.name} (Half: Rs ${selectedCrispySide.halfPrice})
+                `;
+                crispySideContainer.appendChild(tag);
+            } else {
+                crispySideContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+            }
+
+            // Update Mo:Mo item
+            if (selectedMomo) {
+                momoContainer.innerHTML = '';
+                const tag = document.createElement('div');
+                tag.className = 'selected-item-tag';
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedMomo.name} (Half: Rs ${selectedMomo.halfPrice})
+                `;
+                momoContainer.appendChild(tag);
+            } else {
+                momoContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
             }
         }
 
         // Reset combo selections
         function resetCombo() {
             if (confirm('Are you sure you want to reset your combo? All selections will be lost.')) {
-                selectedKhaja = [];
-                selectedMaza = null;
+                selectedMain = null;
+                selectedCrispySide = null;
+                selectedMomo = null;
                 updateUI();
             }
         }
@@ -1434,15 +1479,12 @@ body {
             const priceInfo = calculateComboPrice();
 
             // Create combo item description
-            const khajaNames = selectedKhaja.map(item => item.name).join(' + ');
-            const mazaName = selectedMaza.name;
-
             const comboItem = {
                 id: `combo-${Date.now()}`,
-                name: `Custom Combo: ${khajaNames} with ${mazaName}`,
+                name: `Custom Combo: ${selectedMain.name} + ${selectedCrispySide.name} + ${selectedMomo.name}`,
                 price: priceInfo.total,
                 quantity: 1,
-                details: `Khaja: ${khajaNames} | Maza: ${mazaName}`,
+                details: `Main: ${selectedMain.name} | Side: ${selectedCrispySide.name} | Mo:Mo: ${selectedMomo.name}`,
                 type: 'combo'
             };
 
@@ -1467,8 +1509,9 @@ body {
 
             // Reset combo for next order
             setTimeout(() => {
-                selectedKhaja = [];
-                selectedMaza = null;
+                selectedMain = null;
+                selectedCrispySide = null;
+                selectedMomo = null;
                 updateUI();
             }, 2000);
         }
@@ -1625,14 +1668,14 @@ body {
         }
 
         // Initialize the page
-       // Initialize the page
         function init() {
             // Load cart from storage
             loadCart();
 
             // Generate initial item cards
-            generateItemCards('khaja-items', COMBO_ITEMS.khaja, 2);
-            generateItemCards('maza-items', COMBO_ITEMS.maza, 1);
+            generateItemCards('main-items', COMBO_ITEMS.main, 'main');
+            generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
+            generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
 
             // Update cart badge
             updateCartBadge();
