@@ -194,11 +194,11 @@
             pointer-events: none;
         }
 
-        /* Image container - SMALLER & UPDATED FOR BETTER FIT */
+        /* Image container - REVISED for better image display */
         .item-image-container {
-            height: 60px; /* Reduced from 80px */
-            width: 60px; /* Reduced from 80px */
-            min-height: 60px; /* Reduced from 80px */
+            height: 80px; /* Increased to give more space for image */
+            width: 80px; /* Increased to give more space for image */
+            min-height: 80px; /* Increased to give more space for image */
             border-radius: 10px;
             overflow: hidden;
             margin-bottom: 0.8rem; /* Reduced from 1rem */
@@ -212,20 +212,20 @@
         .item-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* CHANGED from 'contain' to 'cover' for better fit */
+            object-fit: cover; /* Fill the container */
             transition: transform 0.3s ease;
         }
 
         .item-card:hover .item-image {
-            transform: scale(1.1); /* Slightly reduced scale */
+            transform: scale(1.1);
         }
 
         .item-image-container .placeholder-icon {
-            font-size: 1.5rem; /* Reduced from 2rem */
+            font-size: 2rem; /* Increased to fill space */
             color: #aaa;
         }
 
-        /* Item content - SMALLER TEXT */
+        /* Item content - ADJUSTED for new layout */
         .item-content {
             display: flex;
             flex-direction: column;
@@ -234,6 +234,7 @@
             text-align: center;
             width: 100%;
             flex: 1;
+            margin-top: auto; /* Push to bottom */
         }
 
         .item-name {
@@ -759,8 +760,8 @@
             }
 
             .item-image-container {
-                height: 60px; /* Keep consistent size */
-                width: 60px; /* Keep consistent size */
+                height: 80px; /* Increased for better image display */
+                width: 80px; /* Increased for better image display */
             }
 
             .cart-container {
@@ -832,9 +833,9 @@
             }
 
             .item-image-container {
-                height: 55px; /* Smaller for mobile */
-                width: 55px; /* Smaller for mobile */
-                min-height: 55px; /* Smaller for mobile */
+                height: 70px; /* Smaller for mobile but still good size */
+                width: 70px; /* Smaller for mobile but still good size */
+                min-height: 70px; /* Smaller for mobile but still good size */
                 margin-bottom: 0.6rem;
             }
 
@@ -846,6 +847,7 @@
             .item-description {
                 font-size: 0.7rem;
                 margin-bottom: 0.5rem;
+                min-height: 2rem; /* Reduced for mobile */
             }
 
             .item-price {
@@ -916,9 +918,9 @@
             }
 
             .item-image-container {
-                height: 50px; /* Smaller for very small screens */
-                width: 50px; /* Smaller for very small screens */
-                min-height: 50px;
+                height: 65px; /* Adjusted for very small screens */
+                width: 65px; /* Adjusted for very small screens */
+                min-height: 65px;
             }
 
             .item-name {
@@ -927,7 +929,7 @@
 
             .item-description {
                 font-size: 0.65rem;
-                min-height: 2rem;
+                min-height: 1.8rem; /* Further reduced */
             }
 
             .combo-instructions {
@@ -1004,9 +1006,9 @@
             }
 
             .item-image-container {
-                height: 45px; /* Smallest size for tiny screens */
-                width: 45px; /* Smallest size for tiny screens */
-                min-height: 45px;
+                height: 60px; /* Smallest size for tiny screens */
+                width: 60px; /* Smallest size for tiny screens */
+                min-height: 60px;
                 margin-bottom: 0.5rem;
             }
 
@@ -1018,7 +1020,7 @@
             .item-description {
                 font-size: 0.6rem;
                 margin-bottom: 0.4rem;
-                min-height: 1.8rem;
+                min-height: 1.6rem; /* Smallest */
             }
 
             .item-price {
