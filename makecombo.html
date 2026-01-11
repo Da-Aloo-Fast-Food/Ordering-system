@@ -194,7 +194,7 @@
             pointer-events: none;
         }
 
-        /* Image container - SMALLER */
+        /* Image container - SMALLER & UPDATED FOR BETTER FIT */
         .item-image-container {
             height: 60px; /* Reduced from 80px */
             width: 60px; /* Reduced from 80px */
@@ -212,12 +212,12 @@
         .item-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* CHANGED from 'contain' to 'cover' for better fit */
             transition: transform 0.3s ease;
         }
 
         .item-card:hover .item-image {
-            transform: scale(1.08);
+            transform: scale(1.1); /* Slightly reduced scale */
         }
 
         .item-image-container .placeholder-icon {
@@ -1261,7 +1261,7 @@
                     name: "Battered Fries",
                     description: "Crispy battered potato fries",
                     price: 75, // Direct half serving price
-                    image: "images/categories/fries.jpg"
+                    image: "images/categories/battered-fries.jpg"
                 }
             ],
             momo: [
@@ -1270,21 +1270,21 @@
                     name: "Chicken Mo:Mo",
                     description: "Steamed dumplings with chicken filling",
                     price: 110, // Direct half serving price
-                    image: "images/categories/momo.jpg"
+                    image: "images/categories/chicken-momo.jpg"
                 },
                 {
                     id: 8,
                     name: "Paneer Mo:Mo",
                     description: "Steamed dumplings with paneer filling",
                     price: 100, // Direct half serving price
-                    image: "images/categories/momo.jpg"
+                    image: "images/categories/paneer-momo.jpg"
                 },
                 {
                     id: 9,
                     name: "Aloo Mo:Mo",
                     description: "Steamed dumplings with potato filling",
                     price: 90, // Direct half serving price
-                    image: "images/categories/momo.jpg"
+                    image: "images/categories/aloo-momo.jpg"
                 }
             ]
         };
@@ -1726,5 +1726,3 @@
 </body>
 
 </html>
-
-
