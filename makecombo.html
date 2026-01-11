@@ -978,6 +978,7 @@
 
     <script>
         // Combo Items Data - Updated with direct half serving prices
+               // Combo Items Data - Updated with direct half serving prices
         const COMBO_ITEMS = {
             main: [
                 {
@@ -1071,7 +1072,7 @@
             }
         }
 
-        // Generate item cards for a section - UPDATED FOR IMAGE + NAME DESIGN
+        // Generate item cards for a section
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1100,39 +1101,35 @@
                 card.setAttribute('data-section', sectionType);
                 card.setAttribute('title', `${item.name} - Rs ${item.price}`);
 
-               card.innerHTML = `
-    <div class="select-indicator">
-        <i class="fas fa-check"></i>
-    </div>
-    <div class="item-image-container">
-        ${item.image
-            ? `<img src="${item.image}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/></svg>'">`
-            : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
-        }
-    </div>
-    <div class="item-name"><strong>${item.name}</strong></div>
-`;
+                card.innerHTML = `
+                    <div class="select-indicator">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="item-image-container">
+                        ${item.image 
+                            ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/></svg>'">`
+                            : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'}" style="font-size: 50px; color: #ccc;"></i>`
+                        }
+                    </div>
+                    <div class="item-name"><strong>${item.name}</strong></div>
+                `;
 
-card.addEventListener('click', () => toggleSelection(item, sectionType));
-container.appendChild(card);
+                card.addEventListener('click', () => toggleSelection(item, sectionType));
+                container.appendChild(card);
+            });
+        }
 
         // Toggle item selection
         function toggleSelection(item, sectionType) {
             switch (sectionType) {
                 case 'main':
-                    selectedMain = selectedMain && selectedMain.id === item.id ? null : {
-                        ...item
-                    };
+                    selectedMain = selectedMain && selectedMain.id === item.id ? null : { ...item };
                     break;
                 case 'crispySide':
-                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
-                        ...item
-                    };
+                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : { ...item };
                     break;
                 case 'momo':
-                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
-                        ...item
-                    };
+                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : { ...item };
                     break;
             }
 
@@ -1464,11 +1461,11 @@ container.appendChild(card);
 
         // Run init on page load
         document.addEventListener('DOMContentLoaded', init);
-
     </script>
 </body>
 
 </html>
+
 
 
 
