@@ -13,11 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* CSS Variables - Updated to match the design */
         :root {
             --primary: #FFEB3B;
             --primary-hover: #FDD835;
             --secondary: #000000;
-            --bg-light: #fef9e7; /* Light yellow background like the image */
+            --bg-light: #fef9e7; /* Light yellow background */
         }
 
         body {
@@ -33,21 +34,49 @@
             padding: 0 20px;
         }
 
-        /* Page Header */
+        /* Main Content Area */
+        main {
+            padding: 2rem 0;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.8rem;
+            color: var(--secondary);
+            letter-spacing: 1.5px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        /* Page Header - Simplified */
         .page-header {
             text-align: center;
-            padding: 1.5rem 0;
-            margin-bottom: 1.5rem;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
         }
 
         .page-title {
             font-family: 'Bebas Neue', cursive;
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--secondary);
             letter-spacing: 1.5px;
+            margin-bottom: 0.5rem;
         }
 
-        /* Combo Section Layout */
+        .page-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* Combo Sections Layout - NEW DESIGN */
         .combo-section {
             margin-bottom: 3rem;
         }
@@ -58,25 +87,26 @@
             align-items: center;
             margin-bottom: 1.5rem;
             border-bottom: 2px solid rgba(0,0,0,0.05);
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
         }
 
         .section-title-inner {
             font-family: 'Bebas Neue', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--secondary);
+            letter-spacing: 1px;
         }
 
         .section-requirement {
             background-color: var(--secondary);
             color: white;
-            padding: 0.4rem 1rem;
+            padding: 0.4rem 1.2rem;
             border-radius: 20px;
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
         }
 
-        /* Grid for Items */
+        /* Grid for Items - NEW DESIGN */
         .items-grid {
             display: flex;
             justify-content: center;
@@ -84,21 +114,23 @@
             flex-wrap: wrap;
         }
 
-        /* NEW STYLE: Matches Uploaded Image */
+        /* Item Card - NEW STYLE matching the design */
         .item-card {
             background: #FFFFFF;
-            border: 1px solid #E0E0E0;
-            border-radius: 30px; /* High rounding like the image */
-            padding: 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 30px;
+            padding: 1.2rem;
             cursor: pointer;
             width: 180px;
+            height: 220px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
             position: relative;
+            text-align: center;
         }
 
         .item-card:hover {
@@ -110,38 +142,53 @@
         .item-card.selected {
             border: 3px solid var(--primary);
             background: #fff;
+            box-shadow: 0 6px 15px rgba(255, 235, 59, 0.2);
         }
 
         /* Image Container inside Card */
-        .item-image-wrapper {
+        .item-image-container {
             width: 140px;
             height: 140px;
             border-radius: 20px;
             overflow: hidden;
             margin-bottom: 12px;
             background: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .item-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.3s ease;
         }
 
-        /* Item Name Label - Styled like the image */
+        .item-card:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-image-container .placeholder-icon {
+            font-size: 3rem;
+            color: #aaa;
+        }
+
+        /* Item Name Label - Styled like the design */
         .item-label {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 700;
-            color: #4A5568; /* Darker gray/blue text */
+            color: #2D3748;
             margin-top: 5px;
             font-family: 'Montserrat', sans-serif;
+            line-height: 1.2;
         }
 
-        /* Checkmark Indicator */
+        /* Checkmark Indicator - NEW DESIGN */
         .select-indicator {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 12px;
+            right: 12px;
             background: var(--primary);
             color: black;
             width: 28px;
@@ -159,7 +206,7 @@
             display: flex;
         }
 
-        /* Summary & Cart Styles */
+        /* Combo Summary - NEW DESIGN */
         .combo-summary {
             background-color: white;
             border-radius: 20px;
@@ -170,114 +217,730 @@
             border: 2px solid var(--primary);
         }
 
-        .summary-title { font-family: 'Bebas Neue', cursive; font-size: 2rem; }
-        .summary-price { font-size: 1.8rem; font-weight: 800; color: #e74c3c; }
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
 
+        .summary-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.2rem;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .summary-price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #e74c3c;
+        }
+
+        .summary-items {
+            margin-bottom: 2rem;
+        }
+
+        .summary-section {
+            background-color: #f8f9fa;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary);
+        }
+
+        .summary-section-title {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .summary-section-title i {
+            color: var(--primary);
+        }
+
+        .selected-items-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .selected-item-tag {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #e0e0e0;
+            font-weight: 500;
+        }
+
+        .selected-item-tag i {
+            color: #2ecc71;
+            font-size: 0.8rem;
+        }
+
+        .empty-selection {
+            color: #999;
+            font-style: italic;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+        }
+
+        .summary-actions {
+            display: flex;
+            gap: 1rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        /* Buttons - Updated */
         .btn {
             padding: 1rem 1.5rem;
             border-radius: 12px;
             font-weight: 700;
-            cursor: pointer;
+            font-size: 1rem;
             border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             font-family: 'Montserrat', sans-serif;
-            transition: 0.3s;
+            text-decoration: none;
         }
 
-        .btn-primary { background: var(--primary); color: var(--secondary); width: 100%; }
-        .btn-primary:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--secondary);
+            flex: 2;
+        }
 
-        .cart-container { position: fixed; top: 100px; right: 20px; z-index: 999; }
+        .btn-primary:hover {
+            background-color: #ffb300;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #555;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Cart Container - Updated */
+        .cart-container {
+            position: fixed;
+            top: 100px;
+            right: 15px;
+            z-index: 999;
+        }
+
         .cart-icon {
-            background: white; border: 2px solid #35E539; width: 60px; height: 60px;
-            border-radius: 15px; display: flex; align-items: center; justify-content: center;
-            cursor: pointer; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background: #FFFFFF;
+            color: #000000;
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            border: 2px solid #35E539;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: 0.25s ease;
         }
+
+        .cart-icon:hover {
+            transform: scale(1.12);
+        }
+
         .cart-badge {
-            position: absolute; top: -5px; right: -5px; background: #35E539;
-            color: black; width: 22px; height: 22px; border-radius: 6px;
-            display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #35E539;
+            color: #000000;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
 
-        /* Cart Modal Styles */
-        .cart-modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .cart-modal-content { background: white; margin: 10% auto; padding: 0; border-radius: 20px; width: 90%; max-width: 450px; overflow: hidden; }
-        .cart-modal-header { background: var(--primary); padding: 1.5rem; display: flex; justify-content: space-between; }
-        .cart-items { padding: 1rem; max-height: 400px; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .checkout-btn { width: 100%; padding: 1.2rem; background: #25D366; color: white; border: none; font-weight: 700; cursor: pointer; }
+        /* Cart Modal - Updated */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
-        /* Responsive Mobile Styles */
+        .cart-modal-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-modal-header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 20px 20px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-modal-header h2 {
+            margin: 0;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #e74c3c;
+        }
+
+        .cart-items {
+            padding: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .empty-cart-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.95rem;
+        }
+
+        .cart-item-details {
+            font-size: 0.75rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-price {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--primary);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .quantity-display {
+            min-width: 28px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+
+        .cart-total {
+            padding: 1.2rem 1.5rem;
+            background: #f8f9fa;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            border-top: 2px solid #eee;
+        }
+
+        .cart-actions {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 2px solid #eee;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .checkout-btn:hover {
+            background: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .site-footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .site-footer p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Floating Call Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: #25D366;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 40px;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* RESPONSIVE DESIGN - MOBILE VIEW - UPDATED */
         @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+
+            .page-subtitle {
+                font-size: 1rem;
+                padding: 0 15px;
+            }
+
+            .section-title-inner {
+                font-size: 1.8rem;
+            }
+
+            .section-requirement {
+                font-size: 0.8rem;
+                padding: 0.3rem 1rem;
+            }
+
+            /* Single row for mobile */
             .items-grid {
+                display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 justify-content: flex-start;
-                padding: 10px;
+                gap: 1rem;
+                padding: 10px 5px;
                 -webkit-overflow-scrolling: touch;
+                scrollbar-width: thin;
             }
+
+            .items-grid::-webkit-scrollbar {
+                height: 4px;
+            }
+
+            .items-grid::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 4px;
+            }
+
+            .items-grid::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 4px;
+            }
+
             .item-card {
                 flex: 0 0 auto;
-                width: 150px;
+                width: 160px;
+                height: 200px;
+                min-width: 160px;
+                padding: 1rem;
             }
-            .item-image-wrapper { width: 110px; height: 110px; }
-            .item-label { font-size: 1.1rem; }
+
+            .item-image-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .item-label {
+                font-size: 1.1rem;
+            }
+
+            .summary-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+
+            .summary-title {
+                font-size: 1.8rem;
+            }
+
+            .summary-price {
+                font-size: 1.6rem;
+                text-align: left;
+            }
+
+            .summary-actions {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .cart-container {
+                top: 90px;
+                right: 10px;
+            }
+
+            .cart-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.2rem;
+            }
+
+            .cart-badge {
+                width: 22px;
+                height: 22px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .section-title-inner {
+                font-size: 1.5rem;
+            }
+
+            .items-grid {
+                gap: 0.8rem;
+            }
+
+            .item-card {
+                width: 140px;
+                height: 180px;
+                min-width: 140px;
+                padding: 0.8rem;
+            }
+
+            .item-image-container {
+                width: 100px;
+                height: 100px;
+            }
+
+            .item-label {
+                font-size: 1rem;
+            }
+
+            .combo-summary {
+                padding: 1.5rem;
+                margin: 2rem auto;
+            }
+
+            .summary-section {
+                padding: 0.8rem 1rem;
+            }
+
+            .summary-section-title {
+                font-size: 0.9rem;
+            }
+
+            .selected-item-tag {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+            }
+
+            .cart-modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .page-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .section-title-inner {
+                font-size: 1.3rem;
+            }
+
+            .items-grid {
+                gap: 0.6rem;
+            }
+
+            .item-card {
+                width: 130px;
+                height: 170px;
+                min-width: 130px;
+                padding: 0.7rem;
+            }
+
+            .item-image-container {
+                width: 90px;
+                height: 90px;
+            }
+
+            .item-label {
+                font-size: 0.95rem;
+            }
+
+            .select-indicator {
+                width: 24px;
+                height: 24px;
+                top: 10px;
+                right: 10px;
+            }
         }
     </style>
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-CFXTRJEMHN');
+</script>
 
 <body>
+    <!-- Header - Using style.css -->
     <header class="site-header">
         <div class="container">
-            <nav class="site-nav" style="padding: 20px 0; text-align: center;">
-                <a href="index.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: 700;">Menu</a>
-                <a href="make-combo.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: 700; border-bottom: 3px solid var(--primary);">Make Combo</a>
-            </nav>
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo-container">
+                        <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
+                        <div class="tagline">"Where Hunger Comes to An End"</div>
+                    </div>
+                    <nav class="site-nav">
+                        <a href="index.html" class="nav-link">Menu</a>
+                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
+                        <a href="offers.html" class="nav-link">Offers</a>
+                        <a href="about.html" class="nav-link">About</a>
+                    </nav>
+                </div>
+            </div>
         </div>
     </header>
 
+    <!-- Main Content -->
     <main>
         <div class="container">
+            <!-- Page Header -->
             <div class="page-header">
                 <h1 class="page-title">Make Your Combo</h1>
-                <p>Pick one from each section to build your meal!</p>
+                <p class="page-subtitle">Create your perfect combo meal by selecting items from each section below. All
+                    items are served in half portions for the perfect combo experience!</p>
             </div>
 
+            <!-- Combo Sections -->
             <div class="combo-sections">
-                <section class="combo-section">
+                <!-- Main Section -->
+                <section class="combo-section" id="main-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Step 1: Main</h2>
-                        <div class="section-requirement">Select 1</div>
+                        <h2 class="section-title-inner">Main</h2>
+                        <div class="section-requirement">Select 1 Item</div>
                     </div>
-                    <div class="items-grid" id="main-items"></div>
+                    <div class="items-grid" id="main-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
                 </section>
 
-                <section class="combo-section">
+                <!-- Crispy Side Section -->
+                <section class="combo-section" id="crispy-side-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Step 2: Crispy Side</h2>
-                        <div class="section-requirement">Select 1</div>
+                        <h2 class="section-title-inner">Crispy Side</h2>
+                        <div class="section-requirement">Select 1 Item</div>
                     </div>
-                    <div class="items-grid" id="crispy-side-items"></div>
+                    <div class="items-grid" id="crispy-side-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
                 </section>
 
-                <section class="combo-section">
+                <!-- Mo:Mo Section -->
+                <section class="combo-section" id="momo-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Step 3: Mo:Mo</h2>
-                        <div class="section-requirement">Select 1</div>
+                        <h2 class="section-title-inner">Mo:Mo</h2>
+                        <div class="section-requirement">Select 1 Item</div>
                     </div>
-                    <div class="items-grid" id="momo-items"></div>
+                    <div class="items-grid" id="momo-items">
+                        <!-- Items will be populated by JavaScript -->
+                    </div>
                 </section>
             </div>
 
+            <!-- Combo Summary -->
             <div class="combo-summary" id="combo-summary">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h3 class="summary-title">Your Custom Combo</h3>
-                    <div class="summary-price" id="combo-price">Rs 0</div>
+                <div class="summary-header">
+                    <h3 class="summary-title">Your Combo</h3>
+                    <div class="summary-price">
+                        <span id="combo-price">Rs 0</span>
+                    </div>
                 </div>
-                <button class="btn btn-primary" id="add-to-cart-btn" disabled>Complete Selection to Add</button>
+
+                <div class="summary-items">
+                    <div class="summary-section">
+                        <div class="summary-section-title">
+                            <i class="fas fa-utensils"></i> Main - 1 Item
+                        </div>
+                        <div class="selected-items-list" id="selected-main">
+                            <div class="empty-selection">No item selected yet</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="summary-section-title">
+                            <i class="fas fa-bacon"></i> Crispy Side - 1 Item
+                        </div>
+                        <div class="selected-items-list" id="selected-crispy-side">
+                            <div class="empty-selection">No item selected yet</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-section">
+                        <div class="summary-section-title">
+                            <i class="fas fa-dumpling"></i> Mo:Mo - 1 Item
+                        </div>
+                        <div class="selected-items-list" id="selected-momo">
+                            <div class="empty-selection">No item selected yet</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-actions">
+                    <button class="btn btn-secondary" id="reset-btn">
+                        <i class="fas fa-redo"></i> Reset Combo
+                    </button>
+                    <button class="btn btn-primary" id="add-to-cart-btn" disabled>
+                        <i class="fas fa-cart-plus"></i> Add Combo to Cart
+                    </button>
+                </div>
             </div>
         </div>
     </main>
 
+    <!-- Cart Container -->
     <div class="cart-container">
         <div class="cart-icon" id="cartIcon">
             <i class="fas fa-shopping-cart"></i>
@@ -285,116 +948,535 @@
         </div>
     </div>
 
+    <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h2 style="font-family: 'Bebas Neue';">Your Order</h2>
-                <span id="closeCart" style="cursor:pointer; font-size: 1.5rem;">&times;</span>
+                <h2>Your Order</h2>
+                <span class="close-cart" id="closeCart">&times;</span>
             </div>
-            <div class="cart-items" id="cartItems"></div>
-            <div id="cartTotal" style="padding: 1.5rem; font-weight: 800; text-align: right; border-top: 1px solid #eee;">Total: Rs 0</div>
-            <button class="checkout-btn" id="checkoutBtn">Order via WhatsApp</button>
+            <div class="cart-items" id="cartItems">
+                <div class="empty-cart-message" id="emptyCartMessage">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Your cart is empty</p>
+                </div>
+            </div>
+            <div class="cart-total" id="cartTotal">
+                Total: Rs 0
+            </div>
+            <div class="cart-actions">
+                <button class="checkout-btn" id="checkoutBtn">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Confirm Location
+                </button>
+            </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Floating Call Button -->
+    <a class="floating-whatsapp" href="tel:+9779847375984">
+        <i class="fas fa-phone-alt"></i> Call Now
+    </a>
+
     <script>
+        // Combo Items Data - Updated with direct half serving prices
         const COMBO_ITEMS = {
             main: [
-                { id: 1, name: "Sandwich", price: 85, image: "images/categories/sandwich.jpg" },
-                { id: 2, name: "Fried Rice", price: 90, image: "images/categories/fried-rice.jpg" },
-                { id: 3, name: "Chowmein", price: 90, image: "images/categories/chowmein.jpg" }
+                {
+                    id: 1,
+                    name: "Sandwich",
+                    price: 85, // Direct half serving price
+                    image: "images/categories/sandwich.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Fried Rice",
+                    price: 90, // Direct half serving price
+                    image: "images/categories/fried-rice.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Chowmein",
+                    price: 90, // Direct half serving price
+                    image: "images/categories/chowmein.jpg"
+                }
             ],
             crispySide: [
-                { id: 4, name: "Chicken Nuggets", price: 110, image: "images/categories/chicken-nuggets.jpg" },
-                { id: 5, name: "Paneer Nuggets", price: 100, image: "images/categories/paneer-nuggets.jpg" },
-                { id: 6, name: "Battered Fries", price: 75, image: "images/categories/battered-fries.jpg" }
+                {
+                    id: 4,
+                    name: "Chicken Nuggets",
+                    price: 110, // Direct half serving price
+                    image: "images/categories/chicken-nuggets.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Paneer Nuggets",
+                    price: 100, // Direct half serving price
+                    image: "images/categories/paneer-nuggets.jpg"
+                },
+                {
+                    id: 6,
+                    name: "Battered Fries",
+                    price: 75, // Direct half serving price
+                    image: "images/categories/battered-fries.jpg"
+                }
             ],
             momo: [
-                { id: 7, name: "Chicken Mo:Mo", price: 110, image: "images/categories/chicken-momo.jpg" },
-                { id: 8, name: "Paneer Mo:Mo", price: 100, image: "images/categories/paneer-momo.jpg" },
-                { id: 9, name: "Aloo Mo:Mo", price: 90, image: "images/categories/aloo-momo.jpg" }
+                {
+                    id: 7,
+                    name: "Chicken Mo:Mo",
+                    price: 110, // Direct half serving price
+                    image: "images/categories/chicken-momo.jpg"
+                },
+                {
+                    id: 8,
+                    name: "Paneer Mo:Mo",
+                    price: 100, // Direct half serving price
+                    image: "images/categories/paneer-momo.jpg"
+                },
+                {
+                    id: 9,
+                    name: "Aloo Mo:Mo",
+                    price: 90, // Direct half serving price
+                    image: "images/categories/aloo-momo.jpg"
+                }
             ]
         };
 
-        let cart = JSON.parse(localStorage.getItem('daAlooCart')) || [];
+        // Shopping cart
+        let cart = [];
         let selectedMain = null;
         let selectedCrispySide = null;
         let selectedMomo = null;
 
+        // Load cart from localStorage
+        function loadCart() {
+            try {
+                const savedCart = localStorage.getItem('daAlooCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    console.log('Cart loaded from localStorage:', cart);
+                }
+            } catch (error) {
+                console.error('Error loading cart:', error);
+                cart = [];
+            }
+        }
+
+        // Save cart to localStorage
+        function saveCart() {
+            try {
+                localStorage.setItem('daAlooCart', JSON.stringify(cart));
+            } catch (error) {
+                console.error('Error saving cart:', error);
+                sessionStorage.setItem('daAlooCart', JSON.stringify(cart));
+            }
+        }
+
+        // Generate item cards for a section - UPDATED FOR NEW DESIGN
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
+            if (!container) return;
+
             container.innerHTML = '';
 
             items.forEach(item => {
                 let isSelected = false;
-                if(sectionType === 'main') isSelected = selectedMain?.id === item.id;
-                if(sectionType === 'crispySide') isSelected = selectedCrispySide?.id === item.id;
-                if(sectionType === 'momo') isSelected = selectedMomo?.id === item.id;
+
+                // Check if this item is selected based on section type
+                switch (sectionType) {
+                    case 'main':
+                        isSelected = selectedMain && selectedMain.id === item.id;
+                        break;
+                    case 'crispySide':
+                        isSelected = selectedCrispySide && selectedCrispySide.id === item.id;
+                        break;
+                    case 'momo':
+                        isSelected = selectedMomo && selectedMomo.id === item.id;
+                        break;
+                }
 
                 const card = document.createElement('div');
                 card.className = `item-card ${isSelected ? 'selected' : ''}`;
-                
+                card.setAttribute('data-id', item.id);
+                card.setAttribute('data-section', sectionType);
+                card.setAttribute('title', `${item.name} - Rs ${item.price}`);
+
                 card.innerHTML = `
-                    <div class="select-indicator"><i class="fas fa-check"></i></div>
-                    <div class="item-image-wrapper">
-                        <img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/150'">
+                    <div class="select-indicator">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="item-image-container">
+                        ${item.image
+                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/><text x=\"70\" y=\"75\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
+                        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
+                    }
                     </div>
                     <div class="item-label">${item.name}</div>
                 `;
 
-                card.onclick = () => {
-                    if(sectionType === 'main') selectedMain = isSelected ? null : item;
-                    if(sectionType === 'crispySide') selectedCrispySide = isSelected ? null : item;
-                    if(sectionType === 'momo') selectedMomo = isSelected ? null : item;
-                    updateUI();
-                };
+                card.addEventListener('click', () => toggleSelection(item, sectionType));
                 container.appendChild(card);
             });
         }
 
+        // Toggle item selection
+        function toggleSelection(item, sectionType) {
+            switch (sectionType) {
+                case 'main':
+                    selectedMain = selectedMain && selectedMain.id === item.id ? null : {
+                        ...item
+                    };
+                    break;
+                case 'crispySide':
+                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
+                        ...item
+                    };
+                    break;
+                case 'momo':
+                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
+                        ...item
+                    };
+                    break;
+            }
+
+            updateUI();
+        }
+
+        // Calculate combo price
+        function calculateComboPrice() {
+            let total = 0;
+
+            if (selectedMain) {
+                total += selectedMain.price;
+            }
+
+            if (selectedCrispySide) {
+                total += selectedCrispySide.price;
+            }
+
+            if (selectedMomo) {
+                total += selectedMomo.price;
+            }
+
+            return total;
+        }
+
+        // Update UI based on selections
         function updateUI() {
+            // Update item cards
             generateItemCards('main-items', COMBO_ITEMS.main, 'main');
             generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
             generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
 
-            const total = (selectedMain?.price || 0) + (selectedCrispySide?.price || 0) + (selectedMomo?.price || 0);
-            document.getElementById('combo-price').textContent = `Rs ${total}`;
+            // Update selected items display
+            updateSelectedItemsDisplay();
 
-            const btn = document.getElementById('add-to-cart-btn');
-            const isComplete = selectedMain && selectedCrispySide && selectedMomo;
-            btn.disabled = !isComplete;
-            btn.textContent = isComplete ? `Add Combo to Cart (Rs ${total})` : "Select one from each section";
+            // Calculate and update price
+            const totalPrice = calculateComboPrice();
+
+            document.getElementById('combo-price').textContent = `Rs ${totalPrice}`;
+
+            // Enable/disable add to cart button
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            const isComboComplete = selectedMain !== null && selectedCrispySide !== null && selectedMomo !== null;
+
+            addToCartBtn.disabled = !isComboComplete;
+
+            if (isComboComplete) {
+                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo - Rs ${totalPrice}`;
+            } else {
+                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo to Cart`;
+            }
         }
 
-        document.getElementById('add-to-cart-btn').onclick = () => {
-            const total = (selectedMain.price + selectedCrispySide.price + selectedMomo.price);
-            const combo = {
-                id: Date.now(),
-                name: "Custom Combo",
-                details: `${selectedMain.name}, ${selectedCrispySide.name}, ${selectedMomo.name}`,
-                price: total,
-                quantity: 1
+        // Update selected items display
+        function updateSelectedItemsDisplay() {
+            const mainContainer = document.getElementById('selected-main');
+            const crispySideContainer = document.getElementById('selected-crispy-side');
+            const momoContainer = document.getElementById('selected-momo');
+
+            // Update Main item
+            if (selectedMain) {
+                mainContainer.innerHTML = '';
+                const tag = document.createElement('div');
+                tag.className = 'selected-item-tag';
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedMain.name} (Rs ${selectedMain.price})
+                `;
+                mainContainer.appendChild(tag);
+            } else {
+                mainContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+            }
+
+            // Update Crispy Side item
+            if (selectedCrispySide) {
+                crispySideContainer.innerHTML = '';
+                const tag = document.createElement('div');
+                tag.className = 'selected-item-tag';
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.price})
+                `;
+                crispySideContainer.appendChild(tag);
+            } else {
+                crispySideContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+            }
+
+            // Update Mo:Mo item
+            if (selectedMomo) {
+                momoContainer.innerHTML = '';
+                const tag = document.createElement('div');
+                tag.className = 'selected-item-tag';
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedMomo.name} (Rs ${selectedMomo.price})
+                `;
+                momoContainer.appendChild(tag);
+            } else {
+                momoContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
+            }
+        }
+
+        // Reset combo selections
+        function resetCombo() {
+            if (confirm('Are you sure you want to reset your combo? All selections will be lost.')) {
+                selectedMain = null;
+                selectedCrispySide = null;
+                selectedMomo = null;
+                updateUI();
+            }
+        }
+
+        // Add combo to cart
+        function addComboToCart() {
+            const totalPrice = calculateComboPrice();
+
+            // Create combo item description
+            const comboItem = {
+                id: `combo-${Date.now()}`,
+                name: `Custom Combo: ${selectedMain.name} + ${selectedCrispySide.name} + ${selectedMomo.name}`,
+                price: totalPrice,
+                quantity: 1,
+                details: `Main: ${selectedMain.name} (Rs ${selectedMain.price}) | Side: ${selectedCrispySide.name} (Rs ${selectedCrispySide.price}) | Mo:Mo: ${selectedMomo.name} (Rs ${selectedMomo.price})`,
+                type: 'combo'
             };
-            cart.push(combo);
-            localStorage.setItem('daAlooCart', JSON.stringify(cart));
-            updateCartBadge();
-            alert("Combo Added!");
-            selectedMain = selectedCrispySide = selectedMomo = null;
-            updateUI();
-        };
 
-        function updateCartBadge() {
-            document.getElementById('cartBadge').textContent = cart.length;
+            // Add to cart
+            cart.push(comboItem);
+            saveCart();
+            updateCartBadge();
+
+            // Show feedback
+            const addToCartBtn = document.getElementById('add-to-cart-btn');
+            const originalText = addToCartBtn.innerHTML;
+            addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
+            addToCartBtn.style.background = '#2ecc71';
+
+            setTimeout(() => {
+                addToCartBtn.innerHTML = originalText;
+                addToCartBtn.style.background = '';
+            }, 1500);
+
+            // Open cart modal
+            openCartModal();
+
+            // Reset combo for next order
+            setTimeout(() => {
+                selectedMain = null;
+                selectedCrispySide = null;
+                selectedMomo = null;
+                updateUI();
+            }, 2000);
         }
 
-        // Basic Cart Toggle Logic
-        document.getElementById('cartIcon').onclick = () => document.getElementById('cartModal').style.display = 'block';
-        document.getElementById('closeCart').onclick = () => document.getElementById('cartModal').style.display = 'none';
+        // Cart functionality
+        function setupCart() {
+            const cartIcon = document.getElementById('cartIcon');
+            const cartModal = document.getElementById('cartModal');
+            const closeCart = document.getElementById('closeCart');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+            const cartItemsContainer = document.getElementById('cartItems');
 
-        window.onload = () => {
-            updateUI();
+            // Open cart modal
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'block';
+                updateCartDisplay();
+            });
+
+            // Close cart modal
+            closeCart.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+
+            // Checkout - Redirect to location page
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                // Save cart and redirect to location page
+                saveCart();
+                window.location.href = 'location.html';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+
+            // Event Delegation for Cart Actions
+            if (cartItemsContainer) {
+                cartItemsContainer.addEventListener('click', handleCartItemClick);
+            }
+        }
+
+        // Open cart modal
+        function openCartModal() {
+            const cartModal = document.getElementById('cartModal');
+            cartModal.style.display = 'block';
+            updateCartDisplay();
+        }
+
+        // Update cart display
+        function updateCartDisplay() {
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            const emptyCartMessage = document.getElementById('emptyCartMessage');
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="empty-cart-message" id="emptyCartMessage">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>Your cart is empty</p>
+                    </div>`;
+                cartTotal.textContent = 'Total: Rs 0';
+                return;
+            }
+
+            // Hide empty cart message
+            if (emptyCartMessage) {
+                emptyCartMessage.style.display = 'none';
+            }
+
+            let itemsHTML = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+
+                itemsHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name} × ${item.quantity}</div>
+                            ${item.details ? `<div class="cart-item-details">${item.details}</div>` : ''}
+                            <div class="cart-item-price">Rs ${itemTotal}</div>
+                        </div>
+                        <div class="cart-item-controls">
+                            <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
+                            <button class="remove-btn" data-index="${index}"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItems.innerHTML = itemsHTML;
+            cartTotal.textContent = `Total: Rs ${total}`;
+        }
+
+        // Handle cart item click events
+        function handleCartItemClick(e) {
+            // Handle quantity buttons
+            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
+                const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
+                const index = parseInt(button.getAttribute('data-index'));
+                const action = button.getAttribute('data-action');
+
+                if (action === 'increase') {
+                    cart[index].quantity += 1;
+                } else if (action === 'decrease') {
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
+                    } else {
+                        cart.splice(index, 1);
+                        saveCart();
+                        updateCartBadge();
+                        updateCartDisplay();
+                        return; // Exit if item removed
+                    }
+                }
+
+                saveCart();
+                updateCartBadge();
+                updateCartDisplay();
+            }
+
+            // Handle remove buttons
+            if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
+                const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
+                const index = parseInt(button.getAttribute('data-index'));
+
+                if (confirm('Remove Item?')) {
+                    cart.splice(index, 1);
+                    saveCart();
+                    updateCartBadge();
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        // Update cart badge
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            badge.textContent = totalItems;
+
+            // Add bounce animation
+            badge.classList.add('bounce');
+            setTimeout(() => badge.classList.remove('bounce'), 300);
+        }
+
+        // Initialize the page
+        function init() {
+            // Load cart from storage
+            loadCart();
+
+            // Generate initial item cards
+            generateItemCards('main-items', COMBO_ITEMS.main, 'main');
+            generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
+            generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
+
+            // Update cart badge
             updateCartBadge();
-        };
+
+            // Setup cart event listeners
+            setupCart();
+
+            // Setup combo buttons
+            document.getElementById('reset-btn').addEventListener('click', resetCombo);
+            document.getElementById('add-to-cart-btn').addEventListener('click', addComboToCart);
+
+            // Set footer year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+        }
+
+        // Run init on page load
+        document.addEventListener('DOMContentLoaded', init);
+
     </script>
 </body>
+
 </html>
