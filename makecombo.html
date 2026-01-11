@@ -151,22 +151,22 @@
             flex-wrap: wrap;
         }
 
-        /* Desktop item cards - SMALLER */
+        /* Desktop item cards - IMAGE ONLY */
         .item-card {
             background: linear-gradient(135deg, #ffffff, #f7f7f7);
             border: 2px solid #e0e0e0;
             border-radius: 16px;
-            padding: 1rem;
+            padding: 0.8rem;
             cursor: pointer;
             font-weight: 600;
             color: #555;
             transition: all 0.25s ease;
-            width: 160px; /* Reduced from 180px */
-            height: 160px; /* Reduced from 180px */
+            width: 140px; /* Reduced for image-only */
+            height: 140px; /* Reduced for image-only */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             box-sizing: border-box;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
             font-family: 'Montserrat', sans-serif;
@@ -194,14 +194,13 @@
             pointer-events: none;
         }
 
-        /* Image container - REVISED for better image display */
+        /* Image container - FILLS MOST OF THE CARD */
         .item-image-container {
-            height: 80px; /* Increased to give more space for image */
-            width: 80px; /* Increased to give more space for image */
-            min-height: 80px; /* Increased to give more space for image */
+            height: 100px; /* Larger for image-only layout */
+            width: 100px; /* Larger for image-only layout */
+            min-height: 100px; /* Larger for image-only layout */
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 0.8rem; /* Reduced from 1rem */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -221,70 +220,26 @@
         }
 
         .item-image-container .placeholder-icon {
-            font-size: 2rem; /* Increased to fill space */
+            font-size: 2.5rem; /* Larger for image-only layout */
             color: #aaa;
         }
 
-        /* Item content - ADJUSTED for new layout */
-        .item-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            width: 100%;
-            flex: 1;
-            margin-top: auto; /* Push to bottom */
-        }
-
-        .item-name {
-            font-weight: 700;
-            font-size: 0.85rem; /* Reduced from 0.9rem */
-            margin-bottom: 0.3rem; /* Reduced from 0.4rem */
-            color: var(--secondary);
-            line-height: 1.2;
-            font-family: 'Montserrat', sans-serif;
-            max-width: 100%;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .item-description {
-            font-size: 0.7rem; /* Reduced from 0.75rem */
-            color: #666;
-            margin-bottom: 0.5rem; /* Reduced from 0.6rem */
-            line-height: 1.3;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            min-height: 2.2rem; /* Reduced from 2.6rem */
-        }
-
-        .item-price-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.2rem;
-            width: 100%;
-            margin-top: auto;
-        }
-
+        /* REMOVED: All text content styles */
+        .item-content,
+        .item-name,
+        .item-description,
+        .item-price-container,
         .item-price {
-            font-weight: 700;
-            font-size: 0.85rem; /* Reduced from 0.9rem */
-            color: var(--secondary);
-            font-family: 'Montserrat', sans-serif;
+            display: none; /* Hide all text elements */
         }
 
         /* Selection indicator - SMALLER */
         .select-indicator {
             position: absolute;
-            top: 10px; /* Reduced from 12px */
-            right: 10px; /* Reduced from 12px */
-            width: 20px; /* Reduced from 22px */
-            height: 20px; /* Reduced from 22px */
+            top: 8px; /* Adjusted position */
+            right: 8px; /* Adjusted position */
+            width: 24px; /* Slightly larger for visibility */
+            height: 24px; /* Slightly larger for visibility */
             border-radius: 50%;
             border: 2px solid #ccc;
             display: flex;
@@ -303,7 +258,7 @@
         }
 
         .select-indicator i {
-            font-size: 0.65rem; /* Reduced from 0.7rem */
+            font-size: 0.8rem; /* Slightly larger */
         }
 
         /* Combo Summary */
@@ -744,7 +699,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Desktop-specific styles - UPDATED for smaller cards */
+        /* Desktop-specific styles - UPDATED for image-only cards */
         @media (min-width: 769px) {
             .items-grid {
                 display: flex;
@@ -754,14 +709,14 @@
             }
 
             .item-card {
-                width: 160px; /* Keep consistent size */
-                height: 160px; /* Keep consistent size */
-                padding: 1rem;
+                width: 140px; /* Keep consistent size */
+                height: 140px; /* Keep consistent size */
+                padding: 0.8rem;
             }
 
             .item-image-container {
-                height: 80px; /* Increased for better image display */
-                width: 80px; /* Increased for better image display */
+                height: 100px; /* Keep consistent size */
+                width: 100px; /* Keep consistent size */
             }
 
             .cart-container {
@@ -826,43 +781,27 @@
 
             .item-card {
                 flex: 0 0 auto; /* Don't grow or shrink, base on width */
-                width: 150px; /* Even smaller for mobile */
-                height: 150px; /* Even smaller for mobile */
-                min-width: 150px; /* Prevent shrinking */
-                padding: 0.8rem;
+                width: 120px; /* Even smaller for mobile */
+                height: 120px; /* Even smaller for mobile */
+                min-width: 120px; /* Prevent shrinking */
+                padding: 0.6rem;
             }
 
             .item-image-container {
-                height: 70px; /* Smaller for mobile but still good size */
-                width: 70px; /* Smaller for mobile but still good size */
-                min-height: 70px; /* Smaller for mobile but still good size */
-                margin-bottom: 0.6rem;
-            }
-
-            .item-name {
-                font-size: 0.85rem;
-                margin-bottom: 0.3rem;
-            }
-
-            .item-description {
-                font-size: 0.7rem;
-                margin-bottom: 0.5rem;
-                min-height: 2rem; /* Reduced for mobile */
-            }
-
-            .item-price {
-                font-size: 0.85rem;
+                height: 90px; /* Smaller for mobile but still large */
+                width: 90px; /* Smaller for mobile but still large */
+                min-height: 90px; /* Smaller for mobile but still large */
             }
 
             .select-indicator {
-                width: 18px; /* Smaller for mobile */
-                height: 18px; /* Smaller for mobile */
-                top: 8px; /* Adjusted position */
-                right: 8px; /* Adjusted position */
+                width: 22px; /* Adjusted for mobile */
+                height: 22px; /* Adjusted for mobile */
+                top: 6px; /* Adjusted position */
+                right: 6px; /* Adjusted position */
             }
 
             .select-indicator i {
-                font-size: 0.6rem; /* Smaller for mobile */
+                font-size: 0.7rem; /* Adjusted for mobile */
             }
 
             .summary-header {
@@ -911,25 +850,16 @@
             }
 
             .item-card {
-                width: 140px; /* Smaller for very small screens */
-                height: 140px; /* Smaller for very small screens */
-                min-width: 140px;
-                padding: 0.7rem;
+                width: 110px; /* Smaller for very small screens */
+                height: 110px; /* Smaller for very small screens */
+                min-width: 110px;
+                padding: 0.5rem;
             }
 
             .item-image-container {
-                height: 65px; /* Adjusted for very small screens */
-                width: 65px; /* Adjusted for very small screens */
-                min-height: 65px;
-            }
-
-            .item-name {
-                font-size: 0.8rem;
-            }
-
-            .item-description {
-                font-size: 0.65rem;
-                min-height: 1.8rem; /* Further reduced */
+                height: 85px; /* Adjusted for very small screens */
+                width: 85px; /* Adjusted for very small screens */
+                min-height: 85px;
             }
 
             .combo-instructions {
@@ -999,43 +929,27 @@
             }
 
             .item-card {
-                width: 130px; /* Smallest size for tiny screens */
-                height: 130px; /* Smallest size for tiny screens */
-                min-width: 130px;
-                padding: 0.6rem;
+                width: 100px; /* Smallest size for tiny screens */
+                height: 100px; /* Smallest size for tiny screens */
+                min-width: 100px;
+                padding: 0.4rem;
             }
 
             .item-image-container {
-                height: 60px; /* Smallest size for tiny screens */
-                width: 60px; /* Smallest size for tiny screens */
-                min-height: 60px;
-                margin-bottom: 0.5rem;
-            }
-
-            .item-name {
-                font-size: 0.75rem;
-                margin-bottom: 0.2rem;
-            }
-
-            .item-description {
-                font-size: 0.6rem;
-                margin-bottom: 0.4rem;
-                min-height: 1.6rem; /* Smallest */
-            }
-
-            .item-price {
-                font-size: 0.75rem;
+                height: 80px; /* Smallest size for tiny screens */
+                width: 80px; /* Smallest size for tiny screens */
+                min-height: 80px;
             }
 
             .select-indicator {
-                width: 16px;
-                height: 16px;
-                top: 6px;
-                right: 6px;
+                width: 20px;
+                height: 20px;
+                top: 5px;
+                right: 5px;
             }
 
             .select-indicator i {
-                font-size: 0.55rem;
+                font-size: 0.6rem;
             }
 
             .cart-modal-content {
@@ -1224,21 +1138,18 @@
                 {
                     id: 1,
                     name: "Sandwich",
-                    description: "Delicious sandwich with fresh ingredients",
                     price: 85, // Direct half serving price
                     image: "images/categories/sandwich.jpg"
                 },
                 {
                     id: 2,
                     name: "Fried Rice",
-                    description: "Flavorful fried rice with vegetables and spices",
                     price: 90, // Direct half serving price
                     image: "images/categories/fried-rice.jpg"
                 },
                 {
                     id: 3,
                     name: "Chowmein",
-                    description: "Stir-fried noodles with vegetables and seasonings",
                     price: 90, // Direct half serving price
                     image: "images/categories/chowmein.jpg"
                 }
@@ -1247,21 +1158,18 @@
                 {
                     id: 4,
                     name: "Chicken Nuggets",
-                    description: "Crispy chicken nuggets with special seasoning",
                     price: 110, // Direct half serving price
                     image: "images/categories/chicken-nuggets.jpg"
                 },
                 {
                     id: 5,
                     name: "Paneer Nuggets",
-                    description: "Crispy paneer nuggets with herbs",
                     price: 100, // Direct half serving price
                     image: "images/categories/paneer-nuggets.jpg"
                 },
                 {
                     id: 6,
                     name: "Battered Fries",
-                    description: "Crispy battered potato fries",
                     price: 75, // Direct half serving price
                     image: "images/categories/battered-fries.jpg"
                 }
@@ -1270,21 +1178,18 @@
                 {
                     id: 7,
                     name: "Chicken Mo:Mo",
-                    description: "Steamed dumplings with chicken filling",
                     price: 110, // Direct half serving price
                     image: "images/categories/chicken-momo.jpg"
                 },
                 {
                     id: 8,
                     name: "Paneer Mo:Mo",
-                    description: "Steamed dumplings with paneer filling",
                     price: 100, // Direct half serving price
                     image: "images/categories/paneer-momo.jpg"
                 },
                 {
                     id: 9,
                     name: "Aloo Mo:Mo",
-                    description: "Steamed dumplings with potato filling",
                     price: 90, // Direct half serving price
                     image: "images/categories/aloo-momo.jpg"
                 }
@@ -1321,7 +1226,7 @@
             }
         }
 
-        // Generate item cards for a section
+        // Generate item cards for a section - IMAGE ONLY VERSION
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1348,6 +1253,7 @@
                 card.className = `item-card ${isSelected ? 'selected' : ''}`;
                 card.setAttribute('data-id', item.id);
                 card.setAttribute('data-section', sectionType);
+                card.setAttribute('title', `${item.name} - Rs ${item.price}`); // Tooltip with name and price
 
                 card.innerHTML = `
                     <div class="select-indicator">
@@ -1358,15 +1264,6 @@
                         ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
                         : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
                     }
-                    </div>
-                    <div class="item-content">
-                        <div class="item-name">${item.name}</div>
-                        <div class="item-description">${item.description}</div>
-                        <div class="item-price-container">
-                            <div class="item-price">
-                                Rs ${item.price}
-                            </div>
-                        </div>
                     </div>
                 `;
 
