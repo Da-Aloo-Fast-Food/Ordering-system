@@ -1100,18 +1100,17 @@
                 card.setAttribute('data-section', sectionType);
                 card.setAttribute('title', `${item.name} - Rs ${item.price}`);
 
-                card.innerHTML = `
-                    <div class="select-indicator">
-                        <i class="fas fa-check"></i>
-                    </div>
-                    <div class="item-image-container">
-   <div class="item-image-container">
-    ${item.image
-        ? `<img src="${item.image}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/></svg>'">`
-        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
-    }
-</div>
-<div class="item-name"><strong>${item.name}</strong></div>
+               card.innerHTML = `
+    <div class="select-indicator">
+        <i class="fas fa-check"></i>
+    </div>
+    <div class="item-image-container">
+        ${item.image
+            ? `<img src="${item.image}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"140\" height=\"140\" viewBox=\"0 0 140 140\"><rect width=\"140\" height=\"140\" fill=\"%23f0f0f0\" rx=\"20\"/></svg>'">`
+            : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
+        }
+    </div>
+    <div class="item-name"><strong>${item.name}</strong></div>
 `;
 
 card.addEventListener('click', () => toggleSelection(item, sectionType));
@@ -1470,6 +1469,7 @@ container.appendChild(card);
 </body>
 
 </html>
+
 
 
 
