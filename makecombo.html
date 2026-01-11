@@ -13,13 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS Variables from your existing site */
         :root {
             --primary: #FFEB3B;
-            /* Specific yellow used in index.html */
             --primary-hover: #FDD835;
             --secondary: #000000;
-            --bg-light: #f4f4f4;
+            --bg-light: #fef9e7; /* Light yellow background like the image */
         }
 
         body {
@@ -35,29 +33,10 @@
             padding: 0 20px;
         }
 
-        /* Main Content Area */
-        main {
-            padding: 2rem 0;
-        }
-
-        .section-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.8rem;
-            color: var(--secondary);
-            letter-spacing: 1.5px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        .center {
-            text-align: center;
-        }
-
         /* Page Header */
         .page-header {
             text-align: center;
             padding: 1.5rem 0;
-            background: linear-gradient(to right, #fef9e7, #fff);
             margin-bottom: 1.5rem;
         }
 
@@ -66,1027 +45,239 @@
             font-size: 3rem;
             color: var(--secondary);
             letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
         }
 
-        .page-subtitle {
-            color: #666;
-            font-size: 1rem;
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-
-        /* Combo Builder Sections */
-        .combo-instructions {
-            background-color: #f9f9f9;
-            padding: 1.2rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .instructions-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .instructions-list {
-            padding-left: 1.2rem;
-            color: #555;
-        }
-
-        .instructions-list li {
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-        }
-
-        .combo-sections {
-            margin-bottom: 2rem;
-        }
-
-        /* Combo Section Cards */
+        /* Combo Section Layout */
         .combo-section {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.8rem;
-            border-bottom: 2px solid #f9f9f9;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.5rem;
         }
 
         .section-title-inner {
             font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: var(--secondary);
-            letter-spacing: 1px;
         }
 
         .section-requirement {
-            background-color: var(--primary);
-            color: var(--secondary);
-            padding: 0.3rem 0.8rem;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.4rem 1rem;
             border-radius: 20px;
             font-weight: 600;
             font-size: 0.8rem;
         }
 
-        /* Category-style Item Grid - UPDATED */
+        /* Grid for Items */
         .items-grid {
             display: flex;
             justify-content: center;
-            gap: 1rem;
-            margin-top: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
         }
 
-        /* Desktop item cards - IMAGE ONLY */
+        /* NEW STYLE: Matches Uploaded Image */
         .item-card {
-            background: linear-gradient(135deg, #ffffff, #f7f7f7);
-            border: 2px solid #e0e0e0;
-            border-radius: 16px;
-            padding: 0.8rem;
+            background: #FFFFFF;
+            border: 1px solid #E0E0E0;
+            border-radius: 30px; /* High rounding like the image */
+            padding: 15px;
             cursor: pointer;
-            font-weight: 600;
-            color: #555;
-            transition: all 0.25s ease;
-            width: 140px; /* Reduced for image-only */
-            height: 140px; /* Reduced for image-only */
+            width: 180px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-sizing: border-box;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
-            font-family: 'Montserrat', sans-serif;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
         }
 
         .item-card.selected {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: var(--secondary);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
+            border: 3px solid var(--primary);
+            background: #fff;
         }
 
-        .item-card.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* Image container - FILLS MOST OF THE CARD */
-        .item-image-container {
-            height: 100px; /* Larger for image-only layout */
-            width: 100px; /* Larger for image-only layout */
-            min-height: 100px; /* Larger for image-only layout */
-            border-radius: 10px;
+        /* Image Container inside Card */
+        .item-image-wrapper {
+            width: 140px;
+            height: 140px;
+            border-radius: 20px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-            position: relative;
+            margin-bottom: 12px;
+            background: #f9f9f9;
         }
 
         .item-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Fill the container */
-            transition: transform 0.3s ease;
+            object-fit: cover;
         }
 
-        .item-card:hover .item-image {
-            transform: scale(1.1);
+        /* Item Name Label - Styled like the image */
+        .item-label {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4A5568; /* Darker gray/blue text */
+            margin-top: 5px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .item-image-container .placeholder-icon {
-            font-size: 2.5rem; /* Larger for image-only layout */
-            color: #aaa;
-        }
-
-        /* REMOVED: All text content styles */
-        .item-content,
-        .item-name,
-        .item-description,
-        .item-price-container,
-        .item-price {
-            display: none; /* Hide all text elements */
-        }
-
-        /* Selection indicator - SMALLER */
+        /* Checkmark Indicator */
         .select-indicator {
             position: absolute;
-            top: 8px; /* Adjusted position */
-            right: 8px; /* Adjusted position */
-            width: 24px; /* Slightly larger for visibility */
-            height: 24px; /* Slightly larger for visibility */
+            top: 10px;
+            right: 10px;
+            background: var(--primary);
+            color: black;
+            width: 28px;
+            height: 28px;
             border-radius: 50%;
-            border: 2px solid #ccc;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.95);
-            transition: all 0.25s ease;
+            font-size: 0.9rem;
             z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .item-card.selected .select-indicator {
-            background-color: var(--secondary);
-            border-color: var(--secondary);
-            color: var(--primary);
-            transform: scale(1.1);
+            display: flex;
         }
 
-        .select-indicator i {
-            font-size: 0.8rem; /* Slightly larger */
-        }
-
-        /* Combo Summary */
+        /* Summary & Cart Styles */
         .combo-summary {
-            background-color: #f9f9f9;
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem auto;
+            background-color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 3rem auto;
             max-width: 800px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 2px solid var(--primary);
         }
 
-        .summary-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        .summary-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
-            color: var(--secondary);
-            letter-spacing: 1px;
-        }
-
-        .summary-price {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #e74c3c;
-            text-align: right;
-        }
-
-        .summary-items {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
-        }
-
-        .summary-section {
-            background-color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            border-left: 4px solid var(--primary);
-        }
-
-        .summary-section-title {
-            font-weight: 600;
-            color: var(--secondary);
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.9rem;
-        }
-
-        .summary-section-title i {
-            color: var(--primary);
-        }
-
-        .selected-items-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .selected-item-tag {
-            background-color: #f0f0f0;
-            padding: 0.4rem 0.8rem;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .selected-item-tag i {
-            color: #2ecc71;
-            font-size: 0.7rem;
-        }
-
-        .empty-selection {
-            color: #999;
-            font-style: italic;
-            font-size: 0.8rem;
-        }
-
-        .summary-actions {
-            display: flex;
-            gap: 0.8rem;
-            padding-top: 1.2rem;
-            border-top: 1px solid #e0e0e0;
-        }
+        .summary-title { font-family: 'Bebas Neue', cursive; font-size: 2rem; }
+        .summary-price { font-size: 1.8rem; font-weight: 800; color: #e74c3c; }
 
         .btn {
-            padding: 0.8rem 1.2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            border: none;
             font-family: 'Montserrat', sans-serif;
-            text-decoration: none;
+            transition: 0.3s;
         }
 
-        .btn-primary {
-            background-color: var(--primary);
-            color: var(--secondary);
-            flex: 2;
-        }
+        .btn-primary { background: var(--primary); color: var(--secondary); width: 100%; }
+        .btn-primary:disabled { background: #eee; color: #aaa; cursor: not-allowed; }
 
-        .btn-primary:hover {
-            background-color: #ffb300;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
-        }
-
-        .btn-secondary {
-            background-color: #f0f0f0;
-            color: #555;
-            flex: 1;
-        }
-
-        .btn-secondary:hover {
-            background-color: #e0e0e0;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-            box-shadow: none !important;
-        }
-
-        /* Cart Container */
-        .cart-container {
-            position: fixed;
-            top: 100px;
-            right: 15px;
-            z-index: 999;
-        }
-
+        .cart-container { position: fixed; top: 100px; right: 20px; z-index: 999; }
         .cart-icon {
-            background: #FFFFFF;
-            color: #000000;
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            border: 2px solid #35E539;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25),
-                0 0 0 4px rgba(255, 235, 59, 0.35);
-            transition: 0.25s ease;
-            animation: cartPulse 2s infinite;
+            background: white; border: 2px solid #35E539; width: 60px; height: 60px;
+            border-radius: 15px; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; position: relative; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-
-        .cart-icon:hover {
-            transform: scale(1.12);
-        }
-
-        @keyframes cartPulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6),
-                    0 4px 12px rgba(0, 0, 0, 0.25);
-            }
-
-            70% {
-                box-shadow: 0 0 0 8px rgba(255, 235, 59, 0),
-                    0 4px 12px rgba(0, 0, 0, 0.25);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0),
-                    0 4px 12px rgba(0, 0, 0, 0.25);
-            }
-        }
-
         .cart-badge {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background: #35E539;
-            color: #000000;
-            width: 20px;
-            height: 20px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            position: absolute; top: -5px; right: -5px; background: #35E539;
+            color: black; width: 22px; height: 22px; border-radius: 6px;
+            display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold;
         }
 
-        .cart-badge.bounce {
-            animation: badgeBounce 0.4s ease;
-        }
+        /* Cart Modal Styles */
+        .cart-modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
+        .cart-modal-content { background: white; margin: 10% auto; padding: 0; border-radius: 20px; width: 90%; max-width: 450px; overflow: hidden; }
+        .cart-modal-header { background: var(--primary); padding: 1.5rem; display: flex; justify-content: space-between; }
+        .cart-items { padding: 1rem; max-height: 400px; overflow-y: auto; }
+        .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+        .checkout-btn { width: 100%; padding: 1.2rem; background: #25D366; color: white; border: none; font-weight: 700; cursor: pointer; }
 
-        @keyframes badgeBounce {
-            0% {
-                transform: scale(1);
-            }
-
-            30% {
-                transform: scale(1.4);
-            }
-
-            60% {
-                transform: scale(0.9);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        /* Cart Modal */
-        .cart-modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .cart-modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 0;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 450px;
-            max-height: 80vh;
-            overflow-y: auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .cart-modal-header {
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 1.2rem;
-            border-radius: 12px 12px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-modal-header h2 {
-            margin: 0;
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.8rem;
-            letter-spacing: 1px;
-        }
-
-        .close-cart {
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-cart:hover {
-            color: #e74c3c;
-        }
-
-        .cart-items {
-            padding: 0.8rem;
-            max-height: 250px;
-            overflow-y: auto;
-        }
-
-        .empty-cart-message {
-            text-align: center;
-            padding: 1.5rem;
-            color: #666;
-        }
-
-        .empty-cart-message i {
-            font-size: 2.5rem;
-            margin-bottom: 0.8rem;
-            color: #ddd;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item-info {
-            flex: 1;
-        }
-
-        .cart-item-name {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-            font-size: 0.9rem;
-        }
-
-        .cart-item-price {
-            color: #666;
-            font-size: 0.8rem;
-        }
-
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .quantity-btn {
-            background: var(--primary);
-            border: none;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-
-        .quantity-display {
-            min-width: 26px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .remove-btn {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-        }
-
-        .cart-total {
-            padding: 1rem 1.2rem;
-            background: #f8f9fa;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-align: center;
-            border-top: 2px solid #eee;
-        }
-
-        .cart-actions {
-            padding: 1rem 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-top: 2px solid #eee;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            background: #25D366;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 1rem;
-            min-height: 50px;
-            transition: background 0.3s, transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .checkout-btn:hover {
-            background: #1ebe57;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        .site-footer {
-            background-color: var(--secondary);
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .site-footer p {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        /* Floating Call Button */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 12px;
-            right: 12px;
-            background: #25D366;
-            color: white;
-            padding: 10px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            text-decoration: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.3s ease;
-            font-size: 0.8rem;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .floating-whatsapp:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Desktop-specific styles - UPDATED for image-only cards */
-        @media (min-width: 769px) {
-            .items-grid {
-                display: flex;
-                justify-content: center;
-                gap: 1.2rem;
-                flex-wrap: wrap;
-            }
-
-            .item-card {
-                width: 140px; /* Keep consistent size */
-                height: 140px; /* Keep consistent size */
-                padding: 0.8rem;
-            }
-
-            .item-image-container {
-                height: 100px; /* Keep consistent size */
-                width: 100px; /* Keep consistent size */
-            }
-
-            .cart-container {
-                top: 120px;
-                right: 20px;
-            }
-
-            .cart-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-            }
-
-            .cart-badge {
-                width: 24px;
-                height: 24px;
-                font-size: 0.8rem;
-            }
-        }
-
-        /* RESPONSIVE DESIGN - MOBILE VIEW - UPDATED FOR HORIZONTAL ROW */
+        /* Responsive Mobile Styles */
         @media (max-width: 768px) {
-            .page-title {
-                font-size: 2.2rem;
-            }
-
-            .page-subtitle {
-                font-size: 0.9rem;
-                padding: 0 10px;
-            }
-
-            .section-title-inner {
-                font-size: 1.5rem;
-            }
-
-            /* UPDATED: Single row for mobile */
             .items-grid {
-                display: flex;
-                flex-wrap: nowrap; /* Prevent wrapping to next line */
-                overflow-x: auto; /* Enable horizontal scrolling if needed */
-                justify-content: flex-start; /* Align items to start */
-                gap: 0.8rem;
-                padding-bottom: 0.5rem;
-                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-                scrollbar-width: thin; /* For Firefox */
-            }
-
-            /* Hide scrollbar for Chrome, Safari and Opera */
-            .items-grid::-webkit-scrollbar {
-                height: 4px;
-            }
-
-            .items-grid::-webkit-scrollbar-track {
-                background: #f1f1f1;
-                border-radius: 4px;
-            }
-
-            .items-grid::-webkit-scrollbar-thumb {
-                background: var(--primary);
-                border-radius: 4px;
-            }
-
-            .item-card {
-                flex: 0 0 auto; /* Don't grow or shrink, base on width */
-                width: 120px; /* Even smaller for mobile */
-                height: 120px; /* Even smaller for mobile */
-                min-width: 120px; /* Prevent shrinking */
-                padding: 0.6rem;
-            }
-
-            .item-image-container {
-                height: 90px; /* Smaller for mobile but still large */
-                width: 90px; /* Smaller for mobile but still large */
-                min-height: 90px; /* Smaller for mobile but still large */
-            }
-
-            .select-indicator {
-                width: 22px; /* Adjusted for mobile */
-                height: 22px; /* Adjusted for mobile */
-                top: 6px; /* Adjusted position */
-                right: 6px; /* Adjusted position */
-            }
-
-            .select-indicator i {
-                font-size: 0.7rem; /* Adjusted for mobile */
-            }
-
-            .summary-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.4rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .summary-title {
-                font-size: 1.5rem;
-            }
-
-            .summary-price {
-                text-align: left;
-                font-size: 1.3rem;
-            }
-
-            .summary-actions {
-                flex-direction: column;
-                gap: 0.6rem;
-            }
-
-            .btn {
-                width: 100%;
-                padding: 0.7rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .page-title {
-                font-size: 1.8rem;
-            }
-
-            .section-title-inner {
-                font-size: 1.3rem;
-            }
-
-            /* UPDATED: Keep single row even on very small screens */
-            .items-grid {
-                display: flex;
                 flex-wrap: nowrap;
                 overflow-x: auto;
-                gap: 0.6rem; /* Smaller gap on very small screens */
+                justify-content: flex-start;
+                padding: 10px;
+                -webkit-overflow-scrolling: touch;
             }
-
             .item-card {
-                width: 110px; /* Smaller for very small screens */
-                height: 110px; /* Smaller for very small screens */
-                min-width: 110px;
-                padding: 0.5rem;
+                flex: 0 0 auto;
+                width: 150px;
             }
-
-            .item-image-container {
-                height: 85px; /* Adjusted for very small screens */
-                width: 85px; /* Adjusted for very small screens */
-                min-height: 85px;
-            }
-
-            .combo-instructions {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .instructions-title {
-                font-size: 1.3rem;
-            }
-
-            .instructions-list li {
-                font-size: 0.85rem;
-                margin-bottom: 0.3rem;
-            }
-
-            .combo-summary {
-                padding: 1rem;
-                margin: 1.5rem auto;
-            }
-
-            .summary-section {
-                padding: 0.8rem;
-            }
-
-            .summary-section-title {
-                font-size: 0.85rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .selected-items-list {
-                flex-direction: column;
-                gap: 0.4rem;
-            }
-
-            .selected-item-tag {
-                width: 100%;
-                padding: 0.3rem 0.6rem;
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .page-title {
-                font-size: 1.6rem;
-            }
-
-            .page-subtitle {
-                font-size: 0.85rem;
-            }
-
-            .section-title-inner {
-                font-size: 1.2rem;
-            }
-
-            .section-requirement {
-                font-size: 0.7rem;
-                padding: 0.25rem 0.6rem;
-            }
-
-            /* UPDATED: Keep single row */
-            .items-grid {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                gap: 0.5rem;
-            }
-
-            .item-card {
-                width: 100px; /* Smallest size for tiny screens */
-                height: 100px; /* Smallest size for tiny screens */
-                min-width: 100px;
-                padding: 0.4rem;
-            }
-
-            .item-image-container {
-                height: 80px; /* Smallest size for tiny screens */
-                width: 80px; /* Smallest size for tiny screens */
-                min-height: 80px;
-            }
-
-            .select-indicator {
-                width: 20px;
-                height: 20px;
-                top: 5px;
-                right: 5px;
-            }
-
-            .select-indicator i {
-                font-size: 0.6rem;
-            }
-
-            .cart-modal-content {
-                width: 95%;
-                margin: 10% auto;
-            }
+            .item-image-wrapper { width: 110px; height: 110px; }
+            .item-label { font-size: 1.1rem; }
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-CFXTRJEMHN');
-</script>
 
 <body>
-    <!-- Header - Using style.css -->
     <header class="site-header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo-section">
-                    <div class="logo-container">
-                        <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
-                        <div class="tagline">"Where Hunger Comes to An End"</div>
-                    </div>
-                    <nav class="site-nav">
-                        <a href="index.html" class="nav-link">Menu</a>
-                        <a href="make-combo.html" class="nav-link active">Make Combo</a>
-                        <a href="offers.html" class="nav-link">Offers</a>
-                        <a href="about.html" class="nav-link">About</a>
-                    </nav>
-                </div>
-            </div>
+            <nav class="site-nav" style="padding: 20px 0; text-align: center;">
+                <a href="index.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: 700;">Menu</a>
+                <a href="make-combo.html" style="margin: 0 15px; text-decoration: none; color: black; font-weight: 700; border-bottom: 3px solid var(--primary);">Make Combo</a>
+            </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
         <div class="container">
-            <!-- Page Header -->
             <div class="page-header">
                 <h1 class="page-title">Make Your Combo</h1>
-                <p class="page-subtitle">Create your perfect combo meal by selecting items from each section below. All
-                    items are served in half portions for the perfect combo experience!</p>
+                <p>Pick one from each section to build your meal!</p>
             </div>
 
-            <!-- Combo Sections -->
             <div class="combo-sections">
-                <!-- Main Section -->
-                <section class="combo-section" id="main-section">
+                <section class="combo-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Main</h2>
-                        <div class="section-requirement">Select 1 Item</div>
+                        <h2 class="section-title-inner">Step 1: Main</h2>
+                        <div class="section-requirement">Select 1</div>
                     </div>
-                    <div class="items-grid" id="main-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
+                    <div class="items-grid" id="main-items"></div>
                 </section>
 
-                <!-- Crispy Side Section -->
-                <section class="combo-section" id="crispy-side-section">
+                <section class="combo-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Crispy Side</h2>
-                        <div class="section-requirement">Select 1 Item</div>
+                        <h2 class="section-title-inner">Step 2: Crispy Side</h2>
+                        <div class="section-requirement">Select 1</div>
                     </div>
-                    <div class="items-grid" id="crispy-side-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
+                    <div class="items-grid" id="crispy-side-items"></div>
                 </section>
 
-                <!-- Mo:Mo Section -->
-                <section class="combo-section" id="momo-section">
+                <section class="combo-section">
                     <div class="section-header">
-                        <h2 class="section-title-inner">Mo:Mo</h2>
-                        <div class="section-requirement">Select 1 Item</div>
+                        <h2 class="section-title-inner">Step 3: Mo:Mo</h2>
+                        <div class="section-requirement">Select 1</div>
                     </div>
-                    <div class="items-grid" id="momo-items">
-                        <!-- Items will be populated by JavaScript -->
-                    </div>
+                    <div class="items-grid" id="momo-items"></div>
                 </section>
             </div>
 
-            <!-- Combo Summary -->
             <div class="combo-summary" id="combo-summary">
-                <div class="summary-header">
-                    <h3 class="summary-title">Your Combo</h3>
-                    <div class="summary-price">
-                        <span id="combo-price">Rs 0</span>
-                    </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 class="summary-title">Your Custom Combo</h3>
+                    <div class="summary-price" id="combo-price">Rs 0</div>
                 </div>
-
-                <div class="summary-items">
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-utensils"></i> Main - 1 Item
-                        </div>
-                        <div class="selected-items-list" id="selected-main">
-                            <div class="empty-selection">No item selected yet</div>
-                        </div>
-                    </div>
-
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-bacon"></i> Crispy Side - 1 Item
-                        </div>
-                        <div class="selected-items-list" id="selected-crispy-side">
-                            <div class="empty-selection">No item selected yet</div>
-                        </div>
-                    </div>
-
-                    <div class="summary-section">
-                        <div class="summary-section-title">
-                            <i class="fas fa-dumpling"></i> Mo:Mo - 1 Item
-                        </div>
-                        <div class="selected-items-list" id="selected-momo">
-                            <div class="empty-selection">No item selected yet</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="summary-actions">
-                    <button class="btn btn-secondary" id="reset-btn">
-                        <i class="fas fa-redo"></i> Reset Combo
-                    </button>
-                    <button class="btn btn-primary" id="add-to-cart-btn" disabled>
-                        <i class="fas fa-cart-plus"></i> Add Combo to Cart
-                    </button>
-                </div>
+                <button class="btn btn-primary" id="add-to-cart-btn" disabled>Complete Selection to Add</button>
             </div>
         </div>
     </main>
 
-    <!-- Cart Container -->
     <div class="cart-container">
         <div class="cart-icon" id="cartIcon">
             <i class="fas fa-shopping-cart"></i>
@@ -1094,534 +285,116 @@
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
-                <h2>Your Order</h2>
-                <span class="close-cart" id="closeCart">&times;</span>
+                <h2 style="font-family: 'Bebas Neue';">Your Order</h2>
+                <span id="closeCart" style="cursor:pointer; font-size: 1.5rem;">&times;</span>
             </div>
-            <div class="cart-items" id="cartItems">
-                <div class="empty-cart-message" id="emptyCartMessage">
-                    <i class="fas fa-shopping-cart"></i>
-                    <p>Your cart is empty</p>
-                </div>
-            </div>
-            <div class="cart-total" id="cartTotal">
-                Total: Rs 0
-            </div>
-            <div class="cart-actions">
-                <button class="checkout-btn" id="checkoutBtn">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Confirm Location
-                </button>
-            </div>
+            <div class="cart-items" id="cartItems"></div>
+            <div id="cartTotal" style="padding: 1.5rem; font-weight: 800; text-align: right; border-top: 1px solid #eee;">Total: Rs 0</div>
+            <button class="checkout-btn" id="checkoutBtn">Order via WhatsApp</button>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Floating Call Button -->
-    <a class="floating-whatsapp" href="tel:+9779847375984">
-        <i class="fas fa-phone-alt"></i> Call Now
-    </a>
-
     <script>
-        // Combo Items Data - Updated with direct half serving prices
         const COMBO_ITEMS = {
             main: [
-                {
-                    id: 1,
-                    name: "Sandwich",
-                    price: 85, // Direct half serving price
-                    image: "images/categories/sandwich.jpg"
-                },
-                {
-                    id: 2,
-                    name: "Fried Rice",
-                    price: 90, // Direct half serving price
-                    image: "images/categories/fried-rice.jpg"
-                },
-                {
-                    id: 3,
-                    name: "Chowmein",
-                    price: 90, // Direct half serving price
-                    image: "images/categories/chowmein.jpg"
-                }
+                { id: 1, name: "Sandwich", price: 85, image: "images/categories/sandwich.jpg" },
+                { id: 2, name: "Fried Rice", price: 90, image: "images/categories/fried-rice.jpg" },
+                { id: 3, name: "Chowmein", price: 90, image: "images/categories/chowmein.jpg" }
             ],
             crispySide: [
-                {
-                    id: 4,
-                    name: "Chicken Nuggets",
-                    price: 110, // Direct half serving price
-                    image: "images/categories/chicken-nuggets.jpg"
-                },
-                {
-                    id: 5,
-                    name: "Paneer Nuggets",
-                    price: 100, // Direct half serving price
-                    image: "images/categories/paneer-nuggets.jpg"
-                },
-                {
-                    id: 6,
-                    name: "Battered Fries",
-                    price: 75, // Direct half serving price
-                    image: "images/categories/battered-fries.jpg"
-                }
+                { id: 4, name: "Chicken Nuggets", price: 110, image: "images/categories/chicken-nuggets.jpg" },
+                { id: 5, name: "Paneer Nuggets", price: 100, image: "images/categories/paneer-nuggets.jpg" },
+                { id: 6, name: "Battered Fries", price: 75, image: "images/categories/battered-fries.jpg" }
             ],
             momo: [
-                {
-                    id: 7,
-                    name: "Chicken Mo:Mo",
-                    price: 110, // Direct half serving price
-                    image: "images/categories/chicken-momo.jpg"
-                },
-                {
-                    id: 8,
-                    name: "Paneer Mo:Mo",
-                    price: 100, // Direct half serving price
-                    image: "images/categories/paneer-momo.jpg"
-                },
-                {
-                    id: 9,
-                    name: "Aloo Mo:Mo",
-                    price: 90, // Direct half serving price
-                    image: "images/categories/aloo-momo.jpg"
-                }
+                { id: 7, name: "Chicken Mo:Mo", price: 110, image: "images/categories/chicken-momo.jpg" },
+                { id: 8, name: "Paneer Mo:Mo", price: 100, image: "images/categories/paneer-momo.jpg" },
+                { id: 9, name: "Aloo Mo:Mo", price: 90, image: "images/categories/aloo-momo.jpg" }
             ]
         };
 
-        // Shopping cart
-        let cart = [];
+        let cart = JSON.parse(localStorage.getItem('daAlooCart')) || [];
         let selectedMain = null;
         let selectedCrispySide = null;
         let selectedMomo = null;
 
-        // Load cart from localStorage
-        function loadCart() {
-            try {
-                const savedCart = localStorage.getItem('daAlooCart');
-                if (savedCart) {
-                    cart = JSON.parse(savedCart);
-                    console.log('Cart loaded from localStorage:', cart);
-                }
-            } catch (error) {
-                console.error('Error loading cart:', error);
-                cart = [];
-            }
-        }
-
-        // Save cart to localStorage
-        function saveCart() {
-            try {
-                localStorage.setItem('daAlooCart', JSON.stringify(cart));
-            } catch (error) {
-                console.error('Error saving cart:', error);
-                sessionStorage.setItem('daAlooCart', JSON.stringify(cart));
-            }
-        }
-
-        // Generate item cards for a section - IMAGE ONLY VERSION
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
-            if (!container) return;
-
             container.innerHTML = '';
 
             items.forEach(item => {
                 let isSelected = false;
-                
-                // Check if this item is selected based on section type
-                switch(sectionType) {
-                    case 'main':
-                        isSelected = selectedMain && selectedMain.id === item.id;
-                        break;
-                    case 'crispySide':
-                        isSelected = selectedCrispySide && selectedCrispySide.id === item.id;
-                        break;
-                    case 'momo':
-                        isSelected = selectedMomo && selectedMomo.id === item.id;
-                        break;
-                }
+                if(sectionType === 'main') isSelected = selectedMain?.id === item.id;
+                if(sectionType === 'crispySide') isSelected = selectedCrispySide?.id === item.id;
+                if(sectionType === 'momo') isSelected = selectedMomo?.id === item.id;
 
                 const card = document.createElement('div');
                 card.className = `item-card ${isSelected ? 'selected' : ''}`;
-                card.setAttribute('data-id', item.id);
-                card.setAttribute('data-section', sectionType);
-                card.setAttribute('title', `${item.name} - Rs ${item.price}`); // Tooltip with name and price
-
+                
                 card.innerHTML = `
-                    <div class="select-indicator">
-                        ${isSelected ? '<i class="fas fa-check"></i>' : ''}
+                    <div class="select-indicator"><i class="fas fa-check"></i></div>
+                    <div class="item-image-wrapper">
+                        <img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='https://via.placeholder.com/150'">
                     </div>
-                    <div class="item-image-container">
-                        ${item.image
-                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
-                        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
-                    }
-                    </div>
+                    <div class="item-label">${item.name}</div>
                 `;
 
-                card.addEventListener('click', () => toggleSelection(item, sectionType));
+                card.onclick = () => {
+                    if(sectionType === 'main') selectedMain = isSelected ? null : item;
+                    if(sectionType === 'crispySide') selectedCrispySide = isSelected ? null : item;
+                    if(sectionType === 'momo') selectedMomo = isSelected ? null : item;
+                    updateUI();
+                };
                 container.appendChild(card);
             });
         }
 
-        // Toggle item selection
-        function toggleSelection(item, sectionType) {
-            switch(sectionType) {
-                case 'main':
-                    selectedMain = selectedMain && selectedMain.id === item.id ? null : {
-                        ...item
-                    };
-                    break;
-                case 'crispySide':
-                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
-                        ...item
-                    };
-                    break;
-                case 'momo':
-                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
-                        ...item
-                    };
-                    break;
-            }
-
-            updateUI();
-        }
-
-        // Calculate combo price - SIMPLIFIED: No discount applied
-        function calculateComboPrice() {
-            let total = 0;
-
-            if (selectedMain) {
-                total += selectedMain.price;
-            }
-
-            if (selectedCrispySide) {
-                total += selectedCrispySide.price;
-            }
-
-            if (selectedMomo) {
-                total += selectedMomo.price;
-            }
-
-            return total;
-        }
-
-        // Update UI based on selections
         function updateUI() {
-            // Update item cards
             generateItemCards('main-items', COMBO_ITEMS.main, 'main');
             generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
             generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
 
-            // Update selected items display
-            updateSelectedItemsDisplay();
+            const total = (selectedMain?.price || 0) + (selectedCrispySide?.price || 0) + (selectedMomo?.price || 0);
+            document.getElementById('combo-price').textContent = `Rs ${total}`;
 
-            // Calculate and update price
-            const totalPrice = calculateComboPrice();
-
-            document.getElementById('combo-price').textContent = `Rs ${totalPrice}`;
-
-            // Enable/disable add to cart button
-            const addToCartBtn = document.getElementById('add-to-cart-btn');
-            const isComboComplete = selectedMain !== null && selectedCrispySide !== null && selectedMomo !== null;
-
-            addToCartBtn.disabled = !isComboComplete;
-
-            if (isComboComplete) {
-                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo - Rs ${totalPrice}`;
-            } else {
-                addToCartBtn.innerHTML = `<i class="fas fa-cart-plus"></i> Add Combo to Cart`;
-            }
+            const btn = document.getElementById('add-to-cart-btn');
+            const isComplete = selectedMain && selectedCrispySide && selectedMomo;
+            btn.disabled = !isComplete;
+            btn.textContent = isComplete ? `Add Combo to Cart (Rs ${total})` : "Select one from each section";
         }
 
-        // Update selected items display
-        function updateSelectedItemsDisplay() {
-            const mainContainer = document.getElementById('selected-main');
-            const crispySideContainer = document.getElementById('selected-crispy-side');
-            const momoContainer = document.getElementById('selected-momo');
-
-            // Update Main item
-            if (selectedMain) {
-                mainContainer.innerHTML = '';
-                const tag = document.createElement('div');
-                tag.className = 'selected-item-tag';
-                tag.innerHTML = `
-                    <i class="fas fa-check"></i>
-                    ${selectedMain.name} (Rs ${selectedMain.price})
-                `;
-                mainContainer.appendChild(tag);
-            } else {
-                mainContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
-            }
-
-            // Update Crispy Side item
-            if (selectedCrispySide) {
-                crispySideContainer.innerHTML = '';
-                const tag = document.createElement('div');
-                tag.className = 'selected-item-tag';
-                tag.innerHTML = `
-                    <i class="fas fa-check"></i>
-                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.price})
-                `;
-                crispySideContainer.appendChild(tag);
-            } else {
-                crispySideContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
-            }
-
-            // Update Mo:Mo item
-            if (selectedMomo) {
-                momoContainer.innerHTML = '';
-                const tag = document.createElement('div');
-                tag.className = 'selected-item-tag';
-                tag.innerHTML = `
-                    <i class="fas fa-check"></i>
-                    ${selectedMomo.name} (Rs ${selectedMomo.price})
-                `;
-                momoContainer.appendChild(tag);
-            } else {
-                momoContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
-            }
-        }
-
-        // Reset combo selections
-        function resetCombo() {
-            if (confirm('Are you sure you want to reset your combo? All selections will be lost.')) {
-                selectedMain = null;
-                selectedCrispySide = null;
-                selectedMomo = null;
-                updateUI();
-            }
-        }
-
-        // Add combo to cart
-        function addComboToCart() {
-            const totalPrice = calculateComboPrice();
-
-            // Create combo item description
-            const comboItem = {
-                id: `combo-${Date.now()}`,
-                name: `Custom Combo: ${selectedMain.name} + ${selectedCrispySide.name} + ${selectedMomo.name}`,
-                price: totalPrice,
-                quantity: 1,
-                details: `Main: ${selectedMain.name} (Rs ${selectedMain.price}) | Side: ${selectedCrispySide.name} (Rs ${selectedCrispySide.price}) | Mo:Mo: ${selectedMomo.name} (Rs ${selectedMomo.price})`,
-                type: 'combo'
+        document.getElementById('add-to-cart-btn').onclick = () => {
+            const total = (selectedMain.price + selectedCrispySide.price + selectedMomo.price);
+            const combo = {
+                id: Date.now(),
+                name: "Custom Combo",
+                details: `${selectedMain.name}, ${selectedCrispySide.name}, ${selectedMomo.name}`,
+                price: total,
+                quantity: 1
             };
-
-            // Add to cart
-            cart.push(comboItem);
-            saveCart();
+            cart.push(combo);
+            localStorage.setItem('daAlooCart', JSON.stringify(cart));
             updateCartBadge();
+            alert("Combo Added!");
+            selectedMain = selectedCrispySide = selectedMomo = null;
+            updateUI();
+        };
 
-            // Show feedback
-            const addToCartBtn = document.getElementById('add-to-cart-btn');
-            const originalText = addToCartBtn.innerHTML;
-            addToCartBtn.innerHTML = '<i class="fas fa-check"></i> Added to Cart!';
-            addToCartBtn.style.background = '#2ecc71';
-
-            setTimeout(() => {
-                addToCartBtn.innerHTML = originalText;
-                addToCartBtn.style.background = '';
-            }, 1500);
-
-            // Open cart modal
-            openCartModal();
-
-            // Reset combo for next order
-            setTimeout(() => {
-                selectedMain = null;
-                selectedCrispySide = null;
-                selectedMomo = null;
-                updateUI();
-            }, 2000);
-        }
-
-        // Cart functionality
-        function setupCart() {
-            const cartIcon = document.getElementById('cartIcon');
-            const cartModal = document.getElementById('cartModal');
-            const closeCart = document.getElementById('closeCart');
-            const checkoutBtn = document.getElementById('checkoutBtn');
-            const cartItemsContainer = document.getElementById('cartItems');
-
-            // Open cart modal
-            cartIcon.addEventListener('click', () => {
-                cartModal.style.display = 'block';
-                updateCartDisplay();
-            });
-
-            // Close cart modal
-            closeCart.addEventListener('click', () => {
-                cartModal.style.display = 'none';
-            });
-
-            // Checkout - Redirect to location page
-            checkoutBtn.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Your cart is empty!');
-                    return;
-                }
-                // Save cart and redirect to location page
-                saveCart();
-                window.location.href = 'location.html';
-            });
-
-            // Close modal when clicking outside
-            window.addEventListener('click', (e) => {
-                if (e.target === cartModal) {
-                    cartModal.style.display = 'none';
-                }
-            });
-
-            // Event Delegation for Cart Actions
-            if (cartItemsContainer) {
-                cartItemsContainer.addEventListener('click', handleCartItemClick);
-            }
-        }
-
-        // Open cart modal
-        function openCartModal() {
-            const cartModal = document.getElementById('cartModal');
-            cartModal.style.display = 'block';
-            updateCartDisplay();
-        }
-
-        // Update cart display
-        function updateCartDisplay() {
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            const emptyCartMessage = document.getElementById('emptyCartMessage');
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = `
-                    <div class="empty-cart-message" id="emptyCartMessage">
-                        <i class="fas fa-shopping-cart"></i>
-                        <p>Your cart is empty</p>
-                    </div>`;
-                cartTotal.textContent = 'Total: Rs 0';
-                return;
-            }
-
-            // Hide empty cart message
-            if (emptyCartMessage) {
-                emptyCartMessage.style.display = 'none';
-            }
-
-            let itemsHTML = '';
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                const itemTotal = item.price * item.quantity;
-                total += itemTotal;
-
-                itemsHTML += `
-                    <div class="cart-item">
-                        <div class="cart-item-info">
-                            <div class="cart-item-name">${item.name} × ${item.quantity}</div>
-                            ${item.details ? `<div class="cart-item-details" style="font-size:0.75rem;color:#666;">${item.details}</div>` : ''}
-                            <div class="cart-item-price">Rs ${itemTotal}</div>
-                        </div>
-                        <div class="cart-item-controls">
-                            <button class="quantity-btn" data-index="${index}" data-action="decrease">-</button>
-                            <span class="quantity-display">${item.quantity}</span>
-                            <button class="quantity-btn" data-index="${index}" data-action="increase">+</button>
-                            <button class="remove-btn" data-index="${index}"><i class="fas fa-trash"></i></button>
-                        </div>
-                    </div>
-                `;
-            });
-
-            cartItems.innerHTML = itemsHTML;
-            cartTotal.textContent = `Total: Rs ${total}`;
-        }
-
-        // Handle cart item click events
-        function handleCartItemClick(e) {
-            // Handle quantity buttons
-            if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
-                const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
-                const index = parseInt(button.getAttribute('data-index'));
-                const action = button.getAttribute('data-action');
-
-                if (action === 'increase') {
-                    cart[index].quantity += 1;
-                } else if (action === 'decrease') {
-                    if (cart[index].quantity > 1) {
-                        cart[index].quantity -= 1;
-                    } else {
-                        cart.splice(index, 1);
-                        saveCart();
-                        updateCartBadge();
-                        updateCartDisplay();
-                        return; // Exit if item removed
-                    }
-                }
-
-                saveCart();
-                updateCartBadge();
-                updateCartDisplay();
-            }
-
-            // Handle remove buttons
-            if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
-                const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
-                const index = parseInt(button.getAttribute('data-index'));
-
-                if (confirm('Remove Item?')) {
-                    cart.splice(index, 1);
-                    saveCart();
-                    updateCartBadge();
-                    updateCartDisplay();
-                }
-            }
-        }
-
-        // Update cart badge
         function updateCartBadge() {
-            const badge = document.getElementById('cartBadge');
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            badge.textContent = totalItems;
-
-            // Add bounce animation
-            badge.classList.add('bounce');
-            setTimeout(() => badge.classList.remove('bounce'), 300);
+            document.getElementById('cartBadge').textContent = cart.length;
         }
 
-        // Initialize the page
-        function init() {
-            // Load cart from storage
-            loadCart();
+        // Basic Cart Toggle Logic
+        document.getElementById('cartIcon').onclick = () => document.getElementById('cartModal').style.display = 'block';
+        document.getElementById('closeCart').onclick = () => document.getElementById('cartModal').style.display = 'none';
 
-            // Generate initial item cards
-            generateItemCards('main-items', COMBO_ITEMS.main, 'main');
-            generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
-            generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
-
-            // Update cart badge
+        window.onload = () => {
+            updateUI();
             updateCartBadge();
-
-            // Setup cart event listeners
-            setupCart();
-
-            // Setup combo buttons
-            document.getElementById('reset-btn').addEventListener('click', resetCombo);
-            document.getElementById('add-to-cart-btn').addEventListener('click', addComboToCart);
-
-            // Set footer year
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
-        }
-
-        // Run init on page load
-        document.addEventListener('DOMContentLoaded', init);
-
+        };
     </script>
 </body>
-
 </html>
