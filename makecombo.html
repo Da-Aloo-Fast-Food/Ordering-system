@@ -653,8 +653,58 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
+        /* Header Navigation for 4 items */
+        .site-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
+        .nav-link.active {
+            background-color: var(--primary);
+            color: var(--secondary);
+        }
+
         /* RESPONSIVE DESIGN - MOBILE VIEW - Match index.html */
         @media (max-width: 768px) {
+            /* Header adjustments for 4 navigation items */
+            .header-content {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .site-nav {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+            }
+
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+                min-width: 80px;
+                text-align: center;
+            }
+
             .menu-header {
                 display: flex;
                 justify-content: center;
@@ -765,7 +815,7 @@
             }
 
             .cart-container {
-                top: 100px;
+                top: 180px; /* Adjusted for mobile header height */
                 right: 15px;
             }
 
@@ -789,6 +839,16 @@
         }
 
         @media (max-width: 576px) {
+            .site-nav {
+                gap: 0.3rem;
+            }
+
+            .nav-link {
+                padding: 0.35rem 0.7rem;
+                font-size: 0.85rem;
+                min-width: 70px;
+            }
+
             .menu-header {
                 padding: 0 55px 0 10px;
                 min-height: 45px;
@@ -856,6 +916,16 @@
         }
 
         @media (max-width: 480px) {
+            .site-nav {
+                gap: 0.2rem;
+            }
+
+            .nav-link {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.8rem;
+                min-width: 65px;
+            }
+
             .menu-header {
                 padding: 0 50px 0 8px;
                 min-height: 40px;
@@ -901,7 +971,17 @@
             }
         }
 
-        @media (max-width: 360px) {
+        @media (max-width: 400px) {
+            .site-nav {
+                gap: 0.15rem;
+            }
+
+            .nav-link {
+                padding: 0.25rem 0.5rem;
+                font-size: 0.75rem;
+                min-width: 60px;
+            }
+
             .menu-header {
                 padding: 0 45px 0 6px;
                 min-height: 38px;
@@ -921,12 +1001,44 @@
                 width: 80px;
                 height: 80px;
             }
+
+            .cart-container {
+                top: 170px;
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .site-nav {
+                gap: 0.1rem;
+            }
+
+            .nav-link {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.7rem;
+                min-width: 55px;
+            }
+
+            .section-title.menu-page-title {
+                font-size: 1.6rem;
+            }
+
+            .item-card {
+                width: 110px;
+                min-width: 110px;
+                padding: 0.6rem 0.3rem;
+            }
+
+            .item-image-container {
+                width: 70px;
+                height: 70px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- Header - Match index.html exactly -->
+    <!-- Header - Match index.html exactly with 4 navigation items -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -938,6 +1050,7 @@
                 </div>
                 <nav class="site-nav">
                     <a href="index.html" class="nav-link">Menu</a>
+                    <a href="makecombo.html" class="nav-link active">Make Combo</a>
                     <a href="offers.html" class="nav-link">Offers</a>
                     <a href="about.html" class="nav-link">About</a>
                 </nav>
