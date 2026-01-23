@@ -11,7 +11,6 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
         /* CSS Variables from your existing site */
         :root {
@@ -20,12 +19,14 @@
             --primary-hover: #FDD835;
             --secondary: #000000;
             --bg-light: #f4f4f4;
+            --box-black: #1a1a1a;
         }
 
         body {
             background-color: var(--bg-light);
             color: #333;
             font-family: 'Montserrat', sans-serif;
+            margin: 0;
         }
 
         .container {
@@ -34,6 +35,61 @@
             margin: 0 auto;
             padding: 0 20px;
         }
+
+        /* --- Visual Combo Box Styles --- */
+        .visualizer-container {
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .takeaway-box {
+            background-color: var(--box-black);
+            border-radius: 20px;
+            padding: 15px;
+            display: grid;
+            grid-template-areas: 
+                "main main"
+                "side momo";
+            grid-gap: 15px;
+            aspect-ratio: 1 / 0.8;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 4px solid #333;
+        }
+
+        .compartment {
+            background-color: #222;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px inset #111;
+        }
+
+        .compartment img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .compartment img.active { opacity: 1; }
+
+        .compartment::after {
+            content: attr(data-label);
+            position: absolute;
+            color: #444;
+            font-family: 'Bebas Neue';
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .comp-main { grid-area: main; }
+        .comp-side { grid-area: side; }
+        .comp-momo { grid-area: momo; }
 
         /* Main Content Area */
         main {
@@ -231,16 +287,6 @@
             color: #aaa;
         }
 
-        /* REMOVED: All text content styles */
-        .item-content,
-        .item-name,
-        .item-description,
-        .item-price-container,
-        .item-price {
-            display: none;
-            /* Hide all text elements */
-        }
-
         /* Selection indicator - SMALLER */
         .select-indicator {
             position: absolute;
@@ -410,6 +456,77 @@
             cursor: not-allowed;
             transform: none !important;
             box-shadow: none !important;
+        }
+
+        /* Header Styles */
+        .site-header {
+            background-color: var(--secondary);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .main-logo {
+            height: 60px;
+            width: auto;
+        }
+
+        .tagline {
+            color: var(--primary);
+            font-family: 'Bebas Neue', cursive;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
         }
 
         /* Cart Container */
@@ -769,6 +886,17 @@
                 font-size: 1.5rem;
             }
 
+            /* Visualizer adjustments for mobile */
+            .visualizer-container {
+                margin: 1.5rem auto;
+                max-width: 400px;
+            }
+
+            .takeaway-box {
+                padding: 10px;
+                grid-gap: 10px;
+            }
+
             /* UPDATED: Single row for mobile */
             .items-grid {
                 display: flex;
@@ -864,6 +992,23 @@
                 padding: 0.7rem 1rem;
                 font-size: 0.85rem;
             }
+
+            /* Header adjustments for mobile */
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo-section {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .site-nav {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
 
         @media (max-width: 576px) {
@@ -873,6 +1018,21 @@
 
             .section-title-inner {
                 font-size: 1.3rem;
+            }
+
+            /* Visualizer adjustments for small mobile */
+            .visualizer-container {
+                margin: 1rem auto;
+                max-width: 350px;
+            }
+
+            .takeaway-box {
+                padding: 8px;
+                grid-gap: 8px;
+            }
+
+            .compartment::after {
+                font-size: 1rem;
             }
 
             /* UPDATED: Keep single row even on very small screens */
@@ -959,6 +1119,15 @@
                 padding: 0.25rem 0.6rem;
             }
 
+            /* Visualizer adjustments for very small screens */
+            .visualizer-container {
+                max-width: 300px;
+            }
+
+            .takeaway-box {
+                aspect-ratio: 1 / 0.9;
+            }
+
             /* UPDATED: Keep single row */
             .items-grid {
                 display: flex;
@@ -1013,7 +1182,7 @@
 </script>
 
 <body>
-    <!-- Header - Using style.css -->
+    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -1041,6 +1210,21 @@
                 <h1 class="page-title">Make Your Combo</h1>
                 <p class="page-subtitle">Create your perfect combo meal by selecting items from each section below. All
                     items are served in half portions for the perfect combo experience!</p>
+            </div>
+
+            <!-- Visual Combo Box -->
+            <div class="visualizer-container">
+                <div class="takeaway-box">
+                    <div class="compartment comp-main" data-label="Main" id="box-main">
+                        <img id="img-main" src="" alt="">
+                    </div>
+                    <div class="compartment comp-side" data-label="Side" id="box-side">
+                        <img id="img-side" src="" alt="">
+                    </div>
+                    <div class="compartment comp-momo" data-label="Mo:Mo" id="box-momo">
+                        <img id="img-momo" src="" alt="">
+                    </div>
+                </div>
             </div>
 
             <!-- Combo Sections -->
@@ -1195,6 +1379,18 @@
                     name: "Chowmein",
                     price: 90, // Direct half serving price
                     image: "images/categories/chowmein.jpg"
+                },
+                {
+                    id: 10,
+                    name: "Burger",
+                    price: 95, // Direct half serving price
+                    image: "images/categories/burger.jpg"
+                },
+                {
+                    id: 11,
+                    name: "Pasta",
+                    price: 100, // Direct half serving price
+                    image: "images/categories/pasta.jpg"
                 }
             ],
             crispySide: [
@@ -1215,6 +1411,18 @@
                     name: "Battered Fries",
                     price: 75, // Direct half serving price
                     image: "images/categories/battered-fries.jpg"
+                },
+                {
+                    id: 12,
+                    name: "Potato Wedges",
+                    price: 80, // Direct half serving price
+                    image: "images/categories/wedges.jpg"
+                },
+                {
+                    id: 13,
+                    name: "Onion Rings",
+                    price: 85, // Direct half serving price
+                    image: "images/categories/onion-rings.jpg"
                 }
             ],
             momo: [
@@ -1357,12 +1565,29 @@
             return total;
         }
 
+        // Update Visual Box Images
+        function updateBoxImg(imgId, item) {
+            const img = document.getElementById(imgId);
+            if (item) {
+                img.src = item.image;
+                img.classList.add('active');
+            } else {
+                img.classList.remove('active');
+                setTimeout(() => { if(!img.classList.contains('active')) img.src = ""; }, 300);
+            }
+        }
+
         // Update UI based on selections
         function updateUI() {
             // Update item cards
             generateItemCards('main-items', COMBO_ITEMS.main, 'main');
             generateItemCards('crispy-side-items', COMBO_ITEMS.crispySide, 'crispySide');
             generateItemCards('momo-items', COMBO_ITEMS.momo, 'momo');
+
+            // Update Visual Box
+            updateBoxImg('img-main', selectedMain);
+            updateBoxImg('img-side', selectedCrispySide);
+            updateBoxImg('img-momo', selectedMomo);
 
             // Update selected items display
             updateSelectedItemsDisplay();
@@ -1663,10 +1888,6 @@
 
         // Run init on page load
         document.addEventListener('DOMContentLoaded', init);
-
     </script>
 </body>
-
 </html>
-
-
