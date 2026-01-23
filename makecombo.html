@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         /* CSS Variables from your existing site */
         :root {
@@ -456,77 +457,6 @@
             cursor: not-allowed;
             transform: none !important;
             box-shadow: none !important;
-        }
-
-        /* Header Styles */
-        .site-header {
-            background-color: var(--secondary);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .main-logo {
-            height: 60px;
-            width: auto;
-        }
-
-        .tagline {
-            color: var(--primary);
-            font-family: 'Bebas Neue', cursive;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            margin-top: 4px;
-        }
-
-        .site-nav {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link.active {
-            color: var(--primary);
-        }
-
-        .nav-link.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: var(--primary);
         }
 
         /* Cart Container */
@@ -992,23 +922,6 @@
                 padding: 0.7rem 1rem;
                 font-size: 0.85rem;
             }
-
-            /* Header adjustments for mobile */
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .logo-section {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .site-nav {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
         }
 
         @media (max-width: 576px) {
@@ -1182,7 +1095,7 @@
 </script>
 
 <body>
-    <!-- Header -->
+    <!-- Header - Using style.css -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
