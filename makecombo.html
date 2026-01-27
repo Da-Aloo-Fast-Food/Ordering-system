@@ -25,7 +25,6 @@
     </script>
     
     <style>
-        /* Remove the custom header styling to use style.css instead */
         body {
             background-color: white;
             color: #333;
@@ -696,50 +695,6 @@
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
-            /* Header mobile adjustments to match about.html */
-            .header-content {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-                padding: 0.5rem 0;
-            }
-            
-            .logo-container {
-                align-items: center;
-                text-align: center;
-            }
-            
-            .tagline {
-                text-align: center;
-            }
-            
-            .site-nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: nowrap;        /* 🔴 THIS is the key */
-        gap: 10px;                /* reduce spacing */
-        width: 100%;
-        overflow-x: hidden;       /* safety */
-    }
-
-    .site-nav .nav-link {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 0.85rem;      /* text stays compact */
-        line-height: 1;
-
-        padding: 10px 14px;      /* 🔑 makes button bigger than text */
-        min-height: 40px;        /* touch-friendly */
-        border-radius: 8px;
-
-        white-space: nowrap;
-        box-sizing: border-box;
-    }
-}
-            
             .page-title {
                 font-size: 2.5rem;
             }
@@ -888,17 +843,6 @@
                 font-size: 2rem;
             }
             
-            .main-logo {
-                height: 60px;
-            }
-            
-            .nav-link {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-                min-height: 38px;
-                max-width: 100px;
-            }
-            
             .section-title-inner {
                 font-size: 1.3rem;
             }
@@ -969,74 +913,19 @@
         }
 
         @media (max-width: 360px) {
-            .site-nav {
-                gap: 0.3rem;
-            }
-            
-            .nav-link {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.8rem;
-                max-width: 90px;
-            }
-            
             .page-title {
                 font-size: 1.8rem;
             }
         }
-        /* ---------- Mobile Header Fix ---------- */
-@media (max-width: 768px) {
-
-    .header-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .logo-section {
-        width: 100%;
-        text-align: center;
-    }
-
-    .logo-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .main-logo {
-        max-width: 140px;
-        height: auto;
-    }
-
-    .tagline {
-        font-size: 0.85rem;
-        margin-top: 4px;
-        text-align: center;
-    }
-
-    .site-nav {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 15px;
-        flex-wrap: wrap;
-        margin-top: 5px;
-    }
-
-    .site-nav .nav-link {
-        font-size: 0.95rem;
-        padding: 6px 10px;
-    }
-}
-
     </style>
 </head>
 
 <body>
-    <!-- Header - Using the same markup as about.html -->
+    <!-- Site Header - Updated to match about.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
+                <!-- Logo and Tagline Section -->
                 <div class="logo-section">
                     <div class="logo-container">
                         <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
@@ -1198,7 +1087,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Site Footer -->
     <footer class="site-footer">
         <div class="container">
             <p>&copy; <span id="currentYear"></span> Da Aloo. All rights reserved.</p>
@@ -1746,6 +1635,3 @@
     </script>
 </body>
 </html>
-
-
-
