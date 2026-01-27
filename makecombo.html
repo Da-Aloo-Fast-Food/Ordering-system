@@ -189,7 +189,7 @@
             flex-wrap: wrap;
         }
 
-        /* Desktop item cards - IMAGE ONLY */
+        /* Update for item cards with name below image */
         .item-card {
             background: linear-gradient(135deg, #ffffff, #f7f7f7);
             border: 2px solid #e0e0e0;
@@ -199,12 +199,12 @@
             font-weight: 600;
             color: #555;
             transition: all 0.25s ease;
-            width: 140px;
-            height: 140px;
+            width: 150px; /* Slightly wider to accommodate text */
+            height: 170px; /* Taller to accommodate name below */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             box-sizing: border-box;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
             font-family: 'Montserrat', sans-serif;
@@ -235,7 +235,7 @@
         /* Image container */
         .item-image-container {
             height: 100px;
-            width: 100px;
+            width: 100%;
             min-height: 100px;
             border-radius: 10px;
             overflow: hidden;
@@ -244,22 +244,58 @@
             justify-content: center;
             background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
             position: relative;
+            margin-bottom: 8px;
         }
 
         .item-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Changed from 'cover' to 'contain' to show whole image */
             transition: transform 0.3s ease;
         }
 
         .item-card:hover .item-image {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .item-image-container .placeholder-icon {
             font-size: 2.5rem;
             color: #aaa;
+        }
+
+        /* Name display below image */
+        .item-name-display {
+            width: 100%;
+            text-align: center;
+            padding: 0 2px;
+        }
+
+        .item-name-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .item-price-display {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #e74c3c;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Update selected state for text */
+        .item-card.selected .item-name-text {
+            color: var(--secondary);
+        }
+
+        .item-card.selected .item-price-display {
+            color: var(--secondary);
+            font-weight: 800;
         }
 
         /* Selection indicator */
@@ -772,18 +808,26 @@
                 border-radius: 4px;
             }
 
+            /* Mobile adjustments for item cards */
             .item-card {
                 flex: 0 0 auto;
-                width: 120px;
-                height: 120px;
-                min-width: 120px;
+                width: 130px;
+                height: 150px;
+                min-width: 130px;
                 padding: 0.6rem;
             }
 
             .item-image-container {
-                height: 90px;
-                width: 90px;
-                min-height: 90px;
+                height: 85px;
+                min-height: 85px;
+            }
+
+            .item-name-text {
+                font-size: 0.8rem;
+            }
+
+            .item-price-display {
+                font-size: 0.75rem;
             }
 
             .select-indicator {
@@ -873,17 +917,25 @@
                 gap: 0.6rem;
             }
 
+            /* Smaller item cards for very small screens */
             .item-card {
-                width: 110px;
-                height: 110px;
-                min-width: 110px;
+                width: 120px;
+                height: 140px;
+                min-width: 120px;
                 padding: 0.5rem;
             }
 
             .item-image-container {
-                height: 85px;
-                width: 85px;
-                min-height: 85px;
+                height: 80px;
+                min-height: 80px;
+            }
+
+            .item-name-text {
+                font-size: 0.75rem;
+            }
+
+            .item-price-display {
+                font-size: 0.7rem;
             }
 
             .combo-summary {
@@ -915,6 +967,27 @@
         @media (max-width: 360px) {
             .page-title {
                 font-size: 1.8rem;
+            }
+            
+            /* Even smaller item cards for tiny screens */
+            .item-card {
+                width: 110px;
+                height: 135px;
+                min-width: 110px;
+                padding: 0.4rem;
+            }
+
+            .item-image-container {
+                height: 75px;
+                min-height: 75px;
+            }
+
+            .item-name-text {
+                font-size: 0.7rem;
+            }
+
+            .item-price-display {
+                font-size: 0.65rem;
             }
         }
     </style>
@@ -1218,7 +1291,7 @@
             }
         }
 
-        // Generate item cards for a section - IMAGE ONLY VERSION
+        // Generate item cards for a section - WITH NAME BELOW IMAGE
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1256,6 +1329,10 @@
                         ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
                         : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
                     }
+                    </div>
+                    <div class="item-name-display">
+                        <div class="item-name-text">${item.name}</div>
+                        <div class="item-price-display">Rs ${item.price}</div>
                     </div>
                 `;
 
