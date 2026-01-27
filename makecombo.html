@@ -13,18 +13,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS Variables from your existing site */
+        /* CSS Variables updated to match offers.html */
         :root {
-            --primary: #FFEB3B;
-            /* Specific yellow used in index.html */
-            --primary-hover: #FDD835;
-            --secondary: #000000;
-            --bg-light: #f4f4f4;
-            --box-black: #1a1a1a;
+            --primary: #ffc107; /* Yellow from offers.html */
+            --primary-hover: #e0a800; /* Slightly darker yellow for hover */
+            --secondary: #000000; /* Black from offers.html */
+            --bg-light: #f9f9f9; /* Light background */
+            --box-black: #1a1a1a; /* Dark for combo box */
         }
 
         body {
-            background-color: var(--bg-light);
+            background-color: white; /* Changed to match offers.html */
             color: #333;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -35,6 +34,28 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Header styling to match offers.html */
+        .site-header {
+            background: white;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background-color: var(--primary);
+            color: var(--secondary);
         }
 
         /* --- Visual Combo Box Styles --- */
@@ -121,6 +142,7 @@
         /* Main Content Area */
         main {
             padding: 1.5rem 0;
+            background: linear-gradient(to bottom, #fff, #fef9e7); /* Light yellow gradient */
         }
 
         .section-title {
@@ -136,12 +158,13 @@
             text-align: center;
         }
 
-        /* Page Header */
+        /* Page Header - Updated to match offers.html */
         .page-header {
             text-align: center;
-            padding: 1.5rem 0;
-            background: linear-gradient(to right, #fef9e7, #fff);
+            padding: 2rem 0;
+            background: var(--primary); /* Yellow background */
             margin-bottom: 1.5rem;
+            border-radius: 0 0 15px 15px;
         }
 
         .page-title {
@@ -152,7 +175,11 @@
             margin-bottom: 0.5rem;
         }
 
-      
+        .page-subtitle {
+            color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+            opacity: 0.8;
+        }
 
         /* Combo Builder Sections */
         .combo-instructions {
@@ -340,14 +367,15 @@
             /* Slightly larger */
         }
 
-        /* Combo Summary */
+        /* Combo Summary - Updated to match offers.html */
         .combo-summary {
-            background-color: #f9f9f9;
-            border-radius: 12px;
+            background-color: white;
+            border-radius: 20px;
             padding: 1.5rem;
             margin: 2rem auto;
             max-width: 800px;
             border: 2px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
 
         .summary-header {
@@ -449,26 +477,30 @@
             text-decoration: none;
         }
 
+        /* Updated buttons to match offers.html */
         .btn-primary {
             background-color: var(--primary);
             color: var(--secondary);
+            border: 2px solid var(--secondary);
+            font-weight: bold;
             flex: 2;
         }
 
         .btn-primary:hover {
-            background-color: #ffb300;
+            background-color: var(--primary-hover);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn-secondary {
-            background-color: #f0f0f0;
-            color: #555;
+            background-color: white;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
             flex: 1;
         }
 
         .btn-secondary:hover {
-            background-color: #e0e0e0;
+            background-color: #f0f0f0;
         }
 
         .btn:disabled {
@@ -738,9 +770,9 @@
             transform: translateY(-2px);
         }
 
-        /* Footer */
+        /* Footer - Updated to match offers.html */
         .site-footer {
-            background-color: var(--secondary);
+            background-color: #333;
             color: white;
             padding: 1rem 0;
             text-align: center;
@@ -752,14 +784,14 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button */
+        /* Floating Call Button - match offers.html */
         .floating-whatsapp {
             position: fixed;
             bottom: 12px;
             right: 12px;
             background: #25D366;
             color: white;
-            padding: 10px 12px;
+            padding: 10px 15px;
             border-radius: 40px;
             font-weight: 600;
             text-decoration: none;
@@ -769,8 +801,9 @@
             align-items: center;
             gap: 6px;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-family: 'Montserrat', sans-serif;
+            border: none;
         }
 
         .floating-whatsapp:hover {
@@ -837,9 +870,30 @@
                 font-size: 2.2rem;
             }
 
-
             .section-title-inner {
                 font-size: 1.5rem;
+            }
+
+            /* Mobile navigation fix */
+            .site-nav {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .nav-link {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+                white-space: nowrap;
+                min-width: 70px; /* Ensure buttons have minimum width */
+                text-align: center;
+            }
+            
+            /* Specifically fix the "Combo" button text */
+            .nav-link[href="makecombo.html"] {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
             }
 
             /* Visualizer adjustments for mobile */
@@ -927,6 +981,7 @@
                 font-size: 1.3rem;
             }
 
+            /* Adjust summary buttons for mobile */
             .summary-actions {
                 flex-direction: column;
                 gap: 0.6rem;
@@ -936,6 +991,18 @@
                 width: 100%;
                 padding: 0.7rem 1rem;
                 font-size: 0.85rem;
+                text-align: center;
+            }
+            
+            /* Fix button text overflow */
+            .btn i {
+                margin-right: 5px;
+            }
+            
+            .btn span {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
         }
 
@@ -1036,6 +1103,13 @@
                 padding: 0.25rem 0.6rem;
             }
 
+            /* Extra small screens navigation fix */
+            .nav-link {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.85rem;
+                min-width: 60px;
+            }
+
             /* Visualizer adjustments for very small screens */
             .visualizer-container {
                 max-width: 220px;
@@ -1083,6 +1157,11 @@
             .cart-modal-content {
                 width: 95%;
                 margin: 10% auto;
+            }
+            
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.7rem;
             }
         }
     </style>
@@ -1812,4 +1891,3 @@
     </script>
 </body>
 </html>
-
