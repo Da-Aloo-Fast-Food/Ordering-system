@@ -25,7 +25,7 @@
     </script>
     
     <style>
-        /* CSS Variables updated to match index.html */
+        /* CSS Variables updated to match about.html exactly */
         :root {
             --primary: #FFEB3B; /* Yellow from index.html */
             --secondary: #000000; /* Black from index.html */
@@ -33,12 +33,14 @@
             --box-black: #1a1a1a;
         }
 
+        /* Reset and base styles to match about.html */
         body {
             background-color: white;
             color: #333;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
 
         .container {
@@ -48,7 +50,7 @@
             padding: 0 20px;
         }
 
-        /* UPDATED: Header styling to exactly match index.html and about.html */
+        /* UPDATED: Header styling to exactly match about.html */
         .site-header {
             background: var(--primary);
             padding: 0.5rem 0;
@@ -89,7 +91,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* UPDATED: Navigation styling to exactly match index.html and about.html */
+        /* UPDATED: Navigation styling to exactly match about.html */
         .site-nav {
             display: flex;
             gap: 0.5rem;
@@ -127,6 +129,31 @@
             background: var(--secondary);
             color: var(--primary);
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Area - UPDATED to match about.html exactly */
+        main {
+            padding: 1.5rem 0;
+            background: white;
+        }
+
+        /* Page Header - Updated to match about.html hero styling */
+        .page-header {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--primary);
+            margin-bottom: 1.5rem;
+            border-radius: 0 0 15px 15px;
+        }
+
+        .page-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem; /* Matches about.html hero-title size */
+            color: var(--secondary);
+            letter-spacing: 1.5px;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Visual Combo Box Styles */
@@ -170,7 +197,7 @@
         .compartment img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
             opacity: 0;
             transition: opacity 0.3s ease;
             position: absolute;
@@ -208,40 +235,6 @@
 
         .comp-momo { 
             grid-area: momo;
-        }
-
-        /* Main Content Area - UPDATED to match about.html coloring */
-        main {
-            padding: 1.5rem 0;
-            background: white; /* Changed from gradient to white */
-        }
-
-        .section-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.8rem;
-            color: var(--secondary);
-            letter-spacing: 1.5px;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
-
-        /* Page Header - Updated to match about.html */
-        .page-header {
-            text-align: center;
-            padding: 2rem 0;
-            background: var(--primary);
-            margin-bottom: 1.5rem;
-            border-radius: 0 0 15px 15px;
-        }
-
-        .page-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 3.5rem; /* Matches about.html hero-title size */
-            color: var(--secondary);
-            letter-spacing: 1.5px;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Combo Builder Sections */
@@ -792,7 +785,7 @@
             transform: translateY(0);
         }
 
-        /* Footer */
+        /* Footer - UPDATED to match about.html */
         .site-footer {
             background-color: #333;
             color: white;
@@ -806,7 +799,7 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button */
+        /* Floating Call Button - UPDATED to match about.html */
         .floating-whatsapp {
             position: fixed;
             right: 20px;
@@ -834,7 +827,7 @@
 
         /* Mobile Optimization */
         @media (max-width: 768px) {
-            /* Header mobile adjustments */
+            /* Header mobile adjustments to match about.html */
             .header-content {
                 flex-direction: column;
                 align-items: center;
@@ -844,6 +837,7 @@
             
             .logo-container {
                 align-items: center;
+                text-align: center;
             }
             
             .tagline {
@@ -858,17 +852,18 @@
                 margin-top: 0.5rem;
             }
             
-            /* FIXED: Mobile navigation buttons with centered text */
+            /* FIXED: Mobile navigation buttons with perfectly centered text */
             .nav-link {
-                padding: 0.5rem 1.2rem;
+                padding: 0.6rem 1.2rem;
                 font-size: 0.9rem;
                 min-height: 40px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 text-align: center;
-                width: auto;
-                min-width: 70px;
+                width: 100%;
+                max-width: 120px;
+                margin: 0 0.2rem;
             }
             
             .page-title {
@@ -997,8 +992,8 @@
 
             .btn {
                 width: 100%;
-                padding: 0.7rem 1rem;
-                font-size: 0.85rem;
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
                 text-align: center;
                 justify-content: center;
             }
@@ -1024,9 +1019,10 @@
             }
             
             .nav-link {
-                padding: 0.4rem 1rem;
+                padding: 0.5rem 1rem;
                 font-size: 0.85rem;
                 min-height: 38px;
+                max-width: 100px;
             }
             
             .section-title-inner {
@@ -1104,9 +1100,9 @@
             }
             
             .nav-link {
-                padding: 0.35rem 0.8rem;
+                padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
-                min-width: 60px;
+                max-width: 90px;
             }
             
             .page-title {
@@ -1117,7 +1113,7 @@
 </head>
 
 <body>
-    <!-- Header - UPDATED to exactly match index.html and about.html -->
+    <!-- Header - UPDATED to exactly match about.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -1830,4 +1826,3 @@
     </script>
 </body>
 </html>
-
