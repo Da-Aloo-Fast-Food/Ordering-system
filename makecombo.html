@@ -724,9 +724,19 @@
     }
 
     .site-nav .nav-link {
-        font-size: 0.85rem;       /* slightly smaller text */
-        padding: 5px 6px;
-        white-space: nowrap;      /* prevents breaking text */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 0.85rem;      /* text stays compact */
+        line-height: 1;
+
+        padding: 10px 14px;      /* 🔑 makes button bigger than text */
+        min-height: 40px;        /* touch-friendly */
+        border-radius: 8px;
+
+        white-space: nowrap;
+        box-sizing: border-box;
     }
 }
             
@@ -1736,5 +1746,6 @@
     </script>
 </body>
 </html>
+
 
 
