@@ -48,7 +48,7 @@
             padding: 0 20px;
         }
 
-        /* UPDATED: Header styling to exactly match index.html */
+        /* UPDATED: Header styling to exactly match index.html and about.html */
         .site-header {
             background: var(--primary);
             padding: 0.5rem 0;
@@ -89,7 +89,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* UPDATED: Navigation styling to exactly match index.html */
+        /* UPDATED: Navigation styling to exactly match index.html and about.html */
         .site-nav {
             display: flex;
             gap: 0.5rem;
@@ -109,6 +109,11 @@
             font-family: 'Montserrat', sans-serif;
             white-space: nowrap;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 44px;
         }
 
         .nav-link:hover {
@@ -205,10 +210,10 @@
             grid-area: momo;
         }
 
-        /* Main Content Area */
+        /* Main Content Area - UPDATED to match about.html coloring */
         main {
             padding: 1.5rem 0;
-            background: linear-gradient(to bottom, #fff, #fef9e7);
+            background: white; /* Changed from gradient to white */
         }
 
         .section-title {
@@ -220,7 +225,7 @@
             text-align: center;
         }
 
-        /* Page Header - Updated to match index.html */
+        /* Page Header - Updated to match about.html */
         .page-header {
             text-align: center;
             padding: 2rem 0;
@@ -231,49 +236,15 @@
 
         .page-title {
             font-family: 'Bebas Neue', cursive;
-            font-size: 3.5rem;
+            font-size: 3.5rem; /* Matches about.html hero-title size */
             color: var(--secondary);
             letter-spacing: 1.5px;
             margin-bottom: 0.5rem;
             font-weight: 700;
-        }
-
-        .page-subtitle {
-            color: var(--secondary);
-            font-family: 'Montserrat', sans-serif;
-            opacity: 0.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         /* Combo Builder Sections */
-        .combo-instructions {
-            background-color: #f9f9f9;
-            padding: 1.2rem;
-            border-radius: 10px;
-            margin-bottom: 1.5rem;
-            border-left: 4px solid var(--primary);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .instructions-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.5rem;
-            color: var(--secondary);
-            margin-bottom: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .instructions-list {
-            padding-left: 1.2rem;
-            color: #555;
-        }
-
-        .instructions-list li {
-            margin-bottom: 0.4rem;
-            font-size: 0.9rem;
-        }
-
         .combo-sections {
             margin-bottom: 2rem;
         }
@@ -418,7 +389,7 @@
             font-size: 0.8rem;
         }
 
-        /* Combo Summary - Updated to match index.html */
+        /* Combo Summary */
         .combo-summary {
             background-color: white;
             border-radius: 20px;
@@ -561,7 +532,7 @@
             box-shadow: none !important;
         }
 
-        /* Cart Container - UPDATED to match index.html exactly */
+        /* Cart Container */
         .cart-container {
             position: fixed;
             top: 120px;
@@ -569,7 +540,7 @@
             z-index: 999;
         }
 
-        /* Cart Icon - UPDATED to match index.html exactly */
+        /* Cart Icon */
         .cart-icon {
             background: #FFFFFF;
             color: #000000;
@@ -608,7 +579,7 @@
             }
         }
 
-        /* Badge - UPDATED to match index.html exactly */
+        /* Badge */
         .cart-badge {
             position: absolute;
             top: -8px;
@@ -645,7 +616,7 @@
             }
         }
 
-        /* Cart Modal - UPDATED to match index.html exactly */
+        /* Cart Modal */
         .cart-modal {
             display: none;
             position: fixed;
@@ -792,7 +763,7 @@
             border-top: 2px solid #eee;
         }
 
-        /* Checkout Button - UPDATED to match index.html exactly */
+        /* Checkout Button */
         .checkout-btn {
             width: 100%;
             padding: 1.2rem 1.5rem;
@@ -835,7 +806,7 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button - UPDATED to match index.html exactly */
+        /* Floating Call Button */
         .floating-whatsapp {
             position: fixed;
             right: 20px;
@@ -868,6 +839,7 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 1rem;
+                padding: 0.5rem 0;
             }
             
             .logo-container {
@@ -883,11 +855,20 @@
                 width: 100%;
                 flex-wrap: wrap;
                 gap: 0.5rem;
+                margin-top: 0.5rem;
             }
             
+            /* FIXED: Mobile navigation buttons with centered text */
             .nav-link {
-                padding: 0.5rem 1rem;
+                padding: 0.5rem 1.2rem;
                 font-size: 0.9rem;
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                width: auto;
+                min-width: 70px;
             }
             
             .page-title {
@@ -1019,6 +1000,7 @@
                 padding: 0.7rem 1rem;
                 font-size: 0.85rem;
                 text-align: center;
+                justify-content: center;
             }
             
             .btn i {
@@ -1042,8 +1024,9 @@
             }
             
             .nav-link {
-                padding: 0.4rem 0.8rem;
+                padding: 0.4rem 1rem;
                 font-size: 0.85rem;
+                min-height: 38px;
             }
             
             .section-title-inner {
@@ -1089,20 +1072,6 @@
                 min-height: 85px;
             }
 
-            .combo-instructions {
-                padding: 1rem;
-                margin-bottom: 1rem;
-            }
-
-            .instructions-title {
-                font-size: 1.3rem;
-            }
-
-            .instructions-list li {
-                font-size: 0.85rem;
-                margin-bottom: 0.3rem;
-            }
-
             .combo-summary {
                 padding: 1rem;
                 margin: 1.5rem auto;
@@ -1128,11 +1097,27 @@
                 font-size: 0.75rem;
             }
         }
+
+        @media (max-width: 360px) {
+            .site-nav {
+                gap: 0.3rem;
+            }
+            
+            .nav-link {
+                padding: 0.35rem 0.8rem;
+                font-size: 0.8rem;
+                min-width: 60px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <!-- Header - UPDATED to exactly match index.html -->
+    <!-- Header - UPDATED to exactly match index.html and about.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -1845,4 +1830,3 @@
     </script>
 </body>
 </html>
-
