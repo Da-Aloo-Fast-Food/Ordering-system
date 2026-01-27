@@ -13,17 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* CSS Variables updated to match offers.html */
+        /* CSS Variables updated to match index.html */
         :root {
-            --primary: #ffc107; /* Yellow from offers.html */
-            --primary-hover: #e0a800; /* Slightly darker yellow for hover */
-            --secondary: #000000; /* Black from offers.html */
-            --bg-light: #f9f9f9; /* Light background */
-            --box-black: #1a1a1a; /* Dark for combo box */
+            --primary: #FFEB3B; /* Yellow from index.html */
+            --secondary: #000000; /* Black from index.html */
+            --bg-light: #f9f9f9;
+            --box-black: #1a1a1a;
         }
 
         body {
-            background-color: white; /* Changed to match offers.html */
+            background-color: white;
             color: #333;
             font-family: 'Montserrat', sans-serif;
             margin: 0;
@@ -36,29 +35,59 @@
             padding: 0 20px;
         }
 
-        /* Header styling to match offers.html */
+        /* Header styling to match index.html */
         .site-header {
             background: white;
             padding: 1rem 0;
             border-bottom: 1px solid #eee;
         }
 
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /* Navigation styling updated to match index.html category tabs */
+        .site-nav {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        /* Updated to match index.html rounded rectangle style */
         .nav-link {
-            color: var(--secondary);
+            background: linear-gradient(135deg, #ffffff, #f7f7f7);
+            border: 2px solid #e0e0e0;
+            color: #555;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s;
-            font-weight: 500;
-            white-space: nowrap; /* Prevent text wrapping */
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+            font-weight: 600;
+            white-space: nowrap;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+            font-family: 'Montserrat', sans-serif;
+            display: inline-block;
+            margin: 0 0.2rem;
+            text-align: center;
         }
 
         .nav-link:hover, .nav-link.active {
-            background-color: var(--primary);
+            background: var(--primary);
+            border-color: var(--primary);
             color: var(--secondary);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
 
-        /* --- Visual Combo Box Styles --- */
+        /* Visual Combo Box Styles */
         .visualizer-container {
             margin: 1.5rem auto;
             max-width: 320px;
@@ -73,10 +102,10 @@
             grid-template-areas: 
                 "main side"
                 "main momo";
-            grid-template-columns: 2fr 1fr; /* Main compartment is wider */
-            grid-template-rows: 1fr 1fr; /* Two equal rows on the right */
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: 1fr 1fr;
             gap: 8px;
-            aspect-ratio: 4 / 3; /* Slightly wider than tall */
+            aspect-ratio: 4 / 3;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
             border: 3px solid #333;
             width: 100%;
@@ -142,7 +171,7 @@
         /* Main Content Area */
         main {
             padding: 1.5rem 0;
-            background: linear-gradient(to bottom, #fff, #fef9e7); /* Light yellow gradient */
+            background: linear-gradient(to bottom, #fff, #fef9e7);
         }
 
         .section-title {
@@ -154,15 +183,11 @@
             text-align: center;
         }
 
-        .center {
-            text-align: center;
-        }
-
-        /* Page Header - Updated to match offers.html */
+        /* Page Header - Updated to match index.html */
         .page-header {
             text-align: center;
             padding: 2rem 0;
-            background: var(--primary); /* Yellow background */
+            background: var(--primary);
             margin-bottom: 1.5rem;
             border-radius: 0 0 15px 15px;
         }
@@ -245,7 +270,7 @@
             font-size: 0.8rem;
         }
 
-        /* Category-style Item Grid - UPDATED */
+        /* Category-style Item Grid */
         .items-grid {
             display: flex;
             justify-content: center;
@@ -265,9 +290,7 @@
             color: #555;
             transition: all 0.25s ease;
             width: 140px;
-            /* Reduced for image-only */
             height: 140px;
-            /* Reduced for image-only */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -299,14 +322,11 @@
             pointer-events: none;
         }
 
-        /* Image container - FILLS MOST OF THE CARD */
+        /* Image container */
         .item-image-container {
             height: 100px;
-            /* Larger for image-only layout */
             width: 100px;
-            /* Larger for image-only layout */
             min-height: 100px;
-            /* Larger for image-only layout */
             border-radius: 10px;
             overflow: hidden;
             display: flex;
@@ -320,7 +340,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Fill the container */
             transition: transform 0.3s ease;
         }
 
@@ -330,21 +349,16 @@
 
         .item-image-container .placeholder-icon {
             font-size: 2.5rem;
-            /* Larger for image-only layout */
             color: #aaa;
         }
 
-        /* Selection indicator - SMALLER */
+        /* Selection indicator */
         .select-indicator {
             position: absolute;
             top: 8px;
-            /* Adjusted position */
             right: 8px;
-            /* Adjusted position */
             width: 24px;
-            /* Slightly larger for visibility */
             height: 24px;
-            /* Slightly larger for visibility */
             border-radius: 50%;
             border: 2px solid #ccc;
             display: flex;
@@ -364,10 +378,9 @@
 
         .select-indicator i {
             font-size: 0.8rem;
-            /* Slightly larger */
         }
 
-        /* Combo Summary - Updated to match offers.html */
+        /* Combo Summary - Updated to match index.html */
         .combo-summary {
             background-color: white;
             border-radius: 20px;
@@ -477,23 +490,23 @@
             text-decoration: none;
         }
 
-        /* Updated buttons to match offers.html */
+        /* Updated buttons to match index.html */
         .btn-primary {
-            background-color: var(--primary);
+            background: var(--primary);
             color: var(--secondary);
-            border: 2px solid var(--secondary);
-            font-weight: bold;
+            border: none;
             flex: 2;
+            transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
-            background-color: var(--primary-hover);
+            background: #f8e800;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn-secondary {
-            background-color: white;
+            background: white;
             color: var(--secondary);
             border: 2px solid var(--secondary);
             flex: 1;
@@ -770,7 +783,7 @@
             transform: translateY(-2px);
         }
 
-        /* Footer - Updated to match offers.html */
+        /* Footer */
         .site-footer {
             background-color: #333;
             color: white;
@@ -784,7 +797,7 @@
             opacity: 0.8;
         }
 
-        /* Floating Call Button - match offers.html */
+        /* Floating Call Button */
         .floating-whatsapp {
             position: fixed;
             bottom: 12px;
@@ -822,17 +835,13 @@
 
             .item-card {
                 width: 140px;
-                /* Keep consistent size */
                 height: 140px;
-                /* Keep consistent size */
                 padding: 0.8rem;
             }
 
             .item-image-container {
                 height: 100px;
-                /* Keep consistent size */
                 width: 100px;
-                /* Keep consistent size */
             }
 
             .cart-container {
@@ -864,7 +873,7 @@
             }
         }
 
-        /* RESPONSIVE DESIGN - MOBILE VIEW - UPDATED FOR HORIZONTAL ROW */
+        /* RESPONSIVE DESIGN - MOBILE VIEW */
         @media (max-width: 768px) {
             .page-title {
                 font-size: 2.2rem;
@@ -874,26 +883,22 @@
                 font-size: 1.5rem;
             }
 
-            /* Mobile navigation fix */
+            /* Mobile navigation - now matches index.html style */
             .site-nav {
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
                 gap: 0.5rem;
+                width: 100%;
+                margin-top: 1rem;
             }
             
             .nav-link {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.9rem;
                 white-space: nowrap;
-                min-width: 70px; /* Ensure buttons have minimum width */
+                min-width: 70px;
                 text-align: center;
-            }
-            
-            /* Specifically fix the "Combo" button text */
-            .nav-link[href="makecombo.html"] {
-                padding: 0.4rem 0.8rem;
-                font-size: 0.9rem;
             }
 
             /* Visualizer adjustments for mobile */
@@ -913,7 +918,7 @@
                 font-size: 0.8rem;
             }
 
-            /* UPDATED: Single row for mobile */
+            /* Single row for mobile */
             .items-grid {
                 display: flex;
                 flex-wrap: nowrap;
@@ -994,7 +999,6 @@
                 text-align: center;
             }
             
-            /* Fix button text overflow */
             .btn i {
                 margin-right: 5px;
             }
@@ -1028,7 +1032,7 @@
                 gap: 6px;
             }
 
-            /* UPDATED: Keep single row even on very small screens */
+            /* Keep single row even on very small screens */
             .items-grid {
                 display: flex;
                 flex-wrap: nowrap;
@@ -1122,7 +1126,7 @@
                 gap: 5px;
             }
 
-            /* UPDATED: Keep single row */
+            /* Keep single row */
             .items-grid {
                 display: flex;
                 flex-wrap: nowrap;
@@ -1177,7 +1181,7 @@
 </script>
 
 <body>
-    <!-- Header - Updated to match offers.html exactly -->
+    <!-- Header - Updated to match index.html exactly -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -1186,13 +1190,13 @@
                         <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
                         <div class="tagline">"Where Hunger Comes to An End"</div>
                     </div>
-                    <nav class="site-nav">
-                        <a href="index.html" class="nav-link">Menu</a>
-                        <a href="makecombo.html" class="nav-link active">Combo</a>
-                        <a href="offers.html" class="nav-link">Offers</a>
-                        <a href="about.html" class="nav-link">About</a>
-                    </nav>
                 </div>
+                <nav class="site-nav">
+                    <a href="index.html" class="nav-link">Menu</a>
+                    <a href="makecombo.html" class="nav-link active">Combo</a>
+                    <a href="offers.html" class="nav-link">Offers</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -1500,7 +1504,7 @@
                 card.className = `item-card ${isSelected ? 'selected' : ''}`;
                 card.setAttribute('data-id', item.id);
                 card.setAttribute('data-section', sectionType);
-                card.setAttribute('title', `${item.name} - Rs ${item.price}`); // Tooltip with name and price
+                card.setAttribute('title', `${item.name} - Rs ${item.price}`);
 
                 card.innerHTML = `
                     <div class="select-indicator">
@@ -1542,7 +1546,7 @@
             updateUI();
         }
 
-        // Calculate combo price - SIMPLIFIED: No discount applied
+        // Calculate combo price
         function calculateComboPrice() {
             let total = 0;
 
@@ -1565,7 +1569,6 @@
         function updateBoxImg(imgId, item) {
             const img = document.getElementById(imgId);
             if (item) {
-                // Set a fallback image if the main image fails to load
                 img.onerror = function() {
                     this.src = `https://via.placeholder.com/300/222222/FFFFFF?text=${encodeURIComponent(item.name)}`;
                 };
