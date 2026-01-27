@@ -25,6 +25,11 @@
     </script>
     
     <style>
+        :root {
+            --primary: #FFEB3B;
+            --secondary: #000000;
+        }
+
         body {
             background-color: white;
             color: #333;
@@ -39,6 +44,59 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        /* Header Styles */
+        .site-header {
+            background-color: var(--primary);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .main-logo {
+            height: 60px;
+            margin-right: 15px;
+        }
+
+        .tagline {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 1.2rem;
+            color: var(--secondary);
+            letter-spacing: 1px;
+        }
+
+        .site-nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #555;
+        }
+
+        .nav-link.active {
+            border-bottom: 3px solid var(--secondary);
         }
 
         /* Main Content Area */
@@ -474,6 +532,46 @@
             box-shadow: none !important;
         }
 
+        /* Footer */
+        .site-footer {
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 3rem;
+        }
+
+        .site-footer p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Call Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        }
+
         /* Cart Container */
         .cart-container {
             position: fixed;
@@ -744,6 +842,17 @@
                 font-size: 1.5rem;
             }
             
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .site-nav {
+                width: 100%;
+                justify-content: center;
+                gap: 1.5rem;
+            }
+
             /* Cart adjustments for mobile */
             .cart-container {
                 top: 100px;
@@ -883,6 +992,14 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
+
+            .floating-whatsapp {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                right: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -897,6 +1014,15 @@
             .section-requirement {
                 font-size: 0.7rem;
                 padding: 0.25rem 0.6rem;
+            }
+            
+            .site-nav {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
             }
             
             /* Visualizer adjustments for small mobile */
@@ -1290,7 +1416,7 @@
             }
         }
 
-        // Generate item cards for a section - WITH NAME BELOW IMAGE
+        // Generate item cards for a section - FIXED: No text in image container
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1319,13 +1445,14 @@
                 card.setAttribute('data-section', sectionType);
                 card.setAttribute('title', `${item.name} - Rs ${item.price}`);
 
+                // FIXED: Removed text from SVG fallback, using simple gray box instead
                 card.innerHTML = `
                     <div class="select-indicator">
                         ${isSelected ? '<i class="fas fa-check"></i>' : ''}
                     </div>
                     <div class="item-image-container">
                         ${item.image
-                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/><text x=\"50\" y=\"55\" font-family=\"Arial\" font-size=\"14\" text-anchor=\"middle\" fill=\"%23999\">${item.name}</text></svg>'">`
+                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/></svg>'">`
                         : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
                     }
                     </div>
@@ -1387,7 +1514,7 @@
             const img = document.getElementById(imgId);
             if (item) {
                 img.onerror = function() {
-                    this.src = `https://via.placeholder.com/300/222222/FFFFFF?text=${encodeURIComponent(item.name)}`;
+                    this.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/></svg>`;
                 };
                 img.src = item.image;
                 img.classList.add('active');
