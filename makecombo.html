@@ -25,15 +25,7 @@
     </script>
     
     <style>
-        /* CSS Variables updated to match about.html exactly */
-        :root {
-            --primary: #FFEB3B; /* Yellow from index.html */
-            --secondary: #000000; /* Black from index.html */
-            --bg-light: #f9f9f9;
-            --box-black: #1a1a1a;
-        }
-
-        /* Reset and base styles to match about.html */
+        /* Remove the custom header styling to use style.css instead */
         body {
             background-color: white;
             color: #333;
@@ -50,88 +42,7 @@
             padding: 0 20px;
         }
 
-        /* UPDATED: Header styling to exactly match about.html */
-        .site-header {
-            background: var(--primary);
-            padding: 0.5rem 0;
-            border-bottom: 3px solid var(--secondary);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .logo-container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .main-logo {
-            height: 70px;
-            width: auto;
-            margin-bottom: 5px;
-        }
-
-        .tagline {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--secondary);
-            text-align: left;
-            letter-spacing: 0.5px;
-        }
-
-        /* UPDATED: Navigation styling to exactly match about.html */
-        .site-nav {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: nowrap;
-        }
-
-        .nav-link {
-            background: white;
-            color: var(--secondary);
-            text-decoration: none;
-            padding: 0.6rem 1.8rem;
-            border-radius: 25px;
-            border: 2px solid var(--secondary);
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            white-space: nowrap;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            min-height: 44px;
-        }
-
-        .nav-link:hover {
-            background: var(--secondary);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .nav-link.active {
-            background: var(--secondary);
-            color: var(--primary);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Main Content Area - UPDATED to match about.html exactly */
+        /* Main Content Area */
         main {
             padding: 1.5rem 0;
             background: white;
@@ -141,9 +52,7 @@
         .page-header {
             text-align: center;
             padding: 2rem 0;
-            background: var(--primary);
             margin-bottom: 1.5rem;
-            border-radius: 0 0 15px 15px;
         }
 
         .page-title {
@@ -164,7 +73,7 @@
         }
 
         .takeaway-box {
-            background-color: var(--box-black);
+            background-color: #1a1a1a;
             border-radius: 12px;
             padding: 12px;
             display: grid;
@@ -785,46 +694,6 @@
             transform: translateY(0);
         }
 
-        /* Footer - UPDATED to match about.html */
-        .site-footer {
-            background-color: #333;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-            margin-top: 2rem;
-        }
-
-        .site-footer p {
-            font-size: 0.8rem;
-            opacity: 0.8;
-        }
-
-        /* Floating Call Button - UPDATED to match about.html */
-        .floating-whatsapp {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            background-color: #25D366;
-            color: white;
-            padding: 12px 20px;
-            border-radius: 50px;
-            text-decoration: none;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 600;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .floating-whatsapp:hover {
-            background-color: #128C7E;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-        }
-
         /* Mobile Optimization */
         @media (max-width: 768px) {
             /* Header mobile adjustments to match about.html */
@@ -1113,7 +982,7 @@
 </head>
 
 <body>
-    <!-- Header - UPDATED to exactly match about.html -->
+    <!-- Header - Using the same markup as about.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
