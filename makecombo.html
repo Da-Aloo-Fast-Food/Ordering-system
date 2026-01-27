@@ -39,34 +39,34 @@
 
         /* --- Visual Combo Box Styles --- */
         .visualizer-container {
-            margin: 2rem auto;
-            max-width: 500px;
+            margin: 1.5rem auto;
+            max-width: 320px;
             text-align: center;
         }
 
         .takeaway-box {
             background-color: var(--box-black);
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 12px;
             display: grid;
             grid-template-areas: 
-                "top-left top-right"
-                "bottom-left bottom-right";
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr; /* Equal rows for 2x2 grid */
-            gap: 15px;
-            aspect-ratio: 1 / 1; /* Square aspect ratio for 2x2 grid */
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            border: 4px solid #333;
+                "main side"
+                "main momo";
+            grid-template-columns: 2fr 1fr; /* Main compartment is wider */
+            grid-template-rows: 1fr 1fr; /* Two equal rows on the right */
+            gap: 8px;
+            aspect-ratio: 4 / 3; /* Slightly wider than tall */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            border: 3px solid #333;
             width: 100%;
-            max-width: 400px;
+            max-width: 300px;
             margin: 0 auto;
             overflow: hidden;
         }
 
         .compartment {
             background-color: #222;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
             display: flex;
@@ -95,59 +95,32 @@
             position: absolute;
             color: #444;
             font-family: 'Bebas Neue';
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
             z-index: 1;
-            top: 8px;
-            left: 8px;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
-        /* Update compartment classes for 2x2 grid */
+        /* Compartment grid assignments */
         .comp-main { 
-            grid-area: top-left;
+            grid-area: main;
         }
 
         .comp-side { 
-            grid-area: top-right;
+            grid-area: side;
         }
 
         .comp-momo { 
-            grid-area: bottom-left;
-        }
-
-        /* Add a fourth compartment for visual balance */
-        .comp-empty {
-            grid-area: bottom-right;
-            background-color: #222;
-            border-radius: 12px;
-            border: 2px inset #111;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .comp-empty::before {
-            content: "Da Aloo";
-            position: absolute;
-            color: #444;
-            font-family: 'Bebas Neue';
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* For the empty compartment */
-        .comp-empty::after {
-            content: "";
-            display: none;
+            grid-area: momo;
         }
 
         /* Main Content Area */
         main {
-            padding: 2rem 0;
+            padding: 1.5rem 0;
         }
 
         .section-title {
@@ -173,7 +146,7 @@
 
         .page-title {
             font-family: 'Bebas Neue', cursive;
-            font-size: 3rem;
+            font-size: 2.5rem;
             color: var(--secondary);
             letter-spacing: 1.5px;
             margin-bottom: 0.5rem;
@@ -181,7 +154,7 @@
 
         .page-subtitle {
             color: #666;
-            font-size: 1rem;
+            font-size: 0.9rem;
             max-width: 700px;
             margin: 0 auto;
             font-weight: 400;
@@ -812,7 +785,7 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Desktop-specific styles - UPDATED for image-only cards */
+        /* Desktop-specific styles */
         @media (min-width: 769px) {
             .items-grid {
                 display: flex;
@@ -854,10 +827,14 @@
             }
 
             /* Visual Combo Box for Desktop */
+            .visualizer-container {
+                max-width: 280px;
+            }
+
             .takeaway-box {
-                max-width: 450px;
-                padding: 20px;
-                gap: 20px;
+                max-width: 260px;
+                padding: 15px;
+                gap: 10px;
             }
         }
 
@@ -876,36 +853,33 @@
                 font-size: 1.5rem;
             }
 
-            /* Visualizer adjustments for mobile - FIXED SIZE */
+            /* Visualizer adjustments for mobile */
             .visualizer-container {
                 margin: 1.5rem auto;
-                max-width: 320px; /* Fixed size for mobile */
+                max-width: 280px;
                 width: 90%;
             }
 
             .takeaway-box {
-                max-width: 320px; /* Fixed size for mobile */
+                max-width: 260px;
                 padding: 10px;
                 gap: 8px;
-                aspect-ratio: 1 / 1; /* Keep square aspect ratio for mobile */
-                grid-template-rows: 1fr 1fr; /* Equal rows for 2x2 grid */
+            }
+
+            .compartment::after {
+                font-size: 0.8rem;
             }
 
             /* UPDATED: Single row for mobile */
             .items-grid {
                 display: flex;
                 flex-wrap: nowrap;
-                /* Prevent wrapping to next line */
                 overflow-x: auto;
-                /* Enable horizontal scrolling if needed */
                 justify-content: flex-start;
-                /* Align items to start */
                 gap: 0.8rem;
                 padding-bottom: 0.5rem;
                 -webkit-overflow-scrolling: touch;
-                /* Smooth scrolling on iOS */
                 scrollbar-width: thin;
-                /* For Firefox */
             }
 
             /* Hide scrollbar for Chrome, Safari and Opera */
@@ -925,39 +899,27 @@
 
             .item-card {
                 flex: 0 0 auto;
-                /* Don't grow or shrink, base on width */
                 width: 120px;
-                /* Even smaller for mobile */
                 height: 120px;
-                /* Even smaller for mobile */
                 min-width: 120px;
-                /* Prevent shrinking */
                 padding: 0.6rem;
             }
 
             .item-image-container {
                 height: 90px;
-                /* Smaller for mobile but still large */
                 width: 90px;
-                /* Smaller for mobile but still large */
                 min-height: 90px;
-                /* Smaller for mobile but still large */
             }
 
             .select-indicator {
                 width: 22px;
-                /* Adjusted for mobile */
                 height: 22px;
-                /* Adjusted for mobile */
                 top: 6px;
-                /* Adjusted position */
                 right: 6px;
-                /* Adjusted position */
             }
 
             .select-indicator i {
                 font-size: 0.7rem;
-                /* Adjusted for mobile */
             }
 
             .summary-header {
@@ -986,23 +948,6 @@
                 padding: 0.7rem 1rem;
                 font-size: 0.85rem;
             }
-
-            /* Header adjustments for mobile */
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .logo-section {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .site-nav {
-                justify-content: center;
-                flex-wrap: wrap;
-            }
         }
 
         @media (max-width: 576px) {
@@ -1017,19 +962,14 @@
             /* Visualizer adjustments for small mobile */
             .visualizer-container {
                 margin: 1rem auto;
-                max-width: 300px; /* Fixed size for small mobile */
+                max-width: 250px;
                 width: 90%;
             }
 
             .takeaway-box {
-                max-width: 300px; /* Fixed size for small mobile */
+                max-width: 230px;
                 padding: 8px;
                 gap: 6px;
-                aspect-ratio: 1 / 1; /* Keep square */
-            }
-
-            .compartment::after {
-                font-size: 1rem;
             }
 
             /* UPDATED: Keep single row even on very small screens */
@@ -1038,23 +978,18 @@
                 flex-wrap: nowrap;
                 overflow-x: auto;
                 gap: 0.6rem;
-                /* Smaller gap on very small screens */
             }
 
             .item-card {
                 width: 110px;
-                /* Smaller for very small screens */
                 height: 110px;
-                /* Smaller for very small screens */
                 min-width: 110px;
                 padding: 0.5rem;
             }
 
             .item-image-container {
                 height: 85px;
-                /* Adjusted for very small screens */
                 width: 85px;
-                /* Adjusted for very small screens */
                 min-height: 85px;
             }
 
@@ -1118,13 +1053,12 @@
 
             /* Visualizer adjustments for very small screens */
             .visualizer-container {
-                max-width: 280px; /* Fixed size for very small screens */
+                max-width: 220px;
                 width: 90%;
             }
 
             .takeaway-box {
-                max-width: 280px; /* Fixed size for very small screens */
-                aspect-ratio: 1 / 1; /* Keep square */
+                max-width: 200px;
                 padding: 6px;
                 gap: 5px;
             }
@@ -1139,18 +1073,14 @@
 
             .item-card {
                 width: 100px;
-                /* Smallest size for tiny screens */
                 height: 100px;
-                /* Smallest size for tiny screens */
                 min-width: 100px;
                 padding: 0.4rem;
             }
 
             .item-image-container {
                 height: 80px;
-                /* Smallest size for tiny screens */
                 width: 80px;
-                /* Smallest size for tiny screens */
                 min-height: 80px;
             }
 
@@ -1216,17 +1146,18 @@
             <!-- Visual Combo Box -->
             <div class="visualizer-container">
                 <div class="takeaway-box">
+                    <!-- Main compartment (large left side) -->
                     <div class="compartment comp-main" data-label="Main" id="box-main">
                         <img id="img-main" src="" alt="">
                     </div>
+                    <!-- Crispy Side compartment (top right) -->
                     <div class="compartment comp-side" data-label="Side" id="box-side">
                         <img id="img-side" src="" alt="">
                     </div>
+                    <!-- Mo:Mo compartment (bottom right) -->
                     <div class="compartment comp-momo" data-label="Mo:Mo" id="box-momo">
                         <img id="img-momo" src="" alt="">
                     </div>
-                    <!-- Add empty compartment for 2x2 layout -->
-                    <div class="comp-empty"></div>
                 </div>
             </div>
 
