@@ -714,26 +714,21 @@
             }
             
             .site-nav {
-                justify-content: center;
-                width: 100%;
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-top: 0.5rem;
-            }
-            
-            /* FIXED: Mobile navigation buttons with perfectly centered text */
-            .nav-link {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
-                min-height: 40px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                text-align: center;
-                width: 100%;
-                max-width: 120px;
-                margin: 0 0.2rem;
-            }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;        /* 🔴 THIS is the key */
+        gap: 10px;                /* reduce spacing */
+        width: 100%;
+        overflow-x: hidden;       /* safety */
+    }
+
+    .site-nav .nav-link {
+        font-size: 0.85rem;       /* slightly smaller text */
+        padding: 5px 6px;
+        white-space: nowrap;      /* prevents breaking text */
+    }
+}
             
             .page-title {
                 font-size: 2.5rem;
@@ -1741,4 +1736,5 @@
     </script>
 </body>
 </html>
+
 
