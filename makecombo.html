@@ -77,7 +77,7 @@
         /* Updated Visual Combo Box Styles - Now looks like a 3-compartment microwaveable container */
         .visualizer-container {
             margin: 1rem auto;
-            max-width: 160px;
+            max-width: 105px;
             text-align: center;
         }
 
@@ -86,7 +86,7 @@
             background-color: #1a1a1a;
             border-radius: 14px;
             /* Softer, more plastic-like corners */
-            padding: 7px;
+            padding: 5px;
             display: grid;
             /* Large bottom section, two smaller top sections as per image */
             grid-template-areas:
@@ -94,7 +94,7 @@
                 "main main";
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1.2fr;
-            gap: 5px;
+            gap: 3px;
             aspect-ratio: 1 / 1;
             /* These boxes are usually square */
             box-shadow:
@@ -102,7 +102,7 @@
                 0 15px 35px rgba(0, 0, 0, 0.3);
             border: 1px solid #333;
             width: 100%;
-            max-width: 160px;
+            max-width: 105px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
@@ -144,11 +144,11 @@
         .compartment::after {
             content: attr(data-label);
             position: absolute;
-            bottom: 3px;
-            right: 5px;
+            bottom: 2px;
+            right: 3px;
             color: #444;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.35rem;
+            font-size: 0.25rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -882,21 +882,21 @@
             /* Visualizer adjustments for mobile */
             .visualizer-container {
                 margin: 1rem auto;
-                max-width: 185px;
+                max-width: 125px;
             
             }
 
             .takeaway-box {
-                max-width: 185px;
-                padding: 7px;
-                gap: 6px;
-                border-radius: 10px
+                max-width: 125px;
+                padding: 5px;
+                gap: 4px;
+                border-radius: 8px
             }
 
             .compartment::after {
-                font-size: 0.4rem; /* Reduced from 0.55rem to prevent text overlap */
-    bottom: 3px;
-    right: 4px;
+                font-size: 0.3rem; /* Reduced from 0.55rem to prevent text overlap */
+    bottom: 2px;
+    right: 3px;
             }
 
             /* Single row for mobile */
@@ -1023,14 +1023,14 @@
             /* Visualizer adjustments for small mobile */
             .visualizer-container {
                 margin: 1rem auto;
-                max-width: 250px;
+                max-width: 165px;
                 width: 90%;
             }
 
             .takeaway-box {
-                max-width: 250px;
-                padding: 10px;
-                gap: 8px;
+                max-width: 165px;
+                padding: 6px;
+                gap: 5px;
             }
 
             /* Keep single row even on very small screens */
@@ -1945,5 +1945,6 @@
 </body>
 
 </html>
+
 
 
