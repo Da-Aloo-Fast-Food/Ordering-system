@@ -465,66 +465,72 @@
 }
 
         function sendOrderToWhatsApp() {
-            if (!marker) {
-                alert('Map is still loading. Please wait...');
-                return;
-            }
+    if (!marker) {
+        alert('Map is still loading. Please wait...');
+        return;
+    }
 
-            if (!cart.length) {
-                alert('Your cart is empty! Please add items first.');
-                return;
-            }
+    if (!cart.length) {
+        alert('Your cart is empty! Please add items first.');
+        return;
+    }
 
-            let locationText = "";
-            let locationLink = "";
+    let locationText = "";
+    let locationLink = "";
 
-            // Check if we have live location AND marker hasn't been dragged
-            if (isLiveLocation && !hasMarkerBeenDragged) {
-                // Case 1: Live location available and not moved
-                const pos = marker.getLatLng();
-                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+    // Check if we have live location AND marker hasn't been dragged
+    if (isLiveLocation && !hasMarkerBeenDragged) {
+        // Case 1: Live location available and not moved
+        const pos = marker.getLatLng();
+        locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+    }
+    // Check if we DON'T have live location AND marker hasn't been dragged
+    else if (!isLiveLocation && !hasMarkerBeenDragged) {
+        // Case 2: No live location and marker not moved = No location sent
+        locationText = "No location sent - User did not select location";
+        locationLink = "No location sent";
+    }
+    else {
+        // Case 3: Marker has been dragged (regardless of live location status)
+        const pos = marker.getLatLng();
+        locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+        locationText = "User Selected Location";
+    }
 
-            }
-            // Check if we DON'T have live location AND marker hasn't been dragged
-            else if (!isLiveLocation && !hasMarkerBeenDragged) {
-                // Case 2: No live location and marker not moved = No location sent
-                locationText = "No location sent - User did not select location";
-                locationLink = "No location sent";
-            }
-            else {
-                // Case 3: Marker has been dragged (regardless of live location status)
-                const pos = marker.getLatLng();
-                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-                locationText = "User Selected Location";
-            }
+    const message = formatOrderMessage(locationLink, locationText);
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
 
-            const message = formatOrderMessage(locationLink, locationText);
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
+    // Clear the cart
+    localStorage.removeItem('daAlooCart');
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
 
-            localStorage.removeItem('daAlooCart');
-            window.open(whatsappUrl, '_blank');
+    // Dynamic Redirection
+    setTimeout(() => {
+        // Retrieve the origin page saved from index.html or makecombo.html
+        const returnPage = localStorage.getItem('daAlooOrigin') || 'index.html';
+        window.location.href = returnPage;
+    }, 2000);
+}
 
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
-        }
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const location = await getUserLocation();
+        updateLocationStatus(location.isLive);
+        initMap(location.latitude, location.longitude, location.isLive);
+    } catch (error) {
+        console.error('Failed to initialize map:', error);
+        updateLocationStatus(false);
+        initMap(defaultLocation.lat, defaultLocation.lng, false);
+    }
 
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const location = await getUserLocation();
-                updateLocationStatus(location.isLive);
-                initMap(location.latitude, location.longitude, location.isLive);
-            } catch (error) {
-                console.error('Failed to initialize map:', error);
-                updateLocationStatus(false);
-                initMap(defaultLocation.lat, defaultLocation.lng, false);
-            }
-
-            document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
-        });
+    document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
+});
     </script>
 </body>
 
 
 </html>
+
