@@ -1044,52 +1044,44 @@
             }
         }
 
-       @media (max-width: 768px) {
-    /* Ensure the header stacks so nav has full width */
+ @media (max-width: 768px) {
+    /* 1. Make the main header container wider */
     .header-content {
         flex-direction: column;
         gap: 15px;
-        padding: 10px 0;
+        padding: 15px 5px; /* Reduced side padding to give more room to children */
+        max-width: 100%;   /* Allow it to take full screen width */
     }
 
-    /* Keep buttons in a single row with horizontal scroll if needed */
+    /* 2. Expand the navigation container */
     .site-nav {
         display: flex;
-        justify-content: center; /* Center them on screen */
-        gap: 10px;
-        width: 100%;
-        flex-wrap: nowrap; /* Forces single row */
-        overflow-x: auto; /* Adds scroll if screen is tiny */
-        padding: 5px;
-        -webkit-overflow-scrolling: touch;
+        justify-content: center;
+        width: 100vw;      /* Force the nav to use the full viewport width */
+        margin-left: -5px; /* Offset any parent padding to stretch edge-to-edge */
+        gap: 12px;         /* Increased space between buttons */
+        padding: 5px 10px;
+        overflow-x: auto;  /* Safety scroll for very small phones */
+        scrollbar-width: none; /* Hide scrollbar for Firefox */
     }
 
-    /* Hide the scrollbar for a cleaner look */
     .site-nav::-webkit-scrollbar {
-        display: none;
+        display: none; /* Hide scrollbar for Chrome/Safari */
     }
 
+    /* 3. Maintain the consistent 'Pill' shape for buttons */
     .nav-link {
-        /* FIXED: Using padding and min-width to maintain the desktop 'pill' shape */
-        padding: 8px 18px; 
-        font-size: 0.9rem;
-        border-radius: 50px; /* Forces the rounded pill shape from desktop */
-        white-space: nowrap; /* Prevents text from spilling out or wrapping */
+        padding: 10px 22px;   /* Generous padding for a professional look */
+        font-size: 0.95rem;   /* Standard text size */
+        border-radius: 50px;  /* Perfect pill shape */
+        min-width: 95px;      /* Ensures 'Combo' button is identical to others */
+        height: 42px;         /* Slightly taller for better mobile touch */
+        white-space: nowrap;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        min-width: 85px; /* Ensures the button is wide enough for 'Combo' */
-        height: 38px; /* Fixed height to match desktop proportions */
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-}
-
-/* Extra tweak for very small screens */
-@media (max-width: 360px) {
-    .site-nav {
-        justify-content: flex-start; /* Switch to start-aligned so user can scroll through */
-        padding-left: 10px;
+        transition: all 0.2s ease;
+        flex-shrink: 0;       /* Prevents buttons from shrinking if space is tight */
     }
 }
     </style>
@@ -1815,6 +1807,7 @@
     </script>
 </body>
 </html>
+
 
 
 
