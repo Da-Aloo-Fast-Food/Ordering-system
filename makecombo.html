@@ -1044,44 +1044,55 @@
             }
         }
 
- @media (max-width: 768px) {
-    /* 1. Make the main header container wider */
+@media (max-width: 768px) {
+    /* 1. Make the container wide enough to hold the buttons */
     .header-content {
         flex-direction: column;
         gap: 15px;
-        padding: 15px 5px; /* Reduced side padding to give more room to children */
-        max-width: 100%;   /* Allow it to take full screen width */
+        padding: 15px 5px; /* Thinner side padding to maximize horizontal space */
+        width: 95%;        /* Takes up almost the full width of the mobile screen */
+        margin: 0 auto;
     }
 
-    /* 2. Expand the navigation container */
+    /* 2. The background container for the buttons */
     .site-nav {
         display: flex;
-        justify-content: center;
-        width: 100vw;      /* Force the nav to use the full viewport width */
-        margin-left: -5px; /* Offset any parent padding to stretch edge-to-edge */
-        gap: 12px;         /* Increased space between buttons */
-        padding: 5px 10px;
-        overflow-x: auto;  /* Safety scroll for very small phones */
-        scrollbar-width: none; /* Hide scrollbar for Firefox */
+        justify-content: center; /* Centers the whole group of buttons */
+        align-items: center;
+        gap: 8px;              /* Space between buttons */
+        width: 100%;           /* Fills the header-content */
+        flex-wrap: nowrap;     /* Forces them into one line */
+        background: rgba(255, 255, 255, 0.1); /* Subtle floating background if needed */
+        padding: 5px;
+        border-radius: 50px;
     }
 
-    .site-nav::-webkit-scrollbar {
-        display: none; /* Hide scrollbar for Chrome/Safari */
-    }
-
-    /* 3. Maintain the consistent 'Pill' shape for buttons */
+    /* 3. The Buttons (Maintaining the Desktop shape) */
     .nav-link {
-        padding: 10px 22px;   /* Generous padding for a professional look */
-        font-size: 0.95rem;   /* Standard text size */
-        border-radius: 50px;  /* Perfect pill shape */
-        min-width: 95px;      /* Ensures 'Combo' button is identical to others */
-        height: 42px;         /* Slightly taller for better mobile touch */
-        white-space: nowrap;
+        /* This is the key: padding and min-width to prevent 'squishing' */
+        padding: 8px 14px;     
+        font-size: 0.85rem;    /* Small enough to fit all 4 buttons on one line */
+        min-width: 75px;       /* Ensures 'Combo' doesn't spill out */
+        height: 36px;          /* Maintains the pill height */
+        border-radius: 50px;   /* Exact same rounded shape as desktop */
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s ease;
-        flex-shrink: 0;       /* Prevents buttons from shrinking if space is tight */
+        white-space: nowrap;   /* Keeps text on one line */
+        transition: all 0.3s ease;
+        flex-shrink: 0;        /* IMPORTANT: Prevents browser from squishing the button */
+    }
+}
+
+/* Extra tweak for very small phones (like older iPhones) */
+@media (max-width: 360px) {
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        min-width: 65px;
+    }
+    .site-nav {
+        gap: 4px;
     }
 }
     </style>
@@ -1807,6 +1818,7 @@
     </script>
 </body>
 </html>
+
 
 
 
