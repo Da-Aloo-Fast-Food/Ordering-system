@@ -46,59 +46,6 @@
             padding: 0 20px;
         }
 
-        /* Header Styles */
-        .site-header {
-            background-color: var(--primary);
-            padding: 1rem 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo-section {
-            display: flex;
-            align-items: center;
-        }
-
-        .main-logo {
-            height: 60px;
-            margin-right: 15px;
-        }
-
-        .tagline {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 1.2rem;
-            color: var(--secondary);
-            letter-spacing: 1px;
-        }
-
-        .site-nav {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--secondary);
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 0.5rem 0;
-            position: relative;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: #555;
-        }
-
-        .nav-link.active {
-            border-bottom: 3px solid var(--secondary);
-        }
-
         /* Main Content Area */
         main {
             padding: 1.5rem 0;
@@ -841,17 +788,6 @@
             .section-title-inner {
                 font-size: 1.5rem;
             }
-            
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .site-nav {
-                width: 100%;
-                justify-content: center;
-                gap: 1.5rem;
-            }
 
             /* Cart adjustments for mobile */
             .cart-container {
@@ -1016,15 +952,6 @@
                 padding: 0.25rem 0.6rem;
             }
             
-            .site-nav {
-                flex-wrap: wrap;
-                gap: 1rem;
-            }
-
-            .nav-link {
-                font-size: 0.9rem;
-            }
-            
             /* Visualizer adjustments for small mobile */
             .visualizer-container {
                 margin: 1rem auto;
@@ -1119,11 +1046,10 @@
 </head>
 
 <body>
-    <!-- Site Header - Updated to match about.html -->
+    <!-- Site Header - Updated to match index.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <!-- Logo and Tagline Section -->
                 <div class="logo-section">
                     <div class="logo-container">
                         <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
