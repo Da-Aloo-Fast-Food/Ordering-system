@@ -1042,6 +1042,47 @@
                 font-size: 0.7rem;
             }
         }
+
+        /* Update this within your @media (max-width: 768px) block */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .site-nav {
+        display: flex;
+        justify-content: center;
+        gap: 8px; /* Controlled spacing between buttons */
+        width: 100%;
+        flex-wrap: nowrap; /* Keep them in one row if possible, or use wrap if they still don't fit */
+    }
+
+    .nav-link {
+        /* This ensures the button grows to fit the text 'Combo' without overflow */
+        padding: 8px 12px; 
+        font-size: 0.85rem; /* Slightly smaller than desktop but still readable */
+        min-width: fit-content; /* Critical: allows box to expand to text width */
+        white-space: nowrap; /* Prevents the text from breaking into two lines */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+    }
+}
+
+/* Specific fix for very small screens (under 380px) */
+@media (max-width: 380px) {
+    .site-nav {
+        gap: 5px; /* Reduce gap to save horizontal space */
+    }
+    
+    .nav-link {
+        padding: 6px 10px;
+        font-size: 0.8rem;
+    }
+}
     </style>
 </head>
 
@@ -1765,4 +1806,5 @@
     </script>
 </body>
 </html>
+
 
