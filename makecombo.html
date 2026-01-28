@@ -76,16 +76,16 @@
 
         /* Updated Visual Combo Box Styles - Now looks like a 3-compartment microwaveable container */
         .visualizer-container {
-            margin: 1.5rem auto;
-            max-width: 320px;
+            margin: 1rem auto;
+            max-width: 240px;
             text-align: center;
         }
 
         /* The main container - adjusted to match the 3-compartment layout in your photo */
         .takeaway-box {
             background-color: #1a1a1a;
-            border-radius: 18px; /* Softer, more plastic-like corners */
-            padding: 15px;
+            border-radius: 14px; /* Softer, more plastic-like corners */
+            padding: 10px;
             display: grid;
             /* Large bottom section, two smaller top sections as per image */
             grid-template-areas:
@@ -93,14 +93,14 @@
                 "main main";
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr 1.2fr;
-            gap: 12px;
+            gap: 8px;
             aspect-ratio: 1 / 1; /* These boxes are usually square */
             box-shadow: 
                 inset 0 0 15px rgba(0,0,0,0.5), 
                 0 15px 35px rgba(0,0,0,0.3);
             border: 1px solid #333;
             width: 100%;
-            max-width: 320px;
+            max-width: 240px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
@@ -137,11 +137,11 @@
         .compartment::after {
             content: attr(data-label);
             position: absolute;
-            bottom: 8px;
-            right: 10px;
+            bottom: 5px;
+            right: 7px;
             color: #444;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.6rem;
+            font-size: 0.5rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -1937,6 +1937,7 @@
 </body>
 
 </html>
+
 
 
 
