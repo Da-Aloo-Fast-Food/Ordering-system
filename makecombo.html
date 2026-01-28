@@ -13,7 +13,7 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17846211641"></script>
     <script>
@@ -62,7 +62,8 @@
 
         .page-title {
             font-family: 'Bebas Neue', cursive;
-            font-size: 3.5rem; /* Matches about.html hero-title size */
+            font-size: 3.5rem;
+            /* Matches about.html hero-title size */
             color: var(--secondary);
             letter-spacing: 1.5px;
             margin: 0;
@@ -70,42 +71,79 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* Visual Combo Box Styles */
+        /* Updated Visual Combo Box Styles - Now looks like a 3-compartment microwaveable container */
         .visualizer-container {
             margin: 1.5rem auto;
             max-width: 320px;
             text-align: center;
         }
 
+        /* The main container - adjusted to match the 3-compartment layout in your photo */
         .takeaway-box {
             background-color: #1a1a1a;
-            border-radius: 12px;
-            padding: 12px;
+            border-radius: 18px; /* Softer, more plastic-like corners */
+            padding: 15px;
             display: grid;
-            grid-template-areas: 
-                "main side"
-                "main momo";
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 8px;
-            aspect-ratio: 4 / 3;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            border: 3px solid #333;
+            /* Large bottom section, two smaller top sections as per image */
+            grid-template-areas:
+                "side momo"
+                "main main";
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1.2fr;
+            gap: 12px;
+            aspect-ratio: 1 / 1; /* These boxes are usually square */
+            box-shadow: 
+                inset 0 0 15px rgba(0,0,0,0.5), 
+                0 15px 35px rgba(0,0,0,0.3);
+            border: 1px solid #333;
             width: 100%;
-            max-width: 300px;
+            max-width: 320px;
             margin: 0 auto;
+            position: relative;
             overflow: hidden;
         }
 
+        /* Creating the "molded plastic" look for compartments */
         .compartment {
-            background-color: #222;
-            border-radius: 8px;
+            background-color: #111; /* Darker interior */
+            border-radius: 12px;
             overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px inset #111;
+            /* This creates the 'beveled' edge look seen in the photo */
+            box-shadow: 
+                inset 4px 4px 8px rgba(0, 0, 0, 0.8),
+                inset -1px -1px 2px rgba(255, 255, 255, 0.1);
+            border: 1px solid #222;
+        }
+
+        /* The textured bottom seen in your photo */
+        .compartment::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(#222 1px, transparent 1px);
+            background-size: 4px 4px; /* Tiny dots for the grip texture */
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* Labels: styled like embossed plastic */
+        .compartment::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            color: #444;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+            z-index: 2;
         }
 
         .compartment img {
@@ -113,41 +151,46 @@
             height: 100%;
             object-fit: cover;
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
             position: absolute;
             top: 0;
             left: 0;
         }
 
-        .compartment img.active { 
+        .compartment img.active {
             opacity: 1;
+            transform: scale(1.1);
+            filter: brightness(0.9);
         }
 
-        .compartment::after {
-            content: attr(data-label);
+        /* Add a "Plastic Gloss" Overlay */
+        .takeaway-box::after {
+            content: "";
             position: absolute;
-            color: #444;
-            font-family: 'Bebas Neue';
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            top: 5%;
+            left: 5%;
+            width: 90%;
+            height: 40%;
+            background: linear-gradient(
+                to bottom, 
+                rgba(255,255,255,0.05) 0%, 
+                transparent 100%
+            );
+            pointer-events: none;
+            border-radius: 15px;
             z-index: 1;
-            top: 6px;
-            left: 6px;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
         }
 
-        /* Compartment grid assignments */
-        .comp-main { 
+        /* Compartment grid assignments - updated for new layout */
+        .comp-main {
             grid-area: main;
         }
 
-        .comp-side { 
+        .comp-side {
             grid-area: side;
         }
 
-        .comp-momo { 
+        .comp-momo {
             grid-area: momo;
         }
 
@@ -205,8 +248,10 @@
             font-weight: 600;
             color: #555;
             transition: all 0.25s ease;
-            width: 160px; /* Increased width */
-            height: 190px; /* Increased height for better proportions */
+            width: 160px;
+            /* Increased width */
+            height: 190px;
+            /* Increased height for better proportions */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -239,23 +284,29 @@
 
         /* FIXED: Image container - full width with proper aspect ratio */
         .item-image-container {
-            height: 120px; /* Fixed height */
-            width: 100%; /* Full width of card */
-            border-radius: 14px 14px 0 0; /* Rounded top corners only */
+            height: 120px;
+            /* Fixed height */
+            width: 100%;
+            /* Full width of card */
+            border-radius: 14px 14px 0 0;
+            /* Rounded top corners only */
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #f8f9fa; /* Clean light background */
+            background: #f8f9fa;
+            /* Clean light background */
             position: relative;
-            flex-shrink: 0; /* Prevent shrinking */
+            flex-shrink: 0;
+            /* Prevent shrinking */
         }
 
         /* FIXED: Image fills the entire container properly */
         .item-image {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Changed from contain to cover for better filling */
+            object-fit: cover;
+            /* Changed from contain to cover for better filling */
             transition: transform 0.3s ease;
             display: block;
         }
@@ -481,6 +532,13 @@
         }
 
         /* Footer */
+        .site-footer {
+            background-color: #000000;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 3rem;
+        }
 
         .site-footer p {
             margin: 0;
@@ -550,10 +608,12 @@
                 box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6),
                     0 6px 20px rgba(0, 0, 0, 0.25);
             }
+
             70% {
                 box-shadow: 0 0 0 12px rgba(255, 235, 59, 0),
                     0 6px 20px rgba(0, 0, 0, 0.25);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(255, 235, 59, 0),
                     0 6px 20px rgba(0, 0, 0, 0.25);
@@ -586,12 +646,15 @@
             0% {
                 transform: scale(1);
             }
+
             30% {
                 transform: scale(1.4);
             }
+
             60% {
                 transform: scale(0.9);
             }
+
             100% {
                 transform: scale(1);
             }
@@ -778,7 +841,7 @@
             .page-title {
                 font-size: 2.5rem;
             }
-            
+
             .section-title-inner {
                 font-size: 1.5rem;
             }
@@ -816,13 +879,13 @@
             }
 
             .takeaway-box {
-                max-width: 260px;
-                padding: 10px;
-                gap: 8px;
+                max-width: 280px;
+                padding: 12px;
+                gap: 10px;
             }
 
             .compartment::after {
-                font-size: 0.8rem;
+                font-size: 0.55rem;
             }
 
             /* Single row for mobile */
@@ -912,11 +975,11 @@
                 text-align: center;
                 justify-content: center;
             }
-            
+
             .btn i {
                 margin-right: 5px;
             }
-            
+
             .btn span {
                 overflow: hidden;
                 text-overflow: ellipsis;
@@ -936,7 +999,7 @@
             .page-title {
                 font-size: 2rem;
             }
-            
+
             .section-title-inner {
                 font-size: 1.3rem;
             }
@@ -945,7 +1008,7 @@
                 font-size: 0.7rem;
                 padding: 0.25rem 0.6rem;
             }
-            
+
             /* Visualizer adjustments for small mobile */
             .visualizer-container {
                 margin: 1rem auto;
@@ -954,11 +1017,11 @@
             }
 
             .takeaway-box {
-                max-width: 230px;
-                padding: 8px;
-                gap: 6px;
+                max-width: 250px;
+                padding: 10px;
+                gap: 8px;
             }
-            
+
             /* Keep single row even on very small screens */
             .items-grid {
                 display: flex;
@@ -1016,7 +1079,7 @@
             .page-title {
                 font-size: 1.8rem;
             }
-            
+
             /* Even smaller item cards for tiny screens */
             .item-card {
                 width: 120px;
@@ -1037,90 +1100,111 @@
             }
         }
 
-@media (max-width: 768px) {
-    /* 1. Make the container wide enough to hold the buttons */
-    .header-content {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 5px; /* Thinner side padding to maximize horizontal space */
-        width: 95%;        /* Takes up almost the full width of the mobile screen */
-        margin: 0 auto;
-    }
+        @media (max-width: 768px) {
 
-    /* 2. The background container for the buttons */
-    .site-nav {
-        display: flex;
-        justify-content: center; /* Centers the whole group of buttons */
-        align-items: center;
-        gap: 8px;              /* Space between buttons */
-        width: 100%;           /* Fills the header-content */
-        flex-wrap: nowrap;     /* Forces them into one line */
-        background: rgba(255, 255, 255, 0.1); /* Subtle floating background if needed */
-        padding: 5px;
-        border-radius: 50px;
-    }
+            /* 1. Make the container wide enough to hold the buttons */
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5px;
+                /* Thinner side padding to maximize horizontal space */
+                width: 95%;
+                /* Takes up almost the full width of the mobile screen */
+                margin: 0 auto;
+            }
 
-    /* 3. The Buttons (Maintaining the Desktop shape) */
-    .nav-link {
-        /* This is the key: padding and min-width to prevent 'squishing' */
-        padding: 8px 14px;     
-        font-size: 0.85rem;    /* Small enough to fit all 4 buttons on one line */
-        min-width: 75px;       /* Ensures 'Combo' doesn't spill out */
-        height: 36px;          /* Maintains the pill height */
-        border-radius: 50px;   /* Exact same rounded shape as desktop */
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        white-space: nowrap;   /* Keeps text on one line */
-        transition: all 0.3s ease;
-        flex-shrink: 0;        /* IMPORTANT: Prevents browser from squishing the button */
-    }
-}
+            /* 2. The background container for the buttons */
+            .site-nav {
+                display: flex;
+                justify-content: center;
+                /* Centers the whole group of buttons */
+                align-items: center;
+                gap: 8px;
+                /* Space between buttons */
+                width: 100%;
+                /* Fills the header-content */
+                flex-wrap: nowrap;
+                /* Forces them into one line */
+                background: rgba(255, 255, 255, 0.1);
+                /* Subtle floating background if needed */
+                padding: 5px;
+                border-radius: 50px;
+            }
 
-/* Extra tweak for very small phones (like older iPhones) */
-@media (max-width: 360px) {
-    .nav-link {
-        padding: 6px 10px;
-        font-size: 0.8rem;
-        min-width: 65px;
-    }
-    .site-nav {
-        gap: 4px;
-    }
-}
+            /* 3. The Buttons (Maintaining the Desktop shape) */
+            .nav-link {
+                /* This is the key: padding and min-width to prevent 'squishing' */
+                padding: 8px 14px;
+                font-size: 0.85rem;
+                /* Small enough to fit all 4 buttons on one line */
+                min-width: 75px;
+                /* Ensures 'Combo' doesn't spill out */
+                height: 36px;
+                /* Maintains the pill height */
+                border-radius: 50px;
+                /* Exact same rounded shape as desktop */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                white-space: nowrap;
+                /* Keeps text on one line */
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+                /* IMPORTANT: Prevents browser from squishing the button */
+            }
+        }
+
+        /* Extra tweak for very small phones (like older iPhones) */
+        @media (max-width: 360px) {
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                min-width: 65px;
+            }
+
+            .site-nav {
+                gap: 4px;
+            }
+        }
+
         /* Update the Floating Call Button in makecombo.html */
-.floating-whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366; /* WhatsApp Green */
-    color: white;
-    padding: 12px 20px;      /* Gives it the rectangular/pill shape */
-    border-radius: 50px;     /* Makes it a pill shape like index.html */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;               /* Space between icon and text */
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease;
-    z-index: 1000;
-    width: auto;             /* Let it expand to fit the text */
-    height: auto;
-}
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            /* WhatsApp Green */
+            color: white;
+            padding: 12px 20px;
+            /* Gives it the rectangular/pill shape */
+            border-radius: 50px;
+            /* Makes it a pill shape like index.html */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            /* Space between icon and text */
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            width: auto;
+            /* Let it expand to fit the text */
+            height: auto;
+        }
 
-.floating-whatsapp:hover {
-    transform: scale(1.05) translateY(-2px);
-    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
-    color: white;
-}
+        .floating-whatsapp:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
 
-/* Ensure the icon size is correct */
-.floating-whatsapp i {
-    font-size: 1.2rem;
-}
+        /* Ensure the icon size is correct */
+        .floating-whatsapp i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 
@@ -1153,20 +1237,20 @@
                 <h1 class="page-title">Make Your Combo</h1>
             </div>
 
-            <!-- Visual Combo Box -->
+            <!-- Updated Visual Combo Box with new layout -->
             <div class="visualizer-container">
                 <div class="takeaway-box">
-                    <!-- Main compartment (large left side) -->
-                    <div class="compartment comp-main" data-label="Main" id="box-main">
-                        <img id="img-main" src="" alt="">
-                    </div>
-                    <!-- Crispy Side compartment (top right) -->
+                    <!-- Crispy Side compartment (top left) -->
                     <div class="compartment comp-side" data-label="Side" id="box-side">
                         <img id="img-side" src="" alt="">
                     </div>
-                    <!-- Mo:Mo compartment (bottom right) -->
+                    <!-- Mo:Mo compartment (top right) -->
                     <div class="compartment comp-momo" data-label="Mo:Mo" id="box-momo">
                         <img id="img-momo" src="" alt="">
+                    </div>
+                    <!-- Main compartment (large bottom section) -->
+                    <div class="compartment comp-main" data-label="Main Course" id="box-main">
+                        <img id="img-main" src="" alt="">
                     </div>
                 </div>
             </div>
@@ -1455,12 +1539,12 @@
                     <div class="select-indicator">
                         ${isSelected ? '<i class="fas fa-check"></i>' : ''}
                     </div>
-<div class="item-image-container">
-    ${item.image
-        ? `<img src="${item.image}" alt="" class="item-image" onerror="this.style.display='none'">`
-        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
-    }
-</div>
+                    <div class="item-image-container">
+                        ${item.image
+                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/></svg>'">`
+                        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
+                    }
+                    </div>
                     <div class="item-name-display">
                         <div class="item-name-text">${item.name}</div>
                         <div class="item-price-display">Rs ${item.price}</div>
@@ -1514,18 +1598,23 @@
             return total;
         }
 
-        // Update Visual Box Images
+        // Update Visual Box Images with realistic 3D effect
         function updateBoxImg(imgId, item) {
             const img = document.getElementById(imgId);
             if (item) {
-                img.onerror = function() {
+                img.onerror = function () {
                     this.src = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f0f0f0"/></svg>`;
                 };
                 img.src = item.image;
                 img.classList.add('active');
+                // Add the following two lines for the 3D effect
+                img.style.transform = "scale(1.1)";
+                img.style.filter = "brightness(0.9)";
             } else {
                 img.classList.remove('active');
-                setTimeout(() => { if(!img.classList.contains('active')) img.src = ""; }, 300);
+                img.style.transform = "scale(1)";
+                img.style.filter = "brightness(1)";
+                setTimeout(() => { if (!img.classList.contains('active')) img.src = ""; }, 300);
             }
         }
 
@@ -1843,15 +1932,5 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
