@@ -23,7 +23,8 @@
 
         gtag('config', 'AW-17846211641');
     </script>
-    
+
+
     <style>
         :root {
             --primary: #FFEB3B;
@@ -1043,44 +1044,52 @@
             }
         }
 
-        /* Update this within your @media (max-width: 768px) block */
-@media (max-width: 768px) {
+       @media (max-width: 768px) {
+    /* Ensure the header stacks so nav has full width */
     .header-content {
         flex-direction: column;
         gap: 15px;
         padding: 10px 0;
     }
 
+    /* Keep buttons in a single row with horizontal scroll if needed */
     .site-nav {
         display: flex;
-        justify-content: center;
-        gap: 8px; /* Controlled spacing between buttons */
+        justify-content: center; /* Center them on screen */
+        gap: 10px;
         width: 100%;
-        flex-wrap: nowrap; /* Keep them in one row if possible, or use wrap if they still don't fit */
+        flex-wrap: nowrap; /* Forces single row */
+        overflow-x: auto; /* Adds scroll if screen is tiny */
+        padding: 5px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Hide the scrollbar for a cleaner look */
+    .site-nav::-webkit-scrollbar {
+        display: none;
     }
 
     .nav-link {
-        /* This ensures the button grows to fit the text 'Combo' without overflow */
-        padding: 8px 12px; 
-        font-size: 0.85rem; /* Slightly smaller than desktop but still readable */
-        min-width: fit-content; /* Critical: allows box to expand to text width */
-        white-space: nowrap; /* Prevents the text from breaking into two lines */
-        display: flex;
+        /* FIXED: Using padding and min-width to maintain the desktop 'pill' shape */
+        padding: 8px 18px; 
+        font-size: 0.9rem;
+        border-radius: 50px; /* Forces the rounded pill shape from desktop */
+        white-space: nowrap; /* Prevents text from spilling out or wrapping */
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: 8px;
+        min-width: 85px; /* Ensures the button is wide enough for 'Combo' */
+        height: 38px; /* Fixed height to match desktop proportions */
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
 }
 
-/* Specific fix for very small screens (under 380px) */
-@media (max-width: 380px) {
+/* Extra tweak for very small screens */
+@media (max-width: 360px) {
     .site-nav {
-        gap: 5px; /* Reduce gap to save horizontal space */
-    }
-    
-    .nav-link {
-        padding: 6px 10px;
-        font-size: 0.8rem;
+        justify-content: flex-start; /* Switch to start-aligned so user can scroll through */
+        padding-left: 10px;
     }
 }
     </style>
@@ -1806,5 +1815,6 @@
     </script>
 </body>
 </html>
+
 
 
