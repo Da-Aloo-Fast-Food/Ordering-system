@@ -575,15 +575,18 @@
             });
 
             // Checkout - Redirect to location page
-            checkoutBtn.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Your cart is empty!');
-                    return;
-                }
-                // Save cart and redirect to location page
-                saveCart();
-                window.location.href = 'location.html';
-            });
+          // Inside your checkout button click listener
+checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+    }
+    // ADD THIS LINE: Save the origin page
+    localStorage.setItem('daAlooOrigin', 'index.html');
+    
+    saveCart();
+    window.location.href = 'location.html';
+});
 
             // Close modal when clicking outside
             window.addEventListener('click', (e) => {
@@ -2041,3 +2044,4 @@
 
 
 </html>
+
