@@ -8,7 +8,9 @@
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
@@ -18,8 +20,10 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
+
         gtag('config', 'AW-17846211641');
     </script>
+
 
     <style>
         :root {
@@ -61,6 +65,7 @@
         .page-title {
             font-family: 'Bebas Neue', cursive;
             font-size: 3.5rem;
+            /* Matches about.html hero-title size */
             color: var(--secondary);
             letter-spacing: 1.5px;
             margin: 0;
@@ -76,12 +81,14 @@
             text-align: center;
         }
 
-        /* The main container - adjusted to match the 3-compartment layout */
+        /* The main container - adjusted to match the 3-compartment layout in your photo */
         .takeaway-box {
             background-color: #1a1a1a;
             border-radius: 14px;
+            /* Softer, more plastic-like corners */
             padding: 10px;
             display: grid;
+            /* Large bottom section, two smaller top sections as per image */
             grid-template-areas:
                 "side momo"
                 "main main";
@@ -89,6 +96,7 @@
             grid-template-rows: 1fr 1.2fr;
             gap: 8px;
             aspect-ratio: 1 / 1;
+            /* These boxes are usually square */
             box-shadow:
                 inset 0 0 15px rgba(0, 0, 0, 0.5),
                 0 15px 35px rgba(0, 0, 0, 0.3);
@@ -103,12 +111,14 @@
         /* Creating the "molded plastic" look for compartments */
         .compartment {
             background-color: #111;
+            /* Darker interior */
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            /* This creates the 'beveled' edge look seen in the photo */
             box-shadow:
                 inset 4px 4px 8px rgba(0, 0, 0, 0.8),
                 inset -1px -1px 2px rgba(255, 255, 255, 0.1);
@@ -125,6 +135,7 @@
             bottom: 0;
             background-image: radial-gradient(#222 1px, transparent 1px);
             background-size: 4px 4px;
+            /* Tiny dots for the grip texture */
             opacity: 0.3;
             pointer-events: none;
         }
@@ -235,7 +246,7 @@
             flex-wrap: wrap;
         }
 
-        /* Item cards with proper image display */
+        /* FIXED: Item cards with proper image display */
         .item-card {
             background: linear-gradient(135deg, #ffffff, #f7f7f7);
             border: 2px solid #e0e0e0;
@@ -246,7 +257,9 @@
             color: #555;
             transition: all 0.25s ease;
             width: 160px;
+            /* Increased width */
             height: 190px;
+            /* Increased height for better proportions */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -277,25 +290,31 @@
             pointer-events: none;
         }
 
-        /* Image container - full width with proper aspect ratio */
+        /* FIXED: Image container - full width with proper aspect ratio */
         .item-image-container {
             height: 120px;
+            /* Fixed height */
             width: 100%;
+            /* Full width of card */
             border-radius: 14px 14px 0 0;
+            /* Rounded top corners only */
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #f8f9fa;
+            /* Clean light background */
             position: relative;
             flex-shrink: 0;
+            /* Prevent shrinking */
         }
 
-        /* Image fills the entire container properly */
+        /* FIXED: Image fills the entire container properly */
         .item-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            /* Changed from contain to cover for better filling */
             transition: transform 0.3s ease;
             display: block;
         }
@@ -520,6 +539,311 @@
             box-shadow: none !important;
         }
 
+        /* Footer */
+        .site-footer {
+            background-color: #000000;
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 3rem;
+        }
+
+        .site-footer p {
+            margin: 0;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+        }
+
+        /* Floating Call Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Cart Container */
+        .cart-container {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        /* Cart Icon */
+        .cart-icon {
+            background: #FFFFFF;
+            color: #000000;
+            width: 64px;
+            height: 64px;
+            border-radius: 14px;
+            border: 3px solid #35E539;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            font-size: 1.7rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25),
+                0 0 0 6px rgba(255, 235, 59, 0.35);
+            transition: 0.25s ease;
+            animation: cartPulse 2s infinite;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.12);
+        }
+
+        @keyframes cartPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            70% {
+                box-shadow: 0 0 0 12px rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0),
+                    0 6px 20px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        /* Badge */
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #35E539;
+            color: #000000;
+            width: 26px;
+            height: 26px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-badge.bounce {
+            animation: badgeBounce 0.4s ease;
+        }
+
+        @keyframes badgeBounce {
+            0% {
+                transform: scale(1);
+            }
+
+            30% {
+                transform: scale(1.4);
+            }
+
+            60% {
+                transform: scale(0.9);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .cart-modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-modal-header {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 1.5rem;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-modal-header h2 {
+            margin: 0;
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #e74c3c;
+        }
+
+        .cart-items {
+            padding: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+        }
+
+        .empty-cart-message i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .cart-item-price {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quantity-btn {
+            background: var(--primary);
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .remove-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-total {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-align: center;
+            border-top: 2px solid #eee;
+        }
+
+        .cart-actions {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 2px solid #eee;
+        }
+
+        /* Checkout Button */
+        .checkout-btn {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.2rem;
+            min-height: 60px;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .checkout-btn:hover {
+            background: #1ebe57;
+            transform: translateY(-2px);
+        }
+
+        .checkout-btn:active {
+            transform: translateY(0);
+        }
+
         /* Mobile Optimization */
         @media (max-width: 768px) {
             .page-title {
@@ -528,6 +852,31 @@
 
             .section-title-inner {
                 font-size: 1.5rem;
+            }
+
+            /* Cart adjustments for mobile */
+            .cart-container {
+                top: 100px;
+                right: 15px;
+            }
+
+            .cart-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .cart-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 0.7rem;
+                top: -6px;
+                right: -6px;
+            }
+
+            .cart-modal-content {
+                width: 95%;
+                margin: 10% auto;
             }
 
             /* Visualizer adjustments for mobile */
@@ -644,6 +993,14 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
+
+            .floating-whatsapp {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                right: 15px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -751,19 +1108,90 @@
             }
         }
 
-        /* Floating Call Button */
+        @media (max-width: 768px) {
+
+            /* 1. Make the container wide enough to hold the buttons */
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 5px;
+                /* Thinner side padding to maximize horizontal space */
+                width: 95%;
+                /* Takes up almost the full width of the mobile screen */
+                margin: 0 auto;
+            }
+
+            /* 2. The background container for the buttons */
+            .site-nav {
+                display: flex;
+                justify-content: center;
+                /* Centers the whole group of buttons */
+                align-items: center;
+                gap: 8px;
+                /* Space between buttons */
+                width: 100%;
+                /* Fills the header-content */
+                flex-wrap: nowrap;
+                /* Forces them into one line */
+                background: rgba(255, 255, 255, 0.1);
+                /* Subtle floating background if needed */
+                padding: 5px;
+                border-radius: 50px;
+            }
+
+            /* 3. The Buttons (Maintaining the Desktop shape) */
+            .nav-link {
+                /* This is the key: padding and min-width to prevent 'squishing' */
+                padding: 8px 14px;
+                font-size: 0.85rem;
+                /* Small enough to fit all 4 buttons on one line */
+                min-width: 75px;
+                /* Ensures 'Combo' doesn't spill out */
+                height: 36px;
+                /* Maintains the pill height */
+                border-radius: 50px;
+                /* Exact same rounded shape as desktop */
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                white-space: nowrap;
+                /* Keeps text on one line */
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+                /* IMPORTANT: Prevents browser from squishing the button */
+            }
+        }
+
+        /* Extra tweak for very small phones (like older iPhones) */
+        @media (max-width: 360px) {
+            .nav-link {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+                min-width: 65px;
+            }
+
+            .site-nav {
+                gap: 4px;
+            }
+        }
+
+        /* Update the Floating Call Button in makecombo.html */
         .floating-whatsapp {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #25D366;
+            /* WhatsApp Green */
             color: white;
             padding: 12px 20px;
+            /* Gives it the rectangular/pill shape */
             border-radius: 50px;
+            /* Makes it a pill shape like index.html */
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
+            /* Space between icon and text */
             text-decoration: none;
             font-weight: 600;
             font-size: 1rem;
@@ -771,6 +1199,7 @@
             transition: all 0.3s ease;
             z-index: 1000;
             width: auto;
+            /* Let it expand to fit the text */
             height: auto;
         }
 
@@ -780,6 +1209,7 @@
             color: white;
         }
 
+        /* Ensure the icon size is correct */
         .floating-whatsapp i {
             font-size: 1.2rem;
         }
@@ -787,7 +1217,7 @@
 </head>
 
 <body>
-    <!-- Site Header -->
+    <!-- Site Header - Updated to match index.html -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -971,31 +1401,31 @@
                 {
                     id: 1,
                     name: "Sandwich",
-                    price: 85,
+                    price: 85, // Direct half serving price
                     image: "images/categories/sandwich.jpg"
                 },
                 {
                     id: 2,
                     name: "Fried Rice",
-                    price: 90,
+                    price: 90, // Direct half serving price
                     image: "images/categories/fried-rice.jpg"
                 },
                 {
                     id: 3,
                     name: "Chowmein",
-                    price: 90,
+                    price: 90, // Direct half serving price
                     image: "images/categories/chowmein.jpg"
                 },
                 {
                     id: 10,
                     name: "Burger",
-                    price: 95,
+                    price: 95, // Direct half serving price
                     image: "images/categories/burger.jpg"
                 },
                 {
                     id: 11,
                     name: "Pasta",
-                    price: 100,
+                    price: 100, // Direct half serving price
                     image: "images/categories/pasta.jpg"
                 }
             ],
@@ -1003,31 +1433,31 @@
                 {
                     id: 4,
                     name: "Chicken Nuggets",
-                    price: 110,
+                    price: 110, // Direct half serving price
                     image: "images/categories/chicken-nuggets.jpg"
                 },
                 {
                     id: 5,
                     name: "Paneer Nuggets",
-                    price: 100,
+                    price: 100, // Direct half serving price
                     image: "images/categories/paneer-nuggets.jpg"
                 },
                 {
                     id: 6,
                     name: "Battered Fries",
-                    price: 75,
+                    price: 75, // Direct half serving price
                     image: "images/categories/battered-fries.jpg"
                 },
                 {
                     id: 12,
                     name: "Potato Wedges",
-                    price: 80,
+                    price: 80, // Direct half serving price
                     image: "images/categories/wedges.jpg"
                 },
                 {
                     id: 13,
                     name: "Onion Rings",
-                    price: 85,
+                    price: 85, // Direct half serving price
                     image: "images/categories/onion-rings.jpg"
                 }
             ],
@@ -1035,19 +1465,19 @@
                 {
                     id: 7,
                     name: "Chicken Mo:Mo",
-                    price: 110,
+                    price: 110, // Direct half serving price
                     image: "images/categories/momohalf.png"
                 },
                 {
                     id: 8,
                     name: "Paneer Mo:Mo",
-                    price: 100,
+                    price: 100, // Direct half serving price
                     image: "images/categories/paneer-momo.jpg"
                 },
                 {
                     id: 9,
                     name: "Aloo Mo:Mo",
-                    price: 90,
+                    price: 90, // Direct half serving price
                     image: "images/categories/aloo-momo.jpg"
                 }
             ]
@@ -1065,6 +1495,7 @@
                 const savedCart = localStorage.getItem('daAlooCart');
                 if (savedCart) {
                     cart = JSON.parse(savedCart);
+                    console.log('Cart loaded from localStorage:', cart);
                 }
             } catch (error) {
                 console.error('Error loading cart:', error);
@@ -1082,7 +1513,7 @@
             }
         }
 
-        // Generate item cards for a section
+        // Generate item cards for a section - FIXED: No text in image container
         function generateItemCards(sectionId, items, sectionType) {
             const container = document.getElementById(sectionId);
             if (!container) return;
@@ -1111,6 +1542,7 @@
                 card.setAttribute('data-section', sectionType);
                 card.setAttribute('title', `${item.name} - Rs ${item.price}`);
 
+                // FIXED: Removed text from SVG fallback, using simple gray box instead
                 card.innerHTML = `
                     <div class="select-indicator">
                         ${isSelected ? '<i class="fas fa-check"></i>' : ''}
@@ -1136,13 +1568,19 @@
         function toggleSelection(item, sectionType) {
             switch (sectionType) {
                 case 'main':
-                    selectedMain = selectedMain && selectedMain.id === item.id ? null : { ...item };
+                    selectedMain = selectedMain && selectedMain.id === item.id ? null : {
+                        ...item
+                    };
                     break;
                 case 'crispySide':
-                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : { ...item };
+                    selectedCrispySide = selectedCrispySide && selectedCrispySide.id === item.id ? null : {
+                        ...item
+                    };
                     break;
                 case 'momo':
-                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : { ...item };
+                    selectedMomo = selectedMomo && selectedMomo.id === item.id ? null : {
+                        ...item
+                    };
                     break;
             }
 
@@ -1153,9 +1591,17 @@
         function calculateComboPrice() {
             let total = 0;
 
-            if (selectedMain) total += selectedMain.price;
-            if (selectedCrispySide) total += selectedCrispySide.price;
-            if (selectedMomo) total += selectedMomo.price;
+            if (selectedMain) {
+                total += selectedMain.price;
+            }
+
+            if (selectedCrispySide) {
+                total += selectedCrispySide.price;
+            }
+
+            if (selectedMomo) {
+                total += selectedMomo.price;
+            }
 
             return total;
         }
@@ -1169,6 +1615,7 @@
                 };
                 img.src = item.image;
                 img.classList.add('active');
+                // Add the following two lines for the 3D effect
                 img.style.transform = "scale(1.1)";
                 img.style.filter = "brightness(0.9)";
             } else {
@@ -1196,6 +1643,7 @@
 
             // Calculate and update price
             const totalPrice = calculateComboPrice();
+
             document.getElementById('combo-price').textContent = `Rs ${totalPrice}`;
 
             // Enable/disable add to cart button
@@ -1222,7 +1670,10 @@
                 mainContainer.innerHTML = '';
                 const tag = document.createElement('div');
                 tag.className = 'selected-item-tag';
-                tag.innerHTML = `<i class="fas fa-check"></i> ${selectedMain.name} (Rs ${selectedMain.price})`;
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedMain.name} (Rs ${selectedMain.price})
+                `;
                 mainContainer.appendChild(tag);
             } else {
                 mainContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
@@ -1233,7 +1684,10 @@
                 crispySideContainer.innerHTML = '';
                 const tag = document.createElement('div');
                 tag.className = 'selected-item-tag';
-                tag.innerHTML = `<i class="fas fa-check"></i> ${selectedCrispySide.name} (Rs ${selectedCrispySide.price})`;
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedCrispySide.name} (Rs ${selectedCrispySide.price})
+                `;
                 crispySideContainer.appendChild(tag);
             } else {
                 crispySideContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
@@ -1244,7 +1698,10 @@
                 momoContainer.innerHTML = '';
                 const tag = document.createElement('div');
                 tag.className = 'selected-item-tag';
-                tag.innerHTML = `<i class="fas fa-check"></i> ${selectedMomo.name} (Rs ${selectedMomo.price})`;
+                tag.innerHTML = `
+                    <i class="fas fa-check"></i>
+                    ${selectedMomo.name} (Rs ${selectedMomo.price})
+                `;
                 momoContainer.appendChild(tag);
             } else {
                 momoContainer.innerHTML = '<div class="empty-selection">No item selected yet</div>';
@@ -1329,6 +1786,7 @@
                     alert('Your cart is empty!');
                     return;
                 }
+                // Save cart and redirect to location page
                 saveCart();
                 window.location.href = 'location.html';
             });
@@ -1420,7 +1878,7 @@
                         saveCart();
                         updateCartBadge();
                         updateCartDisplay();
-                        return;
+                        return; // Exit if item removed
                     }
                 }
 
@@ -1482,4 +1940,5 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
+
 </html>
