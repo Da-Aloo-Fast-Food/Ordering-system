@@ -1095,6 +1095,39 @@
         gap: 4px;
     }
 }
+        /* Update the Floating Call Button in makecombo.html */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* WhatsApp Green */
+    color: white;
+    padding: 12px 20px;      /* Gives it the rectangular/pill shape */
+    border-radius: 50px;     /* Makes it a pill shape like index.html */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;               /* Space between icon and text */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    width: auto;             /* Let it expand to fit the text */
+    height: auto;
+}
+
+.floating-whatsapp:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+    color: white;
+}
+
+/* Ensure the icon size is correct */
+.floating-whatsapp i {
+    font-size: 1.2rem;
+}
     </style>
 </head>
 
@@ -1818,6 +1851,7 @@
     </script>
 </body>
 </html>
+
 
 
 
