@@ -1455,12 +1455,13 @@
                     <div class="select-indicator">
                         ${isSelected ? '<i class="fas fa-check"></i>' : ''}
                     </div>
-                    <div class="item-image-container">
-                        ${item.image
-                        ? `<img src="${item.image}" alt="${item.name}" class="item-image" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23f0f0f0\"/></svg>'">`
-                        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
-                    }
-                    </div>
+                    // Replace the .item-image-container part of your innerHTML with this:
+<div class="item-image-container">
+    ${item.image
+        ? `<img src="${item.image}" alt="" class="item-image" onerror="this.style.display='none'">`
+        : `<i class="fas fa-${sectionType === 'main' ? 'hamburger' : sectionType === 'crispySide' ? 'bacon' : 'dumpling'} placeholder-icon"></i>`
+    }
+</div>
                     <div class="item-name-display">
                         <div class="item-name-text">${item.name}</div>
                         <div class="item-price-display">Rs ${item.price}</div>
@@ -1844,6 +1845,7 @@
     </script>
 </body>
 </html>
+
 
 
 
