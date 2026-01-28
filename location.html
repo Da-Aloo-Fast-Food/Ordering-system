@@ -415,37 +415,54 @@
             });
         }
 
-        function formatOrderMessage(locationLink, locationText) {
-            let message = "*My ORDER*\n\n*Order Details:*\n";
+       function formatOrderMessage(locationLink, locationText) {
+    let message = "*My ORDER*\n\n*Order Details:*\n";
 
-            const now = new Date();
-            message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
+    const now = new Date();
+    message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
 
-            let total = 0;
+    let total = 0;
 
-            if (cart.length === 0) {
-                message += "No items in cart\n";
-            } else {
-                cart.forEach(item => {
-                    const itemTotal = item.totalPrice;
-                    total += itemTotal;
+    if (cart.length === 0) {
+        message += "No items in cart\n";
+    } else {
+        cart.forEach(item => {
+            // Check both possible price properties (totalPrice for index items, price for combos)
+            const itemPrice = item.totalPrice || item.price || 0;
+            const itemTotal = itemPrice * (item.quantity || 1);
+            total += itemTotal;
 
-                    message += `• ${item.quantity}x ${item.name}`;
-                    if (item.variant) message += ` (${item.variant.name})`;
-                    if (item.extras?.length) message += ` - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-                    message += ` - Rs ${itemTotal}\n`;
-                });
+            // Item Name and Quantity
+            message += `• ${item.quantity}x ${item.name}`;
+
+            // Handle Combo Details (from makecombo.html)
+            if (item.details) {
+                message += `\n   _Items: ${item.details}_`;
             }
 
-            message += `\n*Total Amount: Rs ${total}*\n\n*Delivery Location:*${locationText}`;
-
-            if (locationLink !== "No location sent") {
-                message += `\n${locationLink}`;
+            // Handle Standard Variants (from index.html)
+            if (item.variant) {
+                message += ` (${item.variant.name})`;
             }
 
-            message += `\n\nPlease confirm this order.\n Thank you!`;
-            return message;
-        }
+            // Handle Extras (from index.html)
+            if (item.extras && item.extras.length > 0) {
+                message += `\n   - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
+            }
+
+            message += `\n   - Rs ${itemTotal}\n\n`;
+        });
+    }
+
+    message += `*Total Amount: Rs ${total}*\n\n*Delivery Location:* ${locationText}`;
+
+    if (locationLink !== "No location sent") {
+        message += `\n${locationLink}`;
+    }
+
+    message += `\n\nPlease confirm this order.\nThank you!`;
+    return message;
+}
 
         function sendOrderToWhatsApp() {
             if (!marker) {
@@ -508,5 +525,6 @@
         });
     </script>
 </body>
+
 
 </html>
