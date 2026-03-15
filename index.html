@@ -22,22 +22,22 @@
 
     gtag('config', 'G-CFXTRJEMHN');
 </script>
+
 <body>
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-               <div class="logo-section">
-    <div class="logo-container">
-        <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
-        <div class="tagline">"Where Hunger Comes to An End"</div>
-    </div>
-</div>
-<nav class="site-nav">
-    <a href="index.html" class="nav-link">Menu</a>
-    <a href="offers.html" class="nav-link">Offers</a>
-    <a href="about.html" class="nav-link">About</a>
-</nav>
+                <div class="logo-section">
+                    <div class="logo-container">
+                        <img src="images/logo.png" alt="Da Aloo Logo" class="main-logo">
+                        <div class="tagline">"Where Hunger Comes to An End"</div>
+                    </div>
                 </div>
+                <nav class="site-nav">
+                    <a href="index.html" class="nav-link">Menu</a>
+                    <a href="offers.html" class="nav-link">Offers</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
             </div>
         </div>
     </header>
@@ -134,13 +134,13 @@
         // Enhanced Menu data with variants and extras – PRICES UPDATED AS PER REQUEST
         const MENU = {
             "Aloo Fries": [
-                { "name": "Aloo Fries Medium", "price": 80 },       
+                { "name": "Aloo Fries Medium", "price": 80 },
                 { "name": "Aloo Fries Large", "price": 130 },
-                { "name": "Cajun & Garlic Fries", "price": 170 },      
-                { "name": "Chili Fries", "price": 180 },              
-                { "name": "Spicy Buff Sausage Fries", "price": 190 }, 
-                { "name": "Cheesy Fries", "price": 190 },             
-                { "name": "Chicken Makhani Fries", "price": 220 },     
+                { "name": "Cajun & Garlic Fries", "price": 170 },
+                { "name": "Chili Fries", "price": 180 },
+                { "name": "Spicy Buff Sausage Fries", "price": 190 },
+                { "name": "Cheesy Fries", "price": 190 },
+                { "name": "Chicken Makhani Fries", "price": 220 },
             ],
             "Da Aloo Special": [
                 { "name": "Battered Fries", "price": 180 },
@@ -390,6 +390,10 @@
                 console.error('Error loading cart:', error);
                 cart = [];
             }
+            cart = cart.map(item => {
+                item.availableExtras = item.availableExtras || [];
+                return item;
+            });
         }
 
         // Save cart to localStorage
@@ -575,18 +579,18 @@
             });
 
             // Checkout - Redirect to location page
-          // Inside your checkout button click listener
-checkoutBtn.addEventListener('click', () => {
-    if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-    }
-    // ADD THIS LINE: Save the origin page
-    localStorage.setItem('daAlooOrigin', 'index.html');
-    
-    saveCart();
-    window.location.href = 'location.html';
-});
+            // Inside your checkout button click listener
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Your cart is empty!');
+                    return;
+                }
+                // ADD THIS LINE: Save the origin page
+                localStorage.setItem('daAlooOrigin', 'index.html');
+
+                saveCart();
+                window.location.href = 'location.html';
+            });
 
             // Close modal when clicking outside
             window.addEventListener('click', (e) => {
@@ -2043,4 +2047,3 @@ checkoutBtn.addEventListener('click', () => {
 </body>
 
 </html>
-
