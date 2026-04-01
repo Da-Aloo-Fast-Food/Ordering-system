@@ -1,35 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- ANTI-CACHE TAGS: Forces browser to check for latest version -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <!-- Anti-cache -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>Select Delivery Location - Da Aloo</title>
 
-    <!-- Force HTTPS Redirect -->
+    <!-- Force HTTPS (except localhost) -->
     <script>
-        // Auto-redirect HTTP to HTTPS
         if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
             window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
         }
     </script>
 
-    <!-- Leaflet -->
+    <!-- Leaflet CSS + JS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    <!-- Font Awesome -->
+    <!-- Font Awesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -88,7 +83,6 @@
             letter-spacing: 1px;
         }
 
-        /* Location Status Styles */
         .location-status {
             display: flex;
             align-items: center;
@@ -267,19 +261,10 @@
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
 
-    gtag('config', 'G-CFXTRJEMHN');
-</script>
 <body>
     <div class="location-container">
         <div class="location-header">
-            <!-- Location Status - Will show one of two states -->
             <div class="location-status" id="locationStatus">
                 <i class="fas fa-spinner fa-spin"></i>
                 <span>Checking location...</span>
@@ -294,258 +279,220 @@
         </div>
 
         <div class="location-instructions">
-            <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live
-                location.</p>
+            <p><i class="fas fa-info-circle"></i> Drag the marker to choose a different delivery location.</p>
         </div>
 
         <div class="location-footer">
             <button class="confirm-btn" id="confirmLocationBtn">
-                <i class="fab fa-whatsapp fa-1x"></i> Order on WhatsApp
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
             </button>
         </div>
     </div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        let map, marker, cart = [];
+        // ----- Global Variables -----
+        let map, marker;
         let isLiveLocation = false;
         let hasMarkerBeenDragged = false;
-        let defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu coordinates
+        let cart = [];
+        const defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu
 
+        // ----- Load Cart from localStorage -----
         try {
             const savedCart = localStorage.getItem('daAlooCart');
-            cart = savedCart ? JSON.parse(savedCart) : [];
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                console.log('Cart loaded:', cart.length, 'items');
+            }
         } catch (error) {
             console.error('Error loading cart:', error);
+            cart = [];
         }
 
+        // ----- Update Status UI -----
         function updateLocationStatus(isLive) {
-            const statusElement = document.getElementById('locationStatus');
-            const icon = statusElement.querySelector('i');
-            const textSpan = statusElement.querySelector('span');
+            const statusDiv = document.getElementById('locationStatus');
+            const icon = statusDiv.querySelector('i');
+            const textSpan = statusDiv.querySelector('span');
 
             if (isLive) {
-                // Stage 1: Location is on
-                statusElement.className = 'location-status';
+                statusDiv.className = 'location-status';
                 icon.className = 'fas fa-check-circle';
-                textSpan.textContent = 'Your Live location is selected';
+                textSpan.textContent = 'Your live location is selected';
             } else {
-                // Stage 2: Location is off
-                statusElement.className = 'location-status warning';
+                statusDiv.className = 'location-status warning';
                 icon.className = 'fas fa-exclamation-triangle';
-                textSpan.textContent = 'Turn on Location Setting on your device';
+                textSpan.textContent = 'Turn on location or drag the marker to set delivery address';
             }
         }
 
-        function initMap(latitude, longitude, isLive) {
-            document.getElementById('map').innerHTML = '';
-            map = L.map('map').setView([latitude, longitude], 16);
+        // ----- Initialize Map with given coordinates -----
+        function initMap(lat, lng, isLive) {
+            const mapContainer = document.getElementById('map');
+            mapContainer.innerHTML = ''; // clear loading message
 
+            map = L.map('map').setView([lat, lng], 16);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
 
-            marker = L.marker([latitude, longitude], {
-                draggable: true,
-                icon: L.icon({
-                    iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-                    iconSize: [25, 41],
-                    iconAnchor: [12, 41]
-                })
-            }).addTo(map);
-
+            marker = L.marker([lat, lng], { draggable: true }).addTo(map);
             marker.bindPopup('Drag me to adjust location').openPopup();
 
-            // Track if marker has been dragged
-            marker.on('dragend', function () {
+            marker.on('dragend', () => {
                 hasMarkerBeenDragged = true;
-                const newPos = marker.getLatLng();
-                console.log('Marker dragged to:', newPos.lat, newPos.lng);
+                // Optionally show a small popup to confirm new location
+                const pos = marker.getLatLng();
+                marker.bindPopup(`Location set to ${pos.lat.toFixed(5)}, ${pos.lng.toFixed(5)}`).openPopup();
+                setTimeout(() => marker.closePopup(), 2000);
             });
 
             isLiveLocation = isLive;
         }
 
+        // ----- Get User Location (Promise) -----
         function getUserLocation() {
             return new Promise((resolve) => {
                 if (!navigator.geolocation) {
-                    resolve({
-                        latitude: defaultLocation.lat,
-                        longitude: defaultLocation.lng,
-                        isLive: false
-                    });
+                    resolve({ lat: defaultLocation.lat, lng: defaultLocation.lng, isLive: false });
                     return;
                 }
 
                 let resolved = false;
-                const success = (position) => {
+                const success = (pos) => {
                     if (resolved) return;
                     resolved = true;
-                    navigator.geolocation.clearWatch(watchId);
                     resolve({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
+                        lat: pos.coords.latitude,
+                        lng: pos.coords.longitude,
                         isLive: true
                     });
                 };
 
                 const error = () => {
                     if (!resolved) {
-                        navigator.geolocation.clearWatch(watchId);
-                        resolve({
-                            latitude: defaultLocation.lat,
-                            longitude: defaultLocation.lng,
-                            isLive: false
-                        });
+                        resolved = true;
+                        resolve({ lat: defaultLocation.lat, lng: defaultLocation.lng, isLive: false });
                     }
                 };
 
                 const watchId = navigator.geolocation.watchPosition(success, error, {
                     enableHighAccuracy: true,
                     maximumAge: 0,
-                    timeout: 15000
+                    timeout: 10000
                 });
 
-                // Timeout after 15 seconds
+                // Fallback after 10 seconds
                 setTimeout(() => {
                     if (!resolved) {
                         navigator.geolocation.clearWatch(watchId);
-                        resolve({
-                            latitude: defaultLocation.lat,
-                            longitude: defaultLocation.lng,
-                            isLive: false
-                        });
+                        resolve({ lat: defaultLocation.lat, lng: defaultLocation.lng, isLive: false });
                     }
-                }, 15000);
+                }, 10000);
             });
         }
 
-      function formatOrderMessage(locationLink, locationText) {
-    let message = "*My ORDER*\n\n*Order Details:*\n";
+        // ----- Format Order Message for WhatsApp -----
+        function formatOrderMessage(locationLink, locationText) {
+            let message = "*My ORDER*\n\n*Order Details:*\n";
+            const now = new Date();
+            message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
 
-    const now = new Date();
-    message += `Date: ${now.toLocaleDateString()} ${now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}\n\n`;
+            let grandTotal = 0;
 
-    let grandTotal = 0;
-
-    if (cart.length === 0) {
-        message += "No items in cart\n";
-    } else {
-        cart.forEach(item => {
-            // Determine line total – use totalPrice if it already includes quantity and extras,
-            // otherwise use price per unit multiplied by quantity.
-            let lineTotal;
-            if (item.totalPrice !== undefined) {
-                // totalPrice already includes quantity and any extras
-                lineTotal = item.totalPrice;
-            } else if (item.price !== undefined) {
-                // price is per unit – multiply by quantity
-                lineTotal = item.price * (item.quantity || 1);
+            if (cart.length === 0) {
+                message += "No items in cart\n";
             } else {
-                lineTotal = 0; // fallback (should not happen)
-            }
-            grandTotal += lineTotal;
+                cart.forEach(item => {
+                    // Use totalPrice (already includes quantity + extras)
+                    let lineTotal = item.totalPrice || (item.price * (item.quantity || 1));
+                    grandTotal += lineTotal;
 
-            // Item header: quantity and name
-            message += `• ${item.quantity || 1}x ${item.name}`;
-
-            // Standard variant (from index.html)
-            if (item.variant) {
-                message += ` (${item.variant.name})`;
-            }
-
-            // Extras (from index.html) – prices are already included in totalPrice
-            if (item.extras && item.extras.length > 0) {
-                message += `\n   - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
-            }
-
-            // Combo details (from makecombo.html)
-            if (item.details) {
-                message += `\n   _Items: ${item.details}_`;
+                    message += `• ${item.quantity || 1}x ${item.name}`;
+                    if (item.variant) {
+                        message += ` (${item.variant.name})`;
+                    }
+                    if (item.extras && item.extras.length > 0) {
+                        message += `\n   - Extras: ${item.extras.map(e => e.name).join(', ')}`;
+                    }
+                    if (item.details) {
+                        message += `\n   _Items: ${item.details}_`;
+                    }
+                    message += `\n   - Rs ${lineTotal}\n\n`;
+                });
             }
 
-            // Line subtotal
-            message += `\n   - Rs ${lineTotal}\n\n`;
-        });
-    }
+            message += `*Total Amount: Rs ${grandTotal}*\n\n*Delivery Location:* ${locationText}`;
+            if (locationLink !== "No location sent") {
+                message += `\n${locationLink}`;
+            }
+            message += `\n\nPlease confirm this order.\nThank you!`;
+            return message;
+        }
 
-    message += `*Total Amount: Rs ${grandTotal}*\n\n*Delivery Location:* ${locationText}`;
-
-    if (locationLink !== "No location sent") {
-        message += `\n${locationLink}`;
-    }
-
-    message += `\n\nPlease confirm this order.\nThank you!`;
-    return message;
-}
-
+        // ----- Send Order to WhatsApp -----
         function sendOrderToWhatsApp() {
-    if (!marker) {
-        alert('Map is still loading. Please wait...');
-        return;
-    }
+            if (!cart.length) {
+                alert('Your cart is empty! Please add items first.');
+                return;
+            }
 
-    if (!cart.length) {
-        alert('Your cart is empty! Please add items first.');
-        return;
-    }
+            if (!marker) {
+                alert('Map is still loading. Please wait a moment.');
+                return;
+            }
 
-    let locationText = "";
-    let locationLink = "";
+            let locationText = "";
+            let locationLink = "";
 
-    // Check if we have live location AND marker hasn't been dragged
-    if (isLiveLocation && !hasMarkerBeenDragged) {
-        // Case 1: Live location available and not moved
-        const pos = marker.getLatLng();
-        locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-    }
-    // Check if we DON'T have live location AND marker hasn't been dragged
-    else if (!isLiveLocation && !hasMarkerBeenDragged) {
-        // Case 2: No live location and marker not moved = No location sent
-        locationText = "No location sent - User did not select location";
-        locationLink = "No location sent";
-    }
-    else {
-        // Case 3: Marker has been dragged (regardless of live location status)
-        const pos = marker.getLatLng();
-        locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-        locationText = "User Selected Location";
-    }
+            // Determine location based on marker drag and live location status
+            if (hasMarkerBeenDragged) {
+                // Marker was moved – use that location
+                const pos = marker.getLatLng();
+                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+                locationText = "User selected location";
+            } else if (isLiveLocation) {
+                // Live location available and marker not moved – use live location
+                const pos = marker.getLatLng();
+                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
+                locationText = "Live location";
+            } else {
+                // No live location and marker not moved – no location sent
+                locationText = "No location sent - User did not select location";
+                locationLink = "No location sent";
+            }
 
-    const message = formatOrderMessage(locationLink, locationText);
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
+            const message = formatOrderMessage(locationLink, locationText);
+            const encodedMsg = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMsg}`;
 
-    // Clear the cart
-    localStorage.removeItem('daAlooCart');
-    
-    // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
+            // Clear cart
+            localStorage.removeItem('daAlooCart');
 
-    // Dynamic Redirection
-    setTimeout(() => {
-        // Retrieve the origin page saved from index.html or makecombo.html
-        const returnPage = localStorage.getItem('daAlooOrigin') || 'index.html';
-        window.location.href = returnPage;
-    }, 2000);
-}
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
 
-document.addEventListener('DOMContentLoaded', async () => {
-    try {
-        const location = await getUserLocation();
-        updateLocationStatus(location.isLive);
-        initMap(location.latitude, location.longitude, location.isLive);
-    } catch (error) {
-        console.error('Failed to initialize map:', error);
-        updateLocationStatus(false);
-        initMap(defaultLocation.lat, defaultLocation.lng, false);
-    }
+            // Redirect back to origin page after a short delay
+            setTimeout(() => {
+                const origin = localStorage.getItem('daAlooOrigin') || 'index.html';
+                window.location.href = origin;
+            }, 2000);
+        }
 
-    document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
-});
+        // ----- Main Initialization -----
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const location = await getUserLocation();
+                updateLocationStatus(location.isLive);
+                initMap(location.lat, location.lng, location.isLive);
+            } catch (err) {
+                console.error('Map init failed:', err);
+                updateLocationStatus(false);
+                initMap(defaultLocation.lat, defaultLocation.lng, false);
+            }
+
+            document.getElementById('confirmLocationBtn').addEventListener('click', sendOrderToWhatsApp);
+        });
     </script>
 </body>
-
-
 </html>
-
