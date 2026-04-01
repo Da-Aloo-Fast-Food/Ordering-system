@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Page-specific styles (keeping the marquee and modal) -->
+    <!-- Page-specific styles (keeping marquee and modal) -->
     <style>
         /* --- Horizontal Marquee (touch/drag enabled) --- */
         .marquee-viewport {
@@ -110,7 +110,7 @@
             transform: scale(1.1);
         }
 
-        /* Daily specials section (keeps consistent with site theme) */
+        /* Daily specials section */
         .specials-section {
             background: var(--primary, #FFEB3B);
             width: 100%;
@@ -188,8 +188,9 @@
 </header>
 
 <main>
-    <section class="offers-section">
-        <h1 class="section-title center" > Our Offers</h1>
+    <section class="offers-section" style="padding: 1rem 0; overflow: hidden;">
+        <!-- Heading now matches index.html style -->
+        <h1 class="section-title menu-page-title" style="text-align: center;">Our Offers</h1>
 
         <div class="marquee-viewport" aria-label="Scrolling offers">
             <div class="marquee-track" id="scrollingTrack">
@@ -248,7 +249,7 @@
     <img class="modal-content" id="fullImage" alt="Full size offer">
 </div>
 
-<!-- Google Analytics (loaded after page content for performance) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -264,7 +265,6 @@
         const fullImg = document.getElementById("fullImage");
         fullImg.src = imgSrc;
         modal.style.display = "flex";
-        // Prevent body scroll when modal is open
         document.body.style.overflow = "hidden";
     }
 
@@ -283,14 +283,6 @@
 
     // Set current year in footer
     document.getElementById('currentYear').textContent = new Date().getFullYear();
-
-    // Optional: Add touch-scroll hint for mobile (visual only)
-    const viewport = document.querySelector('.marquee-viewport');
-    if (viewport) {
-        viewport.addEventListener('touchstart', () => {
-            // Just to ensure the animation pauses on touch (already via CSS)
-        });
-    }
 </script>
 </body>
 </html>
