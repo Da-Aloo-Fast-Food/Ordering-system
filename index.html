@@ -23,7 +23,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-CFXTRJEMHN');
 </script>
 
@@ -190,14 +189,14 @@
                 },
                 {
                     "name": "Paneer Katti Roll",
-                    "price": 170,           // was 160
+                    "price": 170,
                     "extras": [
                         { "name": "Add Egg", "price": 30 }
                     ]
                 },
                 {
                     "name": "Tandoori Chicken Katti Roll",
-                    "price": 190,           // was 180
+                    "price": 190,
                     "extras": [
                         { "name": "Add Egg", "price": 30 }
                     ]
@@ -217,11 +216,11 @@
                 {
                     "name": "Paneer Mo:Mo",
                     "variants": [
-                        { "name": "Steam", "price": 140 },  // was 130
-                        { "name": "Kothey", "price": 150 }, // was 140
-                        { "name": "Fried", "price": 160 },  // was 150
-                        { "name": "Jhol", "price": 170 },   // was 160
-                        { "name": "Chilli", "price": 180 }  // unchanged (was 180)
+                        { "name": "Steam", "price": 140 },
+                        { "name": "Kothey", "price": 150 },
+                        { "name": "Fried", "price": 160 },
+                        { "name": "Jhol", "price": 170 },
+                        { "name": "Chilli", "price": 180 }
                     ]
                 },
                 {
@@ -237,11 +236,11 @@
                 {
                     "name": "Chicken Mo:Mo",
                     "variants": [
-                        { "name": "Steam", "price": 160 },  // was 150
-                        { "name": "Kothey", "price": 170 }, // was 160
-                        { "name": "Fried", "price": 180 },  // was 170
-                        { "name": "Jhol", "price": 190 },   // was 180
-                        { "name": "Chilli", "price": 200 }  // was 190
+                        { "name": "Steam", "price": 160 },
+                        { "name": "Kothey", "price": 170 },
+                        { "name": "Fried", "price": 180 },
+                        { "name": "Jhol", "price": 190 },
+                        { "name": "Chilli", "price": 200 }
                     ]
                 },
             ],
@@ -290,18 +289,18 @@
                 { "name": "Mixed Chowmein", "price": 190 },
             ],
             "Snacks": [
-                { "name": "Chicken Chilly", "price": 280 },  // was 250
-                { "name": "Buff Chilly", "price": 270 },     // was 240
-                { "name": "Paneer Chilly", "price": 270 },   // was 240
+                { "name": "Chicken Chilly", "price": 280 },
+                { "name": "Buff Chilly", "price": 270 },
+                { "name": "Paneer Chilly", "price": 270 },
                 { "name": "Chicken Sausage Chilly", "price": 190 },
                 { "name": "Buff Sausage Chilly", "price": 180 },
                 { "name": "Sausage", "price": "50-60", "variants": [{ "name": "Buff", "price": 50 }, { "name": "Chicken", "price": 60 }] },
                 { "name": "Chicken Nuggets", "price": 250 },
             ],
             "Chicken Wings": [
-                { "name": "Buffalo Hot Wings", "price": 360, "details": "3 pcs" },  // was 330
-                { "name": "Crunchy Wings", "price": 360, "details": "3 pcs" },      // was 330
-                { "name": "Cheesy Garlic Wings", "price": 380, "details": "3 pcs" },// was 350
+                { "name": "Buffalo Hot Wings", "price": 360, "details": "3 pcs" },
+                { "name": "Crunchy Wings", "price": 360, "details": "3 pcs" },
+                { "name": "Cheesy Garlic Wings", "price": 380, "details": "3 pcs" },
             ],
             "Rice or Roti Meal": [
                 {
@@ -338,7 +337,7 @@
                 },
             ],
             "Cold Drinks": [
-                { "name": "Coke / Fanta / Sprite", "price": 80 },  // was 70
+                { "name": "Coke / Fanta / Sprite", "price": 80 },
                 { "name": "Cold Coffee", "price": 120 },
                 { "name": "Ice Mint Lemonade", "price": 140 },
                 { "name": "Green Apple Mojito", "price": 150 },
@@ -352,7 +351,7 @@
                 { "name": "Masala Milk Tea", "price": 50 },
                 { "name": "Lemon Tea", "price": 40 },
                 { "name": "Suja (Butter Milk Tea)", "price": 70 },
-                { "name": "Hot Lemon", "price": 100 },   // was 70
+                { "name": "Hot Lemon", "price": 100 },
                 { "name": "Americano", "price": 80 },
                 { "name": "Cappuccino", "price": 100 },
                 { "name": "Hot Chocolate", "price": 100 },
@@ -439,7 +438,6 @@
         function parsePrice(price) {
             if (typeof price === 'string') {
                 if (price.includes('-')) {
-                    // Handle price ranges like "50-60" by taking the first value
                     return parseInt(price.split('-')[0]);
                 }
                 return parseInt(price) || 0;
@@ -447,7 +445,7 @@
             return price;
         }
 
-        // Generate menu items
+        // Generate menu items WITH small images
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
             let first = true;
@@ -463,6 +461,13 @@
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
 
+                    // Build image filename from item name (lowercase, replace spaces/punctuation with hyphens)
+                    let imageName = item.name.toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-|-$/g, '');
+                    let imagePath = `images/items/${imageName}.jpg`;
+                    const fallbackImage = 'images/items/fallback.jpg';
+
                     // Display price range for variant items
                     let displayPrice = `Rs ${item.price}`;
                     let priceForButton = parsePrice(item.price);
@@ -475,9 +480,6 @@
                         priceForButton = minPrice;
                     }
 
-                    // --- BUTTON LOGIC ---
-                    // "Choose Variant" for Mo:Mo (hasVariants)
-                    // "Add to Cart" for everything else (including Rice or Roti Meal)
                     let buttonText = 'Add to Cart';
                     let buttonIcon = 'plus';
                     let btnClass = '';
@@ -490,6 +492,12 @@
 
                     itemsHTML += `
                         <div class="menu-item-card">
+                            <div class="item-image">
+                                <img src="${imagePath}" 
+                                     alt="${item.name}" 
+                                     loading="lazy"
+                                     onerror="this.onerror=null; this.src='${fallbackImage}';">
+                            </div>
                             <div class="item-main-container">
                                 <div class="item-left">
                                     <h3 class="item-name">${item.name}</h3>
@@ -571,46 +579,36 @@
             const checkoutBtn = document.getElementById('checkoutBtn');
             const cartItemsContainer = document.getElementById('cartItems');
 
-            // Open cart modal
             cartIcon.addEventListener('click', () => {
                 cartModal.style.display = 'block';
                 updateCartDisplay();
             });
 
-            // Close cart modal
             closeCart.addEventListener('click', () => {
                 cartModal.style.display = 'none';
             });
 
-            // Checkout - Redirect to location page
-            // Inside your checkout button click listener
             checkoutBtn.addEventListener('click', () => {
                 if (cart.length === 0) {
                     alert('Your cart is empty!');
                     return;
                 }
-                // ADD THIS LINE: Save the origin page
                 localStorage.setItem('daAlooOrigin', 'index.html');
-
                 saveCart();
                 window.location.href = 'location.html';
             });
 
-            // Close modal when clicking outside
             window.addEventListener('click', (e) => {
                 if (e.target === cartModal) {
                     cartModal.style.display = 'none';
                 }
             });
 
-            // Event Delegation for Cart Actions
             if (cartItemsContainer) {
                 cartItemsContainer.addEventListener('click', handleCartItemClick);
-                // Listener for checkbox changes in cart
                 cartItemsContainer.addEventListener('change', handleCartItemChange);
             }
 
-            // Add to cart buttons
             document.addEventListener('click', (e) => {
                 if (e.target.classList.contains('add-to-cart-btn') || e.target.closest('.add-to-cart-btn')) {
                     const button = e.target.classList.contains('add-to-cart-btn') ? e.target : e.target.closest('.add-to-cart-btn');
@@ -619,14 +617,10 @@
                     const hasVariants = button.getAttribute('data-has-variants') === 'true';
 
                     if (hasVariants) {
-                        // Open modal ONLY for Variants (Mo:Mo)
                         openCustomizationModal(name, true, false);
                     } else {
-                        // For items with extras (Burger/Roll) or simple items (Coke)
-                        // we find the item data to see if it has potential availableExtras
                         const itemData = findMenuItem(name);
                         const availableExtras = itemData.extras || [];
-
                         addToCart(name, parsePrice(price), null, [], availableExtras);
                         showAddFeedback(button);
                     }
@@ -634,7 +628,6 @@
             });
         }
 
-        // Customization modal functionality (Only for Variants now)
         function setupCustomizationModal() {
             const modal = document.getElementById('customizationModal');
             const closeBtn = document.getElementById('closeCustomization');
@@ -646,9 +639,7 @@
 
             addBtn.addEventListener('click', () => {
                 if (!currentCustomizationItem) return;
-
                 const selectedVariant = document.querySelector('input[name="variant"]:checked');
-
                 let variant = null;
                 if (selectedVariant) {
                     variant = {
@@ -656,7 +647,6 @@
                         price: parseInt(selectedVariant.getAttribute('data-price'))
                     };
                 }
-
                 addToCart(currentCustomizationItem.name, variant ? variant.price : currentCustomizationItem.price, variant, []);
                 closeCustomizationModal();
             });
@@ -683,10 +673,8 @@
             let html = '';
             let basePrice = 0;
 
-            // Variants section
             if (hasVariants && item.variants) {
-                html += `<div class="customization-section">
-                    <h4>Select Variant</h4>`;
+                html += `<div class="customization-section"><h4>Select Variant</h4>`;
                 item.variants.forEach((variant, index) => {
                     html += `
                         <label class="variant-option">
@@ -705,7 +693,6 @@
             body.innerHTML = html;
             totalPrice.textContent = basePrice;
 
-            // Add event listeners for price updates
             document.querySelectorAll('input[name="variant"]').forEach(input => {
                 input.addEventListener('change', updateCustomizationPrice);
             });
@@ -722,14 +709,12 @@
         function updateCustomizationPrice() {
             const totalPrice = document.getElementById('customTotalPrice');
             let price = 0;
-
             const selectedVariant = document.querySelector('input[name="variant"]:checked');
             if (selectedVariant) {
                 price = parseInt(selectedVariant.getAttribute('data-price'));
             } else if (currentCustomizationItem && currentCustomizationItem.price) {
                 price = currentCustomizationItem.price;
             }
-
             totalPrice.textContent = price;
         }
 
@@ -741,7 +726,6 @@
             return null;
         }
 
-        // Updated addToCart to accept availableExtras
         function addToCart(name, price, variant, extras, availableExtras = []) {
             console.log('Adding to cart:', name, 'Price:', price);
 
@@ -749,18 +733,13 @@
                 name: name,
                 basePrice: price,
                 variant: variant,
-                extras: extras, // Currently selected extras
-                availableExtras: availableExtras, // Potential extras
+                extras: extras,
+                availableExtras: availableExtras,
                 quantity: 1,
                 totalPrice: price + extras.reduce((sum, extra) => sum + extra.price, 0)
             };
 
-            // If item has potential extras (availableExtras), we DO NOT merge them automatically
-            // to allow users to have one Katti Roll with Egg and one without.
-            // If no available extras (e.g., Coke), we can merge.
-
             let existingIndex = -1;
-
             if (availableExtras.length === 0) {
                 existingIndex = cart.findIndex(item =>
                     item.name === cartItem.name &&
@@ -828,63 +807,41 @@
                     description += `<div class="cart-item-variant">Variant: ${item.variant.name}</div>`;
                 }
 
-                // Render Checkboxes for Extras
                 let extrasHTML = '';
                 if (item.availableExtras && item.availableExtras.length > 0) {
                     extrasHTML += '<div class="cart-extras-options">';
-
-                    // Group extras by their group (for radio buttons)
                     const groupedExtras = {};
                     item.availableExtras.forEach(extra => {
                         const group = extra.group || 'default';
-                        if (!groupedExtras[group]) {
-                            groupedExtras[group] = [];
-                        }
+                        if (!groupedExtras[group]) groupedExtras[group] = [];
                         groupedExtras[group].push(extra);
                     });
 
-                    // Render each group
                     Object.values(groupedExtras).forEach(extrasGroup => {
                         const isRadioGroup = extrasGroup[0].type === 'radio';
                         const groupName = extrasGroup[0].group || 'extras';
-
                         extrasHTML += `<div class="extras-group ${isRadioGroup ? 'radio-group' : ''}">`;
-
                         extrasGroup.forEach(opt => {
-                            // Check if this extra is already added
                             const isChecked = item.extras.some(e => e.name === opt.name);
-
                             if (isRadioGroup) {
                                 extrasHTML += `
                                     <label class="cart-extra-label">
-                                        <input type="radio" 
-                                               class="extra-radio" 
-                                               name="extra-${index}-${groupName}"
-                                               data-index="${index}" 
-                                               data-name="${opt.name}" 
-                                               data-price="${opt.price}"
-                                               data-group="${groupName}"
-                                               ${isChecked ? 'checked' : ''}>
+                                        <input type="radio" class="extra-radio" name="extra-${index}-${groupName}"
+                                               data-index="${index}" data-name="${opt.name}" data-price="${opt.price}"
+                                               data-group="${groupName}" ${isChecked ? 'checked' : ''}>
                                         ${opt.name} ${opt.price > 0 ? `(+Rs ${opt.price})` : ''}
-                                    </label>
-                                `;
+                                    </label>`;
                             } else {
                                 extrasHTML += `
                                     <label class="cart-extra-label">
-                                        <input type="checkbox" 
-                                               class="extra-checkbox" 
-                                               data-index="${index}" 
-                                               data-name="${opt.name}" 
-                                               data-price="${opt.price}"
-                                               ${isChecked ? 'checked' : ''}>
+                                        <input type="checkbox" class="extra-checkbox" data-index="${index}"
+                                               data-name="${opt.name}" data-price="${opt.price}" ${isChecked ? 'checked' : ''}>
                                         ${opt.name} (+Rs ${opt.price})
-                                    </label>
-                                `;
+                                    </label>`;
                             }
                         });
                         extrasHTML += '</div>';
                     });
-
                     extrasHTML += '</div>';
                 }
 
@@ -910,7 +867,6 @@
             cartTotal.textContent = `Total: Rs ${total}`;
         }
 
-        // Handle checkbox and radio changes in cart
         function handleCartItemChange(e) {
             if (e.target.classList.contains('extra-checkbox')) {
                 const index = parseInt(e.target.getAttribute('data-index'));
@@ -919,19 +875,15 @@
                 const isChecked = e.target.checked;
 
                 if (isChecked) {
-                    // Add extra if not present
                     if (!cart[index].extras.some(extra => extra.name === name)) {
-                        cart[index].extras.push({ name: name, price: price });
+                        cart[index].extras.push({ name, price });
                     }
                 } else {
-                    // Remove extra
                     cart[index].extras = cart[index].extras.filter(extra => extra.name !== name);
                 }
 
-                // Recalculate price: (Base + Sum of Extras) * Quantity
                 const extrasTotal = cart[index].extras.reduce((sum, extra) => sum + extra.price, 0);
                 cart[index].totalPrice = (cart[index].basePrice + extrasTotal) * cart[index].quantity;
-
                 saveCart();
                 updateCartDisplay();
             }
@@ -942,32 +894,22 @@
                 const price = parseInt(e.target.getAttribute('data-price'));
                 const group = e.target.getAttribute('data-group');
 
-                // Remove all extras from the same radio group
                 const item = cart[index];
-                const extrasInGroup = item.availableExtras.filter(extra => extra.group === group);
-
-                // Clear all extras from this group
                 item.extras = item.extras.filter(extra => {
                     const extraData = item.availableExtras.find(e => e.name === extra.name);
                     return !extraData || extraData.group !== group;
                 });
-
-                // Add the selected radio extra
                 if (!item.extras.some(extra => extra.name === name)) {
-                    item.extras.push({ name: name, price: price });
+                    item.extras.push({ name, price });
                 }
-
-                // Recalculate price: (Base + Sum of Extras) * Quantity
                 const extrasTotal = item.extras.reduce((sum, extra) => sum + extra.price, 0);
                 item.totalPrice = (item.basePrice + extrasTotal) * item.quantity;
-
                 saveCart();
                 updateCartDisplay();
             }
         }
 
         function handleCartItemClick(e) {
-            // Handle quantity buttons
             if (e.target.classList.contains('quantity-btn') || e.target.closest('.quantity-btn')) {
                 const button = e.target.classList.contains('quantity-btn') ? e.target : e.target.closest('.quantity-btn');
                 const index = parseInt(button.getAttribute('data-index'));
@@ -983,26 +925,21 @@
                         saveCart();
                         updateCartBadge();
                         updateCartDisplay();
-                        return; // Exit if item removed
+                        return;
                     }
                 }
-
-                // Recalculate price after quantity change
                 if (cart[index]) {
                     const extrasTotal = cart[index].extras.reduce((sum, extra) => sum + extra.price, 0);
                     cart[index].totalPrice = (cart[index].basePrice + extrasTotal) * cart[index].quantity;
                 }
-
                 saveCart();
                 updateCartBadge();
                 updateCartDisplay();
             }
 
-            // Handle remove buttons
             if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
                 const button = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
                 const index = parseInt(button.getAttribute('data-index'));
-
                 if (confirm('Remove Item?')) {
                     cart.splice(index, 1);
                     saveCart();
@@ -1012,12 +949,10 @@
             }
         }
 
-        // Fallback for missing images
         function handleTabImageError(img, categoryName) {
             img.parentElement.innerHTML = `<div style="font-size:1.5rem;color:#666;">🍽️</div>`;
         }
 
-        // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function () {
             loadCart();
             generateCategoryTabs();
@@ -1032,7 +967,7 @@
     </script>
 
     <style>
-        /* All CSS styles from previous versions */
+        /* All CSS styles from previous versions, plus new item-image styles */
         .menu-section {
             padding: 1rem 0;
         }
@@ -1090,7 +1025,6 @@
             transform: translateY(0);
         }
 
-        /* Cart Container */
         .cart-container {
             position: fixed;
             top: 120px;
@@ -1098,7 +1032,6 @@
             z-index: 999;
         }
 
-        /* Cart Icon */
         .cart-icon {
             background: #FFFFFF;
             color: #000000;
@@ -1112,42 +1045,27 @@
             cursor: pointer;
             position: relative;
             font-size: 1.7rem;
-
-            box-shadow:
-                0 6px 20px rgba(0, 0, 0, 0.25),
-                0 0 0 6px rgba(255, 235, 59, 0.35);
-
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25), 0 0 0 6px rgba(255, 235, 59, 0.35);
             transition: 0.25s ease;
             animation: cartPulse 2s infinite;
         }
 
-        /* Hover */
         .cart-icon:hover {
             transform: scale(1.12);
         }
 
-        /* Cart pulse */
         @keyframes cartPulse {
             0% {
-                box-shadow:
-                    0 0 0 0 rgba(255, 235, 59, 0.6),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6), 0 6px 20px rgba(0, 0, 0, 0.25);
             }
-
             70% {
-                box-shadow:
-                    0 0 0 12px rgba(255, 235, 59, 0),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
+                box-shadow: 0 0 0 12px rgba(255, 235, 59, 0), 0 6px 20px rgba(0, 0, 0, 0.25);
             }
-
             100% {
-                box-shadow:
-                    0 0 0 0 rgba(255, 235, 59, 0),
-                    0 6px 20px rgba(0, 0, 0, 0.25);
+                box-shadow: 0 0 0 0 rgba(255, 235, 59, 0), 0 6px 20px rgba(0, 0, 0, 0.25);
             }
         }
 
-        /* Badge */
         .cart-badge {
             position: absolute;
             top: -8px;
@@ -1165,30 +1083,17 @@
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         }
 
-        /* Badge bounce */
         .cart-badge.bounce {
             animation: badgeBounce 0.4s ease;
         }
 
         @keyframes badgeBounce {
-            0% {
-                transform: scale(1);
-            }
-
-            30% {
-                transform: scale(1.4);
-            }
-
-            60% {
-                transform: scale(0.9);
-            }
-
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            60% { transform: scale(0.9); }
+            100% { transform: scale(1); }
         }
 
-        /* Customization Modal */
         .customization-modal {
             display: none;
             position: fixed;
@@ -1281,11 +1186,6 @@
             color: var(--secondary);
         }
 
-        .variant-option input:checked,
-        .extra-option input:checked {
-            background: var(--primary);
-        }
-
         .variant-name,
         .extra-name {
             flex: 1;
@@ -1340,7 +1240,6 @@
             background: #128C7E;
         }
 
-        /* Enhanced cart item display */
         .cart-item-variant,
         .cart-item-extras {
             font-size: 0.8rem;
@@ -1356,7 +1255,6 @@
             color: #27ae60;
         }
 
-        /* New CSS for Checkboxes and Radio buttons in Cart */
         .cart-extras-options {
             margin-top: 8px;
             display: flex;
@@ -1404,7 +1302,6 @@
             accent-color: #3498db;
         }
 
-        /* Customize button style */
         .customize-btn {
             background: linear-gradient(135deg, var(--primary), #ffd700) !important;
         }
@@ -1528,6 +1425,7 @@
             gap: 1.5rem;
         }
 
+        /* Menu item card - with image support */
         .menu-item-card {
             background: white;
             border-radius: 12px;
@@ -1535,6 +1433,45 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             border: 1px solid #f0f0f0;
             font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Item image styling - responsive height */
+        .item-image {
+            width: 100%;
+            max-height: 120px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.2s ease;
+        }
+
+        .item-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Mobile: smaller image to save vertical space */
+        @media (max-width: 768px) {
+            .item-image {
+                max-height: 90px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .item-image {
+                max-height: 80px;
+            }
         }
 
         .item-main-container {
@@ -1585,14 +1522,12 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Cart Modal Styles */
         .cart-modal {
             display: none;
             position: fixed;
@@ -1735,12 +1670,10 @@
             padding: 1rem 1.5rem;
             display: flex;
             justify-content: center;
-            /* Center the button */
             align-items: center;
             border-top: 2px solid #eee;
         }
 
-        /* UPDATED CHECKOUT BUTTON - Now identical to location.html's confirm button */
         .checkout-btn {
             width: 100%;
             padding: 1.2rem 1.5rem;
@@ -1751,7 +1684,6 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 1.2rem;
-            /* Changed from 1rem to match confirm-btn */
             min-height: 60px;
             transition: background 0.3s, transform 0.2s;
             display: flex;
@@ -1770,7 +1702,6 @@
             transform: translateY(0);
         }
 
-        /* Add responsive styles for checkout-btn - identical to confirm-btn */
         @media (max-width: 768px) {
             .checkout-btn {
                 padding: 1rem 1.2rem;
@@ -1787,7 +1718,6 @@
             }
         }
 
-        /* Floating WhatsApp Button */
         .floating-whatsapp {
             position: fixed;
             right: 20px;
@@ -1813,7 +1743,6 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
         }
 
-        /* Save Notification */
         .save-notification {
             position: fixed;
             top: 20px;
@@ -1843,73 +1772,60 @@
             font-size: 20px;
         }
 
-        /* Mobile Optimization */
         @media (max-width: 768px) {
             .cart-container {
                 top: 100px;
                 right: 15px;
             }
-
             .cart-icon {
                 width: 50px;
                 height: 50px;
                 font-size: 1.2rem;
             }
-
             .cart-badge {
                 width: 20px;
                 height: 20px;
                 font-size: 0.7rem;
             }
-
             .customization-modal-content,
             .cart-modal-content {
                 width: 95%;
                 margin: 10% auto;
             }
-
             .customization-actions {
                 flex-direction: column;
             }
-
             .category-tabs {
                 gap: 0.4rem;
                 grid-template-columns: repeat(4, 1fr);
                 display: grid;
             }
-
             .category-tab {
                 padding: 0;
                 width: 100%;
                 height: 80px;
                 border-radius: 10px;
             }
-
             .tab-image {
                 width: 40px;
                 height: 40px;
             }
-
             .tab-text {
                 font-size: 0.65rem;
             }
-
             .category-header {
                 padding: 0.45rem 0.75rem;
                 margin-top: -0.5rem;
                 margin-bottom: 0.8rem;
                 border-radius: 8px;
             }
-
             .category-title {
                 font-size: 2.2rem;
             }
-
             .category-items {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
-
             .menu-header {
                 display: flex;
                 justify-content: center;
@@ -1919,7 +1835,6 @@
                 padding: 0 60px 0 10px;
                 min-height: 50px;
             }
-
             .section-title.menu-page-title {
                 font-size: 2.5rem;
                 margin: 0;
@@ -1931,7 +1846,6 @@
                 transform: translateX(-50%);
                 z-index: 1;
             }
-
             .save-menu-btn {
                 position: absolute;
                 right: 10px;
@@ -1942,11 +1856,9 @@
                 gap: 4px;
                 z-index: 2;
             }
-
             .save-menu-btn i {
                 font-size: 0.7rem;
             }
-
             .save-notification {
                 top: 10px;
                 right: 10px;
@@ -1960,31 +1872,25 @@
                 padding: 0 55px 0 10px;
                 min-height: 45px;
             }
-
             .section-title.menu-page-title {
                 font-size: 2.2rem;
             }
-
             .save-menu-btn {
                 padding: 5px 8px;
                 font-size: 0.7rem;
                 right: 8px;
             }
-
             .save-menu-btn i {
                 font-size: 0.65rem;
             }
-
             .category-header {
                 padding: 0.4rem 0.6rem;
                 margin-top: -0.4rem;
                 margin-bottom: 0.6rem;
             }
-
             .category-title {
                 font-size: 1.8rem;
             }
-
             .cart-actions {
                 flex-direction: column;
                 gap: 0;
@@ -1996,31 +1902,25 @@
             .category-tab {
                 height: 70px;
             }
-
             .tab-image {
                 width: 40px;
                 height: 40px;
             }
-
             .tab-text {
                 font-size: 0.6rem;
             }
-
             .menu-header {
                 padding: 0 50px 0 8px;
                 min-height: 40px;
             }
-
             .section-title.menu-page-title {
                 font-size: 2rem;
             }
-
             .save-menu-btn {
                 padding: 4px 6px;
                 font-size: 0.65rem;
                 right: 6px;
             }
-
             .save-menu-btn i {
                 font-size: 0.6rem;
             }
@@ -2031,23 +1931,19 @@
                 padding: 0 45px 0 6px;
                 min-height: 38px;
             }
-
             .section-title.menu-page-title {
                 font-size: 1.8rem;
             }
-
             .save-menu-btn {
                 padding: 3px 5px;
                 font-size: 0.6rem;
                 right: 5px;
             }
-
             .save-menu-btn i {
                 font-size: 0.55rem;
             }
         }
     </style>
-
 </body>
 
 </html>
