@@ -302,21 +302,21 @@ body {
     flex-direction: column;
 }
 
-/* Square image styling */
+/* Square image styling - fits card space suitably */
 .item-image {
-    width: 60%;                /* reduced from 80% */
-    max-width: 120px;          /* optional: hard limit */
-    aspect-ratio: 1 / 1;
-    margin: 0 auto 0.8rem;     /* centers and reduces bottom space */
+    width: 100px;                /* fixed width, fits nicely inside card */
+    height: 100px;               /* fixed height, keeps square shape */
+    margin: 0 auto 0.8rem;       /* centered with bottom spacing */
     border-radius: 12px;
     overflow: hidden;
     background: #f8f8f8;
+    flex-shrink: 0;              /* prevents squishing */
 }
 
 .item-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;         /* keeps square cropping */
+    object-fit: cover;           /* ensures square crop without distortion */
     display: block;
 }
 
@@ -398,7 +398,6 @@ body {
 }
 
 .cart-icon:hover { transform: scale(1.12); }
-
 @keyframes cartPulse {
     0% { box-shadow: 0 0 0 0 rgba(255, 235, 59, 0.6), 0 6px 20px rgba(0, 0, 0, 0.25); }
     70% { box-shadow: 0 0 0 12px rgba(255, 235, 59, 0), 0 6px 20px rgba(0, 0, 0, 0.25); }
