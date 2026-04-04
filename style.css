@@ -304,8 +304,9 @@ body {
 
 /* Square image styling */
 .item-image {
-    width: 100%;
+    width: 80%;           /* ← smaller width */
     aspect-ratio: 1 / 1;
+    margin: 0 auto 1rem;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 1rem;
@@ -313,10 +314,10 @@ body {
 }
 
 .item-image img {
+     max-width: 150px;     /* ← images won’t grow beyond this */
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 1rem;
 }
 
 .item-main-container {
