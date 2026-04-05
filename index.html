@@ -323,23 +323,23 @@
                    // Replace the old itemsHTML assignment with this:
 itemsHTML += `
     <div class="menu-item-card">
-        <div class="item-content-wrapper">
+        <div class="item-top-content">
             <div class="item-image">
                 <img src="${imgSrc}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='images/logo.png';">
             </div>
-            <div class="item-info-right">
+            <div class="item-info-stack">
                 <h3 class="item-name">${item.name}</h3>
-                <div class="item-price">${displayPrice}</div>
+                <div class="item-price">Rs ${item.price}</div>
+                <button class="add-to-cart-btn ${btnClass}" 
+                        data-name="${item.name}" 
+                        data-price="${priceForButton}"
+                        data-has-variants="${hasVariants}"
+                        data-has-extras="${hasExtras}">
+                    <i class="fas fa-${buttonIcon}"></i> ${buttonText}
+                </button>
             </div>
         </div>
         ${item.details ? `<div class="item-details">${item.details}</div>` : ''}
-        <button class="add-to-cart-btn ${btnClass}" 
-                data-name="${item.name}" 
-                data-price="${priceForButton}"
-                data-has-variants="${hasVariants}"
-                data-has-extras="${hasExtras}">
-            <i class="fas fa-${buttonIcon}"></i> ${buttonText}
-        </button>
     </div>
 `;
                 }
