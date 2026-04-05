@@ -297,23 +297,20 @@ body {
 .menu-item-card {
     background: #fff;
     border-radius: 15px;
-    padding: 15px;
+    padding: 12px; /* Slightly tighter padding for better fit */
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     margin-bottom: 15px;
-    font-family: 'Montserrat', sans-serif;
 }
 
-/* Flex container to put image left and info right */
 .item-top-content {
     display: flex;
-    align-items: center; /* Vertically centers the image and text block */
-    gap: 15px;
+    align-items: center;
+    gap: 12px;
 }
 
-/* Image styling - slightly wider horizontally */
 .item-image {
-    flex: 0 0 130px; /* Width of the image */
-    height: 110px;    /* Height of the image */
+    flex: 0 0 110px; /* Base width for mobile */
+    height: 100px;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -322,45 +319,41 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: block;
 }
 
-/* The text and button stack on the right */
 .item-info-stack {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers Name, Price, and Button relative to each other */
+    align-items: center;
     text-align: center;
-    gap: 10px;
+    gap: 8px;
+    min-width: 0; /* Prevents flex children from overflowing */
 }
 
 .item-name {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-weight: 700;
     margin: 0;
-    color: #1a1a1a;
+    line-height: 1.2;
 }
 
 .item-price {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #000;
 }
 
-/* Button styling matching the yellow rounded look */
 .add-to-cart-btn {
-    background-color: #ffeb3b; /* Da Aloo Yellow */
+    background-color: #ffeb3b;
     border: none;
     border-radius: 8px;
-    padding: 8px 15px;
+    padding: 8px 10px;
     font-weight: 600;
-    font-size: 0.9rem;
-    width: 100%; /* Makes it fill the right-side container */
+    font-size: 0.85rem;
+    width: 100%;
+    white-space: nowrap; /* CRITICAL: Prevents "Add to Cart" from breaking into two lines */
     cursor: pointer;
-    transition: transform 0.2s, background 0.3s ease;
-    font-family: 'Montserrat', sans-serif;
 }
 
 .add-to-cart-btn:hover {
@@ -767,5 +760,29 @@ body {
     .site-nav { gap: 15px; padding: 10px 30px !important; }
     .nav-link { padding: 8px 20px !important; font-size: 1rem !important; }
 }
+@media (min-width: 768px) {
+    .item-image {
+        flex: 0 0 160px; /* Optimized: Image gets significantly bigger on Laptop */
+        height: 140px;
+    }
 
+    .item-info-stack {
+        gap: 12px;
+        padding-right: 10px;
+    }
+
+    .item-name {
+        font-size: 1.2rem; /* Larger text for larger screens */
+    }
+
+    .item-price {
+        font-size: 1.4rem;
+    }
+
+    .add-to-cart-btn {
+        font-size: 1rem;
+        padding: 10px 20px;
+        max-width: 180px; /* Keeps the button from getting awkwardly wide on big screens */
+    }
+}
 /* Removed old .item-content-wrapper and .item-info-right styles as they are replaced by new layout */
