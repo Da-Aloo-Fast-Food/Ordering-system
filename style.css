@@ -772,25 +772,30 @@ body {
 }
 
 /* Stack Name and Price on the right */
+/* Centering Name and Price relative to each other */
 .item-info-right {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;           /* Space between name and price */
-    text-align: left;
+    justify-content: center; /* Centers items vertically in the box */
+    align-items: center;     /* Centers text horizontally relative to each other */
+    gap: 5px;                /* Space between Name and Price */
+    text-align: center;      /* Ensures text wraps to the center if it's long */
 }
 
 .item-name {
     margin: 0;
     font-size: 1.1rem;
+    font-weight: 600;
     line-height: 1.2;
+    width: 100%;             /* Ensures centering works across the full width */
 }
 
 .item-price {
-    font-weight: 700;
-    color: #333;
+    font-weight: 800;        /* Makes price bolder like your 'after' image */
+    color: #000;             /* Darker color for better visibility */
+    font-size: 1.2rem;       /* Slightly larger price */
 }
-
 /* Mobile adjustments */
 @media (max-width: 480px) {
     .item-image {
