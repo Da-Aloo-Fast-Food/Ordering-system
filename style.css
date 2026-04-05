@@ -1,5 +1,6 @@
 /* style.css v2.0 - Fully refactored & organized */
 /* Last Updated: Refactored with sections and media queries at bottom */
+/* Updated card layout: image left, centered name/price/button on right */
 
 /* ========== CSS VARIABLES & RESET ========== */
 :root {
@@ -292,22 +293,27 @@ body {
     gap: 1.5rem;
 }
 
-/* Compact card styling */
+/* NEW CARD LAYOUT: image left, centered name/price/button on right */
 .menu-item-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #f0f0f0;
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 15px;
     font-family: 'Montserrat', sans-serif;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Smaller square image */
+/* Flex container to put image left and info right */
+.item-top-content {
+    display: flex;
+    align-items: center; /* Vertically centers the image and text block */
+    gap: 15px;
+}
+
+/* Image styling - slightly wider horizontally */
 .item-image {
-    flex: 0 0 140px;    /* Increased from 100px to 140px for more width */
-    height: 100px;      /* Keep height the same or adjust to taste */
+    flex: 0 0 130px; /* Width of the image */
+    height: 110px;    /* Height of the image */
     border-radius: 12px;
     overflow: hidden;
 }
@@ -319,40 +325,41 @@ body {
     display: block;
 }
 
-.item-main-container {
+/* The text and button stack on the right */
+.item-info-stack {
+    flex: 1;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
+    flex-direction: column;
+    align-items: center; /* Centers Name, Price, and Button relative to each other */
+    text-align: center;
+    gap: 10px;
 }
 
 .item-name {
-    font-size: 1rem;
-    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+    color: #1a1a1a;
 }
 
 .item-price {
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #000;
 }
 
-.item-details {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 0.5rem;
-    font-style: italic;
-}
-
+/* Button styling matching the yellow rounded look */
 .add-to-cart-btn {
-    width: 100%;
-    padding: 0.6rem;
-    background: var(--primary);
-    color: var(--secondary);
+    background-color: #ffeb3b; /* Da Aloo Yellow */
     border: none;
     border-radius: 8px;
-    cursor: pointer;
+    padding: 8px 15px;
     font-weight: 600;
-    margin-top: 0.5rem;
-    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    width: 100%; /* Makes it fill the right-side container */
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s ease;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -361,8 +368,13 @@ body {
     transform: translateY(-2px);
 }
 
-.customize-btn {
-    background: linear-gradient(135deg, var(--primary), #ffd700) !important;
+.add-to-cart-btn:active {
+    transform: scale(0.95);
+}
+
+/* Hide old description element if present (new design doesn't include it) */
+.item-details {
+    display: none;
 }
 
 @keyframes fadeIn {
@@ -664,21 +676,22 @@ body {
     .checkout-btn { padding: 1rem 1.2rem; font-size: 1.1rem; min-height: 55px; }
     .customization-header h3 { white-space: normal; font-size: 16px; }
     
-    /* Mobile-specific card & image overrides */
+    /* Mobile adjustments for new card layout */
     .menu-item-card {
-        padding: 0.8rem;
+        padding: 12px;
     }
-   .item-image {
-    flex: 0 0 140px;    /* Increased from 100px to 140px for more width */
-    height: 100px;      /* Keep height the same or adjust to taste */
-    border-radius: 12px;
-    overflow: hidden;
-}
-    .item-name, .item-price {
-        font-size: 0.9rem;
+    .item-image {
+        flex: 0 0 110px;
+        height: 90px;
+    }
+    .item-name {
+        font-size: 1rem;
+    }
+    .item-price {
+        font-size: 1.2rem;
     }
     .add-to-cart-btn {
-        padding: 0.5rem;
+        padding: 6px 12px;
         font-size: 0.85rem;
     }
 }
@@ -690,6 +703,12 @@ body {
     .category-header { padding: 0.4rem 0.6rem; margin-top: -0.4rem; }
     .category-title { font-size: 1.8rem; }
     .checkout-btn { padding: 0.9rem 1rem; font-size: 1rem; min-height: 50px; }
+    
+    /* Further image size reduction on very small screens */
+    .item-image {
+        flex: 0 0 100px;
+        height: 80px;
+    }
 }
 
 @media (max-width: 360px) {
@@ -749,57 +768,4 @@ body {
     .nav-link { padding: 8px 20px !important; font-size: 1rem !important; }
 }
 
-/* Layout for the new wrapper */
-.item-content-wrapper {
-    display: flex;
-    align-items: center; /* Vertically centers text with image */
-    gap: 15px;           /* Space between image and text */
-    margin-bottom: 15px;
-}
-
-/* Ensure the image container stays a fixed square size */
-.item-image {
-    flex: 0 0 140px;    /* Increased from 100px to 140px for more width */
-    height: 100px;      /* Keep height the same or adjust to taste */
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.item-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* Stack Name and Price on the right */
-/* Centering Name and Price relative to each other */
-.item-info-right {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers items vertically in the box */
-    align-items: center;     /* Centers text horizontally relative to each other */
-    gap: 5px;                /* Space between Name and Price */
-    text-align: center;      /* Ensures text wraps to the center if it's long */
-}
-
-.item-name {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    line-height: 1.2;
-    width: 100%;             /* Ensures centering works across the full width */
-}
-
-.item-price {
-    font-weight: 800;        /* Makes price bolder like your 'after' image */
-    color: #000;             /* Darker color for better visibility */
-    font-size: 1.2rem;       /* Slightly larger price */
-}
-/* Mobile adjustments */
-@media (max-width: 480px) {
-    .item-image {
-        flex: 0 0 110px;  /* Slightly wider on mobile than the previous 80px */
-        height: 90px;
-    }
-}
+/* Removed old .item-content-wrapper and .item-info-right styles as they are replaced by new layout */
