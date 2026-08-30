@@ -539,7 +539,11 @@
             if (e.target.classList.contains('remove-btn') || e.target.closest('.remove-btn')) {
                 const btn = e.target.classList.contains('remove-btn') ? e.target : e.target.closest('.remove-btn');
                 const idx = parseInt(btn.dataset.index);
-                if (confirm('Remove Item?')) { cart.splice(idx, 1); saveCart(); updateCartBadge(); updateCartDisplay(); }
+                // Remove item immediately without confirmation
+                cart.splice(idx, 1);
+                saveCart();
+                updateCartBadge();
+                updateCartDisplay();
             }
         }
 
