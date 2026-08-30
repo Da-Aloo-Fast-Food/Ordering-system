@@ -278,7 +278,7 @@
             });
         }
 
-        // --- Lazy load images for category tabs (fixed!) ---
+        // --- Lazy load images for category tabs ---
         function loadTabImages() {
             const tabImages = document.querySelectorAll('#categoryTabs img[data-src]');
             tabImages.forEach(img => {
@@ -329,13 +329,19 @@
                 for (const item of items) {
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
-                    let displayPrice = `Rs ${item.price}`;
+                    
+                    // --- Determine display price and button price ---
+                    let displayPrice = `Rs ${item.price || 0}`; // fallback
                     let priceForButton = parsePrice(item.price);
+                    
                     if (hasVariants) {
                         const prices = item.variants.map(v => v.price);
-                        displayPrice = `Rs ${Math.min(...prices)} - ${Math.max(...prices)}`;
-                        priceForButton = Math.min(...prices);
+                        const minPrice = Math.min(...prices);
+                        const maxPrice = Math.max(...prices);
+                        displayPrice = minPrice === maxPrice ? `Rs ${minPrice}` : `Rs ${minPrice} - ${maxPrice}`;
+                        priceForButton = minPrice;
                     }
+                    
                     let buttonText = 'Add to Cart', buttonIcon = 'plus', btnClass = '';
                     if (hasVariants) { buttonText = 'Choose Variant'; buttonIcon = 'list-ul'; btnClass = 'customize-btn'; }
                     
@@ -354,7 +360,7 @@
                                 </div>
                                 <div class="item-info-stack">
                                     <h3 class="item-name">${item.name}</h3>
-                                    <div class="item-price">Rs ${item.price}</div>
+                                    <div class="item-price">${displayPrice}</div>
                                     <button class="add-to-cart-btn ${btnClass}" 
                                             data-name="${item.name}" 
                                             data-price="${priceForButton}"
@@ -611,10 +617,7 @@
             updateCartBadge();
             document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            // Load tab images (they are always visible in the nav)
             loadTabImages();
-
-            // Load images for the initially active category
             const activeTab = document.querySelector('.category-tab.active');
             if (activeTab) {
                 const categoryId = activeTab.getAttribute('data-category');
