@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- ANTI-CACHE TAGS: Forces browser to check for latest version -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -16,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -89,7 +87,6 @@
         </div>
     </div>
 
-    <!-- Cart Modal (moved to bottom for cleaner DOM) -->
     <div class="cart-modal" id="cartModal">
         <div class="cart-modal-content">
             <div class="cart-modal-header">
@@ -114,7 +111,6 @@
         </div>
     </div>
 
-    <!-- Item Customization Modal (Used ONLY for Variants like Mo:Mo types) -->
     <div class="customization-modal" id="customizationModal">
         <div class="customization-modal-content">
             <div class="customization-header">
@@ -232,7 +228,6 @@
             ]
         };
 
-        // Category images for tabs
         const categoryImages = {
             "Aloo Fries": "images/categories/aloo-fries.jpg",
             "Da Aloo Special": "images/categories/special.jpg",
@@ -255,7 +250,6 @@
         let cart = [];
         let currentCustomizationItem = null;
 
-        // Helper: load/save cart
         function loadCart() {
             try {
                 const savedCart = localStorage.getItem('daAlooCart');
@@ -272,12 +266,22 @@
             return parseInt(price) || 0;
         }
 
-        // --- Lazy load images for a specific category ---
+        // --- Lazy load images for a specific category (menu items) ---
         function loadCategoryImages(categoryId) {
             const categoryDiv = document.getElementById(categoryId);
             if (!categoryDiv) return;
             const imgs = categoryDiv.querySelectorAll('img[data-src]');
             imgs.forEach(img => {
+                if (!img.src || img.src.includes('data:image') || img.src === '') {
+                    img.src = img.dataset.src;
+                }
+            });
+        }
+
+        // --- Lazy load images for category tabs (fixed!) ---
+        function loadTabImages() {
+            const tabImages = document.querySelectorAll('#categoryTabs img[data-src]');
+            tabImages.forEach(img => {
                 if (!img.src || img.src.includes('data:image') || img.src === '') {
                     img.src = img.dataset.src;
                 }
@@ -312,7 +316,7 @@
             }
         }
 
-        // Generate menu items with square images (lazy loaded)
+        // Generate menu items
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
             let first = true;
@@ -380,13 +384,11 @@
                     tab.classList.add('active');
                     const categoryId = tab.getAttribute('data-category');
                     document.getElementById(categoryId).classList.add('active');
-                    // Load images for the newly active category
                     loadCategoryImages(categoryId);
                 });
             });
         }
 
-        // Save menu (image download)
         function setupSaveMenuButton() {
             const saveBtn = document.getElementById('saveMenuBtn');
             const notif = document.getElementById('saveNotification');
@@ -402,7 +404,7 @@
             });
         }
 
-        // Cart & Modal Logic
+        // ======================== CART LOGIC ========================
         function findMenuItem(itemName) {
             for (const [, items] of Object.entries(MENU)) {
                 const found = items.find(i => i.name === itemName);
@@ -597,7 +599,7 @@
             window.addEventListener('click', (e) => { if (e.target === modal) closeCustomizationModal(); });
         }
 
-        // Initialize
+        // ======================== INIT ========================
         document.addEventListener('DOMContentLoaded', () => {
             loadCart();
             generateCategoryTabs();
@@ -608,6 +610,9 @@
             setupCustomizationModal();
             updateCartBadge();
             document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Load tab images (they are always visible in the nav)
+            loadTabImages();
 
             // Load images for the initially active category
             const activeTab = document.querySelector('.category-tab.active');
