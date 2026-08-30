@@ -141,9 +141,8 @@
             ],
             "Da Aloo Special": [
                 { "name": "Battered Fries", "price": 180, "image": "images/menu/battered-fries.jpg" },
-                { "name": "Fried Pizza Ball", "price": 200, "image": "images/menu/fried-pizza-ball.jpg" }
-            ],
-            "Spirals": [
+                { "name": "Fried Pizza Ball", "price": 200, "image": "images/menu/fried-pizza-ball.jpg" },
+                // Spirals moved here
                 { "name": "Aloo's Spiral", "price": 60, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/aloo-spiral.jpg" },
                 { "name": "Cheesy Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/cheesy-spiral.jpg" },
                 { "name": "Battered Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/battered-spiral.jpg" }
@@ -205,33 +204,12 @@
                 { "name": "Tandoori Chicken Curry", "price": 200, "extras": [{ "name": "With Rice", "price": 0, "type": "radio", "group": "serving" }, { "name": "With Roti", "price": 0, "type": "radio", "group": "serving" }], "image": "images/menu/tandoori-chicken-curry.jpg" },
                 { "name": "Masala Paneer Curry", "price": 200, "extras": [{ "name": "With Rice", "price": 0, "type": "radio", "group": "serving" }, { "name": "With Roti", "price": 0, "type": "radio", "group": "serving" }], "image": "images/menu/masala-paneer.jpg" },
                 { "name": "Aloo Curry", "price": 160, "extras": [{ "name": "With Rice", "price": 0, "type": "radio", "group": "serving" }, { "name": "With Roti", "price": 0, "type": "radio", "group": "serving" }], "image": "images/menu/aloo-curry.jpg" }
-            ],
-            "Cold Drinks": [
-                { "name": "Coke / Fanta / Sprite", "price": 80, "image": "images/menu/soft-drink.jpg" },
-                { "name": "Cold Coffee", "price": 120, "image": "images/menu/cold-coffee.jpg" },
-                { "name": "Ice Mint Lemonade", "price": 140, "image": "images/menu/ice-mint-lemonade.jpg" },
-                { "name": "Green Apple Mojito", "price": 150, "image": "images/menu/green-apple-mojito.jpg" },
-                { "name": "Blue Lagoon", "price": 160, "image": "images/menu/blue-lagoon.jpg" },
-                { "name": "Peach Ice Tea", "price": 160, "image": "images/menu/peach-ice-tea.jpg" },
-                { "name": "Strawberry Lemonade", "price": 160, "image": "images/menu/strawberry-lemonade.jpg" },
-                { "name": "Sweet Lassi", "price": 100, "image": "images/menu/sweet-lassi.jpg" }
-            ],
-            "Hot Drinks": [
-                { "name": "Masala Black Tea", "price": 30, "image": "images/menu/masala-tea.jpg" },
-                { "name": "Masala Milk Tea", "price": 50, "image": "images/menu/masala-milk-tea.jpg" },
-                { "name": "Lemon Tea", "price": 40, "image": "images/menu/lemon-tea.jpg" },
-                { "name": "Suja (Butter Milk Tea)", "price": 70, "image": "images/menu/suja.jpg" },
-                { "name": "Hot Lemon", "price": 100, "image": "images/menu/hot-lemon.jpg" },
-                { "name": "Americano", "price": 80, "image": "images/menu/americano.jpg" },
-                { "name": "Cappuccino", "price": 100, "image": "images/menu/cappuccino.jpg" },
-                { "name": "Hot Chocolate", "price": 100, "image": "images/menu/hot-chocolate.jpg" }
             ]
         };
 
         const categoryImages = {
             "Aloo Fries": "images/categories/aloo-fries.jpg",
             "Da Aloo Special": "images/categories/special.jpg",
-            "Spirals": "images/categories/spirals.jpg",
             "Katti Roll": "images/categories/katti-roll.jpg",
             "Mo:Mo": "images/categories/momo.jpg",
             "Burger": "images/categories/burger.jpg",
@@ -241,9 +219,7 @@
             "Chowmein": "images/categories/chowmein.jpg",
             "Snacks": "images/categories/snacks.jpg",
             "Chicken Wings": "images/categories/chicken-wings.jpg",
-            "Rice or Roti Meal": "images/categories/rice-roti.jpg",
-            "Cold Drinks": "images/categories/cold-drinks.jpg",
-            "Hot Drinks": "images/categories/hot-drinks.jpg"
+            "Rice or Roti Meal": "images/categories/rice-roti.jpg"
         };
 
         // ======================== CART STATE ========================
@@ -331,7 +307,7 @@
                     const hasExtras = item.extras && item.extras.length > 0;
                     
                     // --- Determine display price and button price ---
-                    let displayPrice = `Rs ${item.price || 0}`; // fallback
+                    let displayPrice = `Rs ${item.price || 0}`;
                     let priceForButton = parsePrice(item.price);
                     
                     if (hasVariants) {
