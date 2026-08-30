@@ -13,10 +13,12 @@
         href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Your external style.css is still loaded, but we override the category tabs with inline styles below -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Cart bounce styles -->
+    <!-- ===== OVERRIDE: Category tabs as a responsive grid ===== -->
     <style>
+        /* Keep existing cart pulse and bounce */
         .cart-icon {
             animation: cartPulse 2s infinite;
         }
@@ -31,6 +33,109 @@
         .cart-bounce {
             animation: bounceCart 0.5s ease !important;
         }
+
+        /* ===== NEW: RESPONSIVE CATEGORY TAB GRID ===== */
+        .category-tabs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .category-tab {
+            background: linear-gradient(135deg, #ffffff, #f7f7f7);
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.25s ease;
+            padding: 0.75rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100px;
+        }
+
+        .category-tab:hover {
+            border-color: #FFEB3B;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        .category-tab.active {
+            background: #FFEB3B;
+            border-color: #FFEB3B;
+            color: #000;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .tab-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .tab-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            flex-shrink: 0;
+        }
+
+        .tab-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .tab-text {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            word-break: break-word;
+        }
+
+        /* Mobile overrides */
+        @media (max-width: 768px) {
+            .category-tabs {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 0.5rem;
+            }
+            .tab-image {
+                width: 50px;
+                height: 50px;
+            }
+            .tab-text {
+                font-size: 0.65rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .category-tabs {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .tab-image {
+                width: 45px;
+                height: 45px;
+            }
+        }
+        /* ===== END OF CATEGORY GRID OVERRIDES ===== */
     </style>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
