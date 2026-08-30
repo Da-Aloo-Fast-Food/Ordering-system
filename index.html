@@ -15,14 +15,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- ====== NEW CART BOUNCE STYLES (add to your style.css) ====== -->
+    <!-- Cart bounce styles -->
     <style>
-        /* Keep the existing pulse animation */
         .cart-icon {
             animation: cartPulse 2s infinite;
         }
-
-        /* Bounce animation – applied when an item is added */
         @keyframes bounceCart {
             0%   { transform: scale(1); }
             20%  { transform: scale(1.5); }
@@ -31,7 +28,6 @@
             80%  { transform: scale(0.95); }
             100% { transform: scale(1); }
         }
-
         .cart-bounce {
             animation: bounceCart 0.5s ease !important;
         }
@@ -313,7 +309,7 @@
             }
         }
 
-        // Generate menu items
+        // ========== UPDATED: generateMenuItems with category image fallback ==========
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
             let first = true;
@@ -323,6 +319,10 @@
                 categoryDiv.className = `category-content ${first ? 'active' : ''}`;
                 categoryDiv.id = categoryId;
                 let itemsHTML = '';
+
+                // --- Get the category fallback image (once per category) ---
+                const categoryImg = categoryImages[categoryName] || 'images/logo.png';
+
                 for (const item of items) {
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
@@ -341,7 +341,8 @@
                     let buttonText = 'Add to Cart', buttonIcon = 'plus', btnClass = '';
                     if (hasVariants) { buttonText = 'Choose Variant'; buttonIcon = 'list-ul'; btnClass = 'customize-btn'; }
                     
-                    const imgSrc = item.image && item.image.trim() !== '' ? item.image : 'images/logo.png';
+                    // --- Use category image as fallback if item has no image ---
+                    const imgSrc = item.image && item.image.trim() !== '' ? item.image : categoryImg;
                     
                     itemsHTML += `
                         <div class="menu-item-card">
@@ -352,7 +353,7 @@
                                          alt="${item.name}"
                                          loading="lazy"
                                          decoding="async"
-                                         onerror="this.onerror=null; this.src='images/logo.png';">
+                                         onerror="this.onerror=null; this.src='${categoryImg}';">
                                 </div>
                                 <div class="item-info-stack">
                                     <h3 class="item-name">${item.name}</h3>
@@ -415,7 +416,6 @@
             return null;
         }
 
-        // --- Updated addToCart with bounce ---
         function addToCart(name, price, variant, extras, availableExtras = []) {
             const cartItem = { name, basePrice: price, variant, extras, availableExtras, quantity: 1, totalPrice: price + extras.reduce((s, e) => s + e.price, 0) };
             let existingIndex = -1;
@@ -432,11 +432,11 @@
             updateCartBadge();
             if (document.getElementById('cartModal').style.display === 'block') updateCartDisplay();
 
-            // ----- BOUNCE THE CART ICON -----
+            // --- Bounce the cart icon ---
             const cartIcon = document.getElementById('cartIcon');
-            cartIcon.classList.remove('cart-bounce');        // reset
-            void cartIcon.offsetWidth;                       // trigger reflow
-            cartIcon.classList.add('cart-bounce');          // start bounce
+            cartIcon.classList.remove('cart-bounce');
+            void cartIcon.offsetWidth;
+            cartIcon.classList.add('cart-bounce');
             setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
         }
 
