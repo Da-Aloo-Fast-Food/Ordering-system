@@ -14,6 +14,28 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <!-- ====== NEW CART BOUNCE STYLES (add to your style.css) ====== -->
+    <style>
+        /* Keep the existing pulse animation */
+        .cart-icon {
+            animation: cartPulse 2s infinite;
+        }
+
+        /* Bounce animation – applied when an item is added */
+        @keyframes bounceCart {
+            0%   { transform: scale(1); }
+            20%  { transform: scale(1.5); }
+            40%  { transform: scale(0.9); }
+            60%  { transform: scale(1.2); }
+            80%  { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .cart-bounce {
+            animation: bounceCart 0.5s ease !important;
+        }
+    </style>
 </head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
 <script>
@@ -142,7 +164,6 @@
             "Da Aloo Special": [
                 { "name": "Battered Fries", "price": 180, "image": "images/menu/battered-fries.jpg" },
                 { "name": "Fried Pizza Ball", "price": 200, "image": "images/menu/fried-pizza-ball.jpg" },
-                // Spirals moved here
                 { "name": "Aloo's Spiral", "price": 60, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/aloo-spiral.jpg" },
                 { "name": "Cheesy Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/cheesy-spiral.jpg" },
                 { "name": "Battered Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/battered-spiral.jpg" }
@@ -306,7 +327,6 @@
                     const hasVariants = item.variants && item.variants.length > 0;
                     const hasExtras = item.extras && item.extras.length > 0;
                     
-                    // --- Determine display price and button price ---
                     let displayPrice = `Rs ${item.price || 0}`;
                     let priceForButton = parsePrice(item.price);
                     
@@ -395,6 +415,7 @@
             return null;
         }
 
+        // --- Updated addToCart with bounce ---
         function addToCart(name, price, variant, extras, availableExtras = []) {
             const cartItem = { name, basePrice: price, variant, extras, availableExtras, quantity: 1, totalPrice: price + extras.reduce((s, e) => s + e.price, 0) };
             let existingIndex = -1;
@@ -410,6 +431,13 @@
             saveCart();
             updateCartBadge();
             if (document.getElementById('cartModal').style.display === 'block') updateCartDisplay();
+
+            // ----- BOUNCE THE CART ICON -----
+            const cartIcon = document.getElementById('cartIcon');
+            cartIcon.classList.remove('cart-bounce');        // reset
+            void cartIcon.offsetWidth;                       // trigger reflow
+            cartIcon.classList.add('cart-bounce');          // start bounce
+            setTimeout(() => cartIcon.classList.remove('cart-bounce'), 500);
         }
 
         function updateCartBadge() {
