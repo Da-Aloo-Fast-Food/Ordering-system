@@ -272,6 +272,18 @@
             return parseInt(price) || 0;
         }
 
+        // --- Lazy load images for a specific category ---
+        function loadCategoryImages(categoryId) {
+            const categoryDiv = document.getElementById(categoryId);
+            if (!categoryDiv) return;
+            const imgs = categoryDiv.querySelectorAll('img[data-src]');
+            imgs.forEach(img => {
+                if (!img.src || img.src.includes('data:image') || img.src === '') {
+                    img.src = img.dataset.src;
+                }
+            });
+        }
+
         // Generate category tabs
         function generateCategoryTabs() {
             const tabsContainer = document.getElementById('categoryTabs');
@@ -281,10 +293,16 @@
                 const button = document.createElement('button');
                 button.className = `category-tab ${first ? 'active' : ''}`;
                 button.setAttribute('data-category', tabId);
+                const imgSrc = categoryImages[categoryName] || 'images/logo.png';
                 button.innerHTML = `
                     <div class="tab-content">
                         <div class="tab-image">
-                            <img src="${categoryImages[categoryName]}" alt="${categoryName}" loading="lazy" onerror="this.parentElement.innerHTML='<div style=\'font-size:1.5rem;color:#666;\'>🍽️</div>'">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Crect fill='%23f0f0f0' width='60' height='60'/%3E%3C/svg%3E"
+                                 data-src="${imgSrc}"
+                                 alt="${categoryName}"
+                                 loading="lazy"
+                                 decoding="async"
+                                 onerror="this.parentElement.innerHTML='<div style=\\'font-size:1.5rem;color:#666;\\'>🍽️</div>'">
                         </div>
                         <span class="tab-text">${categoryName}</span>
                     </div>
@@ -294,7 +312,7 @@
             }
         }
 
-        // Generate menu items with square images
+        // Generate menu items with square images (lazy loaded)
         function generateMenuItems() {
             const menuContainer = document.getElementById('menuItems');
             let first = true;
@@ -317,31 +335,34 @@
                     let buttonText = 'Add to Cart', buttonIcon = 'plus', btnClass = '';
                     if (hasVariants) { buttonText = 'Choose Variant'; buttonIcon = 'list-ul'; btnClass = 'customize-btn'; }
                     
-                    // Image handling: use item.image if available, otherwise fallback to logo
                     const imgSrc = item.image && item.image.trim() !== '' ? item.image : 'images/logo.png';
                     
-                   // Replace the old itemsHTML assignment with this:
-itemsHTML += `
-    <div class="menu-item-card">
-        <div class="item-top-content">
-            <div class="item-image">
-                <img src="${imgSrc}" alt="${item.name}" loading="lazy" onerror="this.onerror=null; this.src='images/logo.png';">
-            </div>
-            <div class="item-info-stack">
-                <h3 class="item-name">${item.name}</h3>
-                <div class="item-price">Rs ${item.price}</div>
-                <button class="add-to-cart-btn ${btnClass}" 
-                        data-name="${item.name}" 
-                        data-price="${priceForButton}"
-                        data-has-variants="${hasVariants}"
-                        data-has-extras="${hasExtras}">
-                    <i class="fas fa-${buttonIcon}"></i> ${buttonText}
-                </button>
-            </div>
-        </div>
-        ${item.details ? `<div class="item-details">${item.details}</div>` : ''}
-    </div>
-`;
+                    itemsHTML += `
+                        <div class="menu-item-card">
+                            <div class="item-top-content">
+                                <div class="item-image">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect fill='%23f0f0f0' width='200' height='200'/%3E%3C/svg%3E"
+                                         data-src="${imgSrc}"
+                                         alt="${item.name}"
+                                         loading="lazy"
+                                         decoding="async"
+                                         onerror="this.onerror=null; this.src='images/logo.png';">
+                                </div>
+                                <div class="item-info-stack">
+                                    <h3 class="item-name">${item.name}</h3>
+                                    <div class="item-price">Rs ${item.price}</div>
+                                    <button class="add-to-cart-btn ${btnClass}" 
+                                            data-name="${item.name}" 
+                                            data-price="${priceForButton}"
+                                            data-has-variants="${hasVariants}"
+                                            data-has-extras="${hasExtras}">
+                                        <i class="fas fa-${buttonIcon}"></i> ${buttonText}
+                                    </button>
+                                </div>
+                            </div>
+                            ${item.details ? `<div class="item-details">${item.details}</div>` : ''}
+                        </div>
+                    `;
                 }
                 categoryDiv.innerHTML = `<div class="category-header"><h2 class="category-title">${categoryName}</h2></div><div class="category-items">${itemsHTML}</div>`;
                 menuContainer.appendChild(categoryDiv);
@@ -357,7 +378,10 @@ itemsHTML += `
                     tabs.forEach(t => t.classList.remove('active'));
                     contents.forEach(c => c.classList.remove('active'));
                     tab.classList.add('active');
-                    document.getElementById(tab.getAttribute('data-category')).classList.add('active');
+                    const categoryId = tab.getAttribute('data-category');
+                    document.getElementById(categoryId).classList.add('active');
+                    // Load images for the newly active category
+                    loadCategoryImages(categoryId);
                 });
             });
         }
@@ -584,6 +608,13 @@ itemsHTML += `
             setupCustomizationModal();
             updateCartBadge();
             document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Load images for the initially active category
+            const activeTab = document.querySelector('.category-tab.active');
+            if (activeTab) {
+                const categoryId = activeTab.getAttribute('data-category');
+                loadCategoryImages(categoryId);
+            }
         });
     </script>
 </body>
