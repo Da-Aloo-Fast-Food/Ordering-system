@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ANTI-CACHE TAGS: Forces browser to check for latest version -->
+    <!-- ANTI-CACHE TAGS -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
@@ -13,7 +13,6 @@
 
     <!-- Force HTTPS Redirect -->
     <script>
-        // Auto-redirect HTTP to HTTPS
         if (window.location.protocol === 'http:' && !window.location.hostname.includes('localhost')) {
             window.location.href = 'https://' + window.location.hostname + window.location.pathname + window.location.search;
         }
@@ -21,10 +20,8 @@
 
     <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -88,7 +85,6 @@
             letter-spacing: 1px;
         }
 
-        /* Location Status Styles */
         .location-status {
             display: flex;
             align-items: center;
@@ -120,6 +116,20 @@
             color: #FF9800;
         }
 
+        /* NEW: outlet info display */
+        .outlet-info {
+            background: #e8f5e9;
+            border-left: 4px solid #25D366;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 0.95rem;
+            display: none;
+        }
+        .outlet-info strong {
+            color: #1b5e20;
+        }
+
         #map {
             height: 250px;
             width: 100%;
@@ -136,7 +146,6 @@
             text-align: center;
             color: #666;
         }
-
         .map-loading i {
             font-size: 2.5rem;
             margin-bottom: 10px;
@@ -151,7 +160,6 @@
             margin: 15px 0;
             font-size: 0.9rem;
         }
-
         .location-instructions i {
             color: var(--secondary);
             margin-right: 8px;
@@ -181,12 +189,10 @@
             justify-content: center;
             gap: 10px;
         }
-
         .confirm-btn:hover {
             background: #1ebe57;
             transform: translateY(-2px);
         }
-
         .confirm-btn:active {
             transform: translateY(0);
         }
@@ -194,97 +200,57 @@
         .leaflet-control-zoom {
             border: 2px solid var(--secondary) !important;
         }
-
         .leaflet-control-zoom a {
             background: var(--primary) !important;
             color: var(--secondary) !important;
             border: 1px solid var(--secondary) !important;
         }
-
         .leaflet-control-zoom a:hover {
             background: var(--secondary) !important;
             color: var(--primary) !important;
         }
 
         @media (max-width: 768px) {
-            .location-container {
-                width: 95%;
-                max-height: 95vh;
-            }
-
-            .location-header h2 {
-                font-size: 1.8rem;
-            }
-
-            #map {
-                height: 200px;
-            }
-
-            .location-status {
-                font-size: 1.15rem;
-                padding: 8px 16px;
-            }
-
-            .location-status i {
-                font-size: 1.8rem;
-            }
-
-            .confirm-btn {
-                padding: 1rem 1.2rem;
-                font-size: 1.1rem;
-                min-height: 55px;
-            }
+            .location-container { width: 95%; max-height: 95vh; }
+            .location-header h2 { font-size: 1.8rem; }
+            #map { height: 200px; }
+            .location-status { font-size: 1.15rem; padding: 8px 16px; }
+            .location-status i { font-size: 1.8rem; }
+            .confirm-btn { padding: 1rem 1.2rem; font-size: 1.1rem; min-height: 55px; }
         }
-
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .location-header h2 {
-                font-size: 1.6rem;
-            }
-
-            #map {
-                height: 180px;
-            }
-
-            .location-status {
-                font-size: 1.05rem;
-                padding: 6px 12px;
-                gap: 8px;
-            }
-
-            .location-status i {
-                font-size: 1.7rem;
-            }
-
-            .confirm-btn {
-                padding: 0.9rem 1rem;
-                font-size: 1rem;
-                min-height: 50px;
-            }
+            body { padding: 10px; }
+            .location-header h2 { font-size: 1.6rem; }
+            #map { height: 180px; }
+            .location-status { font-size: 1.05rem; padding: 6px 12px; gap: 8px; }
+            .location-status i { font-size: 1.7rem; }
+            .confirm-btn { padding: 0.9rem 1rem; font-size: 1rem; min-height: 50px; }
         }
     </style>
 </head>
-<!-- Google tag (gtag.js) -->
+
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-CFXTRJEMHN"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'G-CFXTRJEMHN');
 </script>
 
 <body>
     <div class="location-container">
         <div class="location-header">
-            <!-- Location Status - Will show one of two states -->
             <div class="location-status" id="locationStatus">
                 <i class="fas fa-spinner fa-spin"></i>
                 <span>Checking location...</span>
             </div>
+        </div>
+
+        <!-- Outlet info display (hidden by default) -->
+        <div class="outlet-info" id="outletInfo">
+            <i class="fas fa-store"></i>
+            <span>Nearest outlet: <strong id="outletName">—</strong> (approx. <span id="outletDistance">—</span> km)</span>
         </div>
 
         <div id="map">
@@ -295,8 +261,7 @@
         </div>
 
         <div class="location-instructions">
-            <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live
-                location.</p>
+            <p><i class="fas fa-info-circle"></i> Drag the marker to choose delivery location other than your live location.</p>
         </div>
 
         <div class="location-footer">
@@ -308,36 +273,110 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
+        // ================================================================
+        //  OUTLET DATA – UPDATE WITH YOUR ACTUAL BRANCHES
+        // ================================================================
+        const outlets = [
+            {
+                id: 'natole',
+                name: 'Natole Branch',
+                lat: 27.674942433423965,
+                lng: 85.31855658411457,
+                phone: '9779847375984',        // without '+'
+                address: 'Natole, Kathmandu'
+            },
+            {
+                id: 'manbhawan',
+                name: 'Manbhawan Branch',
+                lat: 27.667721113264086,
+                lng: 85.31808451534287,
+                phone: '9779747843416',        // without '+'
+                address: 'Manbhawan, Lalitpur'
+            }
+        ];
+
+        // ================================================================
+        //  HELPER FUNCTIONS
+        // ================================================================
+        function getDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371; // Earth's radius in km
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) ** 2 +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLng / 2) ** 2;
+            return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function findNearestOutlet(lat, lng) {
+            let nearest = outlets[0];
+            let minDist = Infinity;
+            for (const outlet of outlets) {
+                const dist = getDistance(lat, lng, outlet.lat, outlet.lng);
+                if (dist < minDist) {
+                    minDist = dist;
+                    nearest = outlet;
+                }
+            }
+            return { outlet: nearest, distance: minDist };
+        }
+
+        // ================================================================
+        //  GLOBALS & STATE
+        // ================================================================
         let map, marker, cart = [];
         let isLiveLocation = false;
         let hasMarkerBeenDragged = false;
-        let defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu coordinates
+        const defaultLocation = { lat: 27.7172, lng: 85.3240 }; // Kathmandu (fallback)
 
+        // Load cart from localStorage
         try {
             const savedCart = localStorage.getItem('daAlooCart');
             cart = savedCart ? JSON.parse(savedCart) : [];
-        } catch (error) {
-            console.error('Error loading cart:', error);
+        } catch (e) {
+            console.error('Error loading cart:', e);
         }
 
+        // ================================================================
+        //  UI UPDATE FUNCTIONS
+        // ================================================================
         function updateLocationStatus(isLive) {
             const statusElement = document.getElementById('locationStatus');
             const icon = statusElement.querySelector('i');
             const textSpan = statusElement.querySelector('span');
 
             if (isLive) {
-                // Stage 1: Location is on
                 statusElement.className = 'location-status';
                 icon.className = 'fas fa-check-circle';
                 textSpan.textContent = 'Your Live location is selected';
             } else {
-                // Stage 2: Location is off
                 statusElement.className = 'location-status warning';
                 icon.className = 'fas fa-exclamation-triangle';
                 textSpan.textContent = 'Turn on Location Setting on your device';
             }
         }
 
+        function showNearestOutlet(lat, lng) {
+            const result = findNearestOutlet(lat, lng);
+            const outlet = result.outlet;
+            const dist = result.distance.toFixed(2);
+
+            const infoDiv = document.getElementById('outletInfo');
+            document.getElementById('outletName').textContent = outlet.name;
+            document.getElementById('outletDistance').textContent = dist;
+            infoDiv.style.display = 'block';
+
+            // Also update status text to show outlet name
+            const statusSpan = document.querySelector('#locationStatus span');
+            if (statusSpan) {
+                statusSpan.textContent = `📍 Nearest: ${outlet.name} (${dist} km)`;
+                document.querySelector('#locationStatus i').className = 'fas fa-store';
+            }
+        }
+
+        // ================================================================
+        //  MAP INITIALISATION
+        // ================================================================
         function initMap(latitude, longitude, isLive) {
             document.getElementById('map').innerHTML = '';
             map = L.map('map').setView([latitude, longitude], 16);
@@ -357,24 +396,32 @@
 
             marker.bindPopup('Drag me to adjust location').openPopup();
 
-            // Track if marker has been dragged
+            // Track marker drag
             marker.on('dragend', function () {
                 hasMarkerBeenDragged = true;
-                const newPos = marker.getLatLng();
-                console.log('Marker dragged to:', newPos.lat, newPos.lng);
+                const pos = marker.getLatLng();
+                // Update nearest outlet display
+                showNearestOutlet(pos.lat, pos.lng);
+                // Update status to indicate manual selection
+                const statusSpan = document.querySelector('#locationStatus span');
+                if (statusSpan) {
+                    statusSpan.textContent = '📍 Location set manually';
+                }
             });
 
             isLiveLocation = isLive;
+
+            // Show nearest outlet for this initial position
+            showNearestOutlet(latitude, longitude);
         }
 
+        // ================================================================
+        //  GET USER LOCATION (with fallback)
+        // ================================================================
         function getUserLocation() {
             return new Promise((resolve) => {
                 if (!navigator.geolocation) {
-                    resolve({
-                        latitude: defaultLocation.lat,
-                        longitude: defaultLocation.lng,
-                        isLive: false
-                    });
+                    resolve({ latitude: defaultLocation.lat, longitude: defaultLocation.lng, isLive: false });
                     return;
                 }
 
@@ -393,11 +440,7 @@
                 const error = () => {
                     if (!resolved) {
                         navigator.geolocation.clearWatch(watchId);
-                        resolve({
-                            latitude: defaultLocation.lat,
-                            longitude: defaultLocation.lng,
-                            isLive: false
-                        });
+                        resolve({ latitude: defaultLocation.lat, longitude: defaultLocation.lng, isLive: false });
                     }
                 };
 
@@ -407,21 +450,19 @@
                     timeout: 15000
                 });
 
-                // Timeout after 15 seconds
                 setTimeout(() => {
                     if (!resolved) {
                         navigator.geolocation.clearWatch(watchId);
-                        resolve({
-                            latitude: defaultLocation.lat,
-                            longitude: defaultLocation.lng,
-                            isLive: false
-                        });
+                        resolve({ latitude: defaultLocation.lat, longitude: defaultLocation.lng, isLive: false });
                     }
                 }, 15000);
             });
         }
 
-        function formatOrderMessage(locationLink, locationText) {
+        // ================================================================
+        //  ORDER MESSAGE FORMATTING (unchanged, but uses dynamic phone)
+        // ================================================================
+        function formatOrderMessage(locationLink, locationText, outlet) {
             let message = "*My ORDER*\n\n*Order Details:*\n";
 
             const now = new Date();
@@ -433,53 +474,43 @@
                 message += "No items in cart\n";
             } else {
                 cart.forEach(item => {
-                    // Determine line total – use totalPrice if it already includes quantity and extras,
-                    // otherwise use price per unit multiplied by quantity.
                     let lineTotal;
                     if (item.totalPrice !== undefined) {
-                        // totalPrice already includes quantity and any extras
                         lineTotal = item.totalPrice;
                     } else if (item.price !== undefined) {
-                        // price is per unit – multiply by quantity
                         lineTotal = item.price * (item.quantity || 1);
                     } else {
-                        lineTotal = 0; // fallback (should not happen)
+                        lineTotal = 0;
                     }
                     grandTotal += lineTotal;
 
-                    // Item header: quantity and name
                     message += `• ${item.quantity || 1}x ${item.name}`;
-
-                    // Standard variant (from index.html)
                     if (item.variant) {
                         message += ` (${item.variant.name})`;
                     }
-
-                    // Extras (from index.html) – prices are already included in totalPrice
                     if (item.extras && item.extras.length > 0) {
                         message += `\n   - Extras: ${item.extras.map(extra => extra.name).join(', ')}`;
                     }
-
-                    // Combo details (from makecombo.html)
                     if (item.details) {
                         message += `\n   _Items: ${item.details}_`;
                     }
-
-                    // Line subtotal
                     message += `\n   - Rs ${lineTotal}\n\n`;
                 });
             }
 
             message += `*Total Amount: Rs ${grandTotal}*\n\n*Delivery Location:* ${locationText}`;
-
             if (locationLink !== "No location sent") {
                 message += `\n${locationLink}`;
             }
-
+            // Append nearest outlet info for reference
+            message += `\n\n*Nearest Outlet:* ${outlet.name} (${outlet.address})`;
             message += `\n\nPlease confirm this order.\nThank you!`;
             return message;
         }
 
+        // ================================================================
+        //  SEND ORDER – now uses nearest outlet dynamically
+        // ================================================================
         function sendOrderToWhatsApp() {
             if (!marker) {
                 alert('Map is still loading. Please wait...');
@@ -491,46 +522,55 @@
                 return;
             }
 
+            // Get final marker position
+            const pos = marker.getLatLng();
+            const userLat = pos.lat;
+            const userLng = pos.lng;
+
+            // Find nearest outlet
+            const result = findNearestOutlet(userLat, userLng);
+            const nearest = result.outlet;
+            const distance = result.distance;
+
+            // Build location text & link based on whether location is live or dragged
             let locationText = "";
             let locationLink = "";
 
-            // Check if we have live location AND marker hasn't been dragged
+            // If live location and marker hasn't been dragged => use live coordinates
             if (isLiveLocation && !hasMarkerBeenDragged) {
-                // Case 1: Live location available and not moved
-                const pos = marker.getLatLng();
-                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-            }
-            // Check if we DON'T have live location AND marker hasn't been dragged
-            else if (!isLiveLocation && !hasMarkerBeenDragged) {
-                // Case 2: No live location and marker not moved = No location sent
+                locationLink = `https://www.google.com/maps?q=${userLat.toFixed(6)},${userLng.toFixed(6)}`;
+                locationText = "Live Location";
+            } else if (!isLiveLocation && !hasMarkerBeenDragged) {
+                // No live location and not dragged -> no location sent (fallback)
                 locationText = "No location sent - User did not select location";
                 locationLink = "No location sent";
-            }
-            else {
-                // Case 3: Marker has been dragged (regardless of live location status)
-                const pos = marker.getLatLng();
-                locationLink = `https://www.google.com/maps?q=${pos.lat.toFixed(6)},${pos.lng.toFixed(6)}`;
-                locationText = "User Selected Location";
+            } else {
+                // Marker dragged -> use its position
+                locationLink = `https://www.google.com/maps?q=${userLat.toFixed(6)},${userLng.toFixed(6)}`;
+                locationText = "Selected Location (dragged)";
             }
 
-            const message = formatOrderMessage(locationLink, locationText);
+            // Format message with nearest outlet info
+            const message = formatOrderMessage(locationLink, locationText, nearest);
             const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/9779847375984?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/${nearest.phone}?text=${encodedMessage}`;
 
-            // Clear the cart
+            // Clear cart
             localStorage.removeItem('daAlooCart');
 
             // Open WhatsApp
             window.open(whatsappUrl, '_blank');
 
-            // Dynamic Redirection
+            // Redirect back after a moment
             setTimeout(() => {
-                // Retrieve the origin page saved from index.html or makecombo.html
                 const returnPage = localStorage.getItem('daAlooOrigin') || 'index.html';
                 window.location.href = returnPage;
             }, 2000);
         }
 
+        // ================================================================
+        //  INIT ON PAGE LOAD
+        // ================================================================
         document.addEventListener('DOMContentLoaded', async () => {
             try {
                 const location = await getUserLocation();
@@ -546,6 +586,4 @@
         });
     </script>
 </body>
-
-
 </html>
