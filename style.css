@@ -205,8 +205,8 @@ body {
     font-weight: 600;
     color: #555;
     transition: all 0.25s ease;
-    width: 160px;      /* Slightly wider */
-    height: 160px;     /* Slightly taller */
+    width: 160px;
+    height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,8 +240,8 @@ body {
 }
 
 .tab-image {
-    width: 90px;       /* Increased from 70px */
-    height: 90px;      /* Increased from 70px */
+    width: 90px;
+    height: 90px;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -258,9 +258,9 @@ body {
 }
 
 .tab-text {
-    font-size: 1rem;   /* Slightly larger text */
+    font-size: 1rem;
     font-weight: 700;
-    text-align: center; /* Ensures multi-line text is centered */
+    text-align: center;
 }
 
 .category-header {
@@ -313,14 +313,14 @@ body {
 /* Flex container to put image left and info right */
 .item-top-content {
     display: flex;
-    align-items: center; /* Vertically centers the image and text block */
+    align-items: center;
     gap: 15px;
 }
 
 /* Image styling - slightly wider horizontally */
 .item-image {
-    flex: 0 0 130px; /* Width of the image */
-    height: 110px;    /* Height of the image */
+    flex: 0 0 130px;
+    height: 110px;
     border-radius: 12px;
     overflow: hidden;
 }
@@ -337,7 +337,7 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers Name, Price, and Button relative to each other */
+    align-items: center;
     text-align: center;
     gap: 10px;
 }
@@ -358,13 +358,13 @@ body {
 
 /* Button styling matching the yellow rounded look */
 .add-to-cart-btn {
-    background-color: #ffeb3b; /* Da Aloo Yellow */
+    background-color: #ffeb3b;
     border: none;
     border-radius: 8px;
     padding: 8px 15px;
     font-weight: 600;
     font-size: 0.9rem;
-    width: 100%; /* Makes it fill the right-side container */
+    width: 100%;
     cursor: pointer;
     transition: transform 0.2s, background 0.3s ease;
     font-family: 'Montserrat', sans-serif;
@@ -682,15 +682,15 @@ body {
     .category-tab { 
         padding: 0; 
         width: 100%; 
-        height: 110px;      /* Taller than before (was 80px) */
+        height: 110px;
         border-radius: 12px; 
     }
     .tab-image { 
-        width: 60px;        /* Larger than before (was 40px) */
+        width: 60px;
         height: 60px; 
     }
     .tab-text { 
-        font-size: 1 rem; /* Slightly larger than before (was 0.65rem) */
+        font-size: 0.65rem;   /* reverted to original */
         font-weight: 700;
     }
     
@@ -706,10 +706,7 @@ body {
     /* Mobile adjustments for new card layout */
     .menu-item-card { padding: 12px; }
     .item-image { flex: 0 0 110px; height: 90px; }
-    .item-name { font-size: 1.2rem;
-               font-weight: 700;}
-    .item-price { font-size: 1.2rem;
-                font-weight: 800;}
+    /* removed overrides for .item-name and .item-price – they keep desktop values */
     .add-to-cart-btn { padding: 6px 12px; font-size: 0.85rem; }
 }
 
@@ -729,7 +726,7 @@ body {
 /* Extra Small Mobile Devices */
 @media (max-width: 400px) {
     .category-tab { 
-        height: 95px;       /* Slightly shorter to fit very small screens */
+        height: 95px;
     }
     .tab-image { 
         width: 50px; 
