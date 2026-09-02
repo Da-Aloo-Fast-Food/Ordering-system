@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Cart bounce styles (unchanged) -->
+    <!-- Cart bounce styles -->
     <style>
         .cart-icon {
             animation: cartPulse 2s infinite;
@@ -149,8 +149,15 @@
         // ======================== MENU DATA ========================
         const MENU = {
             "Aloo Fries": [
-                { "name": "Aloo Fries Medium", "price": 80, "image": "images/menu/aloo-fries-medium.jpg" },
-                { "name": "Aloo Fries Large", "price": 130, "image": "images/menu/aloo-fries-large.jpg" },
+                {
+                    "name": "Aloo Fries",
+                    "price": 0,
+                    "variants": [
+                        { "name": "Medium", "price": 80 },
+                        { "name": "Large",  "price": 130 }
+                    ],
+                    "image": "images/menu/aloo-fries-medium.jpg"
+                },
                 { "name": "Cajun & Garlic Fries", "price": 170, "image": "images/menu/cajun-fries.jpg" },
                 { "name": "Chili Fries", "price": 180, "image": "images/menu/chili-fries.jpg" },
                 { "name": "Spicy Buff Sausage Fries", "price": 190, "image": "images/menu/buff-sausage-fries.jpg" },
@@ -160,9 +167,17 @@
             "Da Aloo Special": [
                 { "name": "Battered Fries", "price": 180, "image": "images/menu/battered-fries.jpg" },
                 { "name": "Fried Pizza Ball", "price": 200, "image": "images/menu/fried-pizza-ball.jpg" },
-                { "name": "Aloo's Spiral", "price": 60, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/aloo-spiral.jpg" },
-                { "name": "Cheesy Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/cheesy-spiral.jpg" },
-                { "name": "Battered Spiral", "price": 80, "extras": [{ "name": "Extra Sauce", "price": 20 }], "image": "images/menu/battered-spiral.jpg" }
+                {
+                    "name": "Spiral",
+                    "price": 0,
+                    "variants": [
+                        { "name": "Aloo",     "price": 60 },
+                        { "name": "Cheesy",   "price": 80 },
+                        { "name": "Battered", "price": 80 }
+                    ],
+                    "extras": [{ "name": "Extra Sauce", "price": 20 }],
+                    "image": "images/menu/aloo-spiral.jpg"
+                }
             ],
             "Katti Roll": [
                 { "name": "Aloo Chat Katti Roll", "price": 120, "extras": [{ "name": "Add Egg", "price": 30 }], "image": "images/menu/aloo-katti-roll.jpg" },
